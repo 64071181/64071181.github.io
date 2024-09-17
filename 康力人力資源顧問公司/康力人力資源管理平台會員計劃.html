@@ -1,0 +1,263 @@
+<html><head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康力人力資源管理平台會員計劃</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"><style>
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+}
+
+header {
+    background: rgba(53, 66, 74, 0.8);
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #e8491d 3px solid;
+}
+
+header h1 {
+    margin: 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+nav {
+    background: rgba(53, 66, 74, 0.8);
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+nav li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e8491d;
+}
+
+.page {
+    background: rgba(255, 255, 255, 0.9);
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.page:hover {
+    transform: translateY(-5px);
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    color: #e8491d;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li::before {
+    content: "✓ ";
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #e8491d;
+    color: #ffffff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.cta-button:hover {
+    background: #ff6347;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+th {
+    background-color: #e8491d;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(242, 242, 242, 0.7);
+}
+
+tr:hover {
+    background-color: rgba(255, 223, 186, 0.5);
+}
+
+.payment-icons {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #4CAF50;
+}
+
+.highlight {
+    background-color: #fffacd;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 5px solid #ffd700;
+    margin: 20px 0;
+}
+
+.profit-animation {
+    animation: profit-pulse 2s infinite;
+}
+
+@keyframes profit-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+</style></head><body>
+    <header>
+        <a href="./"><h1>康力人力資源管理平台會員計劃</h1></a>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('page1')">會員福利</a></li>
+            <li><a href="#" onclick="showPage('page2')">詳細介紹</a></li>
+            <li><a href="#" onclick="showPage('page3')">回報說明</a></li>
+            <li><a href="#" onclick="showPage('page4')">付款方式</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div id="page1" class="page">
+            <h2>會員福利</h2>
+            <p class="highlight">加入康力人力資源管理平台會員，即享高回報保本福利!!</p>
+            <h3>成為會員後即享:</h3>
+            <ul>
+                <li>每月可獲得最少1,000元現金回贈會員福利。</li>
+                <li>3個月後，您可隨時退回會員費（扣除現金回贈後的淨額）。</li>
+                <li>第48個月可全額退還會費（不需扣除現金回贈,100%退還會費）（退會後不再有現金回贈）</li>
+            </ul>
+            <p class="profit-animation">對比銀行定期存款的低回報約4%年利率，我們的年利率高達<strong style="color: #e8491d; font-size: 1.2em;">35.76%</strong>，極具吸引力和增值潛力。</p>
+            <p>立即加入我們，成為會員，享受高回報與資金安全保障的雙重優勢！</p>
+            <a href="https://wa.me/85252718659/?text=我想成為會員" class="cta-button" target="_blank">聯繫我們，了解更多詳情並成為會員！</a>
+        </div>
+        <div id="page2" class="page hidden">
+            <h2>詳細介紹</h2>
+            <p>您好! 我是康力人力資源顧問公司的莫生! 現在誠意邀請您加入我們的會員計劃!</p>
+            <p class="highlight">只需50,000元會員費，立刻享受穩定且高回報的會員福利:</p>
+            <ul>
+                <li><strong>資金用途：</strong> 您的會費將用於支持康力人力資源顧問公司的運營，直接支持我們的業務發展。</li>
+            </ul>
+            <h3>會員福利:</h3>
+            <ul>
+                <li><strong>每月回贈：</strong> 成為會員後，每月可獲得最少1,000元現金回贈會員福利。</li>
+                <li><strong>安全退出：</strong> 3個月後，您可隨時退回會員費（扣除現金回贈後的淨額）; 第48個月可全額100%退還會費（不需扣除現金回贈,退會後不再有現金回贈）。</li>
+                <li><strong>長期收益：</strong> 若選擇不退會費，每月現金回贈將持續給予。</li>
+                <li><strong>升值潛力：</strong> 會員名額可自由轉讓，具升值潛力。</li>
+            </ul>
+            <h3 class="profit-animation">回報高、潛力大：</h3>
+            <p>對比銀行定期存款的低回報約4%年利率，我們的年利率高達<strong style="color: #e8491d; font-size: 1.2em;">35.76%</strong>，極具吸引力和增值潛力。</p>
+        </div>
+        <div id="page3" class="page hidden">
+            <h2>回報說明</h2>
+            <p class="highlight">例子說明，繳納會員費50,000元:</p>
+            <table>
+                <tr>
+                    <th>退出時間</th>
+                    <th>累計現金回贈</th>
+                    <th>可退還會費</th>
+                    <th>總收益</th>
+                </tr>
+                <tr>
+                    <td>第6個月退出</td>
+                    <td>6,000元 (1,000元 × 6個月) + </td>
+                    <td>44,000元 (50,000元 - 6,000元)</td>
+                    <td>50,000元</td>
+                </tr>
+                <tr>
+                    <td>第48個月退出</td>
+                    <td>48,000元 (1,000元 × 48個月) + </td>
+                    <td>50,000元 (100%退還)</td>
+                    <td class="profit-animation">98,000元</td>
+                </tr>
+                <tr>
+                    <td>第60個月退出</td>
+                    <td>60,000元 (1,000元 × 60個月) + </td>
+                    <td>50,000元 (100%退還)</td>
+                    <td class="profit-animation">110,000元</td>
+                </tr>
+            </table>
+        </div>
+        <div id="page4" class="page hidden">
+            <h2>付款方式</h2>
+            <p>我們的收款方式有:</p>
+            <ul>
+                <li><i class="fas fa-money-bill-wave payment-icons"></i>轉數快</li>
+                <li><i class="fab fa-alipay payment-icons"></i>支付寶</li>
+                <li><i class="fab fa-weixin payment-icons"></i>微信支付</li>
+                <li><i class="fab fa-bitcoin payment-icons"></i>USDT</li>
+            </ul>
+            <p class="highlight">所有回贈及退款默認原路返回，有需要可以之後修改退款方式。</p>
+            <p>請問哪個方式最適合您?</p>
+            <a href="https://wa.me/85252718659/?text=我想成為會員" class="cta-button" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp聯絡我們</a>
+        </div>
+    </div>
+    <script>
+        function showPage(pageId) {
+            const pages = document.getElementsByClassName('page');
+            for (let page of pages) {
+                page.classList.add('hidden');
+            }
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+    </script>
+</body></html>
