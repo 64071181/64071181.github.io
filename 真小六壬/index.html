@@ -2,6 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>真小六壬占卜系統</title>
+<!-- https://websim.ai/c/wwoGbME2O7rJz6zUK -->
 <style>
     body {
         font-family: 'Microsoft JhengHei', Arial, sans-serif;
@@ -126,7 +127,11 @@
         padding: 10px;
         position: relative;
     }
-    #historyList li strong{font-size: 40px;font-style: italic;color: #05eeff;margin-right: 10px;}
+    #historyList li strong{
+        font-style: italic;
+        color: #05eeff;
+        margin-right: 10px;
+    }
     .deleteBtn {
         position: absolute;
         top: 0px;
@@ -137,6 +142,14 @@
         border: none;
         padding: 5px 10px;
         cursor: pointer;
+    }
+    #deleteAllBtn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        margin-bottom: 10px;
     }
 
 </style>
@@ -237,6 +250,7 @@
 
         <div class="history">
             <h2>占卜歷史記錄</h2>
+            <button id="deleteAllBtn">刪除所有記錄</button>
             <ul id="historyList"></ul>
         </div>
 
@@ -300,7 +314,7 @@
 
             for (let [relation, elements] of Object.entries(relations)) {
                 if (elements[0] === element1 && elements[1] === element2) {
-                    return relation.charAt(1);  // 返回关系的最后两个字，如"生"、"洩"、"克"、"耗"
+                    return relation.charAt(1);  // 返回关系的最后1个字，如"生"、"洩"、"克"、"耗"
                 }
             }
             return '同';
@@ -385,17 +399,28 @@
                 historyList.appendChild(li);
             });
         }
-
+        function deleteAllResults() {
+            if (confirm('確定要刪除所有記錄嗎？')) {
+                localStorage.removeItem('divinationHistory');
+                displaySavedResults();
+            }
+        }
         function deleteResult(index) {
             let history = JSON.parse(localStorage.getItem('divinationHistory')) || [];
             history.splice(index, 1);
             localStorage.setItem('divinationHistory', JSON.stringify(history));
             displaySavedResults();
         }
-        document.addEventListener('DOMContentLoaded', displaySavedResults);
+        document.addEventListener('DOMContentLoaded', () => {
+            displaySavedResults();
+            document.getElementById('deleteAllBtn').addEventListener('click', deleteAllResults);
+        });
+
         document.getElementById('historyList').addEventListener('click', function(e) {
             if (e.target.classList.contains('deleteBtn')) {
                 deleteResult(e.target.dataset.index);
+            } else if (e.target.classList.contains('shareBtn')) {
+                shareResult(e.target.dataset.index);
             }
         });
 
