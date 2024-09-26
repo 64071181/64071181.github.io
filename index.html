@@ -325,13 +325,20 @@
       ];
 
       function updateScore(value) {
-        score += value;
-        scoreElement.textContent = `⌛: ${score}`;
-        localStorage.setItem('cuteAnimalPortalDashScore', score);
-  
-        if (score % 10000 === 0 && score / 10000 < characters.length) {
-          updateCharacterSelect();
-        }
+          score += value;
+          scoreElement.textContent = `⌛: ${score}`;
+
+          // 取得當前儲存在 localStorage 的最高分數
+          let highestScore = parseInt(localStorage.getItem('cuteAnimalPortalDashScore')) || 0;
+
+          // 只有當前分數大於儲存的最高分數時才更新 localStorage
+          if (score > highestScore) {
+              localStorage.setItem('cuteAnimalPortalDashScore', score);
+          }
+
+          if (score % 10000 === 0 && score / 10000 < characters.length) {
+              updateCharacterSelect();
+          }
       }
   
       function updateCharacterSelect() {
