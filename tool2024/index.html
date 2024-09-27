@@ -175,6 +175,9 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 </head>
 <body>
+
+
+
 <div id="particles-js"></div>
 <div class="hologram"></div>
 <div class="scan-line"></div>
@@ -185,91 +188,22 @@
         <li><a href="#about">關於我們</a></li>
         <li id="translate"></li>
     </ul>
+    <div class="container">
+    <input type="text" id="searchInput" placeholder="搜索工具、描述或關鍵字..."></div>
 </nav>
 
 <div class="container">
     <h1>工具2024</h1>
     
     <section id="tools" class="section">
-        <input type="text" id="searchInput" placeholder="搜索工具、描述或關鍵字...">
+        
         <P id="translate"></P>
         <div id="tool-list"></div>
     </section>
 
-
-
-
-
-
     <section id="about" class="section">
         <h2>全面的數位創意解決方案</h2>
-        <div id="about-section">
-            <div class="about-item">
-                <h3>數據收集</h3>
-                <p>我們在資料收集方面擁有豐富的經驗，可以幫助您尋找潛在客戶、進行市場研究或收集競爭情報。
-                <br>我們為您提供準確且有價值的信息，以做出明智的業務決策。</p>
-            </div>
-            <div class="about-item">
-                <h3>程式設計與開發</h3>
-                <p>我們的團隊擁有豐富的程式設計和開發經驗。
-                <br>
-                我們可以根據您的需求定製程序，無論是網站開發、行動應用程式還是其他自動化工具。
-                <br>   
-                我們的解決方案簡化您的業務流程並提高效率。</p>
-            </div>
-            <div class="about-item">
-                <h3>標誌設計</h3>
-                <p>我們提供專業的標誌設計服務，幫助您創建獨特且品牌特定的商標。</p>
-            </div>
-            <div class="about-item">
-                <h3>內容創作</h3>
-                <p>我們的團隊在內容創作方面擁有豐富的經驗。我們可以為您提供引人入勝且引人入勝的內容，有效傳達您的訊息並吸引目標受眾。</p>
-            </div>
-            <div class="about-item">
-                <h3>多語言配音</h3>
-                <p>我們提供多語言配音服務，讓您的內容能夠接觸到更廣泛的受眾並打破語言障礙。</p>
-            </div>
-            <div class="about-item">
-                <h3>平面設計</h3>
-                <p>我們的設計團隊可以創造令人驚嘆的視覺效果，以增強您的內容並使其更具視覺吸引力。</p>
-            </div>
-            <div class="about-item">
-                <h3>影片製作</h3>
-                <p>我們擁有專業的影片製作團隊，可以製作高品質的宣傳影片或廣告，提升您的品牌形象，增加市場曝光度。</p>
-            </div>
-            <div class="about-item">
-                <h3>人工智慧工具教學</h3>
-                <p>我們可以提供人工智慧工具的使用教學課程，幫助您利用人工智慧技術來提高工作效率和創新能力。</p>
-            </div>
-            <div class="about-item">
-                <h3>網站、APP開發</h3>
-                <p>我們的團隊在網站及程式開發方面擁有豐富的經驗。我們可以為您的企業創建功能強大、易於管理且吸引客戶的網站。</p>
-            </div>
-            <div class="about-item">
-                <h3>多語言翻譯</h3>
-                <p>我們提供多語言翻譯服務，確保您的內容能準確到達不同的目標市場。</p>
-            </div>
-            <div class="about-item">
-                <h3>社群媒體行銷</h3>
-                <p>我們可以製定有效的社群媒體行銷策略，幫助您在各大社群平台上建立強大的品牌影響力並吸引更多目標客戶。</p>
-            </div>
-            <div class="about-item">
-                <h3>專業人才招聘</h3>
-                <p>我們為各種職位提供專業的招募服務，幫助您找到最合適的候選人來滿足您公司的需求。</p>
-            </div>
-            <div class="about-item">
-                <h3>聯繫我們</h3>
-                <p>whatsapp: 
-                    <a href="https://wa.me/85264071181/?text=查詢全面的數位創意解決方案">85264071181</a>
-                    <br>微信：hk64071181</p>
-            </div>
-            <div class="about-item">
-                <a href="https://wa.me/85264071181/?text=查詢全面的數位創意解決方案">
-                    <h3>加入我們</h3>
-                    <p>我們始終歡迎優秀人才的加入，一起打造更好的工具平台。</p>
-                </a>
-            </div>
-        </div>
+        <div id="about-section"></div>
     </section>
 
     <div class="footer">
@@ -282,17 +216,6 @@
             0x84CfF0d94fAAd23439186A050aD175E6242E5161
         </p>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 
@@ -309,6 +232,9 @@
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
+
+
+// ai工具列表 ///////////////////////////////////
 const toolsData = [
     { name: "提示精靈", url: "https://bit.ly/3Rlk1T4", description: "一个致力于收集和提供高质量Prompt的平台，旨在帮助大家更有效地利用AI，从而提升工作效率和质量。", keywords: ["AI", "Prompt", "提示", "靈感", "生產力"] },
     { name: "Chat Everywhere", url: "https://bit.ly/3EIA9pZ", description: "Chat Everywhere 是不用註冊就能使用的ChatGPT 而且功能很強大，不用登入。回應速度很快還可以整理你的交談以及提示詞還可以分享，真的是太棒了！", keywords: ["AI", "靈感", "生產力"] },
@@ -329,10 +255,9 @@ const toolsData = [
     { name: "Consensus", url: "https://bit.ly/3PK01Ir", description: "Consensus不用羅列關鍵字，只用一句話描述你想瞭解的問題，例如「xxxx有什麼好處」、「xx對xx有何影響」。它就能從2億篇論文中搜尋並整理出來答案，而且每一個論點都會附上論文連結。", keywords: ["AI", "靈感", "生產力"] },
     { name: "websim.ai", url: "https://websim.ai/", description: "Websim.ai 輸入一個指令就能生成出網頁、遊戲、應用程式。", keywords: ["AI", "靈感", "生產力", "000"] },
     { name: "artflow.ai", url: "https://app.artflow.ai/", description: "虛擬主播加上配合對白的嘴形", keywords: ["AI", "靈感", "生產力", "剪片","語音"] },
-
     { name: "perplexity", url: "https://www.perplexity.ai/", description: "Perplexity是一款由人工智能驅動的搜尋引擎，旨在提供用戶更直觀和高效的資訊搜尋體驗。", keywords: ["AI", "靈感", "生產力", "搜尋"] }
 ];
-
+// 顯示工具
 function renderTools(tools) {
     const toolList = document.getElementById('tool-list');
     toolList.innerHTML = '';
@@ -350,6 +275,7 @@ function renderTools(tools) {
     });
 }
 
+// search ai工具
 function searchTools(query) {
     return toolsData.filter(tool => 
         tool.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -358,15 +284,51 @@ function searchTools(query) {
     );
 }
 
+
+// 關於我們列表 ///////////////////////////////////
+const 關於我們列表 = [
+    { 內容1: "<h3>數據收集</h3><p>我們在資料收集方面擁有豐富的經驗，可以幫助您尋找潛在客戶、進行市場研究或收集競爭報<br>我們為您提供準確且有價值的信息，以做出明智的業務決策。</p>"},
+    { 內容1: "<h3>程式設計與開發</h3><p>我們的團隊擁有豐富的程式設計和開發經驗。<br>我們可以根據您的需求定製程序，無論是網站開發、行動應用程式還是其他自動化工具。<br> 我們的解決方案簡化您的業務流程並提高效率。</p>"},
+    { 內容1: "<h3>標誌設計</h3><p>我們提供專業的標誌設計服務，幫助您創建獨特且品牌特定的商標。</p>"},
+    { 內容1: "<h3>內容創作</h3><p>我們的團隊在內容創作方面擁有豐富的經驗。我們可以為您提供引人入勝且引人入勝的內容，有效傳達您的訊息並吸引目標受眾。</p>"},
+    { 內容1: "<h3>多語言配音</h3><p>我們提供多語言配音服務，讓您的內容能夠接觸到更廣泛的受眾並打破語言障礙。</p>"},
+    { 內容1: "<h3>平面設計</h3><p>我們的設計團隊可以創造令人驚嘆的視覺效果，以增強您的內容並使其更具視覺吸引力。</p>"},
+    { 內容1: "<h3>影片製作</h3><p>我們擁有專業的影片製作團隊，可以製作高品質的宣傳影片或廣告，提升您的品牌形象，增加場曝光度。</p>"},
+    { 內容1: "<h3>人工智慧工具教學</h3><p>我們可以提供人工智慧工具的使用教學課程，幫助您利用人工智慧技術來提高工作效率和創新能力。</p>"},
+    { 內容1: "<h3>網站、APP開發</h3><p>我們的團隊在網站及程式開發方面擁有豐富的經驗。我們可以為您的企業創建功能強大、易於管理且吸引客戶的網站。</p>"},
+    { 內容1: "<h3>多語言翻譯</h3><p>我們提供多語言翻譯服務，確保您的內容能準確到達不同的目標市場。</p>"},
+    { 內容1: "<h3>社群媒體行銷</h3><p>我們可以製定有效的社群媒體行銷策略，幫助您在各大社群平台上建立強大的品牌影響力並吸引更多目標客戶。</p>"},
+    { 內容1: "<h3>專業人才招聘</h3><p>我們為各種職位提供專業的招募服務，幫助您找到最合適的候選人來滿足您公司的需求。</p>"},
+    { 內容1: "<h3>聯繫我們</h3><p>whatsapp:<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'>85264071181</a><br>微信：hk64071181</p>"},
+    { 內容1: "<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'><h3>加入我們</h3><p>我們始終歡迎優秀人才的加入，一起打造更好的工具平台。</p></a>"}
+];
+// 顯示關於我們
+function 顯示關於我們(內容s) {
+    const 關於我們位 = document.getElementById('about-section');
+    關於我們位.innerHTML = '';
+    內容s.forEach(內容 => {
+        const 內容Item = document.createElement('div');
+        內容Item.className = 'about-item';
+        內容Item.innerHTML = `${內容.內容1}`;
+        關於我們位.appendChild(內容Item);
+    });
+}
+
+
+// 搜尋功能 ///////////////////////////////////
 document.getElementById('searchInput').addEventListener('input', (e) => {
     const query = e.target.value;
     const filteredTools = searchTools(query);
     renderTools(filteredTools);
+    const 關於我們結果 = search關於我們(query);
+    renderTools(關於我們結果);
 });
-
+// 顯示搜尋結果
 renderTools(toolsData);
+顯示關於我們(關於我們列表);
 
-// 添加科技感動畫
+
+// 添加科技感動畫 ///////////////////////////////////
 setInterval(() => {
     const toolItems = document.querySelectorAll('.tool-item');
     const randomItem = toolItems[Math.floor(Math.random() * toolItems.length)];
