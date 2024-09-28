@@ -417,12 +417,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // 隱藏顯示版塊
 const toggleDisplay = (showTools) => {
-        document.getElementById("tools").classList.toggle("active", showTools);
-        document.getElementById("about").classList.toggle("active", !showTools);
-    };
+    document.getElementById("tools").classList.toggle("active", showTools);
+    document.getElementById("about").classList.toggle("active", !showTools);
+};
+
+const allDisplay = (showTools) => {
+    document.getElementById("tools").classList.toggle("active", showTools);
+    document.getElementById("about").classList.toggle("active", showTools);
+};
+
 document.getElementById("tools-link").onclick = () => toggleDisplay(true);
 document.getElementById("about-link").onclick = () => toggleDisplay(false);
-document.getElementById("searchInput").oninput = () => toggleDisplay(true);
+document.getElementById("searchInput").oninput = () => allDisplay(true);
 
 
 
