@@ -316,34 +316,6 @@ function 顯示關於我們(內容s) {
 
 // 搜尋功能 ///////////////////////////////////
 
-/*
-// search ai工具
-function searchTools(query) {
-    return toolsData.filter(tool => 
-        tool.name.toLowerCase().includes(query.toLowerCase()) ||
-        tool.description.toLowerCase().includes(query.toLowerCase()) ||
-        tool.keywords.some(keyword => keyword.toLowerCase().includes(query.toLowerCase()))
-    );
-}
-
-// search關於我們 qqq
-function search關於我們(query) {
-    return 內容Data.filter(內容 => 
-        內容.內容1.toLowerCase().includes(query.toLowerCase()) ||
-        內容.內容1.toLowerCase().includes(query.toLowerCase()) ||
-        內容.內容1.some(keyword => keyword.toLowerCase().includes(query.toLowerCase()))
-    );
-}
-// 顯示搜尋結果
-document.getElementById('searchInput').addEventListener('input', (e) => {
-    const query = e.target.value;
-    const filteredTools = searchTools(query);
-    renderTools(filteredTools);
-    const 關於我們結果 = search關於我們(query); //qqq
-    顯示關於我們(關於我們結果);
-});
-*/
-
 // 顯示搜尋結果
 document.getElementById('searchInput').addEventListener('input', (e) => {
     searchKeyword(e.target.value);
@@ -357,9 +329,6 @@ function searchKeyword(keyword) {
   // 遍歷每個元素，檢查是否包含關鍵字
   items.forEach(item => {
 
-    
-
-
     if (item.textContent.includes(keyword)) {
       item.style.display = '';  // 顯示符合條件的元素
     } else {
@@ -368,12 +337,9 @@ function searchKeyword(keyword) {
   });
 }
 
-
-
 // 顯示內容
 renderTools(toolsData);
 顯示關於我們(關於我們列表);
-
 
 // 添加科技感動畫 ///////////////////////////////////
 setInterval(() => {
@@ -429,6 +395,8 @@ const allDisplay = (showTools) => {
 document.getElementById("tools-link").onclick = () => toggleDisplay(true);
 document.getElementById("about-link").onclick = () => toggleDisplay(false);
 document.getElementById("searchInput").oninput = () => allDisplay(true);
+
+
 
 
 
