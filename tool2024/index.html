@@ -334,6 +334,7 @@ function searchKeyword(keyword) {
     } else {
       item.style.display = 'none';  // 隱藏不符合條件的元素
     }
+    
   });
 }
 
@@ -385,6 +386,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const toggleDisplay = (showTools) => {
     document.getElementById("tools").classList.toggle("active", showTools);
     document.getElementById("about").classList.toggle("active", !showTools);
+    //document.getElementById("searchInput").value = ""; // 重置搜尋輸入框
 };
 
 const allDisplay = (showTools) => {
