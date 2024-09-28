@@ -1,7 +1,7 @@
 <html><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工具202409262312</title>
+    <title>工具2024</title>
 <style>
     body, html {
         font-family: 'Roboto', sans-serif;
@@ -133,13 +133,11 @@
         text-align: center;
         margin-top: 50px;
         padding: 20px;
-        background-color: rgba(26, 26, 46, 0.8);
         border-radius: 10px;
     }
 
 
     nav {
-        background-color: rgba(26, 26, 46, 0.8);
         padding: 10px 0;
         position: sticky;
         top: 0;
@@ -170,6 +168,19 @@
         margin-top: 50px;
         padding-top: 50px;
     }
+
+    /* 隱藏顯示版塊 */
+    .section {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease;
+    }
+
+    .section.active {
+        height: auto;
+    }
+
+
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -184,19 +195,19 @@
 
 <nav>
     <ul>
-        <li><a href="#tools">工具列表</a></li>
-        <li><a href="#about">關於我們</a></li>
+        <li><a href="#" id="tools-link">工具列表</a></li>
+        <li><a href="#" id="about-link">關於我們</a></li>
         <li id="translate"></li>
     </ul>
     <div class="container">
-    <input type="text" id="searchInput" placeholder="搜索工具、描述或關鍵字..."></div>
+        <input type="text" id="searchInput" placeholder="搜索工具、描述或關鍵字...">
+    </div>
 </nav>
 
 <div class="container">
-    <h1>工具2024</h1>
+    <h1>工具202409282057</h1>
     
     <section id="tools" class="section">
-        
         <P id="translate"></P>
         <div id="tool-list"></div>
     </section>
@@ -208,13 +219,6 @@
 
     <div class="footer">
         <p class="mokJsApi_copyright">版權</p>
-        <p>我們需要您的持續支持。請贊助我們以繼續我們的服務。<br>所有收益在扣除成本後，將用於支持各種慈善事業。</p>
-        <p>
-            Bitcoin: <br>
-            3Bwdrz4H25sW7zFtLWTKhtrRwKg2i6o9GF<br><br>
-            Ethereum: <br>
-            0x84CfF0d94fAAd23439186A050aD175E6242E5161
-        </p>
     </div>
 
 </div>
@@ -267,7 +271,6 @@ function renderTools(tools) {
         toolItem.innerHTML = `
             <a href="${tool.url}" target="_blank">${tool.name}
             <p>${tool.description}</p>
-            
             </a>
         `;
         // <div class="keywords">${tool.keywords.join(', ')}</div>
@@ -275,14 +278,7 @@ function renderTools(tools) {
     });
 }
 
-// search ai工具
-function searchTools(query) {
-    return toolsData.filter(tool => 
-        tool.name.toLowerCase().includes(query.toLowerCase()) ||
-        tool.description.toLowerCase().includes(query.toLowerCase()) ||
-        tool.keywords.some(keyword => keyword.toLowerCase().includes(query.toLowerCase()))
-    );
-}
+
 
 
 // 關於我們列表 ///////////////////////////////////
@@ -300,8 +296,11 @@ const 關於我們列表 = [
     { 內容1: "<h3>社群媒體行銷</h3><p>我們可以製定有效的社群媒體行銷策略，幫助您在各大社群平台上建立強大的品牌影響力並吸引更多目標客戶。</p>"},
     { 內容1: "<h3>專業人才招聘</h3><p>我們為各種職位提供專業的招募服務，幫助您找到最合適的候選人來滿足您公司的需求。</p>"},
     { 內容1: "<h3>聯繫我們</h3><p>whatsapp:<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'>85264071181</a><br>微信：hk64071181</p>"},
-    { 內容1: "<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'><h3>加入我們</h3><p>我們始終歡迎優秀人才的加入，一起打造更好的工具平台。</p></a>"}
+    { 內容1: "<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'><h3>加入我們</h3><p>我們始終歡迎優秀人才的加入，一起打造更好的工具平台。</p></a>"},
+    { 內容1: "<h3>贊助我們</h3><p>我們需要您的持續支持。請贊助我們以繼續我們的服務。<br>所有收益在扣除成本後，將用於支持各種慈善事業。</p><p>Bitcoin: <br>3Bwdrz4H25sW7zFtLWTKhtrRwKg2i6o9GF<br><br>Ethereum: <br>0x84CfF0d94fAAd23439186A050aD175E6242E5161</p>"}
 ];
+
+
 // 顯示關於我們
 function 顯示關於我們(內容s) {
     const 關於我們位 = document.getElementById('about-section');
@@ -316,14 +315,62 @@ function 顯示關於我們(內容s) {
 
 
 // 搜尋功能 ///////////////////////////////////
+
+/*
+// search ai工具
+function searchTools(query) {
+    return toolsData.filter(tool => 
+        tool.name.toLowerCase().includes(query.toLowerCase()) ||
+        tool.description.toLowerCase().includes(query.toLowerCase()) ||
+        tool.keywords.some(keyword => keyword.toLowerCase().includes(query.toLowerCase()))
+    );
+}
+
+// search關於我們 qqq
+function search關於我們(query) {
+    return 內容Data.filter(內容 => 
+        內容.內容1.toLowerCase().includes(query.toLowerCase()) ||
+        內容.內容1.toLowerCase().includes(query.toLowerCase()) ||
+        內容.內容1.some(keyword => keyword.toLowerCase().includes(query.toLowerCase()))
+    );
+}
+// 顯示搜尋結果
 document.getElementById('searchInput').addEventListener('input', (e) => {
     const query = e.target.value;
     const filteredTools = searchTools(query);
     renderTools(filteredTools);
-    const 關於我們結果 = search關於我們(query);
-    renderTools(關於我們結果);
+    const 關於我們結果 = search關於我們(query); //qqq
+    顯示關於我們(關於我們結果);
 });
+*/
+
 // 顯示搜尋結果
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchKeyword(e.target.value);
+});
+
+// 搜索功能實現
+function searchKeyword(keyword) {
+  // 選取所有符合條件的元素
+  const items = document.querySelectorAll('.tool-item, .about-item');
+  
+  // 遍歷每個元素，檢查是否包含關鍵字
+  items.forEach(item => {
+
+    
+
+
+    if (item.textContent.includes(keyword)) {
+      item.style.display = '';  // 顯示符合條件的元素
+    } else {
+      item.style.display = 'none';  // 隱藏不符合條件的元素
+    }
+  });
+}
+
+
+
+// 顯示內容
 renderTools(toolsData);
 顯示關於我們(關於我們列表);
 
@@ -367,6 +414,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+// 隱藏顯示版塊
+const toggleDisplay = (showTools) => {
+        document.getElementById("tools").classList.toggle("active", showTools);
+        document.getElementById("about").classList.toggle("active", !showTools);
+    };
+document.getElementById("tools-link").onclick = () => toggleDisplay(true);
+document.getElementById("about-link").onclick = () => toggleDisplay(false);
+document.getElementById("searchInput").oninput = () => toggleDisplay(true);
+
 
 
 </script>
