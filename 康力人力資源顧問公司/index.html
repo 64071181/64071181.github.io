@@ -4,7 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>康力人力資源顧問公司</title>
+
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
         <style>
@@ -156,7 +160,6 @@
         <p class="mokJsApi_copyright">版權</p>
     </footer>
 
-    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
 
     <script>
 
@@ -167,10 +170,10 @@
         
 
         // 顯示工具
-        function renderTools(內容,位置,殼Class) {
+        function renderTools(內容s,位置,殼Class='') {
             const 內容的位 = document.getElementById(位置);
             內容的位.innerHTML = '';
-            內容.forEach(tool => {
+            內容s.forEach(內容 => {
                 const 每個內容 = document.createElement('div');
                 每個內容.className = 殼Class;
                 每個內容.innerHTML = `${內容.內容1}`;
@@ -179,7 +182,7 @@
         }
 
         // 顯示內容
-        renderTools(康力關於,'about','');
+        renderTools(康力關於,'about');
 
 
 
@@ -202,6 +205,10 @@
             });
         });
 
+    </script>
+        <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+
+    <script>
         // 翻譯 
         translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
         translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
