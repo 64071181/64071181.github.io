@@ -6,89 +6,23 @@
         <title>康力人力資源顧問公司</title>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
         <style>
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #f4f4f4;
-            }
-            header {
-                background-color: #007bff;
-                color: white;
-                text-align: center;
-                padding: 1rem;
-                margin-bottom: 2rem;
-                position: relative;
-                overflow: hidden;
-            }
-            header::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                opacity: 0.2;
-                z-index: 0;
-            }
-            header h1 {
-                position: relative;
-                z-index: 1;
-            }
-            h2 {
-                color: #007bff;
-            }
-            .service {
-                background-color: white;
-                border-radius: 5px;
-                padding: 20px;
-                margin-bottom: 20px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                display: flex;
-                align-items: center;
-            }
-            .contact {
-                background-color: #e9ecef;
-                border-radius: 5px;
-                padding: 20px;
-                margin-top: 2rem;
-            }
-            #about {
-                display: flex;
-                align-items: center;
-                margin-bottom: 2rem;
-            }
-            @media (max-width: 768px) {
-                body {
-                    padding: 10px;
-                }
-                #about,.service {
-                    flex-direction: column;
-                }
-            }
-
-            .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-}
-
-.social-icons a {
-    color: #35424a;
-    font-size: 24px;
-    transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: #e8491d;
-}
-.bgimg{background-repeat: no-repeat;background-size: 100%  ;min-width: 360px;min-height: 200px;margin: 1%;float: left;}
-        </style>
+            body {    font-family: Arial, sans-serif;    line-height: 1.6;    color: #333;    max-width: 1200px;    margin: 0 auto;    padding: 20px;    background-color: #f4f4f4;}
+            header {    background-color: #007bff;    color: white;    text-align: center;    padding: 1rem;    margin-bottom: 2rem;    position: relative;    overflow: hidden;}
+            header::before {    content: "";    position: absolute;    top: 0;    left: 0;    right: 0;    bottom: 0;    opacity: 0.2;    z-index: 0;}
+            header h1 {    position: relative;    z-index: 1;}
+            h2 {    color: #007bff;}
+            .service {    background-color: white;    border-radius: 5px;    padding: 20px;    margin-bottom: 20px;    box-shadow: 0 2px 5px rgba(0,0,0,0.1);    display: flex;    align-items: center;}
+            .contact {    background-color: #e9ecef;    border-radius: 5px;    padding: 20px;    margin-top: 2rem;}
+            #about {    display: flex;    align-items: center;    margin-bottom: 2rem;}
+            @media (max-width: 768px) {    body {        padding: 10px;    }#about,.service {        flex-direction: column;    }}
+            .social-icons {display: flex;justify-content: center;gap: 20px;margin: 20px 0;}
+            .social-icons a {color: #35424a;font-size: 24px;transition: color 0.3s ease;}
+            .social-icons a:hover {color: #e8491d;}
+            .bgimg{background-repeat: no-repeat;background-size: 100%  ;min-width: 360px;min-height: 200px;margin: 1%;float: left;}
+            </style>
+            
     </head>
 <body>
     <header>
@@ -99,6 +33,7 @@
     <main>
         <section id="about">
 
+            <!--
             <div class="client-item bgimg" style="background-image: url(https://98672794.github.io/康力人力資源顧問公司/img/0.png);" >
             </div>
             <div>
@@ -115,6 +50,7 @@
                     <br><br>
                     </p>
             </div>
+            -->
         </section>
 
         <section id="services">
@@ -223,6 +159,30 @@
     <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
 
     <script>
+
+
+
+        // 取data並解密
+        const 康力關於 = eval(CryptoJS.AES.decrypt(康力關於Data, 摸老婆).toString(CryptoJS.enc.Utf8))
+        
+
+        // 顯示工具
+        function renderTools(內容,位置,殼Class) {
+            const 內容的位 = document.getElementById(位置);
+            內容的位.innerHTML = '';
+            內容.forEach(tool => {
+                const 每個內容 = document.createElement('div');
+                每個內容.className = 殼Class;
+                每個內容.innerHTML = `${內容.內容1}`;
+                內容的位.appendChild(每個內容);
+            });
+        }
+
+        // 顯示內容
+        renderTools(康力關於,'about','');
+
+
+
         // 防止複製功能
         document.addEventListener('copy', function(e) {
         e.preventDefault();
@@ -247,6 +207,10 @@
         translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
         translate.execute();//進行翻譯 
     </script>
+
+
 <script src="https://64071181.github.io/mokJsapi/mokJsApi.js">//jquery-3.7.0.js 放頭</script>
 <script>mokJsApi_客戶追蹤();</script>
+
+
 </body></html>
