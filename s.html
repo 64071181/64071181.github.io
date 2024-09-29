@@ -48,8 +48,9 @@
   </div>
   
   <script>
-  const correctPasswordHash = '053cd5774228cdacbea2595d4155ae92f832a957343e361290f9402071860dcf'; 
   
+  const correctPasswordHash="fcd0681702049f092163e343759a238f29ea5514d5952aebcadc8224775dc350".split("").reverse().join("");
+
   // 轉換 SHA256
   function sha256(text) {
     return CryptoJS.SHA256(text).toString();
@@ -58,6 +59,7 @@
   // 加密/解密處理
   function processText(action) {
     const password = document.getElementById('password').value;
+    const sha256pas = sha256(password)
     const input = document.getElementById('input').value;
     const messageElement = document.getElementById('message');
     const outputElement = document.getElementById('output');
@@ -70,10 +72,10 @@
     try {
       let result;
       if (action === 'encrypt') {
-        result = CryptoJS.AES.encrypt(input, password).toString();
+        result = CryptoJS.AES.encrypt(input, sha256pas).toString();
         messageElement.textContent = '好!!';
       } else {
-        result = CryptoJS.AES.decrypt(input, password).toString(CryptoJS.enc.Utf8);
+        result = CryptoJS.AES.decrypt(input, sha256pas).toString(CryptoJS.enc.Utf8);
         messageElement.textContent = '哈!!';
       }
       outputElement.value = result;
