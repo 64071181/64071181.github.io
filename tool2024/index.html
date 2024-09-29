@@ -14,21 +14,16 @@
     }
     .container {
         max-width: 800px;
-        margin: 0 auto;
+        margin: auto;
         padding: 20px;
         position: relative;
         z-index: 1;
     }
-    h1, h2 {
+    h1 {
         text-align: center;
         color: #4fd1c5;
         font-size: 2.5em;
-        margin-bottom: 30px;
         text-shadow: 0 0 10px rgba(79, 209, 197, 0.5);
-    }
-    h2 {
-        font-size: 2em;
-        margin-top: 50px;
     }
 
     #tool-list, #about-section {
@@ -72,7 +67,6 @@
     #searchInput {
         width: 100%;
         padding: 10px;
-        margin-bottom: 20px;
         border: none;
         border-radius: 5px;
         background-color: rgba(42, 42, 58, 0.8);
@@ -131,16 +125,16 @@
 
     .footer {
         text-align: center;
-        margin-top: 50px;
+        margin-bottom: 70px;
         padding: 20px;
         border-radius: 10px;
     }
 
-
     nav {
-        padding: 10px 0;
-        position: sticky;
-        top: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        bottom: 0;
         z-index: 1000;
         backdrop-filter: blur(5px);
     }
@@ -163,10 +157,6 @@
     nav ul li a:hover {
         color: #e0e0e0;
         text-shadow: 0 0 5px #4fd1c5;
-    }
-    .section {
-        margin-top: 50px;
-        padding-top: 50px;
     }
 
     /* 隱藏顯示版塊 */
@@ -193,6 +183,28 @@
 <div class="hologram"></div>
 <div class="scan-line"></div>
 
+
+
+<div class="container">
+
+    <section id="tools" class="section">
+        <h1>工具202409291217</h1>
+        <div id="tool-list"></div>
+    </section>
+
+    <section id="about" class="section">
+        <h1>全面的數位創意解決方案</h1>
+        <div id="about-section"></div>
+    </section>
+
+
+
+    <div class="footer">
+        <p class="mokJsApi_copyright">版權</p>
+    </div>
+
+</div>
+
 <nav>
     <ul>
         <li><a href="#" id="tools-link">工具列表</a></li>
@@ -203,27 +215,6 @@
         <input type="text" id="searchInput" placeholder="搜索工具、描述或關鍵字...">
     </div>
 </nav>
-
-<div class="container">
-    <h1>工具202409282057</h1>
-    
-    <section id="tools" class="section">
-        <P id="translate"></P>
-        <div id="tool-list"></div>
-    </section>
-
-    <section id="about" class="section">
-        <h2>全面的數位創意解決方案</h2>
-        <div id="about-section"></div>
-    </section>
-
-    <div class="footer">
-        <p class="mokJsApi_copyright">版權</p>
-    </div>
-
-</div>
-
-
 
 
 
@@ -296,7 +287,7 @@ const 關於我們列表 = [
     { 內容1: "<h3>社群媒體行銷</h3><p>我們可以製定有效的社群媒體行銷策略，幫助您在各大社群平台上建立強大的品牌影響力並吸引更多目標客戶。</p>"},
     { 內容1: "<h3>專業人才招聘</h3><p>我們為各種職位提供專業的招募服務，幫助您找到最合適的候選人來滿足您公司的需求。</p>"},
     { 內容1: "<h3>聯繫我們</h3><p>whatsapp:<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'>85264071181</a><br>微信：hk64071181</p>"},
-    { 內容1: "<a href='https://wa.me/85264071181/?text=查詢全面的數位創意解決方案'><h3>加入我們</h3><p>我們始終歡迎優秀人才的加入，一起打造更好的工具平台。</p></a>"},
+    { 內容1: "<a href='https://wa.me/85264071181/?text=查詢加入工具2024團隊'><h3>加入我們</h3><p>我們始終歡迎優秀人才的加入，一起打造更好的工具平台。</p></a>"},
     { 內容1: "<h3>贊助我們</h3><p>我們需要您的持續支持。請贊助我們以繼續我們的服務。<br>所有收益在扣除成本後，將用於支持各種慈善事業。</p><p>Bitcoin: <br>3Bwdrz4H25sW7zFtLWTKhtrRwKg2i6o9GF<br><br>Ethereum: <br>0x84CfF0d94fAAd23439186A050aD175E6242E5161</p>"}
 ];
 
@@ -314,33 +305,50 @@ function 顯示關於我們(內容s) {
 }
 
 
+
+
+
 // 搜尋功能 ///////////////////////////////////
-
 // 顯示搜尋結果
-document.getElementById('searchInput').addEventListener('input', (e) => {
-    searchKeyword(e.target.value);
+$('#searchInput').on('input', function() {
+    searchKeyword($(this).val());
 });
-
 // 搜索功能實現
 function searchKeyword(keyword) {
-  // 選取所有符合條件的元素
-  const items = document.querySelectorAll('.tool-item, .about-item');
-  
-  // 遍歷每個元素，檢查是否包含關鍵字
-  items.forEach(item => {
-
-    if (item.textContent.includes(keyword)) {
-      item.style.display = '';  // 顯示符合條件的元素
-    } else {
-      item.style.display = 'none';  // 隱藏不符合條件的元素
-    }
-    
-  });
+    // 選取所有符合條件的元素
+    $('.tool-item, .about-item').each(function() {
+        $(this).toggle($(this).text().includes(keyword));
+    });
 }
+// 隱藏顯示版塊
+function toggleDisplay(showTools) {
+    $('#searchInput').val('');  // 重置搜尋輸入框
+    if (showTools) {
+        $('.tool-item').show();
+        $('.about-item').hide();
+    } else {
+        $('.about-item').show();
+        $('.tool-item').hide();
+    }
+    $('#tools').toggleClass('active', showTools);
+    $('#about').toggleClass('active', !showTools);
+}
+// 顯示所有項目
+function allDisplay() {
+    $('#tools, #about').addClass('active');
+}
+$('#tools-link').on('click', function() {
+    toggleDisplay(true);
+});
+$('#about-link').on('click', function() {
+    toggleDisplay(false);
+});
+$('#searchInput').on('input', allDisplay);
 
 // 顯示內容
 renderTools(toolsData);
 顯示關於我們(關於我們列表);
+
 
 // 添加科技感動畫 ///////////////////////////////////
 setInterval(() => {
@@ -351,7 +359,6 @@ setInterval(() => {
         randomItem.classList.remove('glow');
     }, 2000);
 }, 3000);
-
 // 粒子背景效果
 particlesJS('particles-js', {
     particles: {
@@ -371,36 +378,6 @@ particlesJS('particles-js', {
     retina_detect: true
 });
 
-// 平滑滾動
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// 隱藏顯示版塊
-const toggleDisplay = (showTools) => {
-    document.getElementById("tools").classList.toggle("active", showTools);
-    document.getElementById("about").classList.toggle("active", !showTools);
-    //document.getElementById("searchInput").value = ""; // 重置搜尋輸入框
-};
-
-const allDisplay = (showTools) => {
-    document.getElementById("tools").classList.toggle("active", showTools);
-    document.getElementById("about").classList.toggle("active", showTools);
-};
-
-document.getElementById("tools-link").onclick = () => toggleDisplay(true);
-document.getElementById("about-link").onclick = () => toggleDisplay(false);
-document.getElementById("searchInput").oninput = () => allDisplay(true);
-
-
-
-
 
 </script>
 <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
@@ -411,7 +388,7 @@ document.getElementById("searchInput").oninput = () => allDisplay(true);
     translate.execute();//進行翻譯 
 </script>
 
-<script src="https://64071181.github.io/mokJsapi/mokJsApi.js">//jquery-3.7.0.js</script>
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js">//jquery-3.7.0.js 放頭</script>
 <script>mokJsApi_客戶追蹤();</script>
 </body>
 </html>
