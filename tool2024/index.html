@@ -97,26 +97,20 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
 
 <script>
 
-
-// 替换为加密时使用的密码
-const password = 龜龜//'053cd5774228cdacbea2595d4155ae92f832a957343e361290f9402071860dcf'; 
-// 解密時應將加密的資料先進行 Base64 解碼
-const decrypted = CryptoJS.AES.decrypt(encryptedData, password);
-const qqq = decrypted.toString(CryptoJS.enc.Utf8);
-
-const toolsData = eval(qqq)//tool2024工具Data
-
-
-const 關於我們列表 = tool2024關於我們Data
-
+// 解密key
+const 可愛動物 = 龜龜; 
 
 // ai工具列表 ///////////////////////////////////
 
-
+// 解密時應將加密的資料先進行 Base64 解碼
+const toolsData = eval(CryptoJS.AES.decrypt(tool2024工具Data, 可愛動物).toString(CryptoJS.enc.Utf8))//tool2024工具Data
+const 關於我們列表 = eval(CryptoJS.AES.decrypt(tool2024關於我們Data, 可愛動物).toString(CryptoJS.enc.Utf8))//tool2024關於我們Data
 
 // 顯示工具
 function renderTools(tools) {
