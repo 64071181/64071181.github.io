@@ -103,14 +103,12 @@
 
 <script>
 
-// 解密key
-const 可愛動物 = 龜龜; 
 
 // ai工具列表 ///////////////////////////////////
 
-// 解密時應將加密的資料先進行 Base64 解碼
-const toolsData = eval(CryptoJS.AES.decrypt(tool2024工具Data, 可愛動物).toString(CryptoJS.enc.Utf8))//tool2024工具Data
-const 關於我們列表 = eval(CryptoJS.AES.decrypt(tool2024關於我們Data, 可愛動物).toString(CryptoJS.enc.Utf8))//tool2024關於我們Data
+// 取data並解密
+const toolsData = eval(CryptoJS.AES.decrypt(tool2024工具Data, 摸老婆).toString(CryptoJS.enc.Utf8))
+const 關於我們列表 = eval(CryptoJS.AES.decrypt(tool2024關於我們Data, 摸老婆).toString(CryptoJS.enc.Utf8))
 
 // 顯示工具
 function renderTools(tools) {
