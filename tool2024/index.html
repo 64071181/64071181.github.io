@@ -30,6 +30,8 @@
         nav ul li a:hover {color: #e0e0e0;text-shadow: 0 0 5px #4fd1c5;    }
         /* 隱藏顯示版塊 */    .section {height: 0;overflow: hidden;transition: height 0.5s ease;    }
         .section.active {height: auto;    }
+        #搜尋Perplexity{text-align: center;}
+        #搜尋Perplexity a{text-decoration: none;color: #fab5f0;font-size: 1.5em;text-shadow: 0 0 10px rgba(79, 209, 197, 0.5);}
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -57,7 +59,7 @@
         <div id="about-section"></div>
     </section>
 
-
+    <section id="搜尋Perplexity"></section>
 
     <div class="footer">
         <p class="mokJsApi_copyright">版權</p>
@@ -154,11 +156,16 @@ function searchKeyword(keyword) {
     // 選取所有符合條件的元素
     $('.tool-item, .about-item').each(function() {
         $(this).toggle($(this).text().includes(keyword));
+
+        // 搜尋Perplexity
+        $('#搜尋Perplexity').html(`<a href="https://www.perplexity.ai/search?q=${keyword}" target="_blank">在 Perplexity 上搜尋 ${keyword}</a>`);
+        $('#搜尋Perplexity').show();
     });
 }
 // 隱藏顯示版塊
 function toggleDisplay(showTools) {
     $('#searchInput').val('');  // 重置搜尋輸入框
+    $('#搜尋Perplexity').hide();
     if (showTools) {
         $('.tool-item').show();
         $('.about-item').hide();
