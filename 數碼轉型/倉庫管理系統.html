@@ -1,0 +1,269 @@
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>莫氏倉庫管理系統</title>
+
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;}
+  .container { max-width: 100%; padding: 10px;}
+  header { background-color: #3498db; color: white; text-align: center; padding: 1em;}
+  nav { background-color: #2980b9; padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
+  nav a { color: white; text-decoration: none; padding: 10px; margin: 5px; flex-grow: 1; text-align: center; background-color: #3498db; border-radius: 5px;}
+  .content { background-color: white; padding: 15px; margin-top: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+  .inventory-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;}
+  .inventory-item h3 { margin-top: 0; margin-right: 2%;}
+  .inventory-detail { display: flex; justify-content: space-between; flex-wrap: wrap;}
+  .inventory-detail p { margin: 5px 0; flex-basis: 48%;}
+  .btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: 100%; text-align: center;}
+  .btn:hover { background-color: #2980b9;}
+  .edit-mode input { width: 100%; box-sizing: border-box; padding: 5px; margin-bottom: 5px;}
+  .product-images { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 15px;}
+  .product-images img { width: 32%; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+  @media (min-width: 768px) { .container {   padding: 20px; }
+    .inventory-item {   display: flex;   justify-content: space-between;   align-items: center; }
+    .inventory-detail {   flex-grow: 1; }
+    .btn {   width: auto;   margin-left: 10px; }
+    .product-images img {   width: 24%; }
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1>莫氏倉庫管理系統</h1>
+    <p id="translate"></p>
+  </header>
+  <nav>
+    <a href="inventory" >庫存</a>
+    <a href="orders">訂單</a>
+    <a href="suppliers">供應商</a>
+    <a href="reports">報表</a>
+    <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>登入</a>
+  </nav>
+  <div class="container">
+    <div class="content">
+      <h2>庫存概覽</h2>
+      <div id="inventory-list">
+        <!-- 這裡將由JavaScript動態填充數據 -->
+      </div>
+      <button class="btn" onclick="addNewItem()">新增產品</button>
+    </div>
+    <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // 模擬的庫存數據
+    let inventoryData = [
+      { 
+        productNumber: 'SCR-001', 
+        code: 'P001', 
+        quantity: 1000, 
+        location: 'A-1-1', 
+        lastUpdated: '2023-05-01', 
+        responsiblePerson: '張三',
+        boxVolume: '1.2 m³',
+        boxWeight: '25 kg',
+        boxQuantity: '10 盒, 每盒 100 件',
+        locationImage: 'https://example.com/location/P001.jpg',
+        boxImage: 'https://example.com/box/P001.jpg',
+        productImage: 'https://example.com/product/P001.jpg'
+      },
+      { 
+        productNumber: 'NUT-001', 
+        code: 'P002', 
+        quantity: 500, 
+        location: 'A-1-2', 
+        lastUpdated: '2023-05-02', 
+        responsiblePerson: '李四',
+        boxVolume: '0.8 m³',
+        boxWeight: '20 kg',
+        boxQuantity: '5 盒, 每盒 100 件',
+        locationImage: 'https://example.com/location/P002.jpg',
+        boxImage: 'https://example.com/box/P002.jpg',
+        productImage: 'https://example.com/product/P002.jpg'
+      },
+      { 
+        productNumber: 'WRE-001', 
+        code: 'P003', 
+        quantity: 100, 
+        location: 'B-2-1', 
+        lastUpdated: '2023-05-03', 
+        responsiblePerson: '王五',
+        boxVolume: '1.5 m³',
+        boxWeight: '30 kg',
+        boxQuantity: '2 盒, 每盒 50 件',
+        locationImage: 'https://example.com/location/P003.jpg',
+        boxImage: 'https://example.com/box/P003.jpg',
+        productImage: 'https://example.com/product/P003.jpg'
+      },
+    ];
+
+
+    function renderInventoryList() {
+      const listContainer = document.getElementById('inventory-list');
+      listContainer.innerHTML = '';
+      inventoryData.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'inventory-item';
+        itemElement.setAttribute('data-code', item.code);
+        itemElement.innerHTML = `
+          <h3 title="產品編號">${item.productNumber}</h3>
+
+          <!-- 產品圖片 
+          <div class="product-images">
+            <img src="${item.locationImage}" alt="位置圖 - ${item.productNumber}" width="200" height="150">
+            <img src="${item.boxImage}" alt="原箱照片 - ${item.productNumber}" width="200" height="150">
+            <img src="${item.productImage}" alt="產品圖 - ${item.productNumber}" width="200" height="150">
+          </div>
+          -->
+
+          <div class="inventory-detail">
+            <p title="產品代碼"><strong>產品代碼:</strong> ${item.code}</p>
+            <p title="數量"><strong>數量:</strong> ${item.quantity}</p>
+            <p title="儲存位置"><strong>位置:</strong> ${item.location}</p>
+            <p title="原箱體積"><strong>原箱體積:</strong> ${item.boxVolume}</p>
+            <p title="原箱重量"><strong>原箱重量:</strong> ${item.boxWeight}</p>
+            <p title="每箱數量"><strong>每箱數量:</strong> ${item.boxQuantity}</p>
+            
+            <p title="最後更新日期"><strong>更新日期:</strong> ${item.lastUpdated}</p>
+            <p title="負責人"><strong>負責人:</strong> ${item.responsiblePerson}</p>
+          </div>
+          <div>
+            <button class="btn adminbtn" onclick="editItem('${item.code}')">編輯</button>
+            <button class="btn adminbtn" onclick="deleteItem('${item.code}')">刪除</button>
+          </div>
+        `;
+        listContainer.appendChild(itemElement);
+      });
+    }
+
+    function addNewItem() {
+      const newItem = {
+        productNumber: prompt('請輸入產品編號'),
+        code: prompt('請輸入產品代碼'),
+        quantity: parseInt(prompt('請輸入數量')),
+        location: prompt('請輸入儲存位置'),
+        lastUpdated: new Date().toISOString().split('T')[0],
+        responsiblePerson: prompt('請輸入負責人姓名'),
+        boxVolume: prompt('請輸入原箱體積'),
+        boxWeight: prompt('請輸入原箱重量'),
+        boxQuantity: prompt('請輸入每箱數量 (例如: 10 盒, 每盒 100 件)'),
+        // 圖URL
+        //locationImage: prompt('請輸入位置圖URL'),
+        //boxImage: prompt('請輸入原箱照片URL'),
+        //productImage: prompt('請輸入產品圖URL')
+      };
+      inventoryData.push(newItem);
+      renderInventoryList();
+    }
+
+    function editItem(code) {
+      const item = inventoryData.find(item => item.code === code);
+      const itemElement = document.querySelector(`.inventory-item[data-code="${code}"]`);
+      if (item && itemElement) {
+        itemElement.innerHTML = `
+
+          
+          <input type="text" value="${item.productNumber}" data-field="productNumber" placeholder="產品編號" title="產品編號">
+          <!-- 產品圖片 
+          <input type="text" value="${item.locationImage}" data-field="locationImage" placeholder="位置圖URL" title="位置圖URL">
+          <input type="text" value="${item.boxImage}" data-field="boxImage" placeholder="原箱照片URL" title="原箱照片URL">
+          <input type="text" value="${item.productImage}" data-field="productImage" placeholder="產品圖URL" title="產品圖URL">
+          -->
+          
+          <input type="text" value="${item.code}" data-field="code" placeholder="產品代碼" title="產品代碼">
+          <input type="number" value="${item.quantity}" data-field="quantity" placeholder="數量" title="數量">
+          <input type="text" value="${item.location}" data-field="location" placeholder="儲存位置" title="儲存位置">
+
+          <input type="text" value="${item.boxVolume}" data-field="boxVolume" placeholder="原箱體積" title="原箱體積">
+          <input type="text" value="${item.boxWeight}" data-field="boxWeight" placeholder="原箱重量" title="原箱重量">
+          <input type="text" value="${item.boxQuantity}" data-field="boxQuantity" placeholder="每箱數量" title="每箱數量(例如: 10 盒, 每盒 100 件)">
+
+
+          <input type="date" value="${item.lastUpdated}" data-field="lastUpdated" title=最後更新日期">
+          <input type="text" value="${item.responsiblePerson}" data-field="responsiblePerson" placeholder="負責人" title="負責人">
+          <button class="btn" onclick="saveItem('${code}')">保存</button>
+          <button class="btn" onclick="cancelEdit('${code}')">取消</button>
+        `;
+        itemElement.classList.add('edit-mode');
+      }
+    }
+
+    function saveItem(oldCode) {
+      const itemElement = document.querySelector(`.inventory-item[data-code="${oldCode}"]`);
+      if (itemElement) {
+        const newItem = {
+          code: itemElement.querySelector('input[data-field="code"]').value,
+          productNumber: itemElement.querySelector('input[data-field="productNumber"]').value,
+          quantity: parseInt(itemElement.querySelector('input[data-field="quantity"]').value),
+          location: itemElement.querySelector('input[data-field="location"]').value,
+          lastUpdated: itemElement.querySelector('input[data-field="lastUpdated"]').value,
+          responsiblePerson: itemElement.querySelector('input[data-field="responsiblePerson"]').value,
+          boxVolume: itemElement.querySelector('input[data-field="boxVolume"]').value,
+          boxWeight: itemElement.querySelector('input[data-field="boxWeight"]').value,
+          boxQuantity: itemElement.querySelector('input[data-field="boxQuantity"]').value//,
+
+          // 圖URL
+          //locationImage: itemElement.querySelector('input[data-field="locationImage"]').value,
+          //boxImage: itemElement.querySelector('input[data-field="boxImage"]').value,
+          //productImage: itemElement.querySelector('input[data-field="productImage"]').value
+        };
+        
+        const index = inventoryData.findIndex(item => item.code === oldCode);
+        if (index !== -1) {
+          inventoryData[index] = newItem;
+        }
+        
+        renderInventoryList();
+      }
+    }
+
+    function cancelEdit(code) {
+      renderInventoryList();
+    }
+
+    function deleteItem(code) {
+      if (confirm('確定要刪除此項目嗎？')) {
+        inventoryData = inventoryData.filter(item => item.code !== code);
+        renderInventoryList();
+      }
+    }
+
+    // 初始化列表
+    renderInventoryList();
+  </script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+<script>
+    // 翻譯 
+    //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+</script>
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+<script>
+  // mokaki //////////////////
+
+
+  帳戶名稱()
+  mokJsApi_客戶追蹤();
+</script>
+
+
+</html>

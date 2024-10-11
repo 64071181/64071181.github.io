@@ -1,0 +1,275 @@
+<html><head><base href="https://neocyberspace.net" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>身份認證系統|Mok's Group Limited</title>
+
+<style>
+  :root {--neon-blue: #00f3ff;--neon-purple: #9d00ff;--dark-bg: #0a0a20;}
+  body, html {margin: 0;padding: 0;height: 100%;font-family: 'Rajdhani', sans-serif;background: var(--dark-bg);color: #fff;overflow: hidden;}
+  .cyber-grid {position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: 
+      linear-gradient(var(--neon-blue) 1px, transparent 1px),
+      linear-gradient(90deg, var(--neon-blue) 1px, transparent 1px);background-size: 50px 50px;opacity: 0.1;z-index: -1;animation: gridMove 20s linear infinite;}
+  @keyframes gridMove {0% { transform: translateY(0); }
+    100% { transform: translateY(50px); }
+  }
+  .container {display: flex;justify-content: center;align-items: center;height: 100%;perspective: 1000px;}
+  .auth-panel {width: 300px;height: 400px;position: relative;transform-style: preserve-3d;transition: transform 0.6s;}
+  .panel-face {position: absolute;width: 100%;height: 100%;backface-visibility: hidden;background: rgba(10, 10, 32, 0.8);border: 2px solid var(--neon-blue);display: flex;justify-content: center;align-items: center;padding: 20px;box-sizing: border-box;}
+  .front { transform: rotateY(0deg); }
+  .back { transform: rotateY(180deg); }
+  
+  .auth-form {width: 100%;}
+  h2 {text-align: center;color: var(--neon-purple);text-shadow: 0 0 10px var(--neon-purple);margin-bottom: 20px;}
+  input {width: 100%;padding: 10px;margin: 10px 0;background: transparent;border: none;border-bottom: 2px solid var(--neon-blue);color: #fff;font-family: 'Rajdhani', sans-serif;}
+  button {width: 100%;padding: 10px;margin-top: 20px;background: var(--neon-purple);color: #fff;border: none;cursor: pointer;transition: all 0.3s;}
+  button:hover {background: var(--neon-blue);box-shadow: 0 0 20px var(--neon-blue);}
+  .switch-form {text-align: center;margin-top: 20px;color: var(--neon-blue);cursor: pointer;}
+  .particle {position: absolute;width: 2px;height: 2px;border-radius: 50%;pointer-events: none;}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+</head>
+<body>
+<div class="cyber-grid"></div>
+<div class="container">
+  <div class="auth-panel" id="authPanel">
+    <p id="translate" style="text-align: center;"></p>
+    <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+
+    <div class="panel-face front">
+      <div class="auth-form" id="loginForm">
+        <h2 id="登入">?登入</h2>
+        <input id="登入帳號" type="text" placeholder="帳號" required>
+        <input id="登入密碼" type="password" placeholder="密碼" required>
+        <button onclick="登入()"  type="submit">登入</button>
+        <div class="switch-form" onclick="switchForm('register')">新用戶註冊</div>
+      </div>
+    </div>
+    <div class="panel-face back">
+      <div class="auth-form" id="registerForm">
+        <h2 id="註冊">?註冊</h2>
+        <input id="創建帳號" type="text" placeholder="創建帳號" required>
+        <input id="設置密碼" type="password" placeholder="設置密碼" required>
+        <input id="確認密碼" type="password" placeholder="確認密碼" required>
+        <button onclick="註冊()"  type="submit">註冊</button>
+        <div class="switch-form" onclick="switchForm('login')">帳戶登入</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+<script>
+    // 翻譯 
+    //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+</script>
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+
+
+
+
+
+
+<script>
+
+// mokaki //////////////////
+
+
+// 各網login
+const 由網 = localStorage.getItem('莫氏VIP分流');
+
+function 各網login(){
+  // 判斷是否有分流記錄
+  if (由網 != null) $('#登入, #註冊').html(`<a href="javascript:void(0);" onclick="window.history.back();">${由網}</a>`);
+  else $('.container').html(`<h2 style="display: block; width: 100%;"><a href="javascript:void(0);" onclick="window.history.back();">返回</a></h2><h1 style="display: block; width: 100%;"><a href="https://64071181.github.io/">Mok's Group Limited </a></h1>`);
+  
+  
+  
+  // 刪除分流記錄
+  localStorage.removeItem('莫氏VIP分流');
+}
+
+
+
+async function 登入(){
+
+  let 登入帳號  =$( "#登入帳號" ).val()
+    , 登入密碼  =$( "#登入密碼" ).val()
+    , 帳號 = sha256(登入帳號)
+    , 密碼 = sha256(登入密碼)
+
+    , 真帳號 = sha256(`0mo${帳號}kL${由網}V0`)
+    , 真帳密 = sha256(`${密碼}0mo${帳號}kL${由網}V0`)
+
+    , 在不 = await _檢查帳號是否存在(真帳號);
+
+  // 轉回註冊
+  if (在不 === null) {
+    document.getElementById('authPanel').style.transform = 'rotateY(180deg)'; 
+    return;
+  }
+
+  // 驗證密碼
+  fetch(`${在不}/${真帳號}`)
+    .then(response => {
+        return response.text(); // 獲取文本內容
+    })
+    .then(data => {
+        if (data.indexOf(真帳密) !== -1) {
+            console.log('數據驗證成功');
+            // 記錄帳戶名稱
+            localStorage.setItem('帳戶名稱', 登入帳號);
+            // 登入成功 轉跳 上一頁
+            window.history.back();
+        } else {
+            alert('密碼不符');
+        }
+    })
+
+}
+
+
+
+async function 註冊(){
+  /*
+  <script src="https://64071181.github.io/d0/008">
+  註冊或登入：新用戶名+密=戶口文件名，記到d0，已有帳號直接用文件名內資料。
+  先搜d（正式數據庫），再搜d0（臨時數據庫）
+  數據庫要開page
+  */
+
+  let 創建明文 = $( "#創建帳號" ).val()
+      , 密碼明文 = $( "#設置密碼" ).val()
+      , 創建帳號 = sha256(創建明文)
+      , 設置密碼 = sha256(密碼明文)
+      , 確認密碼 = sha256($( "#確認密碼" ).val())
+      ,  jp3ev6  = "\u0032\u0064\u0032\u0063\u0038\u0062\u0037\u0063\u0036\u0037\u0064\u0030\u0037\u0034\u0061\u0030\u0063\u0032\u0061\u0062\u0035\u0034\u0038\u0037\u0063\u0064\u0034\u0033\u0063\u0032\u0062\u0032\u0035\u0035\u0039\u0061\u0066\u0039\u0034\u0066\u0036\u0039\u0036\u0030\u0035\u0038\u0032\u0064\u0037\u0032\u0039\u0030\u0033\u0037\u0066\u0062\u0034\u0065\u0034\u0066\u0030\u0036\u0037\u0065"["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"]('')['reverse']()['join'](''))['reverse']()['join'](""["\u0073\u0070\u006c\u0069\u0074"]("".split("").reverse().join(""))['reverse']()["\u006a\u006f\u0069\u006e"]("".split("").reverse().join(""))))['reverse']()['join'](''['split']("".split("").reverse().join(""))['reverse']()['join']("".split("").reverse().join(""))))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](''['split'](""["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"]("".split("").reverse().join(""))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"]("".split("").reverse().join("")))['reverse']()['join']("".split("").reverse().join("")))['reverse']()["\u006a\u006f\u0069\u006e"](''['split'](""["\u0073\u0070\u006c\u0069\u0074"]("".split("").reverse().join(""))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](''))['reverse']()["\u006a\u006f\u0069\u006e"](''['split']("".split("").reverse().join(""))['reverse']()["\u006a\u006f\u0069\u006e"]("")))))['reverse']()['join'](''["\u0073\u0070\u006c\u0069\u0074"](""['split'](""['split']("".split("").reverse().join(""))['reverse']()['join'](''))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()['join'](""['split']('')["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"]("".split("").reverse().join(""))))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](""['split'](""["\u0073\u0070\u006c\u0069\u0074"]("")["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](""))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()['join'](""['split']("")["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()['join'](''))));
+
+  if(創建明文.length < 4){  alert('帳號長度需4個字以上');  return;  }
+  if(密碼明文.length < 8){  alert('密碼長度需8個字以上');  return;  }
+  if(設置密碼 != 確認密碼){  alert('密碼不符');  return;  }
+
+  let 真帳號 = sha256(`0mo${創建帳號}kL${由網}V0`)
+    , 真帳密 = sha256(`${設置密碼}0mo${創建帳號}kL${由網}V0`)
+    , 檢測號 = sha256(創建明文+jp3ev6)
+
+    , 在不 = await _檢查帳號是否存在(真帳號);
+    console.log('數據庫=',在不);
+  // 沒 = 新增帳號
+  if (在不 === null) {console.log(`開始創建帳號...`);await _上傳文到GitHub(真帳號, 真帳密+檢測號); alert('帳號創建成功，請登入');}
+
+  
+
+  // 轉回登入頁面
+  document.getElementById('authPanel').style.transform = 'rotateY(0deg)';
+
+  
+  
+
+}
+
+
+
+function _檢查帳號是否存在(帳號256){
+  // https://chatgpt.com/share/67094770-9110-8002-9310-ce242839a6a2
+
+  console.log('開始檢查帳號...');
+
+  return new Promise((resolve, reject) => {
+
+    let 主="\u0064\u002f\u006f\u0069\u002e\u0062\u0075\u0068\u0074\u0069\u0067\u002e\u0031\u0038\u0031\u0031\u0037\u0030\u0034\u0036\u002f\u002f\u003a\u0073\u0070\u0074\u0074\u0068"["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"]("".split("").reverse().join(""))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](""))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](""["\u0073\u0070\u006c\u0069\u0074"]('')["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"]("".split("").reverse().join("")))
+      , 臨="\u0030\u0064\u002f\u006f\u0069\u002e\u0062\u0075\u0068\u0074\u0069\u0067\u002e\u0031\u0038\u0031\u0031\u0037\u0030\u0034\u0036\u002f\u002f\u003a\u0073\u0070\u0074\u0074\u0068"["\u0073\u0070\u006c\u0069\u0074"](""["\u0073\u0070\u006c\u0069\u0074"]("")["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"]("".split("").reverse().join("")))["\u0072\u0065\u0076\u0065\u0072\u0073\u0065"]()["\u006a\u006f\u0069\u006e"](''['split']("".split("").reverse().join(""))['reverse']()['join'](""))    
+      , script = document.createElement('script');
+
+    script.src = `${主}/${帳號256}`; // .txt 轉主要刪尾
+    // 嘗試加載主數據庫
+    script.onload = () => {
+      console.log(`VIP帳號已存在，開始登入...`);
+      resolve(主);
+    };
+    // 主數據庫加載失敗後，嘗試臨時數據庫
+    script.onerror = () => {
+      let 臨script = document.createElement('script');
+      臨script.src = `${臨}/${帳號256}`;
+
+      臨script.onload = () => {
+        console.log(`臨時帳號已存在，開始登入...`);
+        resolve(臨);
+      };
+      臨script.onerror = () => {
+        resolve(null);
+      };
+
+      document.head.appendChild(臨script);
+    };
+
+    document.head.appendChild(script);
+  });
+}
+
+各網login();
+mokJsApi_客戶追蹤();
+</script>
+
+
+
+
+
+
+
+
+<script>
+function switchForm(formType) {
+  const panel = document.getElementById('authPanel');
+  if (formType === 'register') {
+    panel.style.transform = 'rotateY(180deg)';
+  } else {
+    panel.style.transform = 'rotateY(0deg)';
+  }
+}
+
+document.querySelectorAll('.auth-form').forEach(form => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('量子傳輸準備完成，即將進入虛擬宇宙！');
+  });
+});
+
+// 添加浮動粒子效果
+function createParticle() {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.background = Math.random() > 0.5 ? 'var(--neon-blue)' : 'var(--neon-purple)';
+  particle.style.left = `${Math.random() * 100}vw`;
+  particle.style.top = `${Math.random() * 100}vh`;
+  particle.style.animation = `float ${5 + Math.random() * 10}s linear infinite`;
+  document.body.appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, 15000);
+}
+
+setInterval(createParticle, 300);
+
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes float {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(10px, 10px); }
+    50% { transform: translate(0, 20px); }
+    75% { transform: translate(-10px, 10px); }
+    100% { transform: translate(0, 0); }
+  }
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>
