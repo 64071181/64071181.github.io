@@ -8,8 +8,8 @@
   .container { max-width: 100%; padding: 10px;}
   header { background-color: #3498db; color: white; text-align: center; padding: 1em;}
   nav { background-color: #2980b9; padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
-  nav a, nav p{ color: white; text-decoration: none; padding: 10px; margin: 5px; flex-grow: 1; text-align: center; background-color: #3498db; border-radius: 5px;}
- 
+  nav a, nav .dropdown{ color: white; text-decoration: none; padding: 10px; margin: 5px; flex-grow: 1; text-align: center; background-color: #3498db; border-radius: 5px; }
+  nav a{display: flex;justify-content: center; /* 水平置中 */align-items: center; /* 垂直置中 */}
   .dropdown-content {
   transition: height 1s ease; /* 變更高度的過渡效果 */
   overflow: hidden; /* 隱藏溢出的內容 */
@@ -63,8 +63,10 @@
     <a href="suppliers">供應商</a>
 
 
-    <a id="登入Btn" class="dropdown" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>登入</a>
 
+  <div class="dropdown">
+    <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>登入</a>
+  </div>
 
 
   </nav>
@@ -264,19 +266,7 @@
 
 
 
-    // 帳號管理btn美化
-    document.getElementById('dropdownToggle').addEventListener('click', function() {
-      const dropdownContent = document.querySelector('.dropdown-content');
-      
-      // 檢查當前高度
-      if (dropdownContent.style.height === '0px' || dropdownContent.style.height === '') {
-        // 設置為自動高度以顯示內容
-        dropdownContent.style.height = dropdownContent.scrollHeight + 'px';
-      } else {
-        // 收起內容
-        dropdownContent.style.height = '0px';
-      }
-    });
+
 
 
   </script>
@@ -304,8 +294,24 @@
 <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 <script>
   // mokaki //////////////////
-
   帳戶名稱()
+
+  // 帳號管理btn美化 後於 帳戶名稱()
+  document.getElementById('dropdownToggle').addEventListener('click', function() {
+    const dropdownContent = document.querySelector('.dropdown-content');
+    // 檢查當前高度
+    if (dropdownContent.style.height === '0px' || dropdownContent.style.height === '') {
+      // 設置為自動高度以顯示內容
+      dropdownContent.style.height = dropdownContent.scrollHeight + 'px';
+    } else {
+      // 收起內容
+    dropdownContent.style.height = '0px';
+  }
+  });
+
+
+  //localStorage.removeItem('帳戶名稱'); 
+
   mokJsApi_客戶追蹤();
 </script>
 
