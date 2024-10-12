@@ -124,6 +124,8 @@ async function 登入(){
             console.log('數據驗證成功');
             // 記錄帳戶名稱
             localStorage.setItem('帳戶名稱', 登入帳號);
+            // 記錄數據文件
+            localStorage.setItem('數據文件', `${在不}/${真帳號}`);
             // 登入成功 轉跳 上一頁
             window.history.back();
         } else {

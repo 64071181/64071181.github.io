@@ -160,14 +160,15 @@
       });
     }
 
+    // 加入新項目
     function addNewItem() {
       const newItem = {
         productNumber: prompt('請輸入產品編號'),
         code: prompt('請輸入產品代碼'),
         quantity: parseInt(prompt('請輸入數量')),
         location: prompt('請輸入儲存位置'),
-        lastUpdated: new Date().toISOString().split('T')[0],
-        responsiblePerson: prompt('請輸入負責人姓名'),
+        lastUpdated: nowTime() ,
+        responsiblePerson: _帳戶名稱(),
         boxVolume: prompt('請輸入原箱體積'),
         boxWeight: prompt('請輸入原箱重量'),
         boxQuantity: prompt('請輸入每箱數量 (例如: 10 盒, 每盒 100 件)'),
@@ -178,8 +179,11 @@
       };
       inventoryData.push(newItem);
       renderInventoryList();
+      console.log('加入新項目=',inventoryData) 
+      console.log('_數據文件=',_數據文件()) 
     }
 
+    // 編輯項目
     function editItem(code) {
       const item = inventoryData.find(item => item.code === code);
       const itemElement = document.querySelector(`.inventory-item[data-code="${code}"]`);
@@ -212,6 +216,7 @@
       }
     }
 
+    // 保存編輯項目
     function saveItem(oldCode) {
       const itemElement = document.querySelector(`.inventory-item[data-code="${oldCode}"]`);
       if (itemElement) {
@@ -238,17 +243,23 @@
         }
         
         renderInventoryList();
+        console.log('保存編輯項目=',inventoryData) 
+        console.log('_數據文件=',_數據文件()) 
       }
     }
 
+    // 取消編輯項目
     function cancelEdit(code) {
       renderInventoryList();
     }
 
+    // 刪除項目
     function deleteItem(code) {
       if (confirm('確定要刪除此項目嗎？')) {
         inventoryData = inventoryData.filter(item => item.code !== code);
         renderInventoryList();
+        console.log('刪除項目=',inventoryData) 
+        console.log('_數據文件=',_數據文件()) 
       }
     }
 
@@ -294,23 +305,17 @@
       _Aki搜尋($(this).val(),'.inventory-item');
   });
 
-  /*
-  // 搜索功能實現
-  function searchKeyword(keyword) {
-      // 選取所有符合條件的元素
-      $('.inventory-item').each(function() {
-          $(this).toggle($(this).text().includes(keyword));
 
-          // 搜尋Perplexity
-          $('#搜尋Perplexity').html(`<a href="https://www.perplexity.ai/search?q=${keyword}" target="_blank">在 Perplexity 上搜尋 ${keyword}</a>`);
-          $('#搜尋Perplexity').show();
-      });
-  }
-  */
+
+
+
+
+
+  
 
   // 帳號管理btn轉
   function 帳號管理btn轉css() {
-    let 有冇帳戶 = 帳戶名稱();
+    let 有冇帳戶 = _帳戶名稱();
     if (有冇帳戶) {
       console.log('有冇帳戶=',有冇帳戶) 
       $('.dropdown').html(`
