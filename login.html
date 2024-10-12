@@ -87,11 +87,9 @@ const 由網 = localStorage.getItem('莫氏VIP分流');
 
 function 各網login(){
   // 判斷是否有分流記錄
-  if (由網 != null) $('#登入, #註冊').html(`<a href="javascript:void(0);" onclick="window.history.back();">${由網}</a>`);
+  if (由網 != null) $('#登入, #註冊').html(`<a href="./${由網}">${由網}</a>`);
   else $('.container').html(`<h2 style="display: block; width: 100%;"><a href="javascript:void(0);" onclick="window.history.back();">返回</a></h2><h1 style="display: block; width: 100%;"><a href="https://64071181.github.io/">Mok's Group Limited </a></h1>`);
-  
-  
-  
+
   // 刪除分流記錄
   localStorage.removeItem('莫氏VIP分流');
 }
@@ -128,6 +126,7 @@ async function 登入(){
             localStorage.setItem('帳戶名稱', 登入帳號);
             // 登入成功 轉跳 上一頁
             window.history.back();
+            window.location.reload();
         } else {
             alert('密碼不符');
         }
@@ -165,13 +164,8 @@ async function 註冊(){
   // 沒 = 新增帳號
   if (在不 === null) {console.log(`開始創建帳號...`);await _上傳文到GitHub(真帳號, 真帳密+檢測號); alert('帳號創建成功，請登入');}
 
-  
-
   // 轉回登入頁面
   document.getElementById('authPanel').style.transform = 'rotateY(0deg)';
-
-  
-  
 
 }
 
@@ -213,6 +207,10 @@ function _檢查帳號是否存在(帳號256){
     document.head.appendChild(script);
   });
 }
+
+
+
+
 
 各網login();
 mokJsApi_客戶追蹤();
