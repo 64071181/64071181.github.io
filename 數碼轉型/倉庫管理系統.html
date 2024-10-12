@@ -4,6 +4,11 @@
 <title>莫氏倉庫管理系統</title>
 
 <style>
+  .限AdminBtn{display:none;}
+  #searchInput {width: 100%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
+  #searchInput:focus {outline: none;box-shadow: 0 0 0 2px #4fd1c5;    }
+
+
   body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;}
   .container { max-width: 100%; padding: 10px;}
   header { background-color: #3498db; color: white; text-align: center; padding: 1em;}
@@ -30,6 +35,7 @@
     .inventory-detail {   flex-grow: 1; }
     .btn {   width: auto;   margin-left: 10px; }
     .product-images img {   width: 24%; }
+  
 }
 </style>
 
@@ -57,10 +63,12 @@
   <div class="container">
     <div class="content">
       <h2>庫存概覽</h2>
+      <input type="text" id="searchInput" placeholder="搜索產品編號、產品代碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品代碼、庫存位置、負責人...任何關鍵字">
+      <br><br>
       <div id="inventory-list">
         <!-- 這裡將由JavaScript動態填充數據 -->
       </div>
-      <button class="btn" onclick="addNewItem()">新增產品</button>
+      <button class="btn 限AdminBtn" onclick="addNewItem()">新增產品</button>
     </div>
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
   </div>
@@ -144,8 +152,8 @@
             <p title="負責人"><strong>負責人:</strong> ${item.responsiblePerson}</p>
           </div>
           <div>
-            <button class="btn adminbtn" onclick="editItem('${item.code}')">編輯</button>
-            <button class="btn adminbtn" onclick="deleteItem('${item.code}')">刪除</button>
+            <button class="btn 限AdminBtn" onclick="editItem('${item.code}')">編輯</button>
+            <button class="btn 限AdminBtn" onclick="deleteItem('${item.code}')">刪除</button>
           </div>
         `;
         listContainer.appendChild(itemElement);
@@ -279,9 +287,31 @@
 <script>
   // mokaki //////////////////
 
+
+  // 搜尋功能 ///////////////////////////////////
+  // 顯示搜尋結果
+  $('#searchInput').on('input', function() {
+      _Aki搜尋($(this).val(),'.inventory-item');
+  });
+
+  /*
+  // 搜索功能實現
+  function searchKeyword(keyword) {
+      // 選取所有符合條件的元素
+      $('.inventory-item').each(function() {
+          $(this).toggle($(this).text().includes(keyword));
+
+          // 搜尋Perplexity
+          $('#搜尋Perplexity').html(`<a href="https://www.perplexity.ai/search?q=${keyword}" target="_blank">在 Perplexity 上搜尋 ${keyword}</a>`);
+          $('#搜尋Perplexity').show();
+      });
+  }
+  */
+
   // 帳號管理btn轉
   function 帳號管理btn轉css() {
-    if (帳戶名稱()) {
+    let 有冇帳戶 = 帳戶名稱();
+    if (有冇帳戶) {
       console.log('有冇帳戶=',有冇帳戶) 
       $('.dropdown').html(`
         <p id="dropdownToggle">${有冇帳戶}</p>
@@ -290,11 +320,14 @@
           <a href="#">新增成員</a>
           <a href="#">設置</a>
         </div>
-      `)
+      `);
+      $('.限AdminBtn').css('display', 'block');
     }
+    else {console.log('未登入') }
   }
 
-  // 帳號管理btn美化 後於 帳戶名稱()
+  帳號管理btn轉css();
+  // 帳號管理btn美化 後於 帳號管理btn轉css()
   document.getElementById('dropdownToggle').addEventListener('click', function() {
     const dropdownContent = document.querySelector('.dropdown-content');
     // 檢查當前高度
@@ -307,9 +340,7 @@
   }
   });
 
-
-  //localStorage.removeItem('帳戶名稱'); 
-
+  
   mokJsApi_客戶追蹤();
 </script>
 
