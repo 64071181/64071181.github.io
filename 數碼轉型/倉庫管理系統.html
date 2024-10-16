@@ -74,9 +74,9 @@
     <p id="translate"></p>
   </header>
   <nav>
-    <a href="inventory" >庫存</a>
-    <a href="orders">訂單</a>
-    <a href="suppliers">供應商</a>
+    <a href="#" >庫存</a>
+    <a href="#">訂單</a>
+    <a href="#">供應商</a>
     <div class="dropdown">
       <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>登入</a>
     </div>
@@ -371,7 +371,7 @@
       $('.dropdown').html(`
         <p id="dropdownToggle">${已登入帳號}</p>
         <div class="dropdown-content">
-          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP()">登出</a>
+          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線數據庫'])">登出</a>
           <a href="#">新增成員</a>
           <a href="#">設置</a>
         </div>
