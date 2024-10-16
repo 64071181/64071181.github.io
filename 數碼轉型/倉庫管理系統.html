@@ -174,8 +174,10 @@
 <script>
 
 
-  // 庫存數據
+  // 取帳戶 數據 (庫存)
   let inventoryData = eval(localStorage.getItem('離線數據庫'))
+  //  沒'離線數據庫' 就新建
+  if(!inventoryData) inventoryData = [];
 
 
 
@@ -231,18 +233,18 @@
       boxVolume: prompt('請輸入原箱體積'),
       boxWeight: prompt('請輸入原箱重量'),
       boxQuantity: prompt('請輸入每箱數量 (例如: 10 盒, 每盒 100 件)'),
-      // 圖URL
+      // 產品圖片
       locationImage: prompt('請輸入位置圖網址'),
       boxImage: prompt('請輸入原箱照片網址'),
       productImage: prompt('請輸入產品圖網址')
     };
+    
     inventoryData.push(newItem);
     
-
     _更新數據(本頁數據庫編號, inventoryData)
         .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
         .catch(error => {  console.error('發生錯誤:', error); });
-    
+
     renderInventoryList();
 
   }
@@ -256,11 +258,11 @@
 
         
         <input type="text" value="${item.productNumber}" data-field="productNumber" placeholder="產品編號" title="產品編號">
-        <!-- 產品圖片 
+        <!-- 產品圖片 -->
         <input type="text" value="${item.locationImage}" data-field="locationImage" placeholder="位置圖網址" title="位置圖網址">
         <input type="text" value="${item.boxImage}" data-field="boxImage" placeholder="原箱照片網址" title="原箱照片網址">
         <input type="text" value="${item.productImage}" data-field="productImage" placeholder="產品圖網址" title="產品圖網址">
-        -->
+        
         
         <input type="text" value="${item.code}" data-field="code" placeholder="產品條碼" title="產品條碼">
         <input type="number" value="${item.quantity}" data-field="quantity" placeholder="數量" title="數量">
@@ -421,6 +423,18 @@
 
 
   帳號管理btn轉css();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
