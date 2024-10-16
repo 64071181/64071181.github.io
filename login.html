@@ -160,11 +160,11 @@ async function 註冊(){
   let 真帳號 = sha256(`0mo${創建帳號}kL${由網}V0`)
     , 真帳密 = sha256(`${設置密碼}0mo${創建帳號}kL${由網}V0`)
     , 檢測號 = sha256(創建明文+jp3ev6)
-    , 數據驗證碼 = '//'+真帳密+檢測號
+    , 數據驗證碼 = `//${真帳密}${檢測號}//$$$$$$$$$$$$$$$$$$\n`
     , 在不 = await _檢查帳號是否存在(真帳號);
     console.log('數據庫=',在不);
   // 沒 = 新增帳號
-  if (在不 === null) {console.log(`開始創建帳號...`);await _上傳文到GitHub(真帳號, 數據驗證碼); alert('帳號創建成功，請登入');}
+  if (在不 === null) {console.log(`開始創建帳號...`);await _上傳文到GitHub(真帳號, 數據驗證碼);}
 
   // 隱藏註冊
   $('#registerForm').html(`<h2>更新約需5分鐘，請耐心等待。</h2><div class="switch-form" onclick="switchForm('login')">帳戶登入</div>`)
