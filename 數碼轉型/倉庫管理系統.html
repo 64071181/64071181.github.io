@@ -29,7 +29,13 @@
     .btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: 100%; text-align: center;}
     .btn:hover { background-color: #2980b9;}
     .edit-mode input { width: 100%; box-sizing: border-box; padding: 5px; margin-bottom: 5px;}
+    
+    .product-images {
+    height: 0px; /* 預設高度 */
+    overflow: hidden; /* 隱藏超出部分 */
+    }
     .product-images { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 15px;}
+
     .product-images img { width: 32%; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
     @media (min-width: 768px) { .container {   padding: 20px; }
       .inventory-item {   display: flex;   justify-content: space-between;   align-items: center; }
@@ -79,7 +85,7 @@
   <div class="container">
     <div class="content">
       <h2>庫存概覽</h2>
-      <input type="text" id="searchInput" placeholder="搜索產品編號、產品代碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品代碼、庫存位置、負責人...任何關鍵字">
+      <input type="text" id="searchInput" placeholder="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字">
       <br><br>
       <div id="inventory-list">
         <!-- 這裡將由JavaScript動態填充數據 -->
@@ -120,6 +126,8 @@
   // 搜尋功能 ///////////////////////////////////
   // 顯示搜尋結果
   $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
+
+
 
   mokJsApi_客戶追蹤();
 </script>
@@ -175,23 +183,24 @@
   function renderInventoryList() {
     const listContainer = document.getElementById('inventory-list');
     listContainer.innerHTML = '';
-    inventoryData.forEach(item => {
-      const itemElement = document.createElement('div');
+    //inventoryData.forEach(item => {
+    inventoryData.forEach((item, index) => {
+    const itemElement = document.createElement('div');
       itemElement.className = 'inventory-item';
       itemElement.setAttribute('data-code', item.code);
       itemElement.innerHTML = `
-        <h3 title="產品編號">${item.productNumber}</h3>
+        <h3 title="產品編號" onclick="toggleHeight(${index + 1})">${item.productNumber}</h3>
 
-        <!-- 產品圖片 
-        <div class="product-images">
+        <!-- 產品圖片 -->
+        <div class="product-images" id="img${index + 1}">
           <img src="${item.locationImage}" alt="位置圖 - ${item.productNumber}" width="200" height="150">
           <img src="${item.boxImage}" alt="原箱照片 - ${item.productNumber}" width="200" height="150">
           <img src="${item.productImage}" alt="產品圖 - ${item.productNumber}" width="200" height="150">
         </div>
-        -->
+        
 
         <div class="inventory-detail">
-          <p title="產品代碼"><strong>產品代碼:</strong> ${item.code}</p>
+          <p title="產品條碼"><strong>產品條碼:</strong> ${item.code}</p>
           <p title="數量"><strong>數量:</strong> ${item.quantity}</p>
           <p title="儲存位置"><strong>位置:</strong> ${item.location}</p>
           <p title="原箱體積"><strong>原箱體積:</strong> ${item.boxVolume}</p>
@@ -210,11 +219,11 @@
     });
   }
 
-  // 庫存加入新項目
+  // 庫存加入新項目 
   function addNewItem() {
     const newItem = {
       productNumber: prompt('請輸入產品編號'),
-      code: prompt('請輸入產品代碼'),
+      code: prompt('請輸入產品條碼'),
       quantity: parseInt(prompt('請輸入數量')),
       location: prompt('請輸入儲存位置'),
       lastUpdated: nowTime() ,
@@ -223,17 +232,22 @@
       boxWeight: prompt('請輸入原箱重量'),
       boxQuantity: prompt('請輸入每箱數量 (例如: 10 盒, 每盒 100 件)'),
       // 圖URL
-      //locationImage: prompt('請輸入位置圖URL'),
-      //boxImage: prompt('請輸入原箱照片URL'),
-      //productImage: prompt('請輸入產品圖URL')
+      locationImage: prompt('請輸入位置圖網址'),
+      boxImage: prompt('請輸入原箱照片網址'),
+      productImage: prompt('請輸入產品圖網址')
     };
     inventoryData.push(newItem);
+    
+
+    _更新數據(本頁數據庫編號, inventoryData)
+        .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
+        .catch(error => {  console.error('發生錯誤:', error); });
+    
     renderInventoryList();
-    console.log('加入新項目=',inventoryData) 
-    console.log('_數據文件=',帳號數據庫) 
+
   }
 
-  // 編輯庫存
+  // 編輯庫存 
   function editItem(code) {
     const item = inventoryData.find(item => item.code === code);
     const itemElement = document.querySelector(`.inventory-item[data-code="${code}"]`);
@@ -243,12 +257,12 @@
         
         <input type="text" value="${item.productNumber}" data-field="productNumber" placeholder="產品編號" title="產品編號">
         <!-- 產品圖片 
-        <input type="text" value="${item.locationImage}" data-field="locationImage" placeholder="位置圖URL" title="位置圖URL">
-        <input type="text" value="${item.boxImage}" data-field="boxImage" placeholder="原箱照片URL" title="原箱照片URL">
-        <input type="text" value="${item.productImage}" data-field="productImage" placeholder="產品圖URL" title="產品圖URL">
+        <input type="text" value="${item.locationImage}" data-field="locationImage" placeholder="位置圖網址" title="位置圖網址">
+        <input type="text" value="${item.boxImage}" data-field="boxImage" placeholder="原箱照片網址" title="原箱照片網址">
+        <input type="text" value="${item.productImage}" data-field="productImage" placeholder="產品圖網址" title="產品圖網址">
         -->
         
-        <input type="text" value="${item.code}" data-field="code" placeholder="產品代碼" title="產品代碼">
+        <input type="text" value="${item.code}" data-field="code" placeholder="產品條碼" title="產品條碼">
         <input type="number" value="${item.quantity}" data-field="quantity" placeholder="數量" title="數量">
         <input type="text" value="${item.location}" data-field="location" placeholder="儲存位置" title="儲存位置">
 
@@ -266,7 +280,7 @@
     }
   }
 
-  // 保存編輯庫存
+  // 保存編輯庫存 
   function saveItem(oldCode) {
     const itemElement = document.querySelector(`.inventory-item[data-code="${oldCode}"]`);
     if (itemElement) {
@@ -279,12 +293,12 @@
         responsiblePerson: itemElement.querySelector('input[data-field="responsiblePerson"]').value,
         boxVolume: itemElement.querySelector('input[data-field="boxVolume"]').value,
         boxWeight: itemElement.querySelector('input[data-field="boxWeight"]').value,
-        boxQuantity: itemElement.querySelector('input[data-field="boxQuantity"]').value//,
+        boxQuantity: itemElement.querySelector('input[data-field="boxQuantity"]').value,
 
         // 圖URL
-        //locationImage: itemElement.querySelector('input[data-field="locationImage"]').value,
-        //boxImage: itemElement.querySelector('input[data-field="boxImage"]').value,
-        //productImage: itemElement.querySelector('input[data-field="productImage"]').value
+        locationImage: itemElement.querySelector('input[data-field="locationImage"]').value,
+        boxImage: itemElement.querySelector('input[data-field="boxImage"]').value,
+        productImage: itemElement.querySelector('input[data-field="productImage"]').value
       };
       
       const index = inventoryData.findIndex(item => item.code === oldCode);
@@ -292,9 +306,12 @@
         inventoryData[index] = newItem;
       }
       
+      
+      _更新數據(本頁數據庫編號, inventoryData)
+        .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
+        .catch(error => {  console.error('發生錯誤:', error); });
+
       renderInventoryList();
-      console.log('保存編輯項目=',inventoryData) 
-      console.log('_數據文件=',帳號數據庫) 
     }
   }
 
@@ -308,12 +325,13 @@
     function deleteItem(code) {
     if (confirm('確定要刪除此項目嗎？')) {
       inventoryData = inventoryData.filter(item => item.code !== code);
-      renderInventoryList();
+      
+
       _更新數據(本頁數據庫編號, inventoryData)
         .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
         .catch(error => {  console.error('發生錯誤:', error); });
-          
-
+      
+      renderInventoryList();
     }
   }
   // 初始化列表
@@ -373,9 +391,35 @@
       }
       });
 
+      
+
     }
     else {console.log('未登入') }
   }
+
+  // 顯示/隱藏 照片
+  // https://chateverywhere.app?shareable_conversation_id=33028325-866f-48f3-8b73-9c7649f2b7eb
+  const expandedStates = {}; // 用于存储每个 id 的展开状态
+
+  function toggleHeight(id) {
+      const productImages = document.querySelector(`#img${id}`);
+      
+      // 初始化该 id 的状态为 false（未展开），如果没有设置的话
+      if (expandedStates[id] === undefined) {
+          expandedStates[id] = false;
+      }
+
+      if (expandedStates[id]) {
+          productImages.style.height = '0px'; // 恢复为预设高度
+      } else {
+          productImages.style.height = 'auto'; // 设置为自动高度
+      }
+      
+      // 切换状态
+      expandedStates[id] = !expandedStates[id];
+  }
+
+
   帳號管理btn轉css();
 
 
