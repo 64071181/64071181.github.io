@@ -110,9 +110,7 @@
 
 
 
-
-
-<script src="00mokJsApi.js"></script>
+<script src="00mokJsApi.js22"></script>
 <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 <script>
   // mokaki ////////////////// 必須放頭
@@ -251,7 +249,7 @@
     
     inventoryData.push(newItem);
     
-    _更新數據qqq(本頁數據庫編號, inventoryData)
+    _更新數據(本頁數據庫編號, inventoryData)
         .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
         .catch(error => {  console.error('發生錯誤:', error); });
 
@@ -319,7 +317,7 @@
       }
       
       
-      _更新數據qqq(本頁數據庫編號, inventoryData)
+      _更新數據(本頁數據庫編號, inventoryData)
         .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
         .catch(error => {  console.error('發生錯誤:', error); });
 
@@ -339,7 +337,7 @@
       inventoryData = inventoryData.filter(item => item.code !== code);
       
 
-      _更新數據qqq(本頁數據庫編號, inventoryData)
+      _更新數據(本頁數據庫編號, inventoryData)
         .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
         .catch(error => {  console.error('發生錯誤:', error); });
       
