@@ -111,7 +111,7 @@
 
 
 <!-- <script src="00mokJsApi.js"></script> -->
-<script src222="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 <script>
   // mokaki ////////////////// 必須放頭
 
@@ -119,6 +119,7 @@
   const 已登入帳號 = _帳戶名稱()
   , 帳號數據庫 = _數據文件()
   , 本頁數據庫編號 = 'd1'
+  , 數據庫位 = '.io/d0/'
   if (已登入帳號) _取本頁數據庫() // eval(localStorage.getItem('離線數據庫'))
   
   // 搜尋功能 ///////////////////////////////////
@@ -248,11 +249,7 @@
     };
     
     inventoryData.push(newItem);
-    
-    _更新數據(本頁數據庫編號, inventoryData)
-        .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
-        .catch(error => {  console.error('發生錯誤:', error); });
-
+    _更新數據B(本頁數據庫編號, inventoryData, 數據庫位)
     renderInventoryList();
 
   }
@@ -315,12 +312,8 @@
       if (index !== -1) {
         inventoryData[index] = newItem;
       }
-      
-      
-      _更新數據(本頁數據庫編號, inventoryData)
-        .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
-        .catch(error => {  console.error('發生錯誤:', error); });
 
+      _更新數據B(本頁數據庫編號, inventoryData, 數據庫位)
       renderInventoryList();
     }
   }
@@ -335,12 +328,8 @@
     function deleteItem(code) {
     if (confirm('確定要刪除此項目嗎？')) {
       inventoryData = inventoryData.filter(item => item.code !== code);
-      
 
-      _更新數據(本頁數據庫編號, inventoryData)
-        .then(新all數據 => { _上傳文到GitHub(帳號數據庫.split('.io/d0/')[1],新all數據 ); })
-        .catch(error => {  console.error('發生錯誤:', error); });
-      
+      _更新數據B(本頁數據庫編號, inventoryData, 數據庫位)
       renderInventoryList();
     }
   }
