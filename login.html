@@ -79,6 +79,8 @@
 
 
 
+<!-- <script src="數碼轉型/00mokJsApi.js"></script> -->
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 
 
 <script>
@@ -87,7 +89,9 @@
 
 
 // 各網login
-const 由網 = localStorage.getItem('莫氏VIP分流');
+const 由網 = localStorage.getItem('莫氏VIP分流')
+
+
 
 function 各網login(){
   // 判斷是否有分流記錄
@@ -96,6 +100,13 @@ function 各網login(){
 
   // 刪除分流記錄
   localStorage.removeItem('莫氏VIP分流');
+
+
+
+
+  console.log(`VIP的網模版${VIP的網模版}`);
+
+
 }
 
 
@@ -149,6 +160,8 @@ async function 註冊(){
   數據庫要開page
   */
 
+
+
   let 創建明文 = $( "#創建帳號" ).val()
       , 密碼明文 = $( "#設置密碼" ).val()
       , 創建帳號 = sha256(創建明文)
@@ -163,7 +176,9 @@ async function 註冊(){
   let 真帳號 = sha256(`0mo${創建帳號}kL${由網}V0`)
     , 真帳密 = sha256(`${設置密碼}0mo${創建帳號}kL${由網}V0`)
     , 檢測號 = sha256(創建明文+jp3ev6)
-    , 數據驗證碼 = `//${真帳密}${檢測號}//$$$$$$$$$$$$$$$$$$\n`
+    // vip首次註冊,获取上一网页(由網)的 URL
+    , VIP的網模版 = document.referrer.split(總網址)[1]
+    , 數據驗證碼 = `//${真帳密}${檢測號}//$$$$$$$$$$$$$$$$$$\nconst VIP的網模版 = '${VIP的網模版}'//$$$$$$$$$$$$$$$$$$\n`
     , 在不 = await _檢查帳號是否存在(真帳號);
     console.log('數據庫=',在不);
   // 沒 = 新增帳號
@@ -183,13 +198,10 @@ async function 註冊(){
 
 
 
-
 各網login();
-mokJsApi_客戶追蹤();
+//mokJsApi_客戶追蹤();
 </script>
 
-<!--<script src="數碼轉型/00mokJsApi.js"></script> -->
-<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 
 
 
