@@ -266,7 +266,7 @@ async function 登入(){
             // 登入成功 轉跳 上一頁
             window.history.back();
         } else {
-            alert('密碼不符');
+            $('#提示訊息').text(`密碼不符`)
         }
     })
 
@@ -316,7 +316,7 @@ async function 註冊(vip=''){
     // 如VIP的UserID數據庫存在,檢查帳號存在
     if(舊的VIPUserID.indexOf(檢測號) !== -1) {
       console.log(`${創建明文}已被使用`);
-      alert(`${創建明文}已被使用`);
+      $('#提示訊息').text(`${創建明文}已被使用`);
       return;
     }
 
@@ -411,7 +411,7 @@ function switchForm(formType) {
 document.querySelectorAll('.auth-form').forEach(form => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('量子傳輸準備完成，即將進入虛擬宇宙！');
+    //alert('量子傳輸準備完成，即將進入虛擬宇宙！');
   });
 });
 
