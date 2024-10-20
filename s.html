@@ -73,9 +73,11 @@
     try {
       let result;
       if (action === 'encrypt') {
+        // 加密內容
         result = CryptoJS.AES.encrypt(input, sha256pas).toString();
         messageElement.textContent = '好!!';
       } else {
+        // 解密內容
         result = CryptoJS.AES.decrypt(input, sha256pas).toString(CryptoJS.enc.Utf8);
         messageElement.textContent = '哈!!';
       }
