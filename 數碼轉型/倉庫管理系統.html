@@ -88,7 +88,7 @@
 
   <nav>
     <a href="#" id="庫存btn" class="page用btn" >庫存</a>
-    <a href="javascript:void(0);" onclick="登出莫氏VIP(['離線VIP網料','數據文件'])">登出巨</a>
+    <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','離線VIP網料','數據文件','VipAdmin標記'])">登出巨</a>
     <a href="#">供應商</a>
     <div class="dropdown">
       <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>VIP登入</a>
@@ -147,26 +147,21 @@
 <script>
   // mokaki ////////////////// 必須放頭
 
-  let 已登入VIP帳號 = _帳戶名稱() // qqq vipuser不同
+  let 已登入帳號 = _帳戶名稱() 
 
     , 帳號數據庫 = _數據文件()
     , 本頁數據庫編號 = '莫氏倉庫管理系統'
     , 數據庫位 = '.io/d0/'
-
-
 
   function _必須放頭() {
 
     // 取帳號資料
     _取本頁數據庫('VIP的網料','離線VIP網料')
 
-    // qqq vipuser不同
-    if (已登入VIP帳號) _取本頁數據庫(本頁數據庫編號,'離線數據庫') // eval(localStorage.getItem('離線數據庫'))
-    ///if (已登入VIP帳號) _取本頁數據庫() // eval(localStorage.getItem('離線數據庫'))
-    // qqq vipuser不同
+    if (已登入帳號) _取本頁數據庫(本頁數據庫編號,'離線數據庫') // eval(localStorage.getItem('離線數據庫'))
 
     _aki睇錯([
-      `已登入VIP帳號: ${已登入VIP帳號}`,
+      `已登入帳號: ${已登入帳號}`,
       `帳號數據庫: ${帳號數據庫}`,
       `本頁數據庫編號: ${本頁數據庫編號}`,
       `數據庫位: ${數據庫位}`
@@ -192,14 +187,14 @@
     _changeStyle();
 
     // VIP自己登入
-    if(已登入VIP帳號) {
+    if(已登入帳號) {
       // VIP的設置
       document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
       document.getElementById('網頁標題Input').value = 網站標題;
       }
 
     // VIP的user登入
-    if(!已登入VIP帳號){
+    if(!已登入帳號){
       // VIP的user 登入VIP的網
       document.getElementById('登入Btn').onclick = 登入莫氏VIP(網站標題)
       document.getElementById('登入Btn').innerText = '登入'
@@ -455,7 +450,7 @@
       quantity: parseInt(prompt('請輸入數量')),
       location: prompt('請輸入儲存位置'),
       lastUpdated: nowTime() ,
-      responsiblePerson: 已登入VIP帳號,
+      responsiblePerson: 已登入帳號,
       boxVolume: prompt('請輸入原箱體積'),
       boxWeight: prompt('請輸入原箱重量'),
       boxQuantity: prompt('請輸入每箱數量 (例如: 10 盒, 每盒 100 件)'),
@@ -580,25 +575,17 @@
 
 <script>
   // mokaki ////////////////// 要放模版後
-  // 帳號管理btn轉
   function 帳號管理btn轉css() {
-    if (已登入VIP帳號) {
-      console.log('VIP帳號=',已登入VIP帳號) 
+
+
+    if (已登入帳號) {
+      console.log('帳號=',已登入帳號) 
       $('.dropdown').html(`
-        <p id="dropdownToggle">${已登入VIP帳號}</p>
+        <p id="dropdownToggle">${已登入帳號}</p>
         <div class="dropdown-content">
-          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱'])">登出</a>
-
-          <!-- <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料'])">登出 qqq </a> -->
-
-          <a href="#">新增成員</a>
-
-
-          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >VIP設置</a>
+          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>
         </div>
       `);
-
-      $('.限AdminBtn').css('display', 'block');
 
       // 帳號管理btn美化 後於 帳號管理btn轉css()
       document.getElementById('dropdownToggle').addEventListener('click', function() {
@@ -612,10 +599,59 @@
         dropdownContent.style.height = '0px';
       }
       });
-
     }
     else {console.log('未登入') }
+    
+    if(localStorage.getItem('VipAdmin標記')) {
+      console.log('*** VIP帳號 ***') 
+
+      $('.限AdminBtn').css('display', 'block');
+
+      $('.dropdown-content').append(`
+          <a href="#">新增成員</a>
+          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >VIP設置</a>
+      `);
+    }
+    
+    
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // 顯示/隱藏 照片
   // https://chateverywhere.app?shareable_conversation_id=33028325-866f-48f3-8b73-9c7649f2b7eb
