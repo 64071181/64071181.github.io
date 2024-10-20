@@ -159,7 +159,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','離線VIP網料','數據文件','VipAdmin標記'])">登出巨</a>
     <a href="#">供應商</a>
     <div class="dropdown">
-      <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>VIP登入</a>
+      <a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>VIP登入</a>
     </div>
   </nav>
 
@@ -189,8 +189,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </section>
 
     
+    
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     <a id="backToTopBtn" href="#searchInput"> ^ </a>
+    
   </div>
 
   
@@ -272,9 +274,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     document.title = 網站標題;
     document.getElementById('網站標題').innerHTML = 網站標題;
-      
+
     // 改變 VIP的網 css
     _changeStyle();
+
+    
 
     // VIP自己登入
     if(已登入帳號) {
@@ -286,8 +290,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // VIP的user登入
     if(!已登入帳號){
       // VIP的user 登入VIP的網
-      document.getElementById('登入Btn').onclick = 登入莫氏VIP(網站標題)
-      document.getElementById('登入Btn').innerText = '登入'
+      $('.dropdown').html(`<a onclick="登入莫氏VIP('${網站標題}')" href='../login.html'>登入</a>`);
+    }
+
+    // VIP登入
+    if(!localStorage.getItem('VipAdmin標記')){
+      $('.mokJsApi_copyright').prepend(`<a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'><hr></a>`);
     }
 
   }
@@ -295,7 +303,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     _必須放頭()
     // 最少等500ms 才檢查VIP網
-    setTimeout(function() { _檢查VIP網()  }, 500);
+    setTimeout(function() { _檢查VIP網()  }, 300);
+
 </script>
 
 
@@ -690,9 +699,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>
         </div>
       `);
+    }
+    else {console.log('未登入') }
+    
+    if(localStorage.getItem('VipAdmin標記')) {
+      console.log('*** VIP帳號 ***') 
 
-      // 帳號管理btn美化 後於 帳號管理btn轉css()
-      document.getElementById('dropdownToggle').addEventListener('click', function() {
+      $('.限AdminBtn').css('display', 'block');
+
+      $('#dropdownToggle').text(`${已登入帳號} *`);
+
+      $('.dropdown-content').append(`
+          <a href="#">新增成員</a>
+          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >VIP設置</a>
+      `);
+    }
+
+    // 登入高度變化
+    document.getElementById('dropdownToggle').addEventListener('click', function() {
         const dropdownContent = document.querySelector('.dropdown-content');
         // 檢查當前高度
         if (dropdownContent.style.height === '0px' || dropdownContent.style.height === '') {
@@ -703,19 +727,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         dropdownContent.style.height = '0px';
       }
       });
-    }
-    else {console.log('未登入') }
-    
-    if(localStorage.getItem('VipAdmin標記')) {
-      console.log('*** VIP帳號 ***') 
-
-      $('.限AdminBtn').css('display', 'block');
-
-      $('.dropdown-content').append(`
-          <a href="#">新增成員</a>
-          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >VIP設置</a>
-      `);
-    }
 
   }
 
@@ -743,33 +754,33 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   }
 
 
+  function _導航換頁() {
+    // 顯示所有項目
+    document.addEventListener("DOMContentLoaded", function() {
+        const navLinks = document.querySelectorAll(".page用btn");
+        const sections = document.querySelectorAll(".section");
 
-  // 顯示所有項目
-  document.addEventListener("DOMContentLoaded", function() {
-      const navLinks = document.querySelectorAll(".page用btn");
-      const sections = document.querySelectorAll(".section");
+        // 預設顯示庫存page
+        const defaultSection = document.getElementById("庫存page");
+        defaultSection.classList.add("active");
+        
+        navLinks.forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault(); // 防止默認行為
 
-      // 預設顯示庫存page
-      const defaultSection = document.getElementById("庫存page");
-      defaultSection.classList.add("active");
-      
-      navLinks.forEach(link => {
-          link.addEventListener("click", function(event) {
-              event.preventDefault(); // 防止默認行為
+                // 隱藏所有 section
+                sections.forEach(section => {
+                    section.classList.remove("active");
+                });
 
-              // 隱藏所有 section
-              sections.forEach(section => {
-                  section.classList.remove("active");
-              });
-
-              // 顯示對應的 section
-              const targetId = this.id === "庫存btn" ? "庫存page" : "VIP設置btn" ? "VIP設置page" : null;
-              const targetSection = document.getElementById(targetId);
-              targetSection.classList.add("active");
-          });
-      });
-  });
-
+                // 顯示對應的 section
+                const targetId = this.id === "庫存btn" ? "庫存page" : "VIP設置btn" ? "VIP設置page" : null;
+                const targetSection = document.getElementById(targetId);
+                targetSection.classList.add("active");
+            });
+        });
+    });
+  }
 
 
   function _changeStyle() {
@@ -827,7 +838,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   }
 
 
-  帳號管理btn轉css();
+  帳號管理btn轉css()
+  _導航換頁();
+
 
 </script>
 
@@ -873,7 +886,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 <script>
     translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
-    translate.execute();//進行翻譯 
+    //進行翻譯
+    setTimeout(function() { translate.execute()  }, 800);
 </script>
 
 
