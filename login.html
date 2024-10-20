@@ -121,7 +121,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <div class="panel-face front">
       <div class="auth-form" id="loginForm">
         <h2 id="登入">?登入</h2>
-        <p id="提示訊息" style="color: #f15858; "></p>
+        <p class="提示訊息" style="color: #f15858; "></p>
         <input id="登入帳號" type="text" placeholder="帳號" required>
         <input id="登入密碼" type="password" placeholder="密碼" required>
         <button onclick="登入()"  type="submit">登入</button>
@@ -131,6 +131,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <div class="panel-face back">
       <div class="auth-form" id="registerForm">
         <h2 id="註冊">?註冊</h2>
+        <p class="提示訊息" style="color: #f15858; "></p>
         <input id="創建帳號" type="text" placeholder="創建帳號" required>
         <input id="設置密碼" type="password" placeholder="設置密碼" required>
         <input id="確認密碼" type="password" placeholder="確認密碼" required>
@@ -266,7 +267,7 @@ async function 登入(){
             // 登入成功 轉跳 上一頁
             window.history.back();
         } else {
-            $('#提示訊息').text(`密碼不符`)
+            $('.提示訊息').text(`密碼不符`)
         }
     })
 
@@ -316,7 +317,7 @@ async function 註冊(vip=''){
     // 如VIP的UserID數據庫存在,檢查帳號存在
     if(舊的VIPUserID.indexOf(檢測號) !== -1) {
       console.log(`${創建明文}已被使用`);
-      $('#提示訊息').text(`${創建明文}已被使用`);
+      $('.提示訊息').text(`${創建明文}已被使用`);
       return;
     }
 
