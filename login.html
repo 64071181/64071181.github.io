@@ -186,9 +186,8 @@ async function 註冊(vip=''){
     , 檢測號 = sha256(創建明文+jp3ev6)
     , 數據驗證碼;
 
-  // VIP的User登入 // qqqqqqqqqqqqqqq
+  // VIP的User註冊
   if (vip === 'vip') {
-
     // 如VIP的UserID數據庫存在,檢查帳號存在
     帳號數據庫 = 只有vipUser才會帶數據庫登入
     _取本頁數據庫('VIP的UserID','VIP的UserID') 
@@ -200,15 +199,9 @@ async function 註冊(vip=''){
     }
 
     數據驗證碼 = `${真帳密}${檢測號}`
-
-    console.log(`${數據驗證碼}==數據驗證碼`);
-
-
     數據庫位 = `.io/${只有vipUser才會帶數據庫登入.split('/')[3]}/`
-    //_更新數據B('VIP的UserID', 數據驗證碼, 數據庫位) // 换为 JSON 字符串
-
+    _更新數據B('VIP的UserID', 數據驗證碼, 數據庫位) // 换为 JSON 字符串
     return;
-
 
   } else {
     // vip首次註冊,获取上一网页(由網)的 URL
