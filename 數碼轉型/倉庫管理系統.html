@@ -4,21 +4,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>莫氏倉庫管理系統</title>
 
-  <style>
+  <style id="ChangCss">
+
     .限AdminBtn{display:none;}
-    #searchInput {width: 100%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
+    #searchInput, #VipPegaIDInput, #網頁標題Input {width: 95%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
     #searchInput:focus {outline: none;box-shadow: 0 0 0 2px #4fd1c5;    }
 
 
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;}
     .container { max-width: 100%; padding: 10px;}
-    header { background-color: #3498db; color: white; text-align: center; padding: 1em;}
-    nav { background-color: #2980b9; padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
-    nav a, nav .dropdown{ color: white; text-decoration: none; padding: 10px; margin: 5px; flex-grow: 1; text-align: center; background-color: #3498db; border-radius: 5px; }
+    header { background-color: #d141db; color: white; text-align: center; padding: 1em;}
+    nav { background-color: #3e3e3e; padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
+    nav a, nav .dropdown{ color: white; text-decoration: none; padding: 10px; margin: 5px; flex-grow: 1; text-align: center; background-color: #d141db; border-radius: 5px; }
     nav a{display: flex;justify-content: center; /* 水平置中 */align-items: center; /* 垂直置中 */}
 
     .dropdown-content {  transition: height 1s ease; /* 變更高度的過渡效果 */  overflow: hidden; /* 隱藏溢出的內容 */  height: 0; /* 初始高度為0 */  background-color: rgba(0, 0, 0, 0);  text-align: center;  z-index: 1000;}
-    .dropdown-content a {color: black;text-decoration: none;display: block;text-align: center;background-color: #3498db;}
+    .dropdown-content a {color: black;text-decoration: none;display: block;text-align: center;background-color: #d141db;}
     .dropdown-content a:hover {background-color: #5fb8f3;}
 
     .content { background-color: white; padding: 15px; margin-top: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
@@ -26,28 +27,38 @@
     .inventory-item h3 { margin-top: 0; margin-right: 2%;}
     .inventory-detail { display: flex; justify-content: space-between; flex-wrap: wrap;}
     .inventory-detail p { margin: 5px 0; flex-basis: 48%;}
-    .btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: 100%; text-align: center;}
-    .btn:hover { background-color: #2980b9;}
+    .btn { background-color: #d141db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: 100%; text-align: center;}
+    .btn:hover { background-color: #3e3e3e;}
     .edit-mode input { width: 100%; box-sizing: border-box; padding: 5px; margin-bottom: 5px;}
-    
-    .product-images {
-    height: 0px; /* 預設高度 */
-    overflow: hidden; /* 隱藏超出部分 */
-    }
-    .product-images { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 15px;}
 
+    .product-images {    height: 0px; /* 預設高度 */overflow: hidden; /* 隱藏超出部分 */}
+    .product-images { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 15px;}
     .product-images img { width: 32%; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+    
     @media (min-width: 768px) { .container {   padding: 20px; }
       .inventory-item {   display: flex;   justify-content: space-between;   align-items: center; }
       .inventory-detail {   flex-grow: 1; }
       .btn {   width: auto;   margin-left: 10px; }
       .product-images img {   width: 24%; }
+    }
+
+    /* 隱藏顯示版塊 */    
+    .container {height: 100vh; /* 設定父容器的高度 */overflow: hidden; /* 確保內容不會超出父容器 */}
+    .section { max-height: 0;overflow: hidden;transition: max-height 0.5s ease;    }
+    .section.active { max-height: calc(100% - 50px); /* 設定為父容器的 100% */overflow-y: auto; /* 顯示滾動條 */}
     
-  }
+    /* 滾動條美化 Firefox */
+    * { scrollbar-width: none; /* 滾動條寬度 */}
+    /* 返回頂端 */
+    #backToTopBtn {position: relative;bottom: 30px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
+    #backToTopBtn:hover {background-color: #5fb8f3;}
+
   </style>
 
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
 
   </head>
 
@@ -69,31 +80,52 @@
 
 
 <body>
+  
   <header>
-    <h1>莫氏倉庫管理系統</h1>
+    <h1 id="網站標題">莫氏倉庫管理系統</h1>
     <p id="translate"></p>
   </header>
+
   <nav>
-    <a href="#" >庫存</a>
-    <a href="#">訂單</a>
+    <a href="#" id="庫存btn" class="page用btn" >庫存</a>
+    <a href="javascript:void(0);" onclick="登出莫氏VIP(['離線VIP網料','數據文件'])">登出巨</a>
     <a href="#">供應商</a>
     <div class="dropdown">
-      <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>登入</a>
+      <a id="登入Btn" onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>VIP登入</a>
     </div>
   </nav>
 
   <div class="container">
-    <div class="content">
-      <h2>庫存概覽</h2>
-      <input type="text" id="searchInput" placeholder="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字">
-      <br><br>
-      <div id="inventory-list">
-        <!-- 這裡將由JavaScript動態填充數據 -->
+
+    <section id="庫存page" class="section">
+        <div class="content">
+          <h2>庫存概覽</h2>
+          <input type="text" id="searchInput" placeholder="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字">
+          <br><br>
+          <div id="inventory-list">
+            <!-- 這裡將由JavaScript動態填充數據 -->
+          </div>
+          <button class="btn 限AdminBtn" onclick="addNewItem()">新增產品</button>
+        </div>
+    </section>
+
+    <section id="VIP設置page" class="section">
+      <div class="content">
+        <h2 title="將您的網址分享給您的使用者">您的網址</h2>
+        <input type="text" id="VipPegaIDInput" placeholder="將您的網址分享給您的使用者" title="您的網址" onclick="copyToClipboard('VipPegaIDInput')" readonly>
+        <h2>您的網頁標題</h2>
+        <input type="text" id="網頁標題Input" placeholder="請修改您的網頁標題" title="請修改您的網頁標題" >
+        
+        <button class="btn" onclick="_更新數據B('VIP的網料', document.getElementById('網頁標題Input').value, 數據庫位)" >更新網頁標題</button>
       </div>
-      <button class="btn 限AdminBtn" onclick="addNewItem()">新增產品</button>
-    </div>
+    </section>
+
+    
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+    <a id="backToTopBtn" href="#searchInput"> ^ </a>
   </div>
+
+  
 </body>
 
 
@@ -110,35 +142,80 @@
 
 
 
-<!-- <script src="00mokJsApi.js"></script> -->
+<!-- --><script src="00mokJsApi.js"></script> 
 <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 <script>
   // mokaki ////////////////// 必須放頭
 
-  // 取帳號資料
-  const 已登入帳號 = _帳戶名稱()
-  , 帳號數據庫 = _數據文件()
-  , 本頁數據庫編號 = '莫氏倉庫管理系統'
-  , 數據庫位 = '.io/d0/'
-  if (已登入帳號) _取本頁數據庫() // eval(localStorage.getItem('離線數據庫'))
-  
-  // 搜尋功能 ///////////////////////////////////
+  let 已登入VIP帳號 = _帳戶名稱() // qqq vipuser不同
+
+    , 帳號數據庫 = _數據文件()
+    , 本頁數據庫編號 = '莫氏倉庫管理系統'
+    , 數據庫位 = '.io/d0/'
+
+
+
+  function _必須放頭() {
+
+    // 取帳號資料
+    _取本頁數據庫('VIP的網料','離線VIP網料')
+
+    // qqq vipuser不同
+    if (已登入VIP帳號) _取本頁數據庫(本頁數據庫編號,'離線數據庫') // eval(localStorage.getItem('離線數據庫'))
+    ///if (已登入VIP帳號) _取本頁數據庫() // eval(localStorage.getItem('離線數據庫'))
+    // qqq vipuser不同
+
+    _aki睇錯([
+      `已登入VIP帳號: ${已登入VIP帳號}`,
+      `帳號數據庫: ${帳號數據庫}`,
+      `本頁數據庫編號: ${本頁數據庫編號}`,
+      `數據庫位: ${數據庫位}`
+    ]);
+
   // 顯示搜尋結果
   $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
 
+  }
 
 
-  //mokJsApi_客戶追蹤();
+  function _檢查VIP網() {
 
+    // VIP的網標題
+    網站標題 = eval(localStorage.getItem('離線VIP網料'))
 
+    if(!網站標題) return
+
+    document.title = 網站標題;
+    document.getElementById('網站標題').innerHTML = 網站標題;
+      
+    // 改變 VIP的網 css
+    _changeStyle();
+
+    // VIP自己登入
+    if(已登入VIP帳號) {
+      // VIP的設置
+      document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
+      document.getElementById('網頁標題Input').value = 網站標題;
+      }
+
+    // VIP的user登入
+    if(!已登入VIP帳號){
+      // VIP的user 登入VIP的網
+      document.getElementById('登入Btn').onclick = 登入莫氏VIP(網站標題)
+      document.getElementById('登入Btn').innerText = '登入'
+    }
+
+  }
 
 
 
   
-  
 
 
 
+    _必須放頭()
+    // 最少等500ms 才檢查VIP網
+    setTimeout(function() { _檢查VIP網()  }, 500);
 </script>
 
 
@@ -185,8 +262,149 @@
 
   // 取帳戶 數據 (庫存)
   let inventoryData = eval(localStorage.getItem('離線數據庫'))
-  //  沒'離線數據庫' 就新建
-  if(!inventoryData) inventoryData = [];
+  //  沒'離線數據庫' = demo
+  if(!inventoryData) inventoryData = [
+  {
+    "code": "P001",
+    "productNumber": "NUT-0032131231333132",
+    "quantity": 300,
+    "location": "A-1-1",
+    "lastUpdated": "2023-06-15",
+    "responsiblePerson": "張三2313",
+    "boxVolume": "0.5 m³",
+    "boxWeight": "15 kg",
+    "boxQuantity": "6 盒, 每盒 50 件33333",
+    "locationImage": "https://example.com/location/P001.jpg",
+    "boxImage": "https://example.com/box/P001.jpg",
+    "productImage": "https://example.com/product/P001.jpg"
+  },
+  {
+    "productNumber": "NUT-002",
+    "code": "P002",
+    "quantity": 500,
+    "location": "A-1-2",
+    "lastUpdated": "2023-05-02",
+    "responsiblePerson": "李四",
+    "boxVolume": "0.8 m³",
+    "boxWeight": "20 kg",
+    "boxQuantity": "5 盒, 每盒 100 件",
+    "locationImage": "https://example.com/location/P002.jpg",
+    "boxImage": "https://example.com/box/P002.jpg",
+    "productImage": "https://example.com/product/P002.jpg"
+  },
+  {
+    "productNumber": "NUT-003",
+    "code": "P003",
+    "quantity": 250,
+    "location": "A-1-3",
+    "lastUpdated": "2023-07-10",
+    "responsiblePerson": "王五",
+    "boxVolume": "0.6 m³",
+    "boxWeight": "18 kg",
+    "boxQuantity": "4 盒, 每盒 75 件",
+    "locationImage": "https://example.com/location/P003.jpg",
+    "boxImage": "https://example.com/box/P003.jpg",
+    "productImage": "https://example.com/product/P003.jpg"
+  },
+  {
+    "productNumber": "NUT-004",
+    "code": "P004",
+    "quantity": 400,
+    "location": "A-1-4",
+    "lastUpdated": "2023-08-20",
+    "responsiblePerson": "趙六",
+    "boxVolume": "0.7 m³",
+    "boxWeight": "22 kg",
+    "boxQuantity": "3 盒, 每盒 100 件",
+    "locationImage": "https://example.com/location/P004.jpg",
+    "boxImage": "https://example.com/box/P004.jpg",
+    "productImage": "https://example.com/product/P004.jpg"
+  },
+  {
+    "productNumber": "NUT-005",
+    "code": "P005",
+    "quantity": 600,
+    "location": "A-1-5",
+    "lastUpdated": "2023-09-15",
+    "responsiblePerson": "李四",
+    "boxVolume": "0.9 m³",
+    "boxWeight": "25 kg",
+    "boxQuantity": "2 盒, 每盒 150 件",
+    "locationImage": "https://example.com/location/P005.jpg",
+    "boxImage": "https://example.com/box/P005.jpg",
+    "productImage": "https://example.com/product/P005.jpg"
+  },
+  {
+    "productNumber": "NUT-006",
+    "code": "P006",
+    "quantity": 350,
+    "location": "A-1-6",
+    "lastUpdated": "2023-10-01",
+    "responsiblePerson": "陳七",
+    "boxVolume": "0.4 m³",
+    "boxWeight": "10 kg",
+    "boxQuantity": "8 盒, 每盒 40 件",
+    "locationImage": "https://example.com/location/P006.jpg",
+    "boxImage": "https://example.com/box/P006.jpg",
+    "productImage": "https://example.com/product/P006.jpg"
+  },
+  {
+    "productNumber": "NUT-007",
+    "code": "P007",
+    "quantity": 700,
+    "location": "A-1-7",
+    "lastUpdated": "2023-08-05",
+    "responsiblePerson": "李四",
+    "boxVolume": "1.0 m³",
+    "boxWeight": "30 kg",
+    "boxQuantity": "1 盒, 每盒 200 件",
+    "locationImage": "https://example.com/location/P007.jpg",
+    "boxImage": "https://example.com/box/P007.jpg",
+    "productImage": "https://example.com/product/P007.jpg"
+  },
+  {
+    "productNumber": "NUT-008",
+    "code": "P008",
+    "quantity": 150,
+    "location": "A-1-8",
+    "lastUpdated": "2023-09-20",
+    "responsiblePerson": "趙六",
+    "boxVolume": "0.3 m³",
+    "boxWeight": "5 kg",
+    "boxQuantity": "10 盒, 每盒 15 件",
+    "locationImage": "https://example.com/location/P008.jpg",
+    "boxImage": "https://example.com/box/P008.jpg",
+    "productImage": "https://example.com/product/P008.jpg"
+  },
+  {
+    "productNumber": "NUT-009",
+    "code": "P009",
+    "quantity": 400,
+    "location": "A-1-9",
+    "lastUpdated": "2023-06-30",
+    "responsiblePerson": "陳七",
+    "boxVolume": "0.6 m³",
+    "boxWeight": "15 kg",
+    "boxQuantity": "5 盒, 每盒 80 件",
+    "locationImage": "https://example.com/location/P009.jpg",
+    "boxImage": "https://example.com/box/P009.jpg",
+    "productImage": "https://example.com/product/P009.jpg"
+  },
+  {
+    "productNumber": "NUT-010",
+    "code": "P010",
+    "quantity": 250,
+    "location": "A-1-10",
+    "lastUpdated": "2023-07-25",
+    "responsiblePerson": "王五",
+    "boxVolume": "0.5 m³",
+    "boxWeight": "12 kg",
+    "boxQuantity": "7 盒, 每盒 30 件",
+    "locationImage": "https://example.com/location/P010.jpg",
+    "boxImage": "https://example.com/box/P010.jpg",
+    "productImage": "https://example.com/product/P010.jpg"
+  }
+];
 
 
 
@@ -194,7 +412,6 @@
   function renderInventoryList() {
     const listContainer = document.getElementById('inventory-list');
     listContainer.innerHTML = '';
-    //inventoryData.forEach(item => {
     inventoryData.forEach((item, index) => {
     const itemElement = document.createElement('div');
       itemElement.className = 'inventory-item';
@@ -238,7 +455,7 @@
       quantity: parseInt(prompt('請輸入數量')),
       location: prompt('請輸入儲存位置'),
       lastUpdated: nowTime() ,
-      responsiblePerson: 已登入帳號,
+      responsiblePerson: 已登入VIP帳號,
       boxVolume: prompt('請輸入原箱體積'),
       boxWeight: prompt('請輸入原箱重量'),
       boxQuantity: prompt('請輸入每箱數量 (例如: 10 盒, 每盒 100 件)'),
@@ -365,16 +582,22 @@
   // mokaki ////////////////// 要放模版後
   // 帳號管理btn轉
   function 帳號管理btn轉css() {
-    if (已登入帳號) {
-      console.log('有冇帳戶=',已登入帳號) 
+    if (已登入VIP帳號) {
+      console.log('VIP帳號=',已登入VIP帳號) 
       $('.dropdown').html(`
-        <p id="dropdownToggle">${已登入帳號}</p>
+        <p id="dropdownToggle">${已登入VIP帳號}</p>
         <div class="dropdown-content">
-          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件'])">登出</a>
+          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱'])">登出</a>
+
+          <!-- <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料'])">登出 qqq </a> -->
+
           <a href="#">新增成員</a>
-          <a href="#">設置</a>
+
+
+          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >VIP設置</a>
         </div>
       `);
+
       $('.限AdminBtn').css('display', 'block');
 
       // 帳號管理btn美化 後於 帳號管理btn轉css()
@@ -389,8 +612,6 @@
         dropdownContent.style.height = '0px';
       }
       });
-
-      
 
     }
     else {console.log('未登入') }
@@ -419,15 +640,96 @@
   }
 
 
+
+  // 顯示所有項目
+  document.addEventListener("DOMContentLoaded", function() {
+      const navLinks = document.querySelectorAll(".page用btn");
+      const sections = document.querySelectorAll(".section");
+
+      // 預設顯示庫存page
+      const defaultSection = document.getElementById("庫存page");
+      defaultSection.classList.add("active");
+      
+      navLinks.forEach(link => {
+          link.addEventListener("click", function(event) {
+              event.preventDefault(); // 防止默認行為
+
+              // 隱藏所有 section
+              sections.forEach(section => {
+                  section.classList.remove("active");
+              });
+
+              // 顯示對應的 section
+              const targetId = this.id === "庫存btn" ? "庫存page" : "VIP設置btn" ? "VIP設置page" : null;
+              const targetSection = document.getElementById(targetId);
+              targetSection.classList.add("active");
+          });
+      });
+  });
+
+
+
+  function _changeStyle() {
+    const style = document.getElementById('ChangCss');
+    style.innerHTML = `
+      
+    .限AdminBtn{display:none;}
+    #searchInput, #VipPegaIDInput, #網頁標題Input {width: 95%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
+    #searchInput:focus {outline: none;box-shadow: 0 0 0 2px #4fd1c5;    }
+
+
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;}
+    .container { max-width: 100%; padding: 10px;}
+    header { background-color: #3498db; color: white; text-align: center; padding: 1em;}
+    nav { background-color: #2980b9; padding: 10px; display: flex; justify-content: space-around; flex-wrap: wrap;}
+
+    nav a, nav .dropdown{ color: white; text-decoration: none; padding: 10px; margin: 5px; flex-grow: 1; text-align: center; background-color: #3498db; border-radius: 5px; }
+    nav a{display: flex;justify-content: center; /* 水平置中 */align-items: center; /* 垂直置中 */}
+
+    .dropdown-content {  transition: height 1s ease; /* 變更高度的過渡效果 */  overflow: hidden; /* 隱藏溢出的內容 */  height: 0; /* 初始高度為0 */  background-color: rgba(0, 0, 0, 0);  text-align: center;  z-index: 1000;}
+    .dropdown-content a {color: black;text-decoration: none;display: block;text-align: center;background-color: #3498db;}
+    .dropdown-content a:hover {background-color: #5fb8f3;}
+
+    .content { background-color: white; padding: 15px; margin-top: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+    .inventory-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;}
+    .inventory-item h3 { margin-top: 0; margin-right: 2%;}
+    .inventory-detail { display: flex; justify-content: space-between; flex-wrap: wrap;}
+    .inventory-detail p { margin: 5px 0; flex-basis: 48%;}
+    .btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: 100%; text-align: center;}
+    .btn:hover { background-color: #2980b9;}
+    .edit-mode input { width: 100%; box-sizing: border-box; padding: 5px; margin-bottom: 5px;}
+
+    .product-images {    height: 0px; /* 預設高度 */overflow: hidden; /* 隱藏超出部分 */}
+    .product-images { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 15px;}
+    .product-images img { width: 32%; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+    
+    @media (min-width: 768px) { .container {   padding: 20px; }
+      .inventory-item {   display: flex;   justify-content: space-between;   align-items: center; }
+      .inventory-detail {   flex-grow: 1; }
+      .btn {   width: auto;   margin-left: 10px; }
+      .product-images img {   width: 24%; }
+    }
+
+    /* 隱藏顯示版塊 */    
+    .container {height: 100vh; /* 設定父容器的高度 */overflow: hidden; /* 確保內容不會超出父容器 */}
+    .section { max-height: 0;overflow: hidden;transition: max-height 0.5s ease;    }
+    .section.active { max-height: calc(100% - 50px); /* 設定為父容器的 100% */overflow-y: auto; /* 顯示滾動條 */}
+    
+    /* 滾動條美化 Firefox */
+    * { scrollbar-width: none; /* 滾動條寬度 */}
+    /* 返回頂端 */
+    #backToTopBtn {position: relative;bottom: 30px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
+    #backToTopBtn:hover {background-color: #5fb8f3;}
+    `
+  }
+
+
   帳號管理btn轉css();
 
 
 
 
 
-
-
-  
 
 
 
