@@ -121,6 +121,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <div class="panel-face front">
       <div class="auth-form" id="loginForm">
         <h2 id="登入">?登入</h2>
+        <p id="提示訊息" style="color: #f15858; "></p>
         <input id="登入帳號" type="text" placeholder="帳號" required>
         <input id="登入密碼" type="password" placeholder="密碼" required>
         <button onclick="登入()"  type="submit">登入</button>
@@ -198,6 +199,10 @@ const 由網 = localStorage.getItem('莫氏VIP分流')
 
 let 只有vipUser才會帶數據庫登入;
 function 各網login(){
+
+  console.log('由網=',由網);
+
+
   // 判斷是否有分流記錄
   if (由網 != null) $('#登入, #註冊').html(`<a href="javascript:void(0);" onclick="window.history.back();">${由網}</a>`);
   else $('.container').html(`<h2 style="display: block; width: 100%;"><a href="javascript:void(0);" onclick="window.history.back();">返回</a></h2><h1 style="display: block; width: 100%;"><a href="https://64071181.github.io/">Mok's Group Limited </a></h1>`);
