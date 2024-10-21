@@ -34,7 +34,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  #+#       #+#    #+#    #+#      #+#   #+#        #+#     #+#    #+#   #+#            #+#
 ###       ###     ########       ###    ###       ###     ###    ###    ###       ###########
 
-202410202138                                        mokaki
+202410211001                                         mokaki
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
@@ -96,8 +96,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   </style>
 
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js">//jq</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">//shr256</script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
 
 
 
@@ -156,8 +157,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   <nav>
     <a href="#" id="庫存btn" class="page用btn" >庫存</a>
-    <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','離線VIP網料','數據文件','VipAdmin標記'])">登出巨</a>
-    <a href="#">供應商</a>
     <div class="dropdown">
       <a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>VIP登入</a>
     </div>
@@ -179,12 +178,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     <section id="VIP設置page" class="section">
       <div class="content">
+
+        <h2 title="您的會員數"><strong id="網站標題B">網頁標題</strong>現有<strong id="Vip會員數" style="color: #3498db;">cont</strong>位成員</h2>
+        <hr>
+
         <h2 title="將您的網址分享給您的使用者">您的網址</h2>
+        <a onclick="_下載QRCode('您的網址qrcode')"><canvas id="您的網址qrcode">您的網址qrcode</canvas></a>
+        <br><br>
+        <a class="btn" href='https://wa.me/85264071181/?text=我要購買VIP' >網址太長嗎? VIP會員可享專屬網址!!</a>
+        <br>
         <input type="text" id="VipPegaIDInput" placeholder="請先修改您的網頁標題" title="您的網址" onclick="copyToClipboard('VipPegaIDInput')" readonly>
+        <hr>
+
         <h2>您的網頁標題</h2>
         <input type="text" id="網頁標題Input" placeholder="請修改您的網頁標題" title="請修改您的網頁標題" >
-        
         <button class="btn" onclick="_更新數據B('VIP的網料', document.getElementById('網頁標題Input').value, 數據庫位)" >更新網頁標題</button>
+      
       </div>
     </section>
 
@@ -284,6 +293,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     if(已登入帳號) {
       // VIP的設置
       document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
+      
+      
+      _取本頁數據庫('VIP的UserID','VIP的UserID')
+      Vip的會員數 = localStorage.getItem('VIP的UserID');
+      $('#網站標題B').text(網站標題);
+      $('#Vip會員數').text(Vip的會員數.split('\\').length - 1);
+
       document.getElementById('網頁標題Input').value = 網站標題;
       }
 
@@ -296,8 +312,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // VIP登入
     if(!localStorage.getItem('VipAdmin標記')){
       $('.mokJsApi_copyright').prepend(`<a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'><hr></a>`);
+    } else{ // 新增成員
+      $('.dropdown-content').prepend(`
+      <a onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記']);登入莫氏VIP('${網站標題}')" href='../login.html'>新增成員</a>
+      `)
     }
 
+    _生成QRCode('VipPegaIDInput','您的網址qrcode')
+    
   }
 
 
@@ -697,6 +719,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         <p id="dropdownToggle">${已登入帳號}</p>
         <div class="dropdown-content">
           <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>
+          <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','離線VIP網料','數據文件','VipAdmin標記'])">登出並清除記錄</a>
         </div>
       `);
     }
@@ -709,9 +732,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       $('#dropdownToggle').text(`${已登入帳號} *`);
 
-      $('.dropdown-content').append(`
-          <a href="#">新增成員</a>
-          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >VIP設置</a>
+      $('.dropdown-content').prepend(`
+          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >設置</a>
       `);
     }
 
