@@ -158,13 +158,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <nav>
     <a href="#" id="庫存btn" class="page用btn" >庫存</a>
     <div class="dropdown">
-      <a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>VIP登入</a>
+      <a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>免費使用</a>
     </div>
   </nav>
 
   <div class="container">
 
-    <section id="庫存page" class="section">
+    <section id="庫存page" class="section active">
         <div class="content">
           <h2>庫存概覽</h2>
           <input type="text" id="searchInput" placeholder="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字">
@@ -522,6 +522,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   // 庫存列表
   function renderInventoryList() {
+    //console.log('inventoryData=',inventoryData) 
     const listContainer = document.getElementById('inventory-list');
     listContainer.innerHTML = '';
     inventoryData.forEach((item, index) => {
@@ -663,7 +664,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     }
   }
   // 初始化列表
-  renderInventoryList();
+  renderInventoryList()
 </script>
 
 
@@ -862,6 +863,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   帳號管理btn轉css()
   _導航換頁();
+
 
 
 </script>
