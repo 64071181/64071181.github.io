@@ -8,8 +8,8 @@
     body, html {margin: 0;padding: 0;height: 100%;font-family: 'Roboto', sans-serif;background: linear-gradient(135deg, #00ffee 0%, #eb2121 100%);color: #e0e0ff;overflow-x: hidden;}  
     a{text-decoration: none;}
     .container {max-width: 800px;margin: 50px auto;padding: 20px;border-radius: 10px;box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);position: relative;z-index: 1;}  
-    h1, h2 {text-align: center;color: #ff00f7;text-shadow: 0 0 10px rgba(0, 255, 4, 0.5);}  
-    input, textarea, button, select {padding: 10px;margin: 10px 0;border: none;border-radius: 5px;background-color: rgba(0, 0, 0, 0.3);color: #e0e0ff;font-size: 16px;}  
+    h1, h2 {text-align: center;color: rgb(251, 0, 255);text-shadow: 0 0 10px rgba(0, 0, 0, 0.998);}  
+    input, textarea, button, select {padding: 10px;margin: 10px 0;border: none;border-radius: 5px;background-color: rgba(0, 0, 0, 0.1);color: #e0e0ff;font-size: 16px;}  
     input, textarea,  select{width: 100%;}
     button{width: auto;}
     textarea{height: auto;}  
@@ -30,21 +30,53 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div id="background"></div>
   <div class="container">
     <h1><a href="./">統治地球!!</a></h1>
     
     <div class="tab">
       <!-- sel fun -->
-      <button class="tablinks" onclick="openTab(event, '')">🐜</button>
-      <button class="tablinks" onclick="openTab(event, '')">💦</button>
-      <button class="tablinks" onclick="openTab(event, 'EncryptDecrypt')" id="defaultOpen">🦕</button>
+      
       <button class="tablinks" onclick="openTab(event, '')">🌞</button>
-      <button class="tablinks" onclick="openTab(event, '')">🤰🏼</button>
+      <button class="tablinks" onclick="openTab(event, '')">💦</button>
+      <button class="tablinks" onclick="openTab(event, '')">⚡</button>
+      <button class="tablinks" onclick="openTab(event, '')">🧬</button>
+      <button class="tablinks" onclick="openTab(event, '')">🦠</button>
+      <button class="tablinks" onclick="openTab(event, 'zipUp野用')">🍀</button>
       <button class="tablinks" onclick="openTab(event, 'SHA256')">🐛</button>
       <button class="tablinks" onclick="openTab(event, '')";onclick="UpCode()">💩</button>
-      <button class="tablinks" onclick="openTab(event, 'up野')">🍀</button>
-      <button class="tablinks" onclick="openTab(event, '')">⚡</button>
+      <button class="tablinks" onclick="openTab(event, 'EncryptDecrypt')" id="defaultOpen">🦕</button>
+      <button class="tablinks" onclick="openTab(event, '')">🤰🏼</button>
+      
+      
+      
+      
     </div>
   
     <!-- Cryp unCryp -->
@@ -65,7 +97,7 @@
     </div>
 
     <!-- zip code or upload -->
-    <div id="up野" class="tabcontent">
+    <div id="zipUp野用" class="tabcontent">
       <input id="const名">
       <input id="Data庫" value="d/VIPdata.js">
       <button onclick="zipCode()">🌻</button>
@@ -73,6 +105,37 @@
       <textarea id="codeOutput" onclick="copyToClipboard('codeOutput')" readonly ></textarea>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,6 +164,8 @@
     return CryptoJS.SHA256(text).toString();
   }
   
+
+
   // 加密/解密處理
   function processText(action) {
     const password = document.getElementById('password').value;
@@ -130,6 +195,9 @@
       messageElement.textContent = '身體健康!!' + error.message;
     }
   }
+  
+
+
   
   // 生成 SHA256
   function generateSHA256() {
