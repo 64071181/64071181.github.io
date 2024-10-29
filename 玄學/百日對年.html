@@ -1,0 +1,103 @@
+
+
+    <style>
+        .雲通 { font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif;  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);  min-height: auto;  margin: 0;  padding: 20px;  display: flex;  height: auto;justify-content: center;text-align: center; align-items: center;flex-wrap: wrap;  /* 允許在小螢幕時自動換行 */}
+        .雲通_calculator { padding: 2rem;  border-radius: 15px;  box-shadow: 0 10px 20px rgba(0,0,0,0.1);width: 90%;margin: auto;}
+        .雲通_container {padding: 20px;border: 1px solid #ccc;border-radius: 10px;}
+
+        .雲通_h1 { color: #2c3e50;  text-align: center;  margin-bottom: 1.5rem;  font-size: 1.8rem;}
+        
+        .雲通_input {margin-bottom: 10px;padding: 10px;width: 100%;}
+        .雲通_button {padding: 10px;width: 100%;background-color: #D75f28;color: white;border: none;border-radius: 5px;cursor: pointer;}
+        .雲通_button:hover {background-color: #D75f28;}
+        .雲通_result {margin-top: 20px;}
+        .雲通_result p {font-size: 30px; font-weight: 900;}
+
+    </style>
+
+
+
+
+
+
+<div class="雲通">
+    <div class="雲通_calculator">
+        <h1 class="雲通_h1">百日對年計算機</h1>
+        <h2>亡者過世 西歷日期</h2>
+        <div id="雲通_datesel">往生日期：</div>
+        <button class="雲通_button" onclick="convert()">計算</button>
+        <div class="雲通_result" id="雲通_result"></div>
+    </div>
+<div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/lunar-calendar-zh@0.1.4/lib/LunarCalendar.min.js"></script>
+    <script>
+        // 設定預設日期為今天
+        $(document).ready(function() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+            $('#雲通_datesel').html(`<input type="date" id="雲通_dateInput" class="雲通_input" value="${formattedDate}">`);
+        });
+
+        function convert() {
+            const dateValue = document.getElementById('雲通_dateInput').value;
+            if (dateValue) {
+                const date = new Date(dateValue);
+
+                // 計算第100天
+                const date100 = new Date(date);
+                date100.setDate(date.getDate() + 99);
+                
+
+                const year100 = date100.getFullYear();
+                const month100 = date100.getMonth() + 1;
+                const day100 = date100.getDate();
+
+                // 計算滿一週年
+                const date1Year = new Date(date);
+                date1Year.setFullYear(date.getFullYear() + 1);
+                date1Year.setDate(date1Year.getDate() - 11);  // 減去11天以符合農民曆
+
+                const year1Year = date1Year.getFullYear();
+                const month1Year = date1Year.getMonth() + 1;
+                const day1Year = date1Year.getDate();
+
+                // 農曆轉換
+                const lunarData100 = LunarCalendar.solarToLunar(year100, month100, day100);
+                const lunarData1Year = LunarCalendar.solarToLunar(year1Year, month1Year, day1Year);
+
+                // 民國年轉換
+                const rocYear100 = year100 - 1911;
+                const rocYear1Year = year1Year - 1911;
+
+                // 顯示結果
+                const 雲通_resultDiv = document.getElementById('雲通_result');
+                雲通_resultDiv.innerHTML = `
+                    <p><strong>百日：</strong></p>
+                    <p><strong>公曆：</strong> ${year100}年 ${month100}月 ${day100}日</p>
+                    <p><strong>農曆：</strong> ${lunarData100.lunarYear}年 ${lunarData100.lunarMonthName} ${lunarData100.lunarDayName}</p>
+                    <p><strong>民國：</strong> 民國${rocYear100}年${month100}月 ${day100}日</p>
+                    
+                    <hr>
+
+                    <p><strong>對年：</strong></p>
+                    <p><strong>公曆：</strong> ${year1Year}年 ${month1Year}月 ${day1Year}日</p>
+                    <p><strong>農曆：</strong> ${lunarData1Year.lunarYear}年 ${lunarData1Year.lunarMonthName} ${lunarData1Year.lunarDayName}</p>
+                    <p><strong>民國：</strong> 民國${rocYear1Year}年${month1Year}月 ${day1Year}日</p>
+                `;
+            } else {
+                alert('請輸入正確的日期！');
+            }
+        }
+
+    </script>
+
+
+<p style="text-align: center;">
+    All rights reserved by <a href="https://64071181.github.io/">64071181.github.io</a>
+</p>

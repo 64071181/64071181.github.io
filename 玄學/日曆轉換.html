@@ -1,0 +1,118 @@
+
+
+    <style>
+        .雲通 {font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif;  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);  display: block;  height: 100vh;justify-content: center;  align-items: center;}
+        h1 { color: #2c3e50;  text-align: center;  margin-bottom: 1.5rem;  font-size: 1.8rem;}
+        .input-group { margin-bottom: 1.5rem;}
+        label { display: block;  margin-bottom: 0.5rem;  color: #34495e;}
+        .button.secondary { background: #D75F28;}
+        .雲通_container {width: auto; margin: 5%;padding: 20px;border: 1px solid #ccc;border-radius: 10px; }
+        input,select {margin-bottom: 10px;padding: 10px;width: 93%;}
+        button {padding: 10px;width: 100%;background-color: #D75F28;color: white;border: none;border-radius: 5px;cursor: pointer;}
+        .result {margin-top: 20px;}
+        .result p {font-size: 30px; font-weight: 900;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+
+    
+
+
+<div class="雲通">
+    <div class="雲通_container">
+        <h1>西曆轉換農曆</h1>
+        <div id="雲通_datesel">西曆轉換農曆</div>
+        <button onclick="convert()">轉換</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <div class="雲通_container">
+        <h1>農曆轉換西曆</h1>
+            <div id="雲通_西曆轉換農曆">西曆轉換農曆</div>
+        <button onclick="convertLunarToROC()">轉換</button>
+        <div class="result" id="resultB"></div>
+    </div>
+    
+</div>
+    
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lunar-calendar-zh@0.1.4/lib/LunarCalendar.min.js"></script>
+<script>
+
+    // 設定預設日期為今天
+    $(document).ready(function() {
+            console.log('設定預設日期為今天=');
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // 月份補0
+            const day = String(today.getDate()).padStart(2, '0'); // 日期補0
+            const formattedDate = `${year}-${month}-${day}`;
+            $('#雲通_datesel').html(`<input type="date" id="dateInput" placeholder="選擇日期" value="${formattedDate}">`);
+            $('#雲通_西曆轉換農曆').html(`<input type="date" id="dateInputB" placeholder="選擇日期" value="${formattedDate}">`);
+        });
+
+    function convert() {
+        // 取得輸入的日期
+        const dateValue = document.getElementById('dateInput').value;
+        console.log('dateValue=',dateValue);
+        if (dateValue) {
+            const date = new Date(dateValue);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1; // 月份從0開始，所以+1
+            const day = date.getDate();
+
+            // 將公曆轉換為農曆
+            const lunarData = LunarCalendar.solarToLunar(parseInt(year), parseInt(month), parseInt(day));
+            
+            // 將公曆轉換為民國曆
+            const rocYear = year - 1911;
+
+            // 顯示結果
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p><strong>公曆：</strong> ${year}年 ${month}月 ${day}日</p>
+                <p><strong>農曆：</strong> ${lunarData.lunarYear}年 ${lunarData.lunarMonthName} ${lunarData.lunarDayName}</p>
+                <!--
+                <p><strong>生肖：</strong> ${lunarData.zodiac}</p>
+                <p><strong>天干地支：</strong> ${lunarData.GanZhiYear}年 ${lunarData.GanZhiMonth}月 ${lunarData.GanZhiDay}日</p>
+                -->
+                <p><strong>民國：</strong> 民國${rocYear}年</p>
+            `;
+        } else {
+            alert('請輸入正確的年月日！');
+        }
+    }
+
+
+
+    function convertLunarToROC() {
+    
+        const dateValue = document.getElementById('dateInputB').value;
+        const date = new Date(dateValue);
+        const lunarYear = date.getFullYear();
+        const lunarMonth = date.getMonth() + 1; // 月份從0開始，所以+1
+        const lunarDay = date.getDate();
+
+        if (!dateValue) {
+            alert('請輸入完整的農曆日期！');
+            return;
+        }
+
+        // 使用 LunarCalendar 轉換農曆至公曆
+        const solarData = LunarCalendar.lunarToSolar(lunarYear, lunarMonth, lunarDay);
+        const rocYear = solarData.year - 1911;
+
+        // 顯示結果
+        const resultDiv = document.getElementById('resultB');
+        resultDiv.innerHTML = `
+            <p><strong>農曆：</strong> ${lunarYear}年 ${lunarMonth}月 ${lunarDay}日</p>
+            <p><strong>公曆：</strong> ${solarData.year}年 ${solarData.month}月 ${solarData.day}日</p>
+            <p><strong>民國：</strong> 民國${rocYear}年</p>
+        `;
+    }
+
+</script>
+
+
