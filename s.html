@@ -226,11 +226,8 @@
         ,  原code = document.getElementById('input').value;
 
     if (原code =='' || const名 =='' || Data庫 =='')  return;
-    
-    //Data庫B = btoa(unescape(encodeURIComponent(`cdnList.push('https://64071181.github.io/${Data庫}')`)))
 
     真必要其他庫 = ''
-    //
     必要其他庫a = 必要其他庫.split(",")
     必要其他庫B = `"https://64071181.github.io/${Data庫}","https://code.jquery.com/jquery-3.7.0.js","https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"`
     if (必要其他庫 !== ''){
@@ -275,11 +272,9 @@
       // 整可up code
       可upCode = `const ${const名} = '${CryptoJS.AES.encrypt(真code, sha256pas).toString()}'`
       $('#output').val(可upCode)
-
     }
-    // 轉為可睇code
-    //else 真code = 原code.replace(/\\`/g, "`").replace(/\\\$/g, "$").slice(2, -3);
 
+    // 轉為可睇code
     else 真code = 原code.replace(/\\/g, "").replace(/\\\$/g, "$").replace(/<\\\/script>/g, "<\/script>").slice(2, -3);
     
     $('#input').val(真code)
@@ -296,7 +291,6 @@
 
 
   function UpCode() {
-
 
     // 要有data名及原code
     const const名 = document.getElementById('const名').value;
