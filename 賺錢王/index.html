@@ -233,7 +233,11 @@
             function _網頁分流(){
                 
                 if ((location.href).indexOf('?MoneyKing') !== -1) $('#下載賺錢王').css('display', 'none');
-                if ((location.href).indexOf('???') !== -1) Btn_各功能('MokAki')
+                // aki admin
+                if ((location.href).indexOf('?!?') !== -1) {
+                    標 = location.href.split('?!?')[1];
+                    Btn_各功能('標')
+                }
             }
 
 
