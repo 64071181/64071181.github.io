@@ -147,12 +147,15 @@
 
 
             <div id="textareaContainer"><!-- textarea --></div>
+            <p id="已執行" class="non1e none"> O K </p>
 
 
             <div class="non1e">
                 <input type="number" id="numOfTextareas" placeholder="輸入增加的數量" min="1" style="width: 80%;" value="1">
                 <button id="增加" onclick="Btn_增加Textarea()"> 增加 </button>
             </div>
+
+            <button id="執行" onclick="Btn_執行pyFun('b1')" > 請先下載賺錢王，再執行 </button>
             
         </section>
 
@@ -182,10 +185,153 @@
 
 
 
+
+
+
+
         <script>
+
+
+/*
+        :::   :::       ::::::::       :::    :::           :::        :::    :::       :::::::::::
+      :+:+: :+:+:     :+:    :+:      :+:   :+:          :+: :+:      :+:   :+:            :+:
+    +:+ +:+:+ +:+    +:+    +:+      +:+  +:+          +:+   +:+     +:+  +:+             +:+
+   +#+  +:+  +#+    +#+    +:+      +#++:++          +#++:++#++:    +#++:++              +#+
+  +#+       +#+    +#+    +#+      +#+  +#+         +#+     +#+    +#+  +#+             +#+
+ #+#       #+#    #+#    #+#      #+#   #+#        #+#     #+#    #+#   #+#            #+#
+###       ###     ########       ###    ###       ###     ###    ###    ###       ###########
+
+*/
+
+            function _網頁分流(){
+                
+                if ((location.href).indexOf('?MoneyKing') !== -1) $('#下載賺錢王').css('display', 'none');
+                // aki admin
+                if ((location.href).indexOf('?!?') !== -1) {
+                    標 = location.href.split('?!?')[1];
+                    Btn_各功能(標)
+                }
+            }
+
+            function _檢查設備類型() {
+                const userAgent = navigator.userAgent;
+                let deviceType = "";
+
+                if (/Windows/i.test(userAgent)) {
+                    deviceType = "Windows 電腦";
+                } else if (/Macintosh/i.test(userAgent)) {
+                    deviceType = "Mac 電腦";
+                } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                    deviceType = "iOS 手機或平板";
+                } else if (/Android/i.test(userAgent)) {
+                    deviceType = "Android 手機或平板";
+                } else {
+                    deviceType = "未知設備";
+                }
+                document.getElementById("device-info").innerText = "您正在使用: " + deviceType;
+            }
+
+
+
+
+
+
+/*
+      :::::::::   :::::::::::       ::::    :::
+     :+:    :+:      :+:           :+:+:   :+:
+    +:+    +:+      +:+           :+:+:+  +:+
+   +#++:++#+       +#+           +#+ +:+ +#+
+  +#+    +#+      +#+           +#+  +#+#+#
+ #+#    #+#      #+#           #+#   #+#+#
+#########       ###           ###    ####
+
+*/
+
+
+            function Btn_執行pyFun(idVal){
+                val = $(`#${idVal}`).val()
+                if (val != ''){
+                    console.log('執行=',val);
+                    // 先顯示即隱 比py 查到行下步
+                    $('#已執行').removeClass('none');
+                    //setTimeout(function() { $('#已執行').addClass('none');}, 3000);
+                }
+            }
+
+
+
+
+
+            function Btn_各功能(sel){
+                console.log('sel=',sel);
+                $('#標題分頁').html(`<input type="text" value="${sel}" readonly>`);
+
+                if(sel=='主選單'){
+                    $('#主選單').addClass('seePage');
+                    $('#賺錢王分頁').removeClass('seePage');
+                }else{
+                $(`#賺錢王分頁`).addClass('seePage');
+                $('#主選單').removeClass('seePage');
+                }
+
+                if(sel=='exe'){
+                    $('#textareaContainer').html(`
+                    <textarea id="a1" readonly>* 請將要封裝成exe的py檔放在當前目錄內 *</textarea>
+                    <textarea id="b1" placeholder="請填寫要封裝成exe的py檔名"></textarea>
+                    `);
+
+                    
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+            function Btn_增加Textarea(數='') {
+                const container = document.getElementById('textareaContainer');
+                
+                if (數 != '') num = 數
+                else num = parseInt(document.getElementById('numOfTextareas').value) || 0;
+
+                for (let i = 0; i < num; i++) {
+                    // 創建 readonly textarea
+                    const newReadonlyTextarea = document.createElement('textarea');
+                    newReadonlyTextarea.id = 'a' + (Math.floor(container.children.length / 2) + 1); // 使用 Math.floor 取整
+                    newReadonlyTextarea.readOnly = true;
+                    
+                    // 創建可編輯 textarea
+                    const newEditableTextarea = document.createElement('textarea');
+                    newEditableTextarea.id = 'b' + (Math.floor(container.children.length / 2) + 1);
+
+                    // 將 textarea 添加到容器中
+                    container.appendChild(newReadonlyTextarea);
+                    container.appendChild(newEditableTextarea);
+                }
+            }
+
+
+
+
+
+
+/*
+      ::::::::       ::::::::       ::::::::
+    :+:    :+:     :+:    :+:     :+:    :+:
+   +:+            +:+            +:+
+  +#+            +#++:++#++     +#++:++#++
+ +#+                   +#+            +#+
+#+#    #+#     #+#    #+#     #+#    #+#
+########       ########       ########
+
+*/
             let activeElement = null;
             const overlay = document.querySelector('.overlay');
-            
             document.querySelectorAll('.按鈕AA').forEach(option => {
                 option.addEventListener('click', function(e) {
                     // 如果點擊的是已經激活的元素，則取消激活
@@ -221,92 +367,23 @@
 
 
 
+/*
+      ::::::::   :::::::::::           :::        :::::::::   :::::::::::
+    :+:    :+:      :+:             :+: :+:      :+:    :+:      :+:
+   +:+             +:+            +:+   +:+     +:+    +:+      +:+
+  +#++:++#++      +#+           +#++:++#++:    +#++:++#:       +#+
+        +#+      +#+           +#+     +#+    +#+    +#+      +#+
+#+#    #+#      #+#           #+#     #+#    #+#    #+#      #+#
+########       ###           ###     ###    ###    ###      ###
 
-
-
-
-
-
-
-
-
-            // mokaki 
-            function _網頁分流(){
-                
-                if ((location.href).indexOf('?MoneyKing') !== -1) $('#下載賺錢王').css('display', 'none');
-                // aki admin
-                if ((location.href).indexOf('?!?') !== -1) {
-                    標 = location.href.split('?!?')[1];
-                    Btn_各功能(標)
-                }
-            }
-
-
-
-
-            function _檢查設備類型() {
-                const userAgent = navigator.userAgent;
-                let deviceType = "";
-
-                if (/Windows/i.test(userAgent)) {
-                    deviceType = "Windows 電腦";
-                } else if (/Macintosh/i.test(userAgent)) {
-                    deviceType = "Mac 電腦";
-                } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                    deviceType = "iOS 手機或平板";
-                } else if (/Android/i.test(userAgent)) {
-                    deviceType = "Android 手機或平板";
-                } else {
-                    deviceType = "未知設備";
-                }
-                document.getElementById("device-info").innerText = "您正在使用: " + deviceType;
-            }
-
-
-            function Btn_各功能(sel){
-                console.log('sel=',sel);
-                $('#標題分頁').html(`<input type="text" value="${sel}" readonly>`);
-
-                if(sel=='主選單'){
-                    $('#主選單').addClass('seePage');
-                    $('#賺錢王分頁').removeClass('seePage');
-                }else{
-                $(`#賺錢王分頁`).addClass('seePage');
-                $('#主選單').removeClass('seePage');
-                }
-
-                
-            }
-
-            function Btn_增加Textarea(數='') {
-                const container = document.getElementById('textareaContainer');
-                
-                if (數 != '') num = 數
-                else num = parseInt(document.getElementById('numOfTextareas').value) || 0;
-
-                for (let i = 0; i < num; i++) {
-                    // 創建 readonly textarea
-                    const newReadonlyTextarea = document.createElement('textarea');
-                    newReadonlyTextarea.id = 'a' + (Math.floor(container.children.length / 2) + 1); // 使用 Math.floor 取整
-                    newReadonlyTextarea.readOnly = true;
-                    
-                    // 創建可編輯 textarea
-                    const newEditableTextarea = document.createElement('textarea');
-                    newEditableTextarea.id = 'b' + (Math.floor(container.children.length / 2) + 1);
-
-                    // 將 textarea 添加到容器中
-                    container.appendChild(newReadonlyTextarea);
-                    container.appendChild(newEditableTextarea);
-                }
-            }
-
+*/
             $(document).ready(function() {
                 _網頁分流();
                 _檢查設備類型();
             });
-        </script>
+</script>
     
-    </body>
+    
 
     
     <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
@@ -318,5 +395,12 @@
     </script>
 
 
-    <scr22ipt src="https://64071181.github.io/mokJsapi/mokJsApi.js"></scr22ipt>
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+
+
+
+
+
+
+</body>
 </html>
