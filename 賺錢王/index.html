@@ -1,0 +1,317 @@
+<html>
+    <head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mok's Group Limited | 賺錢王2024</title>
+
+    <style>
+        * {margin: 0;padding: 0;box-sizing: border-box;}
+        body {justify-content: center;align-items: center;text-align: center;width: 90%;margin: auto; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);font-family: 'Arial', sans-serif;height: 100vh;}
+        a{text-decoration: none;}
+        .payment-container {grid-template-columns: repeat(4, 1fr);margin: auto;width: auto;text-align: center;}
+        .置中{text-align: center;padding: 5% 0;}
+        .按鈕AA,.按鈕BB {float: left; width: 170px;height: 170px;margin: 2% ;background: #00000000;border-radius: 50%;display: flex;justify-content: center;align-items: center;cursor: pointer;transition: all 0.3s ease;overflow: hidden;}
+        .按鈕外框 {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.9);border-radius: 15px;padding: 15px;display: flex;flex-direction: column;justify-content: center;align-items: center;opacity: 0;transition: all 0.3s ease;text-align: center;pointer-events: none;}
+        .按鈕圖標{font-size: 100px;transition: transform 0.3s ease, color 0.3s ease;}
+        .按鈕圖標:hover{ transform: scale(1.8) rotate(15deg);}
+        .按鈕外框 h2, .按鈕外框 p {mix-blend-mode: difference;color: #c3cfe2; line-height: 200%;}
+        /* 遮罩層 */
+        .overlay {display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.5);z-index: 999;}
+        /* 放大後的元素樣式 */
+        .active {position: fixed !important;top: 50% !important;left: 50% !important;transform: translate(-50%, -50%) !important;width: 400px !important;height: 400px !important;z-index: 1000;box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
+        .active .按鈕外框 {opacity: 1;}
+
+        /* 隱藏顯示版塊 */    
+        section{display: none;}
+        section.seePage{display: block;}
+
+        textarea,input{width: 90%; background: #0000001b;font-size: 20px;padding: 1%;margin: 1%;}
+        textarea[readonly],input[readonly]{background: #00000000;border: none;resize: none;}
+        button{margin: 5% auto;padding: 1%;font-size: 20px;border-radius: 15px;}
+        .none{display: none;}
+    </style>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+    </head>
+    <body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="overlay"></div>
+        <div class="payment-container">
+
+            <div style="text-align: center;">
+                <h1>
+                    <a href="../">Mok's Group Limited </a>
+                    | 賺錢王2024
+                </h1>
+                <br>
+                <p id="translate"></p>
+                <br>
+                <p class="mokJsApi_copyright">版權</p>
+            </div>
+
+
+
+            <section id="主選單" class="置中 seePage">
+                <p id="device-info">您沒有連接網路，功能將受限。</p>
+
+
+                <div id="下載賺錢王" class="按鈕BB">
+                    <a href="?dlw" class="按鈕圖標" title="下載賺錢王">🤑</a>
+                </div>
+
+                <div class="按鈕AA">
+                    <div class='按鈕圖標' title="賺錢王介紹" >💰</div> 
+                    <div class="按鈕外框">
+                        <h2>賺錢王</h2>
+                        <br>
+                        <p >是一款專為營商人士打造的全方位自動化工具，致力於簡化工作流程。其功能涵蓋了自動引流客戶、自動宣傳推廣、自動客服支援、自動數據收集，以及自動生成文章、海報和影片等多項服務。賺錢王能夠高效提升營運效率，助您輕鬆掌握商機！</p>
+                    </div>
+                </div>
+
+                <div class="按鈕BB none">
+                    <a onclick="Btn_各功能('翻譯');Btn_增加Textarea(5);"  class="按鈕圖標" title="翻譯"><i class="material-icons" style="font-size:100px">translate</i></a>
+                </div>
+
+                <div class="按鈕BB">
+                    <a onclick="Btn_各功能('引流')" class="按鈕圖標" title="自動引流">🐽</a>
+                </div>
+
+                <div class="按鈕BB">
+                    <a onclick="Btn_各功能('宣傳')" class="按鈕圖標" title="自動宣傳推廣">📣</a>
+                </div>
+
+                <div class="按鈕BB">
+                    <a onclick="Btn_各功能('客服')" class="按鈕圖標" title="自動客服支援">☎️</a>
+                </div>
+
+                <div class="按鈕BB">
+                    <a onclick="Btn_各功能('數據')" class="按鈕圖標" title="自動數據收集">📺</a>
+                </div>
+
+                <div class="按鈕BB">
+                    <a onclick="Btn_各功能('生成')" class="按鈕圖標" title="自動生成文章、海報和影片">💭</a>
+                </div>
+
+                <div class="按鈕BB">
+                    <a href="https://64071181.github.io/tool2024/?MoneyKingIn" target="_blank"  class="按鈕圖標" title="AI工具">🤖</a>
+                </div>
+
+                
+
+            </section>
+        </div>
+
+
+
+
+
+        <section id="賺錢王分頁" class="置中">
+
+            <a href="javascript:void(0)" onclick="Btn_各功能('主選單')" class="按鈕圖標" title="主頁">🔙</a>
+
+
+            <div id="標題分頁" >
+                <input type="text" value="" readonly>
+            </div>
+
+
+            <div id="textareaContainer"><!-- textarea --></div>
+
+
+            <div class="no1ne">
+                <input type="number" id="numOfTextareas" placeholder="輸入增加的數量" min="1" style="width: 80%;" value="1">
+                <button onclick="Btn_增加Textarea()"> 增加 </button>
+            </div>
+            
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            let activeElement = null;
+            const overlay = document.querySelector('.overlay');
+            
+            document.querySelectorAll('.按鈕AA').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    // 如果點擊的是已經激活的元素，則取消激活
+                    if (this === activeElement) {
+                        this.classList.remove('active');
+                        overlay.style.display = 'none';
+                        activeElement = null;
+                        return;
+                    }
+            
+                    // 移除其他元素的激活狀態
+                    if (activeElement) {
+                        activeElement.classList.remove('active');
+                    }
+            
+                    // 激活當前元素
+                    this.classList.add('active');
+                    overlay.style.display = 'block';
+                    activeElement = this;
+                });
+            });
+            
+            // 點擊遮罩層時取消激活狀態
+            overlay.addEventListener('click', function() {
+                if (activeElement) {
+                    activeElement.classList.remove('active');
+                    overlay.style.display = 'none';
+                    activeElement = null;
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // mokaki 
+            function _網頁分流(){
+                
+                if ((location.href).indexOf('?MoneyKing') !== -1) $('#下載賺錢王').css('display', 'none');                
+            }
+
+
+
+
+            function _檢查設備類型() {
+                const userAgent = navigator.userAgent;
+                let deviceType = "";
+
+                if (/Windows/i.test(userAgent)) {
+                    deviceType = "Windows 電腦";
+                } else if (/Macintosh/i.test(userAgent)) {
+                    deviceType = "Mac 電腦";
+                } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                    deviceType = "iOS 手機或平板";
+                } else if (/Android/i.test(userAgent)) {
+                    deviceType = "Android 手機或平板";
+                } else {
+                    deviceType = "未知設備";
+                }
+                document.getElementById("device-info").innerText = "您正在使用: " + deviceType;
+            }
+
+
+            function Btn_各功能(sel){
+                console.log('sel=',sel);
+                $('#標題分頁').html(`<input type="text" value="${sel}" readonly>`);
+
+                if(sel=='主選單'){
+                    $('#主選單').addClass('seePage');
+                    $('#賺錢王分頁').removeClass('seePage');
+                }else{
+                $(`#賺錢王分頁`).addClass('seePage');
+                $('#主選單').removeClass('seePage');
+                }
+
+                
+            }
+
+            function Btn_增加Textarea(數='') {
+                const container = document.getElementById('textareaContainer');
+                
+                if (數 != '') num = 數
+                else num = parseInt(document.getElementById('numOfTextareas').value) || 0;
+
+                for (let i = 0; i < num; i++) {
+                    // 創建 readonly textarea
+                    const newReadonlyTextarea = document.createElement('textarea');
+                    newReadonlyTextarea.id = 'a' + (Math.floor(container.children.length / 2) + 1); // 使用 Math.floor 取整
+                    newReadonlyTextarea.readOnly = true;
+                    
+                    // 創建可編輯 textarea
+                    const newEditableTextarea = document.createElement('textarea');
+                    newEditableTextarea.id = 'b' + (Math.floor(container.children.length / 2) + 1);
+
+                    // 將 textarea 添加到容器中
+                    container.appendChild(newReadonlyTextarea);
+                    container.appendChild(newEditableTextarea);
+                }
+            }
+
+            $(document).ready(function() {
+                _網頁分流();
+                _檢查設備類型();
+            });
+        </script>
+    
+    </body>
+
+    
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+    <script>
+        // 翻譯 
+        //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+        translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+        translate.execute();//進行翻譯 
+    </script>
+
+
+    <scr22ipt src="https://64071181.github.io/mokJsapi/mokJsApi.js"></scr22ipt>
+</html>
