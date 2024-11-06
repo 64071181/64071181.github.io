@@ -126,7 +126,6 @@
                 <div class="按鈕BB">
                     <a href="https://64071181.github.io/tool2024/?MoneyKingIn" target="_blank"  class="按鈕圖標" title="AI工具">🤖</a>
                 </div>
-
                 
 
             </section>
@@ -151,7 +150,7 @@
 
             <div class="no1ne">
                 <input type="number" id="numOfTextareas" placeholder="輸入增加的數量" min="1" style="width: 80%;" value="1">
-                <button onclick="Btn_增加Textarea()"> 增加 </button>
+                <button id="增加" onclick="Btn_增加Textarea()"> 增加 </button>
             </div>
             
         </section>
@@ -233,7 +232,8 @@
             // mokaki 
             function _網頁分流(){
                 
-                if ((location.href).indexOf('?MoneyKing') !== -1) $('#下載賺錢王').css('display', 'none');                
+                if ((location.href).indexOf('?MoneyKing') !== -1) $('#下載賺錢王').css('display', 'none');
+                if ((location.href).indexOf('???') !== -1) Btn_各功能('MokAki')
             }
 
 
