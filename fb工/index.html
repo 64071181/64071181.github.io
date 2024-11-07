@@ -1,0 +1,191 @@
+<html><head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mok's Group Limited | FB 群組列表</title>
+  <style>
+    body {font-family: Arial, sans-serif;max-width: 800px;margin: 0 auto;padding: 20px;background: #f0f2f5;}
+    a{text-decoration: none;}
+    .group-list {list-style: none;padding: 0;}
+    .group-item {background: white;padding: 15px;margin-bottom: 10px;border-radius: 8px;box-shadow: 0 1px 3px rgba(0,0,0,0.1);display: flex;justify-content: space-between;align-items: center;transition: transform 0.2s;}
+    .group-item:hover {transform: translateY(-2px);}
+    .group-name {font-weight: bold;color: #1877f2;}
+    .group-members {color: #65676b;float: right;}
+    .group-link {color: #1877f2;text-decoration: none;width: 100%;}
+    .filter-buttons {margin: 0 20px;}
+    .filter-btn {background: #1877f2;color: white;border: none;padding: 8px 16px;margin: 10px;border-radius: 4px;cursor: pointer;transition: background 0.2s;}
+    .filter-btn:hover {background: #166fe5;}
+    .filter-btn.active {background: #166fe5;box-shadow: 0 0 0 2px rgba(24,119,242,0.2);}
+    .ddw{float: left;}
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+  <h1 style="text-align: center;">
+    <a href="../">Mok's Group Limited </a>
+    <br>
+    FB 群組列表 202411071229
+  </h1>
+
+  <ul class="group-list" id="groupList"></ul>
+
+
+  <div class="filter-buttons">
+    <button class="filter-btn" data-category="all">全部</button>
+    <button class="filter-btn" data-category="招聘求職">招聘求職</button>
+    <button class="filter-btn" data-category="買賣交易">買賣交易</button>
+    <button class="filter-btn" data-category="服務供求">服務供求</button>
+    <button class="filter-btn" data-category="投資">投資</button>
+    <button class="filter-btn" data-category="加盟合作">加盟合作</button>
+    <button class="filter-btn" data-category="生意頂讓">生意頂讓</button>
+    
+    <button class="filter-btn" data-category="中國">中國</button>
+    <button class="filter-btn" data-category="香港">香港</button>
+    <button class="filter-btn" data-category="台灣">台灣</button>
+    <button class="filter-btn" data-category="澳門">澳門</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+  <script>
+    // 群組資料
+    const groups = [
+      {
+        name: "香港生意頂讓群",members: 9471,
+        url: "https://www.facebook.com/groups/441454859557899",
+        category: ["生意頂讓","買賣交易","香港","服務供求"]
+      },
+      {
+        name: "酒吧夜場求職搵工請人招聘犀(全職兼職）",members: 8756,
+        url: "https://www.facebook.com/groups/nightclubjobhk",
+        category: ["招聘求職","買賣交易","香港","中國","台灣","澳門","服務供求"]
+      },
+      {
+        name: "香港兼職炒散即日出糧群",members: 8786,
+        url: "https://www.facebook.com/groups/1375195432528847",
+        category: ["招聘求職","買賣交易","香港","服務供求"]
+      },
+      {
+        name: "飲食業 招聘 頂更 生意頂讓 二手用具",members: 5032,
+        url: "https://www.facebook.com/groups/310530886427027",
+        category: ["生意頂讓","招聘求職","買賣交易","香港","中國","台灣","澳門","服務供求"]
+      },
+      {
+        name: "快剪搵工招聘-單剪,速剪,髮型師,兼職,全職,頂假,用品出售-香港,中國,台灣",members: 3470,
+        url: "https://www.facebook.com/groups/193265888192020",
+        category: ["生意頂讓","招聘求職","買賣交易","香港","中國","台灣","澳門","服務供求"]
+      },
+      {
+        name: "香港散貨場總會",members: 2901,
+        url: "https://www.facebook.com/groups/2109045609316212",
+        category: ["生意頂讓","買賣交易","香港","服務供求"]
+      },
+      {
+        name: "中港台澳投資機會報料交流資訊群",members: 2392,
+        url: "https://www.facebook.com/groups/539164463368633",
+        category: ["投資","買賣交易","香港","中國","台灣","澳門","服務供求"]
+      },
+      {
+        name: "中港台澳宣傳買賣服務徵求交易廣告區",members: 1785,
+        url: "https://www.facebook.com/groups/776144202553933",
+        category: ["買賣交易","香港","中國","台灣","澳門","服務供求"]
+      },
+      {
+        name: "中港台澳商業加盟商務合作徵求交流資訊群",members: 927,
+        url: "https://www.facebook.com/groups/440828339624274",
+        category: ["生意頂讓","投資","加盟合作","香港","中國","台灣","澳門","服務供求"]
+      },
+      {
+        name: "中港台澳創業伙伴招募找金主天使投資計劃分享交流人人賺錢群",members: 762,
+        url: "https://www.facebook.com/groups/1619118991433947",
+        category: ["生意頂讓","投資","加盟合作","香港","中國","台灣","澳門","服務供求"]
+      }
+    ];
+
+
+
+    // 動態生成列表
+    function renderGroups(filterCategory = 'all') {
+      const groupList = document.getElementById('groupList');
+      groupList.innerHTML = ''; // 清空現有列表
+      
+      const filteredGroups = filterCategory === 'all' 
+        ? groups 
+        : groups.filter(group => group.category.includes(filterCategory));
+
+      filteredGroups.forEach(group => {
+        const li = document.createElement('li');
+        li.className = 'group-item';
+        li.innerHTML = `
+          <a class="group-link" href="${group.url}" target="_blank">
+            <span class="group-name" >${group.name}</span>
+            <span class="group-members" >${group.members.toLocaleString()} 位成員</span>
+          </a>
+        `;
+        groupList.appendChild(li);
+      });
+    }
+
+
+
+    // 設置按鈕點擊事件
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        // 移除所有按鈕的active狀態
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        // 添加當前按鈕的active狀態
+        e.target.classList.add('active');
+        // 根據按鈕的category過濾並重新渲染列表
+        const category = e.target.dataset.category;
+        renderGroups(category);
+      });
+    });
+
+
+
+    
+    // 頁面載入時執行
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('[data-category="all"]').classList.add('active');
+      renderGroups();
+    });
+  </script>
