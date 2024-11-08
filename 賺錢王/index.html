@@ -141,9 +141,9 @@
 
             <a href="javascript:void(0)" onclick="Btn_各功能('主選單')" class="按鈕圖標" title="主頁">🔙</a>
 
-            <div class="姐只讀">
-                <div class="姐用" ></div>
-                <input id="標題分頁" type="text" value="" class="只讀">
+            <div id="標題分頁" class="姐只讀">
+                <div class="姐用"></div>
+                <input type="text" value="fff" class="只讀">
             </div>
 
             <div id="textareaContainer"><!-- textarea --></div>
@@ -263,7 +263,7 @@
 
             function Btn_各功能(sel){
                 console.log('sel=',sel);
-                $('#標題分頁').val(sel);
+                $('#標題分頁').html(`<div class="姐用"></div><input type="text" value="${sel}">`);
 
                 if(sel=='主選單'){
                     $('#主選單').addClass('seePage');
@@ -277,7 +277,7 @@
                     $('#textareaContainer').html(`
                     <div class="姐只讀">
                         <div class="姐用" ></div>
-                        <textarea id="a1" class="只讀">* 請將要封裝成exe的py檔、圖示檔(名名為0.ico) 放在當前目錄內 *</textarea>
+                        <textarea id="a1" class="只讀">* 請將要封裝成exe的py檔、圖示檔(命名為0.ico) 放在當前目錄內 *</textarea>
                     </div>
                     <textarea id="b1" placeholder="請填寫要封裝成exe的py檔名"></textarea>
                     `);
