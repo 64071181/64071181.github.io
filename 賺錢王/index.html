@@ -32,6 +32,9 @@
         button{margin: 5% auto;padding: 1%;font-size: 20px;border-radius: 15px;}
         .none{display: none;}
         .non1e{height: 1px;overflow: hidden;}
+
+
+        .py睇野{font-size: 20px;background: #ff0202;color: #fffa75;margin: 1%;padding: 1%;}
     </style>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -82,6 +85,9 @@
                 <p id="translate"></p>
                 <br>
                 <p class="mokJsApi_copyright">版權</p>
+
+                <div id="py睇野" class="py睇野">請先下載賺錢王，再執行</div>
+
             </div>
 
 
@@ -92,7 +98,7 @@
                     <a href="?dlw" class="按鈕圖標" title="下載賺錢王">🤑</a>
                 </div>
 
-                <div class="按鈕AA">
+                <div class="按鈕AA" >
                     <div class='按鈕圖標' title="賺錢王介紹" >💰</div> 
                     <div class="按鈕外框">
                         <h2>賺錢王</h2>
@@ -143,13 +149,12 @@
 
             <div id="標題分頁" class="姐只讀">
                 <div class="姐用"></div>
-                <input type="text" value="fff" class="只讀">
+                <input  type="text" value="fff" class="只讀">
             </div>
 
             <div id="textareaContainer"><!-- textarea --></div>
-            <p id="已執行" class="non1e none"> O K </p>
 
-            <div class="non1e">
+            <div class="non1e">qqqqqqqqqqqqqq
                 <input type="number" id="numOfTextareas" placeholder="輸入增加的數量" min="1" style="width: 80%;" value="1">
                 <button id="增加" onclick="Btn_增加Textarea()"> 增加 </button>
             </div>
@@ -189,16 +194,14 @@
 
 
         <script>
-
-
 /*
-        :::   :::       ::::::::       :::    :::           :::        :::    :::       :::::::::::
-      :+:+: :+:+:     :+:    :+:      :+:   :+:          :+: :+:      :+:   :+:            :+:
-    +:+ +:+:+ +:+    +:+    +:+      +:+  +:+          +:+   +:+     +:+  +:+             +:+
-   +#+  +:+  +#+    +#+    +:+      +#++:++          +#++:++#++:    +#++:++              +#+
-  +#+       +#+    +#+    +#+      +#+  +#+         +#+     +#+    +#+  +#+             +#+
- #+#       #+#    #+#    #+#      #+#   #+#        #+#     #+#    #+#   #+#            #+#
-###       ###     ########       ###    ###       ###     ###    ###    ###       ###########
+      ::::::::::       :::        ::::::::     :::       :::
+     :+:              :+:       :+:    :+:    :+:       :+:
+    +:+              +:+       +:+    +:+    +:+       +:+
+   :#::+::#         +#+       +#+    +:+    +#+  +:+  +#+
+  +#+              +#+       +#+    +#+    +#+ +#+#+ +#+
+ #+#              #+#       #+#    #+#     #+#+# #+#+#
+###              ########## ########       ###   ###
 
 */
 
@@ -211,6 +214,14 @@
                     Btn_各功能(標)
                 }
             }
+
+
+            function _比py睇(id){
+                $('#py睇野').removeClass('py睇野').addClass('non1e');
+                $('#py睇野').html(`<p id="py過">${id}</p>`);
+                setTimeout(function() { $('#py睇野').html('');}, 500);
+            }
+
 
             function _檢查設備類型() {
                 const userAgent = navigator.userAgent;
@@ -251,9 +262,7 @@
                 val = $(`#${idVal}`).val()
                 if (val != ''){
                     console.log('執行=',val);
-                    // 先顯示即隱 比py 查到行下步
-                    $('#已執行').removeClass('none');
-                    //setTimeout(function() { $('#已執行').addClass('none');}, 3000);
+                    _比py睇('執行')
                 }
             }
 
@@ -263,26 +272,31 @@
 
             function Btn_各功能(sel){
                 console.log('sel=',sel);
-                $('#標題分頁').html(`<div class="姐用"></div><input type="text" value="${sel}">`);
 
+                $('#標題分頁').html(`
+                    <div class="姐用"></div>
+                    <input type="text" value="${sel}" class="只讀">`
+                );
+                _比py睇('主場')
+                
                 if(sel=='主選單'){
+                    _比py睇('退出')
+                    
                     $('#主選單').addClass('seePage');
                     $('#賺錢王分頁').removeClass('seePage');
                 }else{
-                $(`#賺錢王分頁`).addClass('seePage');
-                $('#主選單').removeClass('seePage');
+                    $(`#賺錢王分頁`).addClass('seePage');
+                    $('#主選單').removeClass('seePage');
                 }
 
                 if(sel=='exe'){
                     $('#textareaContainer').html(`
-                    <div class="姐只讀">
-                        <div class="姐用" ></div>
-                        <textarea id="a1" class="只讀">* 請將要封裝成exe的py檔、圖示檔(命名為0.ico) 放在當前目錄內 *</textarea>
-                    </div>
-                    <textarea id="b1" placeholder="請填寫要封裝成exe的py檔名"></textarea>
+                        <div class="姐只讀">
+                            <div class="姐用" ></div>
+                            <textarea id="a1" class="只讀">* 請將要封裝成exe的py檔、圖示檔(命名為0.ico) 放在當前目錄內 *</textarea>
+                        </div>
+                        <textarea id="b1" placeholder="請填寫要封裝成exe的py檔名"></textarea>
                     `);
-
-                    
                 }
             }
 
@@ -294,7 +308,7 @@
 
 
 
-
+            // qqqqqqqqqqqqqqqqqqqqqq
             function Btn_增加Textarea(數='') {
                 const container = document.getElementById('textareaContainer');
                 
@@ -316,7 +330,6 @@
                     newEditableTextarea.id = 'b' + (Math.floor(container.children.length / 2) + 1);
 
                     // 將 textarea 添加到容器中
-                    //container.appendChild(newReadonlyTextarea);
                     container.appendChild(newEditableTextarea);
                 }
             }
@@ -383,11 +396,12 @@
 ########       ###           ###     ###    ###    ###      ###
 
 */
+
             $(document).ready(function() {
                 _網頁分流();
                 _檢查設備類型();
             });
-</script>
+    </script>
     
     
 
@@ -400,13 +414,7 @@
         translate.execute();//進行翻譯 
     </script>
 
-
     <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
-
-
-
-
-
 
 </body>
 </html>
