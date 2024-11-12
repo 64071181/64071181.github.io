@@ -228,17 +228,17 @@
                 let deviceType = "";
 
                 if (/Windows/i.test(userAgent)) {
-                    deviceType = "Windows 電腦";
+                    deviceType = "Windows";
                 } else if (/Macintosh/i.test(userAgent)) {
-                    deviceType = "Mac 電腦";
+                    deviceType = "Mac";
                 } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                    deviceType = "iOS 手機或平板";
+                    deviceType = "iOS";
                 } else if (/Android/i.test(userAgent)) {
-                    deviceType = "Android 手機或平板";
+                    deviceType = "Android";
                 } else {
                     deviceType = "未知設備";
                 }
-                document.getElementById("device-info").innerText = "您正在使用: " + deviceType;
+                document.getElementById("device-info").innerText = deviceType;
             }
 
 
