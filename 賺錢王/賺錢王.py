@@ -94,7 +94,7 @@ def _Page控Py流程(page):
     try:
         page.wait_for_selector('#py過', timeout=300000)
         內容 = page.query_selector('#py過').text_content()
-        #print(f"操作={內容}")
+        print(f"操作={內容}")
         return 內容
     except:
         sys.exit("User 5分鐘沒操作，自動退出")
@@ -342,7 +342,8 @@ def 前往賺錢王(flow=''):
     結果 = f"{初始標題}功能開發中..."
 
     if 初始標題 == 'exe':
-        if admin功能:
+        # 需有 _adminFun.py 和 .aki pw文件
+        if admin功能 and os.path.isfile('.aki'):
             結果 = admin功能._adminFun(page,初始標題)
 
 
