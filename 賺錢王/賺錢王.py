@@ -334,13 +334,17 @@ def 前往賺錢王(flow=''):
     初始標題 = page.query_selector('#標題分頁 input').get_attribute('value')
     #print(f"到 * {初始標題} * 頁")
 
-    # admin功能
-    # exe版有都錯
-    admin功能 = _動態載入Py('admin功能py', './_adminFun.py')
-
     # 按標題選動作
     結果 = f"{初始標題}功能開發中..."
 
+    if 初始標題 == '引流':
+        print(f"引流引流引流引流")
+        input("按任意鍵結束...")
+
+
+
+    # admin功能 exe版有_adminFun都錯
+    admin功能 = _動態載入Py('admin功能py', './_adminFun.py')
     if 初始標題 == 'exe':
         # 需有 _adminFun.py 和 .aki pw文件
         if admin功能 and os.path.isfile('.aki'):

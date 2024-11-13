@@ -1,4 +1,4 @@
-<html>
+ <html>
     <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1181 賺錢王 創業平台 | 賺錢王2024</title>
@@ -101,7 +101,6 @@
                 <p id="device-info">您沒有連接網路，功能將受限。</p>
 
                 <div id="下載賺錢王" class="按鈕BB">
-                    <a href="?dlw" class="按鈕圖標" title="下載賺錢王">🤑</a>
                 </div>
 
                 <div class="按鈕AA" >
@@ -175,6 +174,7 @@
         <!-- 加入隱藏元素 -->
         <span id="翻譯動態用字" style="display:none;">
             本功能限程式內使用，請下載賺錢王!;;
+            下載賺錢王;;
             翻譯;;
             引流;;
             宣傳:自動宣傳推廣;;
@@ -245,15 +245,13 @@
 
 
             function _檢查設備類型() {
-
+ 
                 // 轉不同設置下再網址
                 const MoneyKing下再網址= MoneyKingUpdataList
                 真下再網址 = []
-                臨址 = ''
+                臨址 = `<a href="${MoneyKing下再網址[0]}" class="按鈕圖標" title="${翻譯動態用字B[1]}">🤑</a>`
                 for (址 in MoneyKing下再網址){
-                    if ((MoneyKing下再網址[址]).indexOf('https:/') != -1){
-                        臨址 = `<a href="${MoneyKing下再網址[址]}" class="按鈕圖標" title="下載賺錢王">🤑</a>`
-                    } else { 臨址 = 臨址 }
+                    if ((MoneyKing下再網址[址]).indexOf('https:/') != -1) 臨址 = `<a href="${MoneyKing下再網址[址]}" class="按鈕圖標" title="${翻譯動態用字B[1]}">🤑</a>`
                     真下再網址.push(臨址)
                 }
 
@@ -331,7 +329,7 @@
             function Btn_各功能(sel){
                 console.log('sel=',sel);
 
-                list1 = ['愛老婆','翻譯','引流','宣傳','客服','數據','生成']
+                list1 = ['愛老婆','下載賺錢王','翻譯','引流','宣傳','客服','數據','生成']
                 翻標 = ''
                 for (let aa in list1) {
                     if (sel === list1[aa]) {
