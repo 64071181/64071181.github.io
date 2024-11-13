@@ -1,7 +1,7 @@
 <html>
     <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1181 賺錢王 Entrepreneurship Platform | 賺錢王2024</title>
+    <title>1181 賺錢王 創業平台 | 賺錢王2024</title>
 
     <style>
         * {margin: 0;padding: 0;box-sizing: border-box;}
@@ -45,7 +45,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
     <script src="https://64071181.github.io/MoneyKingUpdataList/MoneyKingUpdataList.js"></script>
-    </head>
+    
+</head>
     <body>
 
 
@@ -83,7 +84,7 @@
 
             <div style="text-align: center;">
                 <h1>
-                    <a href="../">1181 賺錢王 Entrepreneurship Platform </a>
+                    <a href="../">1181 賺錢王 創業平台 </a>
                     | 賺錢王2024
                 </h1>
                 <br>
@@ -170,7 +171,18 @@
         </section>
 
 
-
+        
+        <!-- 加入隱藏元素 -->
+        <span id="翻譯動態用字" style="display:none;">
+            本功能限程式內使用，請下載賺錢王!;;
+            翻譯;;
+            引流;;
+            宣傳:自動宣傳推廣;;
+            客服:自動客服支援;;
+            數據:自動數據收集;;
+            生成:自動生成文章、海報和影片;;
+        </span>
+        
 
 
 
@@ -212,14 +224,14 @@
 */
 
             function _網頁分流(){
-                
+
                 if ((location.href).indexOf('?MoneyKing') !== -1) {$('#下載賺錢王').css('display', 'none');}
                 else {
                     $(".限appBtn").on("click", function(event) {
                         event.preventDefault(); // 防止默認行為
-                        alert("本功能限程式內使用，請下載賺錢王!");
+                        // 從隱藏元素中取得翻譯後的文字
+                        alert(翻譯動態用字B[0]);
                         });
-
                 }
                 // aki admin
                 if ((location.href).indexOf('?!?') !== -1) {
@@ -277,6 +289,21 @@
             }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
       :::::::::   :::::::::::       ::::    :::
      :+:    :+:      :+:           :+:+:   :+:
@@ -304,10 +331,23 @@
             function Btn_各功能(sel){
                 console.log('sel=',sel);
 
+                list1 = ['愛老婆','翻譯','引流','宣傳','客服','數據','生成']
+                翻標 = ''
+                for (let aa in list1) {
+                    if (sel === list1[aa]) {
+                        翻標 = 翻譯動態用字B[aa];
+                        console.log('翻標111=',翻標);
+                        break; // 找到匹配項後跳出迴圈
+                    }
+                }
+                if (!翻標) 翻標 = sel;
+
+
                 $('#標題分頁').html(`
                     <div class="姐用"></div>
-                    <input type="text" value="${sel}" class="只讀">`
+                    <input type="text" value="${翻標}" class="只讀">`
                 );
+
                 _比py睇('主場')
                 
                 if(sel=='主選單'){
@@ -370,6 +410,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
       ::::::::       ::::::::       ::::::::
     :+:    :+:     :+:    :+:     :+:    :+:
@@ -417,6 +472,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
 /*
       ::::::::   :::::::::::           :::        :::::::::   :::::::::::
     :+:    :+:      :+:             :+: :+:      :+:    :+:      :+:
@@ -429,6 +498,8 @@
 */
 
             $(document).ready(function() {
+                const 翻譯動態用字 = document.getElementById('翻譯動態用字').innerText;
+                翻譯動態用字B = 翻譯動態用字.replace(/\n/g, '').replace(/ /g, '').split(';;')
                 _網頁分流();
                 _檢查設備類型();
             });
