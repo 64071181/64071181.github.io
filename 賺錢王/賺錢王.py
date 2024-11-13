@@ -17,13 +17,15 @@
  #+#   #+#+#      #+#    #+#      #+#           #+#
 ###    ####       ########       ###           ##########
 
-202411122127
+202411130940
+
+admin功能  exe版有都錯
 
 '''
 
 
 
-更新時間 = '202411122127'
+更新時間 = '202411130940'
 本程式名 = '賺錢王'
 
 # 賺錢王瀏覽器
@@ -81,7 +83,6 @@ import subprocess
  #+#    #+#      #+#     #+#   #+#    #+#      #+#
 #########       ###     ###    ########       ##########
 
-
 '''
 
 def _Page控Py流程(page):
@@ -93,15 +94,13 @@ def _Page控Py流程(page):
 
     try:
         page.wait_for_selector('#py過', timeout=300000)
+        print('')
         內容 = page.query_selector('#py過').text_content()
-        print(f"操作={內容}")
+        print('')
+        #print(f"操作={內容}")
         return 內容
     except:
         sys.exit("User 5分鐘沒操作，自動退出")
-
-            
-
-
 
 
 
@@ -336,6 +335,7 @@ def 前往賺錢王(flow=''):
     #print(f"到 * {初始標題} * 頁")
 
     # admin功能
+    # exe版有都錯
     admin功能 = _動態載入Py('admin功能py', './_adminFun.py')
 
     # 按標題選動作

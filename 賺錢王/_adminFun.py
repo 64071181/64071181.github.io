@@ -17,15 +17,19 @@
  #+#   #+#+#      #+#    #+#      #+#           #+#
 ###    ####       ########       ###           ##########
 
-202411112253
+202411130940
 
 '''
 import os
 import 賺錢王
 
-
-
 更新時間 = 賺錢王.更新時間
+
+
+
+
+
+
 
 
 
@@ -189,9 +193,14 @@ def _UpToMega(page,NewATWexe,ac,pw):
             # upload ATW.exe
             # https://pypi.org/project/mega.py/
             mega = Mega()
-            m = mega.login(ac, pw)
-            folder = m.find('MoneyKing')
-            m.upload(UP檔, folder[0])
+
+            try:
+                m = mega.login(ac, pw)
+                folder = m.find('MoneyKing')
+                m.upload(UP檔, folder[0])
+            except:
+                return f"mega 上傳失敗，請確認網路連線或密碼是否正確"
+            
             break
         else:
             print(f'  **** 請將 {NewATWexe} 放在 dist 資料夾內再試... ****    ')
@@ -253,20 +262,18 @@ def _UpToGithub(DwlUrl,設備,TOKEN):
     新的內容 = ""
 
     if 設備 == 'Windows':
-        新的內容 = f'{Dwl列表頭}"{DwlUrl}",{Dwl列內容B[1]},{Dwl列內容B[2]},{Dwl列內容B[3]}{Dwl列表尾}'
+        新的內容 = f'{Dwl列表頭}["{DwlUrl}",{Dwl列內容B[1]},{Dwl列內容B[2]},{Dwl列內容B[3]}{Dwl列表尾}'
     if 設備 == 'Mac':
-        新的內容 = f'{Dwl列表頭}{Dwl列內容B[0]},"{DwlUrl}",{Dwl列內容B[2]},{Dwl列內容B[3]}{Dwl列表尾}'
+        新的內容 = f'{Dwl列表頭}[{Dwl列內容B[0]},"{DwlUrl}",{Dwl列內容B[2]},{Dwl列內容B[3]}{Dwl列表尾}'
     if 設備 == 'iOS':
-        新的內容 = f'{Dwl列表頭}{Dwl列內容B[0]},{Dwl列內容B[1]},"{DwlUrl}",{Dwl列內容B[3]}{Dwl列表尾}'
+        新的內容 = f'{Dwl列表頭}[{Dwl列內容B[0]},{Dwl列內容B[1]},"{DwlUrl}",{Dwl列內容B[3]}{Dwl列表尾}'
     if 設備 == 'Android':
-        新的內容 = f'{Dwl列表頭}{Dwl列內容B[0]},{Dwl列內容B[1]},{Dwl列內容B[2]},"{DwlUrl}"{Dwl列表尾}'
+        新的內容 = f'{Dwl列表頭}[{Dwl列內容B[0]},{Dwl列內容B[1]},{Dwl列內容B[2]},"{DwlUrl}"{Dwl列表尾}'
 
 
     # GitHub Token (需在 GitHub 上創建個人存取權杖)
     REPO_NAME = "64071181/MoneyKingUpdataList"
     FILE_PATH = "MoneyKingUpdataList.js"  # 指定檔案在儲存庫中的路徑
-
-    
 
     COMMIT_MESSAGE = f'''
         更新 MoneyKingUpdataList.js 
@@ -275,14 +282,17 @@ def _UpToGithub(DwlUrl,設備,TOKEN):
     '''
 
     # 初始化 GitHub 連線
-    g = Github(TOKEN)
-    repo = g.get_repo(REPO_NAME)
+    try:
+        g = Github(TOKEN)
+        repo = g.get_repo(REPO_NAME)
 
-    # 取得目前的檔案內容與 sha 值
-    file = repo.get_contents(FILE_PATH)
-    repo.update_file(file.path, COMMIT_MESSAGE, 新的內容, file.sha)
+        # 取得目前的檔案內容與 sha 值
+        file = repo.get_contents(FILE_PATH)
+        repo.update_file(file.path, COMMIT_MESSAGE, 新的內容, file.sha)
+    except:
+        return f"Github 上傳失敗，請確認網路連線或密碼是否正確"
 
-    結果 = f"版本={設備}\n更新時間={更新時間} 已更新成功！"
+    結果 = f"版本={設備}\n更新時間={更新時間}\n已更新成功！"
     return 結果
 
 
@@ -358,8 +368,7 @@ def _adminFun(page,sel,檔=''):
             # user 點 執行 or 退出
             流程 = 賺錢王._Page控Py流程(page)
             if 流程== '退出':   
-                #賺錢王.前往賺錢王()
-                sys.exit("自動退出")
+                return "admin 功能 * 封裝 exe * 已取消 *"
 
             if 流程 == '執行':   
                 page.evaluate("document.querySelector('#a1').value = '封裝中...'")
@@ -397,12 +406,17 @@ def _adminFun(page,sel,檔=''):
     # UpToMega ****
     if sel == 'UpToMega':
         up完 = _UpToMega(page,檔,allPw[0],allPw[1])
-        結果B = f'{up完[0]}.exe 已上傳\n網址: {up完[1]}'
-        print(結果B)
+        # 上傳失敗
+        if not up完[1]:
+            return up完[0]
+        else:
+            結果B = f'{up完[0]}.exe 已上傳\n網址: {up完[1]}'
+            print(結果B)
 
         # admin專用 Up To Github
         if allPw[2] :
             _adminFun(page,'UpToGithub',up完[1])
+
         return 結果B
 
 
@@ -411,8 +425,6 @@ def _adminFun(page,sel,檔=''):
         結果c = _UpToGithub(檔,適用設備,allPw[2] )
         print(結果c)
         return 結果c
-        
-
 
 
 
