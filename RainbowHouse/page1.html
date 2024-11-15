@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>彩虹之家寵物紀念網 - 小黃的故事</title>
+        <style>
+            /* Existing code ... */
+            .rainbow-bridge {background: linear-gradient(to right, violet, rgb(201, 125, 255), rgb(126, 126, 255), rgb(125, 255, 125), rgb(255, 255, 0), rgb(251, 120, 120), rgb(255, 113, 113));opacity: 1;animation: rainbow-wave 3s ease-in-out infinite;}
+            /* New styles for single pet page */
+            .pet-profile {max-width: 800px;margin: 2rem auto;background: white;border-radius: 20px;padding: 2rem;box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+            
+            .pet-profile-header {text-align: center;margin-bottom: 2rem;}
+            
+            .main-pet-image {width: 100%;max-width: 600px;height: 400px;object-fit: cover;border-radius: 15px;margin: 0 auto 2rem;display: block;}
+            
+            .pet-gallery {display: grid;grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));gap: 1rem;margin: 2rem 0;}
+            
+            .gallery-image {width: 100%;height: 150px;object-fit: cover;border-radius: 10px;cursor: pointer;transition: transform 0.3s ease;}
+            
+            .gallery-image:hover {transform: scale(1.05);}
+            
+            .pet-story-section {font-size: 1.1rem;line-height: 1.8;color: #444;margin: 2rem 0;}
+            
+            .video-container {position: relative;padding-bottom: 56.25%;height: 0;margin: 2rem 0;}
+            
+            .video-container iframe {position: absolute;top: 0;left: 0;width: 100%;height: 100%;border-radius: 15px;}
+            
+            .memory-tags {display: flex;flex-wrap: wrap;gap: 0.5rem;margin: 1rem 0;}
+            
+            .memory-tag {background: #e8f4f8;padding: 0.5rem 1rem;border-radius: 20px;font-size: 0.9rem;color: #5c7c8a;}
+            
+            .navigation-buttons {display: flex;justify-content: space-between;margin-top: 2rem;padding-top: 1rem;border-top: 1px solid #eee;}
+            
+            .nav-button {padding: 0.8rem 1.5rem;background: linear-gradient(45deg, #89f7fe 0%, #66a6ff 100%);color: white;border: none;border-radius: 25px;cursor: pointer;text-decoration: none;transition: transform 0.3s ease;}
+            
+            .nav-button:hover {transform: translateY(-2px);}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    </head>
+    <body>
+
+
+
+
+
+
+
+
+
+
+    <div class="header rainbow-bridge" >
+        <h1>彩虹之家寵物紀念網</h1>
+        <p >永遠懷念我們摯愛的寵物夥伴</p>
+
+    </div>
+
+    <div class="container">
+        <div class="pet-profile">
+            <div class="pet-profile-header">
+                <h2 class="pet-name">小黃</h2>
+                <div class="pet-dates">2010年3月15日 - 2023年6月20日</div>
+            </div>
+
+            <img alt="金毛尋回犬小黃在陽光下微笑的特寫照片，毛髮金黃燦爛" src="img/0.jpg" width="600" height="400" class="main-pet-image">
+
+            <div class="memory-tags">
+                <span class="memory-tag">永遠的開心果</span>
+                <span class="memory-tag">最佳玩伴</span>
+                <span class="memory-tag">忠實的朋友</span>
+                <span class="memory-tag">陽光男孩</span>
+            </div>
+
+            <div class="pet-story-section">
+                <p>親愛的小黃，你是上天送給我們最珍貴的禮物。十三年的陪伴，你為我們的生活帶來無限的歡樂與溫暖。還記得你第一次來到我們家時，那充滿好奇的眼神和搖擺不停的尾巴，就像昨天發生的事一樣清晰。</p>
+                <p>你總是能察覺我們的心情，在我們難過時溫柔地靠近，在我們開心時一起分享快樂。每天早晨，你都是我們的鬧鐘，用溫暖的舔舐喚醒我們。散步時，你總是充滿活力，帶著我們探索每一個角落。</p>
+            </div>
+
+            <!--
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/example" title="小黃的快樂時光" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+            </div>
+            -->
+
+            <div class="pet-gallery">
+                <img alt="小黃在公園玩耍的照片" src="img/1.jpg" width="200" height="150" class="gallery-image">
+                <img alt="小黃和家人在海邊的合照" src="img/2.jfif" width="200" height="150" class="gallery-image">
+                <img alt="小黃睡覺時可愛的模樣" src="img/3.jpeg" width="200" height="150" class="gallery-image">
+                <img alt="小黃最後的歡樂時光" src="img/4.jfif" width="200" height="150" class="gallery-image">
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="hearts-container" id="heartsContainer"></div>
+
+        <script>
+        // Existing heart animation code...
+
+        // Add image click to enlarge functionality
+        document.querySelectorAll('.gallery-image').forEach(image => {
+            image.addEventListener('click', function() {
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1001';
+
+                const enlargedImage = document.createElement('img');
+                enlargedImage.src = this.src;
+                enlargedImage.style.maxWidth = '90%';
+                enlargedImage.style.maxHeight = '90%';
+                enlargedImage.style.objectFit = 'contain';
+                enlargedImage.style.borderRadius = '10px';
+
+                modal.appendChild(enlargedImage);
+                document.body.appendChild(modal);
+
+                modal.addEventListener('click', () => {
+                    modal.remove();
+                });
+            });
+        });
+
+
+
+        </script>
+
+    <p id="translate"></p>
+    <p class="mokJsApi_copyright">版權</p>
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+    <script>
+        // 翻譯 
+        //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+        translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+        translate.execute();//進行翻譯 
+    </script>
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+    </body>
+</html>

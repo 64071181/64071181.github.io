@@ -1,0 +1,202 @@
+<html><head><base href="." /><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>彩虹之家寵物紀念網</title><style>
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{text-decoration: none;}
+body {
+    font-family: '微軟正黑體', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styles */
+.header {
+    background: linear-gradient(45deg, #89f7fe 0%, #66a6ff 100%);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header h1 {
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+}
+
+.rainbow-bridge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, 
+        violet, indigo, blue, green, yellow, orange, red);
+    opacity: 0.6;
+    animation: rainbow-wave 3s ease-in-out infinite;
+}
+
+@keyframes rainbow-wave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Main content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.memorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.memorial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.memorial-card:hover {
+    transform: translateY(-5px);
+}
+
+.pet-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.pet-name {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+.pet-dates {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.pet-story {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Floating hearts animation */
+.hearts-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    color: rgba(255, 182, 193, 0.6);
+    animation: float-up 4s ease-in-out infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+</head><body>
+
+    <div class="header">
+        <h1>彩虹之家寵物紀念網</h1>
+        <p>永遠懷念我們摯愛的寵物夥伴</p>
+        <div class="rainbow-bridge"></div>
+    </div>
+
+    <div class="container">
+        <div class="memorial-grid">
+
+            <a href="page1.html" class="memorial-card">
+                <img alt="一隻金毛尋回犬在陽光下微笑的照片，溫暖色調" src="img/0.jpg" width="300" height="200" class="pet-image">
+                <h2 class="pet-name">小黃</h2>
+                <div class="pet-dates">2010-2023</div>
+                <p class="pet-story">親愛的小黃，謝謝你陪伴我們13年的時光。你永遠是我們家最溫暖的陽光，是最忠實的朋友。現在你在彩虹橋的另一端，依然帶著那迷人的微笑，等待著我們再相聚的那一天。</p>
+            </a>
+
+            <div class="memorial-card">
+                <img alt="一隻黑白相間的貓咪優雅躺臥的照片" src="img/b1.png" width="300" height="200" class="pet-image">
+                <h2 class="pet-name">米米</h2>
+                <div class="pet-dates">2015-2022</div>
+                <p class="pet-story">優雅的米米，你總是安靜地陪伴在我身邊，用你特別的方式表達愛意。即使你已經離開，我依然能感受到你在我腳邊蹭來蹭去的溫暖。願你在天堂也能找到最舒適的陽光躺著。</p>
+            </div>
+
+            <div class="memorial-card">
+                <img alt="一隻可愛的倉鼠在花園中的特寫照片" src="img/c1.jpg" width="300" height="200" class="pet-image">
+                <h2 class="pet-name">丸子</h2>
+                <div class="pet-dates">2020-2022</div>
+                <p class="pet-story">小小的丸子，雖然和你相處的時間不長，但你帶給我們的快樂卻是無限的。你可愛的小臉和活潑的個性永遠留在我們心中。希望天堂有很多好吃的零食給你。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <script>
+    // 創建浮動愛心效果
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        document.getElementById('heartsContainer').appendChild(heart);
+
+        // 動畫結束後移除愛心
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    // 定期產生新的愛心
+    setInterval(createHeart, 300);
+    </script>
+
+
+<p id="translate"></p>
+<p class="mokJsApi_copyright">版權</p>
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+<script>
+    // 翻譯 
+    //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+</script>
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+</body>
+</html>
+
