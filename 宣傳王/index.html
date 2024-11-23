@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐳宣傳王🐳</title>
+
+
+    <link rel="stylesheet" href="aki.css">
+
+    <script src="dd.js"></script>
+
+
+    <script src="https://cdn.staticfile.org/pako/1.0.10/pako.min.js">//TxtZip </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script><!-- 用於貼js字 -->
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js">//SHA256</script>
+    <script src="https://64071181.github.io/d/64071181data.js">// 模擬從資料庫讀取廣告資料</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>🐳宣傳王🐳</h1>
+        <p id="translate"></p>
+        <p class="mokJsApi_copyright">版權</p>
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <main class="page p1" >
+        <div class="search-container">
+            <div class="search-section">
+                <label for="region-select">地區搜尋</label>
+                <select id="region-select">
+                    <option value="">請選擇地區</option>
+                </select>
+            </div>
+    
+            <div class="search-section">
+                <label for="industry-select">行業搜尋</label>
+                <select id="industry-select">
+                    <option value="">請選擇行業</option>
+                </select>
+            </div>
+    
+            <div class="search-section">
+                <label for="merchant-select">商戶搜尋</label>
+                <select id="merchant-select">
+                    <option value="">請選擇商戶</option>
+                </select>
+            </div>
+    
+            <div class="search-section">
+                <label for="keyword-input">關鍵字搜尋</label>
+                <input type="text" id="keyword-input" placeholder="輸入關鍵字">
+            </div>
+        </div>
+        <button onclick="searchAds()">搜尋</button>
+        <br><br>
+    
+        <div id="adContainer" class="ad-grid">
+            <!-- 廣告會在這裡動態載入 -->
+        </div>
+        <div class="pagination">
+            <button onclick="changePage(-1)">上一頁</button>
+            <div id="pageLinks"></div>
+            <button onclick="changePage(1)">下一頁</button>
+        </div>
+    </main>
+
+
+
+
+
+
+    <main class="page p2" >
+        <div id="我的廣告" class="ad-grid">
+            <!-- 收藏的廣告會在這裡動態載入 -->
+        </div>
+    </main>
+
+
+
+
+
+
+
+
+    <main class="page p3" >
+        <section>
+            <h2>宣傳王的故事</h2>
+            <p><strong>宣傳王</strong> 成立於2020年，是一個革命性的廣告平台，旨在為本地企業和消費者搭建橋樑。<br><br>宣傳王相信，每一個企業都應該有機會讓自己的聲音被聽到，而每一個消費者都應該輕鬆找到他們需要的產品和服務。</p>
+        </section>
+        <section>
+            <h2>宣傳王的使命</h2>
+            <p>宣傳王的使命是創造一個互利共贏的廣告生態系統。<br><br>通過提供直觀、高效的廣告平台，宣傳王幫助企業增加曝光率，同時為消費者提供更多選擇和更好的購物體驗。</p>
+        </section>
+        <section>
+            <h2>宣傳王的成長歷程</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>2020年</h3>
+                        <p>宣傳王 正式成立，推出基礎廣告平台。</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>2021年</h3>
+                        <p>新增地區和行業分類功能，幫助用戶更精準地找到所需信息。</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>2022年</h3>
+                        <p>推出商戶合作計劃，讓商戶廣告更容易被用戶找到，讓用戶隨時隨地瀏覽和收藏廣告。</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>2023年</h3>
+                        <p>引入AI推薦系統，為用戶提供個性化的廣告體驗。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>宣傳王的未來展望</h2>
+            <p>展望未來，宣傳王將以用戶需要為根本，持續創新，不斷優化用戶體驗，擴大宣傳王的服務範圍。<br><br>宣傳王計劃引入更多互動功能，如虛擬實境廣告體驗，以及基於區塊鏈技術的透明廣告交易系統。<br><br>宣傳王相信，通過不懈努力，宣傳王 將成為香港乃至全球最受歡迎的廣告平台之一。</p>
+        </section>
+
+        
+        <section>
+            <h2>宣傳王的價值觀</h2>
+            <ul>
+                <li><strong>責任：</strong>宣傳王致力於為社會創造價值，支持本地經濟發展。</li>
+                <br><br>
+                <li><strong>誠信：</strong>宣傳王以誠實和透明的方式經營業務，贏得客戶和合作夥伴的信任。</li>
+                <br><br>
+                <li><strong>共赢：</strong>宣傳王致力於創造一個互利共贏的廣告生態系統，使用戶享有優質的服務。</li>
+                <br><br>
+                <li><strong>用戶：</strong>宣傳王將用戶的需求放在首位，不斷改進宣傳王的產品和服務。</li>
+                <br><br>
+                <li><strong>創新：</strong>宣傳王不斷探索新技術和新方法，以提供更好的廣告解決方案。</li>
+            </ul>
+        </section>
+        <section>
+            <h2>宣傳王的成就</h2>
+            <ul>
+                <li>2021年香港科技創新獎</li>
+                <br><br>
+                <li>2022年最佳用戶體驗設計獎</li>
+                <br><br>
+                <li>2023年香港百大網站之一</li>
+            </ul>
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <main class="page p4" >
+        <section class="contact-info">
+            <h2>聯絡資訊</h2>
+            <p><strong>地址：</strong>香港中環干諾道中64號21樓</p>
+            <p><strong>電話：</strong>(852) 6407 1181</p>
+            <p><strong>電郵：</strong><a href="mailto: moksurky@gmail.com" class="__cf_email__" data-cfemail="2a43444c456a4b4e5c434f5d04494547">moksurky@gmail.com</a></p>
+            <p><strong>營業時間：</strong>週二至週四 12:00 - 15:00</p>
+        </section>
+        
+        <section class="contact-form">
+            <h2>聯絡表格</h2>
+            <form id="contactForm">
+                <label for="name">名稱：</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">電郵：</label>
+                <input type="email" id="email" name="email" >
+                
+                <label for="phone">電話：</label>
+                <input type="tel" id="phone" name="phone">
+                
+                <label for="subject">主題：</label>
+                <input type="text" id="subject" name="subject">
+                
+                <label for="message">訊息：</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                
+                <button type="button" onclick="發送whatsapp()">發送whatsapp</button>
+            </form>
+        </section>
+        
+        <section class="map-section">
+            <h2>我們的位置</h2>
+            <iframe id="MyMap" class="map" src="" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+    <nav id="導航">
+            <ul>
+                <li><button id="btn-p1" class="nav-button" onclick="togglePage(1);">首頁</button></li>
+                <li><button id="btn-p2" class="nav-button" onclick="togglePage(2);loadCollectedAds()">我的廣告</button></li>
+                <li><button id="btn-p3" class="nav-button" onclick="togglePage(3)">關於我們</button></li>
+                <li><button id="btn-p4" class="nav-button" onclick="togglePage(4)">聯絡我們</button></li>
+            </ul>
+    </nav>
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+    // 選擇用
+    let 地區選擇 = ['中西區','東區','南區','灣仔區','九龍城區','觀塘區','深水埗區','黃大仙區','油尖旺區','離島區','葵青區','北區','西貢區','沙田區','大埔區','荃灣區','屯門區','元朗區','全香港','澳門','深圳','珠海','日本','美國'],
+
+        行業選擇 = ['超市/便利店','飲食','參茸海味','娛樂購物','網購','抽獎','數碼科技','百貨公司','嬰童','旅游或活動','服飾','交通或通訊','銀行或信用卡','電子錢包','開倉','美容化妝'],
+
+        商戶選擇 = ['7-Eleven','大家樂','樓上 / 大棧','すき家 Sukiya','百佳 / 惠康','萬寧','OK便利店','超力食品','AEON','AEON Mobile','Subway','東海堂','A-1 Bakery','壽司郎 Sushiro','牛角日本燒肉專門店','Uniqlo','大快活','崇光百貨','西樹泡芙','Living Plaza / Daiso Japan','Starbucks','MTR Mobile','香港書展','GODIVA','PayMe','美心MX','美心西餅','SATAMI','元氣壽司','KFC','賞茶 A Nice Gift','759 阿信屋','yuu'],
+
+        關鍵字   = ['中西區','東區','南區','灣仔區','九龍城區','觀塘區','深水埗區','黃大仙區','油尖旺區','離島區','葵青區','北區','西貢區','沙田區','大埔區','荃灣區','屯門區','元朗區','全香港','澳門','深圳','珠海','日本','美國','超市/便利店','飲食','參茸海味','娛樂購物','網購','抽獎','數碼科技','百貨公司','嬰童','旅游或活動','服飾','交通或通訊','銀行或信用卡','電子錢包','開倉','美容化妝','7-Eleven','大家樂','樓上 / 大棧','すき家 Sukiya','百佳 / 惠康','萬寧','OK便利店','超力食品','AEON','AEON Mobile','Subway','東海堂','A-1 Bakery','壽司郎 Sushiro','牛角日本燒肉專門店','Uniqlo','大快活','崇光百貨','西樹泡芙','Living Plaza / Daiso Japan','Starbucks','MTR Mobile','香港書展','GODIVA','PayMe','美心MX','美心西餅','SATAMI','元氣壽司','KFC','賞茶 A Nice Gift','759 阿信屋','yuu'
+        ]
+
+        let currentPage = 1;
+        const adsPerPage = 8;
+
+        // 取data並解密
+        const allAds = eval(CryptoJS.AES.decrypt(宣傳王data, 摸老婆).toString(CryptoJS.enc.Utf8))
+
+        // 從localStorage讀取收藏的廣告ID
+        const collectedAds = JSON.parse(localStorage.getItem('collectedAds')) || [];
+
+        function loadAds(ads) {
+            // 過濾數據，確保 id 格式正確
+
+            ads.sort((a, b) => {
+                const idA = parseInt(a.id.split('_')[1], 10);
+                const idB = parseInt(b.id.split('_')[1], 10);
+                return idB - idA;
+            });
+
+            const adContainer = document.getElementById('adContainer');
+            adContainer.innerHTML = ''; // 清空容器
+
+            const startIndex = (currentPage - 1) * adsPerPage;
+            const endIndex = startIndex + adsPerPage;
+            const paginatedAds = ads.slice(startIndex, endIndex);
+
+            if (paginatedAds.length === 0) {
+                adContainer.innerHTML = '<div class="no-ads"><h3>暫時沒有可供展示的廣告</h3><p>請稍後再來查看或嘗試其他搜尋條件。</p></div>';
+                return;
+            }
+
+            paginatedAds.forEach((ad) => {
+
+                const adElement = document.createElement('div');
+                adElement.className = 'ad-item';
+                adElement.innerHTML = `
+                    ${ad.imageSrc ? `<img src="${ad.imageSrc}" alt="廣告 ${ad.id}" title="${ad.id}" width="300" height="300" ondblclick="zoomAd('${ad.id}', '${ad.imageSrc}')">` : ''}
+                    ${ad.title ? `<h3>${ad.title}</h3>` : ''}
+                    ${ad.description ? `<p>${ad.description}</p>` : ''}
+                    <div class="ad-actions">
+                        <button onclick="collectAd('${ad.id}')">
+                            ${collectedAds.includes(ad.id) ? '取消收藏' : '收藏'}
+                        </button>
+                        <button onclick="showShareOptions('${ad.id}', '${ad.keywords.join(', ')}', '${ad.imageSrc}')">分享</button>
+                    </div>
+                `;
+                adContainer.appendChild(adElement);
+            });
+        }
+
+
+        function searchAds() {
+            const region = document.getElementById('region-select').value;
+            const industry = document.getElementById('industry-select').value;
+            const merchant = document.getElementById('merchant-select').value;
+            const keyword = document.getElementById('keyword-input').value.toLowerCase();
+
+            const filteredAds = allAds.filter(ad => {
+                const matchesRegion = region ? ad.region === region : true;
+                const matchesIndustry = industry ? ad.industry === industry : true;
+                const matchesMerchant = merchant ? ad.merchant === merchant : true;
+                const matchesKeyword = keyword ? ad.keywords.some(k => k.includes(keyword)) : true;
+
+                return matchesRegion && matchesIndustry && matchesMerchant && matchesKeyword;
+            }).sort((a, b) => {
+                const idA = parseInt(a.id.split('_')[1], 10);
+                const idB = parseInt(b.id.split('_')[1], 10);
+                return idB - idA;
+            });
+
+            currentPage = 1;
+            loadAds(filteredAds);
+        }
+
+        function collectAd(id) {
+            const index = collectedAds.indexOf(id);
+            if (index > -1) {
+                collectedAds.splice(index, 1);
+                //alert('已從收藏中移除！');
+            } else {
+                collectedAds.push(id);
+                //alert('已添加到收藏！');
+            }
+            localStorage.setItem('collectedAds', JSON.stringify(collectedAds));
+            loadAds(allAds);
+        }
+
+        function showShareOptions(id, keywords, imageSrc) {
+            const shareUrl = `${window.location.origin}${window.location.pathname}?${id}`;
+            document.getElementById('shareContainer').style.display = 'flex';
+            document.getElementById('shareContainer').dataset.url = shareUrl;
+            document.getElementById('shareContainer').dataset.title = keywords;
+            document.getElementById('shareContainer').dataset.content = '您朋友給您分享了廣告王的廣告';
+            document.getElementById('shareContainer').dataset.pic = imageSrc;
+        }
+
+        // 放大廣告
+        function zoomAd(id, imageSrc) {
+            const overlay = document.createElement('div');
+            overlay.className = 'zoom-overlay';
+            overlay.innerHTML = `<img src="${imageSrc}" alt="放大廣告圖片">`;
+            overlay.onclick = function(event) {
+                if (event.target === overlay) {
+                    closeZoom();
+                }
+            };
+            document.body.appendChild(overlay);
+            window.history.pushState({}, '', `?${id}`);
+        }
+        
+        function closeZoom() {
+            const overlay = document.querySelector('.zoom-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
+            window.history.pushState({}, '', window.location.pathname);
+        }
+
+
+        // 分頁
+        function updatePageLinks() {
+            const totalPages = Math.ceil(allAds.length / adsPerPage);
+            const pageLinksContainer = document.getElementById('pageLinks');
+            pageLinksContainer.innerHTML = ''; // 清空舊的頁碼連結
+
+            const createPageLink = (pageNumber, isCurrent = false) => {
+                const pageLink = document.createElement('button');
+                pageLink.textContent = pageNumber;
+                pageLink.onclick = function () {
+                    currentPage = pageNumber;
+                    loadAds(allAds);
+                    updatePageLinks();
+                };
+
+                // 高亮當前頁
+                if (isCurrent) {
+                    pageLink.style.fontWeight = 'bold';
+                    pageLink.style.textDecoration = 'underline';
+                }
+
+                pageLinksContainer.appendChild(pageLink);
+            };
+
+            // 顯示第一頁
+            createPageLink(1, currentPage === 1);
+
+            // 處理省略部分
+            if (currentPage > 4) {
+                const dots = document.createElement('span');
+                dots.textContent = '..';
+                pageLinksContainer.appendChild(dots);
+            }
+
+            // 顯示前後3頁
+            for (let i = Math.max(2, currentPage - 2); i <= Math.min(totalPages - 1, currentPage + 2); i++) {
+                createPageLink(i, currentPage === i);
+            }
+
+            // 處理省略部分
+            if (currentPage < totalPages - 1) {
+                const dots = document.createElement('span');
+                dots.textContent = '..';
+                pageLinksContainer.appendChild(dots);
+            }
+
+            // 顯示最後一頁
+            if (totalPages > 1) {
+                createPageLink(totalPages, currentPage === totalPages);
+            }
+        }
+
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(allAds.length / adsPerPage);
+            currentPage += direction;
+            // 確保頁數不超過範圍
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            loadAds(allAds);
+            updatePageLinks();
+        }
+
+        // 頁面加載時顯示廣告
+        loadAds(allAds.sort((a, b) => b.id.localeCompare(a.id))); // 這行是新增的，用於頁面加載時按id倒序排列廣告
+
+
+        // 打開分享的廣告
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const adId = params.keys().next().value;
+            if (adId) {
+                const ad = allAds.find(ad => ad.id === adId);
+                if (ad) {
+                    zoomAd(adId, ad.imageSrc);
+                }
+            }
+        }
+
+        // 隱藏分享選項
+        function hideShareOptions() {
+            document.getElementById('shareContainer').style.display = 'none';
+        }
+
+        function shareOnSocialMedia(type) {
+            const container = document.getElementById('shareContainer');
+            const url = container.dataset.url;
+            const title = container.dataset.title;
+            const content = container.dataset.content;
+            const pic = container.dataset.pic;
+            let shareUrl;
+            switch (type) {
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(title + '\n' + url)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'line':
+                    shareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+                    break;
+                case 'weixin':
+                    alert('微信分享請使用微信客戶端內的分享功能');
+                    hideShareOptions();
+                    return;
+                case 'xiaohongshu':
+                    alert('小紅書分享請使用小紅書客戶端內的分享功能');
+                    hideShareOptions();
+                    return;
+                case 'instagram':
+                    alert('Instagram分享請使用Instagram客戶端內的分享功能');
+                    hideShareOptions();
+                    return;
+                default:
+                    alert('不支持的分享類型');
+                    hideShareOptions();
+                    return;
+            }
+            window.open(shareUrl, '_blank');
+            hideShareOptions();
+        }
+
+        // 頁面加載時初始化頁碼連結
+        updatePageLinks();
+
+
+
+        // 切換顯示版塊
+        function togglePage(page) {
+            // 隱藏所有頁面
+            $('.page').hide();
+            // 顯示對應頁面
+            $(`.p${page}`).show();
+            
+            // 清除所有按鈕的 active 狀態
+            $('.nav-button').removeClass('active');
+            // 設定當前按鈕的 active 狀態
+            $(`#btn-p${page}`).addClass('active');
+        }
+
+
+
+
+
+
+
+
+
+
+        //     我的廣告
+
+        
+        function loadCollectedAds() {
+            const adContainer = document.getElementById('我的廣告');
+            adContainer.innerHTML = ''; // 清空容器
+
+            const collectedAdItems = allAds.filter(ad => collectedAds.includes(ad.id));
+            const startIndex = (currentPage - 1) * adsPerPage;
+            const endIndex = startIndex + adsPerPage;
+            const paginatedAds = collectedAdItems.slice(startIndex, endIndex);
+
+            if (paginatedAds.length === 0) {
+                adContainer.innerHTML = '<div class="no-ads"><h3>您還沒有收藏任何廣告</h3><p>瀏覽首頁並收藏您喜歡的廣告。</p></div>';
+                return;
+            }
+
+            paginatedAds.forEach((ad) => {
+                const adElement = document.createElement('div');
+                adElement.className = 'ad-item';
+                adElement.innerHTML = `
+                    ${ad.imageSrc ? `<img src="${ad.imageSrc}" alt="廣告 ${ad.id}" title="${ad.id}" width="300" height="300" ondblclick="zoomAd('${ad.id}', '${ad.imageSrc}')">` : ''}
+                    ${ad.title ? `<h3>${ad.title}</h3>` : ''}
+                    ${ad.description ? `<p>${ad.description}</p>` : ''}
+                    <div class="ad-actions">
+                        <button onclick="collectAd('${ad.id}')">
+                            ${collectedAds.includes(ad.id) ? '取消收藏' : '收藏'}
+                        </button>
+                        <button onclick="showShareOptions('${ad.id}', '${ad.keywords.join(', ')}', '${ad.imageSrc}')">分享</button>
+                    </div>
+                `;
+                adContainer.appendChild(adElement);
+            });
+        }
+
+        function uncollectAd(id) {
+            const index = collectedAds.indexOf(id);
+            if (index > -1) {
+                collectedAds.splice(index, 1);
+                localStorage.setItem('collectedAds', JSON.stringify(collectedAds));
+                alert('已從收藏中移除！');
+                loadCollectedAds();
+            }
+        }
+
+        // 頁面加載時顯示收藏的廣告
+        //;
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="shareContainer" class="share-container">
+    <!-- m.js _網插件('分享','html','#shareContainer',0) -->
+</div>
+
+
+
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+<script src="m.js"></script>
+<script src="aki.js"></script>
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+<script>
+    // 翻譯 
+    translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+</script>
+</body>
+</html>
