@@ -1,0 +1,173 @@
+<html>
+  <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technological transformation | Mok's Group Limited</title>
+
+<style>
+  body {font-family: 'Orbitron', sans-serif;background-color: #0c0c1d;color: #00ffff;overflow-x: hidden;}
+  .container {max-width: 1200px;top: 150px;left: 5%;right: 5%;bottom: 0;height: auto;max-width: 1200px;margin: auto;padding: 20px;position: absolute;z-index: 1; 
+  }
+  a{text-decoration: none;}
+  header {background: linear-gradient(45deg, #0000006b, #32f9f97b);padding: 20px 0;text-align: center;position: absolute;top: 0;left: 0;right: 0;}
+  h1 {font-size: 3em;margin: 0;text-shadow: 0 0 10px #00ffff;}
+  nav {margin-top: 20px;}
+  nav a {color: #00ffff;margin: 0 15px;font-size: 1.2em;transition: all 0.3s ease;}
+  nav a:hover {color: #b3ffff;text-shadow: 0 0 5px #f56bf574; font-size: 1.8em; font-weight: 900;}
+  .product-list {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 30px;margin-top: 50px;}
+  .product-card2 {background: rgba(0, 0, 33, 0.5);border: 1px solid #00ffff;border-radius: 10px;padding: 20px;transition: all 0.3s ease;position: relative;overflow: hidden;}
+  .product-card2:hover {transform: translateY(-10px);box-shadow: 0 0 20px #00ffff;}
+  /* 閃耀特效 */
+  .product-card2::before {content: '';position: absolute;top: -50%;left: -50%;width: 200%;height: 200%;background: linear-gradient(45deg, transparent, #32f9f97b, transparent);transform: rotate(45deg);}
+  /* 選擇所有奇數子元素 https://chateverywhere.app?shareable_conversation_id=116ae3d2-b2b8-412e-bd39-1704b5b902a4 */
+  .product-card2:nth-child(3n + 1)::before {animation: shine 3.7s infinite;}
+  .product-card2:nth-child(3n + 2)::before {animation: shine 4.1s infinite;}
+  .product-card2:nth-child(3n + 3)::before {animation: shine 5.1s infinite;}
+  @keyframes shine {0% { transform: translateX(-50%) rotate(45deg); }
+    100% { transform: translateX(150%) rotate(45deg); }
+  }
+  .product-card2 h2 {font-size: 1.5em;margin-top: 0;}
+  .product-card2 p {font-size: 1em;line-height: 1.6;}
+  .about-us {margin-top: 50px;background: rgba(0, 0, 33, 0.5);border: 1px solid #00ffff;border-radius: 10px;padding: 30px;position: relative;}
+  .about-us::after {content: '';position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%2300ffff" stroke-width="0.5"/></svg>') repeat;opacity: 0.1;z-index: -1;}
+</style>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+</head>
+
+
+
+
+
+<body>
+  <div id="particles-js"></div>
+  <div class="hologram"></div>
+<div class="scan-line"></div>
+
+
+  <header>
+    <div class="">
+      <h1>Technological transformation</h1>
+      <nav>
+        <a href="#applications">Industry applications</a>
+        <a href="#about">About us</a>
+        <a href="https://wa.me/85264071181/?text=查詢科技轉型">Contact</a>
+        
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="container">
+    <section id="applications" class="product-list"><!-- 商品 --></section>
+    
+    <section id="about" class="about-us"><!-- 關於 --></section>
+
+    <br>
+    <p id="translate" style="text-align: center;" ></p>
+    <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+    <br><br>
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    // 取data並解密
+    const 關於 = eval(CryptoJS.AES.decrypt(數碼轉型關於, 摸老婆).toString(CryptoJS.enc.Utf8))
+    const 商品 = eval(CryptoJS.AES.decrypt(數碼轉型商品, 摸老婆).toString(CryptoJS.enc.Utf8))
+    
+    // 顯示data
+    // 殼Class = 包這{}的div的class
+    function 顯示data(內容s,位置,殼Class='') {
+        const 內容的位 = document.getElementById(位置);
+        內容的位.innerHTML = '';
+        內容s.forEach(內容 => {
+            const 每個內容 = document.createElement('div');
+            if (殼Class!='') 每個內容.className = 殼Class;
+            每個內容.innerHTML = `${內容.內容1}`;
+            內容的位.appendChild(每個內容);
+        });
+    }
+
+    // 顯示內容
+    顯示data(關於,'about');
+    顯示data(商品,'applications','product-card2');
+</script>
+
+
+  <script>
+    // 入場時內容向上彈出
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    const cards = document.querySelectorAll('.product-card2');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(50px)';
+      card.style.transition = 'opacity 0.5s, transform 0.5s';
+      observer.observe(card);
+    });
+
+    // 粒子背景效果
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: "#4fd1c5" },
+            shape: { type: "circle" },
+            opacity: { value: 0.5, random: false },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: "#4fd1c5", opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+            modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+        },
+        retina_detect: true
+    });
+  </script>
+</body>
+
+
+
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+    <script>
+        // 翻譯 
+        //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+        translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+        translate.execute();//進行翻譯 
+    </script>
+</html>
