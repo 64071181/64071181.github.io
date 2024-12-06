@@ -22,6 +22,9 @@
 
 
 
+
+
+
 <!--
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -94,6 +97,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     #backToTopBtn {position: relative;bottom: 30px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
     #backToTopBtn:hover {background-color: #5fb8f3;}
 
+    .none{display:none;}
+
   </style>
 
   <script src="https://code.jquery.com/jquery-3.7.0.js">//jq</script>
@@ -150,6 +155,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 <body>
   
+
+  
+
+
   <header>
     <h1 id="網站標題">莫氏倉庫管理系統</h1>
     <p id="translate"></p>
@@ -158,7 +167,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <nav>
     <a href="#" id="庫存btn" class="page用btn" >庫存</a>
     <div class="dropdown">
-      <a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'>免費使用</a>
+      <a href="javascript:void(0);" onclick="window.location.href=`${location.href}???`;_vipLogin分流('???','莫氏倉庫管理系統','../login.html')" >免費使用</a>
     </div>
   </nav>
 
@@ -179,20 +188,23 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <section id="VIP設置page" class="section">
       <div class="content">
 
-        <h2 title="您的會員數"><strong id="網站標題B">網頁標題</strong>現有<strong id="Vip會員數" style="color: #3498db;">cont</strong>位成員</h2>
-        <hr>
+        <div id="有網頁標題再顯" class="none" >
+          <h2 title="您的會員數"><strong id="網站標題B">公司名稱</strong>現有<strong id="Vip會員數" style="color: #3498db;">0</strong>位成員</h2>
+          <hr>
 
-        <h2 title="將您的網址分享給您的使用者">您的網址</h2>
-        <a onclick="_下載QRCode('您的網址qrcode')"><canvas id="您的網址qrcode">您的網址qrcode</canvas></a>
-        <br><br>
-        <a class="btn" href='https://wa.me/85264071181/?text=我要購買VIP' >網址太長嗎? VIP會員可享專屬網址!!</a>
-        <br>
-        <input type="text" id="VipPegaIDInput" placeholder="請先修改您的網頁標題" title="您的網址" onclick="copyToClipboard('VipPegaIDInput')" readonly>
-        <hr>
+          <h2 title="將您的網址分享給您的使用者">您的網址</h2>
+          <a onclick="_下載QRCode('您的網址qrcode')"><canvas id="您的網址qrcode">您的網址qrcode</canvas></a>
+          <br><br>
+          <a class="btn" href='https://wa.me/85264071181/?text=我要購買VIP' >網址太長嗎? VIP會員可享專屬網址!!</a>
+          <br>
+          <input type="text" id="VipPegaIDInput" placeholder="請先修改您的公司名稱" title="您的網址" onclick="copyToClipboard('VipPegaIDInput')" readonly>
+          <hr>
+        </div>
 
-        <h2>您的網頁標題</h2>
-        <input type="text" id="網頁標題Input" placeholder="請修改您的網頁標題" title="請修改您的網頁標題" >
-        <button class="btn" onclick="_更新數據B('VIP的網料', document.getElementById('網頁標題Input').value, 數據庫位)" >更新網頁標題</button>
+          <h2>您的公司名稱</h2>
+          <input type="text" id="網頁標題Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
+          <button class="btn" onclick="_更新數據B('VIP的網料', document.getElementById('網頁標題Input').value, 數據庫位)" >更新公司名稱</button>
+        
       
       </div>
     </section>
@@ -243,8 +255,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
 
-<script src="00mokJsApi.js"></script> 
-<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+<script src="../../mokJsapi/mokJsApi.js"></script>
+<script src="htt3333333333ps://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 <script>
   // mokaki ////////////////// 必須放頭
 
@@ -268,6 +280,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       `數據庫位: ${數據庫位}`
     ]);
 
+    // qqqq kkkkkkkkkkkkkkk
+    _不同分流退出()
+
   // 顯示搜尋結果
   $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
 
@@ -281,8 +296,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     if(!網站標題) return
 
+    $('#有網頁標題再顯').show();
+
     document.title = 網站標題;
     document.getElementById('網站標題').innerHTML = 網站標題;
+    $('#網頁標題Input').val(網站標題);
 
     // 改變 VIP的網 css
     _changeStyle();
@@ -291,31 +309,26 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     // VIP自己登入
     if(已登入帳號) {
-      // VIP的設置
-      document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
-      
-      
-      _取本頁數據庫('VIP的UserID','VIP的UserID')
-      Vip的會員數 = localStorage.getItem('VIP的UserID');
-      $('#網站標題B').text(網站標題);
-      $('#Vip會員數').text(Vip的會員數.split('\\').length - 1);
+        // VIP的設置
+        document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
 
-      document.getElementById('網頁標題Input').value = 網站標題;
+        _取本頁數據庫('VIP的UserID','VIP的UserID')
+        Vip的會員數 = localStorage.getItem('VIP的UserID');
+        $('#網站標題B').text(網站標題);
+        if(Vip的會員數 != null){
+          $('#Vip會員數').text(Vip的會員數.split('\\').length - 1);
+        }
       }
 
     // VIP的user登入
-    if(!已登入帳號){
-      // VIP的user 登入VIP的網
-      $('.dropdown').html(`<a onclick="登入莫氏VIP('${網站標題}')" href='../login.html'>登入</a>`);
-    }
+    vip登入鍵 = `<a href="javascript:void(0);" onclick="window.location.href=${location.href}???;_vipLogin分流('???','${網站標題}','../login.html')" >免費使用</a>`
+    if(!已登入帳號) $('.dropdown').html(vip登入鍵);
 
     // VIP登入
-    if(!localStorage.getItem('VipAdmin標記')){
-      $('.mokJsApi_copyright').prepend(`<a onclick="登入莫氏VIP('莫氏倉庫管理系統')" href='../login.html'><hr></a>`);
-    } else{ // 新增成員
-      $('.dropdown-content').prepend(`
-      <a onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記']);登入莫氏VIP('${網站標題}')" href='../login.html'>新增成員</a>
-      `)
+    if(!localStorage.getItem('VipAdmin標記')) $('.mokJsApi_copyright').prepend(vip登入鍵);
+    else{ // 新增成員
+      vip的會員登入鍵 = `<a href="javascript:void(0);" onclick="window.location.href=${location.href}???;_vipLogin分流('???','${網站標題}','../login.html')" >新增成員</a>`
+      $('.dropdown-content').prepend(`<a onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記']);${vip的會員登入鍵}`)
     }
 
     _生成QRCode('VipPegaIDInput','您的網址qrcode')
@@ -328,8 +341,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     setTimeout(function() { _檢查VIP網()  }, 300);
 
 </script>
-
-
 
 
 
@@ -720,14 +731,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         <p id="dropdownToggle">${已登入帳號}</p>
         <div class="dropdown-content">
           <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>
-          <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','離線VIP網料','數據文件','VipAdmin標記'])">登出並清除記錄</a>
+          <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料', '離線數據庫', 'VIP的UserID','VipAdmin標記'])">登出並清除記錄</a>
         </div>
       `);
     }
     else {console.log('未登入') }
     
     if(localStorage.getItem('VipAdmin標記')) {
-      console.log('*** VIP帳號 ***') 
+      //console.log('*** VIP帳號 ***') 
 
       $('.限AdminBtn').css('display', 'block');
 
@@ -857,6 +868,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     /* 返回頂端 */
     #backToTopBtn {position: relative;bottom: 30px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
     #backToTopBtn:hover {background-color: #5fb8f3;}
+    .none{display:none;}
     `
   }
 

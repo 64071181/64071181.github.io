@@ -53,7 +53,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     html {scroll-behavior: smooth;}
 
     /* Original CSS remains */
-    :root {--主色: #ee41f4;--副色: #08b2a9;--提示色: #ff1100;--文字色: ;}
+    :root {--主色: #ee41f4;--副色: #08b2a9;--提示色: #6fff00;--文字色: ;}
     
     body {margin: 0 ;font-family: "微軟正黑體", sans-serif;background: #f7f7f7;}
     a{text-decoration: none;}
@@ -66,13 +66,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     
     input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
     .services {grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));gap: 1rem;margin: 2rem 0;}
-    .service-card {float: left;max-width: 25%;min-width: 150px; margin: 1%; background: white;padding: 1.5rem;border-radius: 8px;text-align: center;transition: transform 0.3s;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    
+    
+    .service-card {float: left;width: 130px;height: 130px; margin: 1%; background: white;padding: 1.5rem;border-radius: 8px;text-align: center;transition: transform 0.3s;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    
+    
     .service-card:hover {transform: translateY(-5px);}
 
     button,.按鈕 {background: var(--副色);color: var(--文字色);padding: 1rem 2rem;border: none;border-radius: 5px;font-size: 1.1rem;cursor: pointer;transition: background 0.3s;width: 100%;}
     button:hover,.按鈕:hover {background: var(--主色);}
 
-    .預約成功message {display: none;background: var(--副色);color: var(--文字色);padding: 1rem;border-radius: 5px;text-align: center;position: fixed;left: 5%;right: 5%;top: 5%;}
+    .預約成功message {display: none;background: var(--副色);color: var(--文字色);padding: 1rem;border-radius: 5px;position: fixed;left: 5%;top: 5%;padding: 5%;}
     
     /* New CSS for schedule */
     .schedule {margin: 2rem 0;background: white;padding: 1rem;border-radius: 10px;}
@@ -179,7 +183,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         </div>
         <div class="form-group">
           <label>預約日期</label>
-          <input type="date" required name="date">
+          <input type="date" required name="date" id="預約日期">
         </div>
         <div class="form-group">
           <label>預約時間</label>
@@ -189,7 +193,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       </form>
 
       <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+
+      <hr>
+      <a href="javascript:void(0);" onclick="window.location.href=`${location.href}???`;_vipLogin分流('???','琪琪髮型預約系統','../login.html')" >免費使用</a>
+      <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料', '離線數據庫', 'VIP的UserID','VipAdmin標記'])">登出並清除記錄</a>
       
+
+
 
       <div class="預約成功message" id="successMessage">預約成功！</div>
     </div>
@@ -245,26 +255,43 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   // 模擬已預約的時段
   let 預約日程表 = {
-    '2024-12-20': {
-      '10:00': { name: '張小明', phone: '0912345678', service: 'cut' },
-      '10:15': { name: '王大華', phone: '0923456789', service: 'color' },
-      '14:30': { name: '李美麗', phone: '0934567890', service: 'perm' },
-      '15:45': { name: '陳志明', phone: '0945678901', service: 'cut' }
+    "2024-12-05": {
+        "19:15": [
+            {
+                "name": "123",
+                "phone": "64071181",
+                "service": "無指定師傅 $ 400"
+            },
+            {
+                "name": "dsd",
+                "phone": "96727947",
+                "service": "無指定師傅 $ 400"
+            },
+            {
+                "name": "ds釜金d",
+                "phone": "96727947",
+                "service": "無指定師傅 $ 400"
+            }
+        ]
     }
-  };
+}
+;
+
+
 
   const 公司資料 = [{
-    公司名:'琪琪剪髮公司',簡介: '專業髮型設計，為您打造完美造型', ws: '64071181', 地址: '中環1號'
-    , 開工時間: 10, 收工時間: 20, 每時段: 15,
-    主色: '#ee41f4', 副色: '#08b2a9', 提示色: '#ff1100', 文字色: '#000'
+    公司名:'琪琪剪髮公司',簡介: '專業髮型設計，為您打造完美造型'
+    , ws: '64071181', 地址: '中環1號'
+    , 開工時間: 10, 收工時間: 20, 每時段: 15, 時段做客上限: 3
+    , 主色: '#ee41f4', 副色: '#08b2a9', 提示色: '#ff1100', 文字色: '#000'
   }]
 
   const 服務資料 = [
-    { 師傅: '無指定師傅', 收費: 400, 放假: [] },
-    { 師傅: '1號師傅', 收費: 500, 放假: [2, 5, 7, 22] },
-    { 師傅: '2號師傅', 收費: 600, 放假: [3, 8, 15, 21] },
-    { 師傅: '3號師傅', 收費: 700, 放假: [1, 4, 10, 20] },
-    { 師傅: '4號師傅', 收費: 800, 放假: [6, 11, 17, 25] }
+    { 師傅: '無指定師傅', 收費: 400, 放假: [] }
+    , { 師傅: '1號師傅', 收費: 500, 放假: [2, 5, 7, 22] }
+    ,  { 師傅: '2號師傅', 收費: 600, 放假: [3, 8, 15, 21] }
+    ,  { 師傅: '3號師傅', 收費: 700, 放假: [1, 4, 10, 20] }
+    ,  { 師傅: '4號師傅', 收費: 800, 放假: [6, 11, 17, 25] }
   ];
 
 
@@ -325,12 +352,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       // 價目表
       const 選服務item = document.createElement('div');
       選服務item.className = 'service-card';
+
+      假日 = ''
+      if (item.放假.length > 0) 假日 = `<p>假日 ${item.放假.join(',')} 號</p>`
+
       選服務item.innerHTML = `
         <h3>${item.師傅}</h3>
-        <p>$${item.收費}</p>
-        <p>${item.放假.join(',')} 號</p>
+        <p>$ ${item.收費}</p>
+        ${假日}
       `;
       價目表.appendChild(選服務item); // 將卡片加入到價目表
+      
 
       // 當師傅放假時，跳過顯示
       if (isHoliday(item.放假, date)) {
@@ -341,14 +373,16 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       
       // 服務選項
       const option = document.createElement('option'); // 建立 <option> 元素
-      option.value = `${item.師傅} $${item.收費}`; // 設定選項的值
-      option.textContent = `${item.師傅} $${item.收費}`; // 設定選項的顯示文字
+      option.value = `${item.師傅} $ ${item.收費}`; // 設定選項的值
+      option.textContent = `${item.師傅} $ ${item.收費}`; // 設定選項的顯示文字
       選服務.appendChild(option); // 將選項加入到 <select> 中
     });
 
     // 日程表
     const schedule = document.getElementById('schedule');
     schedule.innerHTML = `<h3>${date} 可預約時段</h3>`;
+    $('#預約日期').val(date)
+
     
     for (let hour = 公司資料[0].開工時間; hour < 公司資料[0].收工時間; hour++) {
       const hourRow = document.createElement('div');
@@ -356,13 +390,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       for (let minutes = 0; minutes < 60; minutes += 公司資料[0].每時段) {
         const timeString = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-        const isBooked = 預約日程表[date]?.[timeString];
         
+        // 檢查該時段是否已滿
+        const 預約筆數 = 預約日程表[date]?.[timeString]?.length || 0;
+        const 時段已滿 = 預約筆數 >= 公司資料[0].時段做客上限; // 假設每時段最多 3 筆預約
+
+        // 建立時段元素
         const timeSlot = document.createElement('div');
-        timeSlot.className = `time-slot ${isBooked ? 'booked' : 'available'}`;
+        timeSlot.className = `time-slot ${時段已滿 ? 'booked' : 'available'}`;
         timeSlot.innerHTML = `<a>${timeString}</a>`;
         
-        if (!isBooked) {
+        if (!時段已滿) {
           timeSlot.querySelector('a').addEventListener('click', (event) => {
             event.preventDefault(); // 防止預設行為
             document.querySelector('input[name="time"]').value = timeString;
@@ -372,7 +410,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
               scrollTop: $('#確認預約').offset().top
             }, 500);
           });
-        }
+        } else timeSlot.innerHTML = `<a>${timeString} (客滿)</a>`; // 顯示客滿訊息
         hourRow.appendChild(timeSlot);
       }
       schedule.appendChild(hourRow);
@@ -433,45 +471,55 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       return;
     }
 
-    if (預約日程表[data.date]?.[data.time]) {
-      alert('此時段已被預約，請選擇其他時間');
-      return;
-    }
-    
+    // 初始化該日期和時間的預約列表
     if (!預約日程表[data.date]) {
-      預約日程表[data.date] = [];
+      預約日程表[data.date] = {};
+    }
+    if (!預約日程表[data.date][data.time]) {
+      預約日程表[data.date][data.time] = []; // 將該時段設定為一個空陣列
     }
 
-    預約日程表[data.date][data.time] = {
+    // 檢查該時段是否已達上限
+    if (預約日程表[data.date][data.time].length >= 公司資料[0].時段做客上限) {
+      alert('此時段已滿，請選擇其他時間');
+      return;
+    }
+
+    // 新增預約至該時段
+    預約日程表[data.date][data.time].push({
       name: data.name,
       phone: data.phone,
       service: data.service
-    };
-  
+    });
 
     // 確認預約成功
     確認預約成功 = document.getElementById('successMessage')
     確認預約成功.innerHTML = `
       <h3>預約成功！</h3>
-      <hr>
-      <p>${data.name} | ${data.phone}</p>
       <br>
-      <p>${data.date} | ${data.time}</p>
-      <br>
-      <p>${data.service}</p>
       <hr>
       <br>
-      <a class="按鈕" href="https://wa.me/852${公司資料[0].ws}/?text=${data.name}%0A${data.date}%20|%20${data.time}%0A${data.service}" target="_blank"><i class='fab fa-whatsapp'></i></a></p>
+      <p><i class="fa fa-address-card" ></i> ${data.name}</p>
+      <p><i class="fa fa-phone" ></i> ${data.phone}</p>
+      <p><i class="fa fa-calendar" ></i> ${data.date}  ${data.time}</p>
+      <p><i class="fa fa-cut" ></i> ${data.service}</p>
       <br>
-      <p><a class="按鈕" href="#" id="保存圖片"><i class="fa fa-save" ></i></a></p>
+      <hr>
       <br>
-      <p><a class="按鈕" href="#" id="退出按鈕"><i class="fa fa-home" ></i></a></p>
+      <p>${公司資料[0].公司名}</p>
+      <p><i class="fab fa-whatsapp" ></i> ${公司資料[0].ws}</p>
+      <p><i class="fa fa-map" ></i> ${公司資料[0].地址}</p>
+      <br>
+      <hr>
+      <br>
+      <a class="按鈕" href="https://wa.me/852${公司資料[0].ws}/?text=${data.name}%0A${data.date}%20|%20${data.time}%0A${data.service}" target="_blank"><i class='fab fa-whatsapp'></i></a>
+      <a class="按鈕" href="#" id="保存圖片"><i class="fa fa-save" ></i></a>
+      <a class="按鈕" href="#" id="退出按鈕"><i class="fa fa-home" ></i></a>
     `;
     確認預約成功.style.display = 'block';
 
     this.reset();
     
-
     // 退出按鈕
     document.getElementById('退出按鈕').addEventListener('click', (event) => {
       event.preventDefault(); // 防止預設的跳轉行為
@@ -540,17 +588,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
   
-
-
-  //登出莫氏VIP(['帳戶名稱','離線VIP網料','數據文件','VipAdmin標記'])
-
   function _登入AKI() {
     let 已登入帳號 = _帳戶名稱() 
       , 帳號數據庫 = _數據文件()
       , 本頁數據庫編號 = '琪琪髮型預約系統'
       , 數據庫位 = '.io/d0/'
 
-    _vipLogin分流('???','琪琪髮型預約系統','../login.html')
+    //_vipLogin分流('???',本頁數據庫編號,'../login.html')
 
     console.log(`
       已登入帳號=${已登入帳號}
@@ -558,7 +602,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       本頁數據庫編號=${本頁數據庫編號}
     `);
 
-    if (!已登入帳號) /* VIP的user 登入VIP的網*/  return
+    if (!已登入帳號) return /* VIP的user 登入VIP的網*/
 
     _取本頁數據庫(本頁數據庫編號,'離線數據庫') 
     // VIP的網標題
@@ -589,6 +633,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       `)
     }
     */
+
     _生成QRCode('VipPegaIDInput','您的網址qrcode')
 
 
@@ -647,6 +692,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
   _登入AKI();
+  _不同分流退出();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">// 保存圖片</script>
 
