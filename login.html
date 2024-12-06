@@ -62,12 +62,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">//shr256</script>
 
 
 
-<!-- --><script src="數碼轉型/00mokJsApi.js"></script> 
-<script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+<!-- --><script src="../mokJsapi/mokJsApi.js"></script> 
+<script src="ht222222tps://64071181.github.io/mokJsapi/mokJsApi.js"></script>
 
 </head>
 
@@ -85,13 +85,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+<!--
 
 
-
-
-
-
-
+-->
 
 
 <!--
@@ -190,32 +187,34 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 <script>
 
-// mokaki //////////////////
+// qqqqqqqqqqqq vip login
 
-// 各網login
-const 由網 = localStorage.getItem('莫氏VIP分流')
+  帳號數據庫 = ''
+  數據中VIP的網模版 = ''
+  /*
+  由不同網站到此login
+  如上次記錄的網和這次來的網不同，則先刪除分流記錄
+  */
+  const 由網  = localStorage.getItem('莫氏VIP分流')
+  上次網  = localStorage.getItem('上次網')
+  localStorage.setItem('上次網', 由網);
+  // 檢查上次登入網站 不同網站刪除分流記錄
+  if (localStorage.getItem('莫氏VIP分流') != 上次網) {
+    console.log(`不同網站刪除分流記錄`);
+    登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料', '離線數據庫', 'VIP的UserID','VipAdmin標記'])
+  }
 
+  // 各網login
+  let 只有vipUser才會帶數據庫登入; //由vip的網站到此login 
+  function 各網login(){
 
+    // 判斷是否有分流記錄
+    if (由網 != null) $('#登入, #註冊').html(`<a href="javascript:void(0);" onclick="window.history.back();">${由網}</a>`);
+    else $('.container').html(`<h2 style="display: block; width: 100%;"><a href="javascript:void(0);" onclick="window.history.back();">返回</a></h2><h1 style="display: block; width: 100%;"><a href="https://64071181.github.io/">Mok's Group Limited </a></h1>`);
 
-
-let 只有vipUser才會帶數據庫登入;
-function 各網login(){
-  //console.log('由網=',由網);
-
-  // 判斷是否有分流記錄
-  if (由網 != null) $('#登入, #註冊').html(`<a href="javascript:void(0);" onclick="window.history.back();">${由網}</a>`);
-  else $('.container').html(`<h2 style="display: block; width: 100%;"><a href="javascript:void(0);" onclick="window.history.back();">返回</a></h2><h1 style="display: block; width: 100%;"><a href="https://64071181.github.io/">Mok's Group Limited </a></h1>`);
-
-  // 刪除分流記錄
-  localStorage.removeItem('莫氏VIP分流');
-
-  只有vipUser才會帶數據庫登入 = _數據文件()
-  // 註冊鍵轉 vipUser註冊
-  if (只有vipUser才會帶數據庫登入) $('#註冊鍵').html(`<button onclick="註冊('VIP的User')" type="submit">註冊</button>`)
-
-  _aki睇錯([
-    `帳號數據庫: ${只有vipUser才會帶數據庫登入}`
-  ]);
+    // 註冊鍵轉 vipUser註冊
+    只有vipUser才會帶數據庫登入 = _數據文件() 
+    if (只有vipUser才會帶數據庫登入) $('#註冊鍵').html(`<button onclick="註冊('VIP的User')" type="submit">註冊</button>`)
 
 }
 
@@ -225,8 +224,10 @@ function 各網login(){
 
 
 
-
-
+/*
+真帳號會記錄 由網 再zip256
+就算同帳號在不同網也不能共用
+*/
 async function 登入(){
 
   let 登入帳號  =$( "#登入帳號" ).val()
@@ -237,7 +238,7 @@ async function 登入(){
     , 真帳號 = sha256(`0mo${帳號}kL${由網}V0`)
     , 真帳密 = sha256(`${密碼}0mo${帳號}kL${由網}V0`)
 
-    // VIP的User登入 不回
+    // VIP的User登入 不回來
     if (只有vipUser才會帶數據庫登入) _檢查VIP的User是否存在(登入帳號,真帳密);
 
     let 在不 = await _檢查帳號是否存在(真帳號);
@@ -249,25 +250,34 @@ async function 登入(){
   }
 
   // 驗證密碼
-  fetch(`${在不}/${真帳號}`)
+  帳號數據庫 = `${在不}/${真帳號}`
+  fetch(帳號數據庫)
     .then(response => {
         return response.text(); // 獲取文本內容
     })
-    .then(data => {
+    .then(data => { // data = 數據內容
         if (data.indexOf(真帳密) !== -1) {
             console.log('帳戶驗證成功');
+
+            console.log('data',data);
             // 記錄帳戶名稱
             localStorage.setItem('帳戶名稱', 登入帳號);
             // 記錄數據文件
-            localStorage.setItem('數據文件', `${在不}/${真帳號}`);
+            localStorage.setItem('數據文件', 帳號數據庫);
             // VipAdmin標記
             localStorage.setItem('VipAdmin標記', '臣在');
-            // 登入成功 轉跳 上一頁
-            window.history.back();
+
+            // 用於對比入網和數據中模版是否一致
+            _取本頁數據庫('VIP的網模版','數據中VIP的網模版','不用解謝謝')
+            數據中VIP的網模版 = localStorage.getItem('數據中VIP的網模版')
+            //console.log(`VIP的網模版=${數據中VIP的網模版}`);
+            window.location.href = `./${數據中VIP的網模版}`
         } else {
             $('.提示訊息').text(`密碼不符`)
         }
     })
+
+
 
 }
 
@@ -280,6 +290,7 @@ async function 登入(){
 
 
 async function 註冊(vip=''){
+
   /*
   <script src="https://64071181.github.io/d0/008">
   註冊或登入：新用戶名+密=戶口文件名，記到d0，已有帳號直接用文件名內資料。
@@ -300,12 +311,11 @@ async function 註冊(vip=''){
 
   let 真帳號 = sha256(`0mo${創建帳號}kL${由網}V0`)
     , 真帳密 = sha256(`${設置密碼}0mo${創建帳號}kL${由網}V0`)
-    , 檢測號 = sha256(創建明文+jp3ev6)
+    , 檢測號 = sha256(創建明文+jp3ev6) // 愛
     , 數據驗證碼;
 
   // VIP的User註冊
   if (vip === 'VIP的User') {
-    
     //賦值準備寫入
     帳號數據庫 = 只有vipUser才會帶數據庫登入
 
@@ -323,15 +333,14 @@ async function 註冊(vip=''){
     數據庫位 = `.io/${只有vipUser才會帶數據庫登入.split('/')[3]}/`
     _更新數據B('VIP的UserID', 數據驗證碼, 數據庫位)
     return;
+  } 
 
-  } else {
-    // vip首次註冊,获取上一网页(由網)的 URL
-    let VIP的網模版 = document.referrer.split(總網址)[1].split('.html')[0]+'.html'
-      , 在不 = await _檢查帳號是否存在(真帳號);
-
-    數據驗證碼 = `//${真帳密}${檢測號}//$$$$$$$$$$$$$$$$$$\nconst VIP的網模版 = '${VIP的網模版}'//$$$$$$$$$$$$$$$$$$\n`
-    console.log('數據庫=',在不);
-    // 沒 = 新增帳號
+  // vip首次註冊,获取上一网页(由網)的 URL
+  else {
+    let 在不 = await _檢查帳號是否存在(真帳號);
+    VIP註冊時的網模版 = localStorage.getItem('VIP註冊時的網模版')
+    數據驗證碼 = `//${真帳密}${檢測號}//$$$$$$$$$$$$$$$$$$\nconst VIP的網模版 = '${VIP註冊時的網模版}'//$$$$$$$$$$$$$$$$$$\n`
+    // 如帳號不存在,創建帳號
     if (在不 === null) {console.log(`開始創建帳號...`);await _上傳文到GitHub(真帳號, 數據驗證碼);}
   }
 
