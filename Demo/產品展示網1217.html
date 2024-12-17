@@ -1,0 +1,380 @@
+<html>
+  <head>
+    <style>
+      * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
+      .logo-container {height: 50px;width: 100%;background-color: #54d6f4;display: flex;justify-content: center;align-items: center;}
+      .logo {color: white;font-size: 24px;font-weight: bold;}
+      .logo img {height: 100%;width: auto;}
+
+      /* 走馬燈 */
+      .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
+      .marquee-container:hover .marquee-content {animation-play-state: paused;}
+      .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;animation: scrollUp 10s linear infinite;}      
+      .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
+      .marquee-item a {text-decoration: none;color: #333;}
+      .marquee-item a:hover {text-decoration: underline;}
+
+      .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
+
+      .image-container {width: 100%;text-align: center;}
+      .responsive-image {max-width: 100%;height: auto;}
+      
+      @media (min-width: 768px) {
+        .responsive-image {  height: auto;  width: 50%;max-width: 760px;}
+      }
+      
+      .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
+
+      .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
+
+      .contact-title {font-size: 24px;height: 50px;display: flex;justify-content: space-between;align-items: center;}
+      .toggle-btn {cursor: pointer;font-size: 24px;}
+      .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
+
+      /* line圖示 */
+      .social-links {margin: 20px ;}
+      .line-icon {width: 40px;height: 40px;}
+      .line-icon:hover > path{fill: #00B900;}
+
+      .copyright {text-align: center;padding: 20px;background: #f8f8f8;}
+      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: #54d6f4;color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+      
+      @keyframes scrollUp {0% { transform: translateY(100%); }
+        100% { transform: translateY(-100%); }
+      }
+    </style>
+
+    <title>精緻型專業搬遷、廠房辦公室搬運最優解｜誠鑫搬家｜北部地區首選、台北市、新北市、桃園市、基隆市</title>
+    <meta content="各式各樣大型小型及整層搬家皆可，小資學生女性套房搬遷首選！免動手代客精緻打包、超重型、特殊物品搬遷、鋼琴搬運、古董家具搬運、吊車服務、廢棄物清運、居家清潔等，誠鑫搬家全都可以一條龍幫你服務到家！加LINE發問即可享有免費線上估價！" name="description">
+    <meta content="誠鑫搬家" name="copyright">
+    <meta content="誠鑫搬家" name="copyright">
+    <meta content="精緻型專業搬遷、廠房辦公室搬運最優解｜誠鑫搬家｜北部地區首選、台北市、新北市、桃園市、基隆市" property="og:title">
+    <meta content="各式各樣大型小型及整層搬家皆可，小資學生女性套房搬遷首選！免動手代客精緻打包、超重型、特殊物品搬遷、鋼琴搬運、古董家具搬運、吊車服務、廢棄物清運、居家清潔等，誠鑫搬家全都可以一條龍幫你服務到家！加LINE發問即可享有免費線上估價！" property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="誠鑫搬家" property="og:site_name">
+    <meta content="//gs.liteshop.tw/public/meta_og_image/4cFJZCxH9xndRKyC9YEHDDWy/06-社群封面-1200x630(2).webp" property="og:image">
+    <meta content="//gs.liteshop.tw/public/meta_og_image/4cFJZCxH9xndRKyC9YEHDDWy/06-社群封面-1200x630(2).webp" property="og:image:secure_url">
+    <meta content="精緻型專業搬遷、廠房辦公室搬運最優解｜誠鑫搬家｜北部地區首選、台北市、新北市、桃園市、基隆市" property="og:image:alt">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+
+  </head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::       ::::::::       :::::::::    :::   :::
+     :+:    :+:     :+:    :+:      :+:    :+:   :+:   :+:
+    +:+    +:+     +:+    +:+      +:+    +:+    +:+ +:+
+   +#++:++#+      +#+    +:+      +#+    +:+     +#++:
+  +#+    +#+     +#+    +#+      +#+    +#+      +#+
+ #+#    #+#     #+#    #+#      #+#    #+#      #+#
+#########       ########       #########       ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+<div class="logo-container">
+  <div class="logo"><img src="//gs.liteshop.tw/public/logos/4cFJZCxH9xndRKyC9YEHDDWy/54946d78-0cac-4250-808e-17d3342f62ca.png" alt="誠鑫搬家"></div>
+</div>
+
+<div class="marquee-container" id="marqueeContainer">
+  <div class="close-marquee" onclick="closeMarquee()">×</div>
+  <div id="走馬燈" class="marquee-content"><!-- JS 走馬燈內容 --></div>
+</div>
+
+<div id="產品展示"><!-- JS 產品展示內容 --></div>
+
+<div id="關於我們" class="company-intro"><!-- JS 關於我們內容 --></div>
+
+<div class="contact-section">
+  <div class="contact-title">
+    客服與聯絡資訊
+    <span class="toggle-btn" onclick="toggleContact()">+</span>
+  </div>
+  <div id="聯絡資訊" class="contact-content" ><!-- JS 聯絡資訊內容 --></div>
+</div>
+
+<div id="社交帳號"  class="social-links"><!-- JS 社交帳號內容 --></div>
+
+
+
+
+
+
+<div class="copyright">
+  <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 誠鑫搬家`)</script>
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            ::::::::       ::::::::       ::::::::
+          :+:    :+:     :+:    :+:     :+:    :+:
+        +:+            +:+            +:+
+        +#+            +#++:++#++     +#++:++#++
+      +#+                   +#+            +#+
+      #+#    #+#     #+#    #+#     #+#    #+#
+      ########       ########       ########
+
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+      // 關走馬燈
+      function closeMarquee() {
+        document.getElementById('marqueeContainer').style.display = 'none';
+      }
+
+      // 開闢 聯絡卡
+      function toggleContact() {
+        const content = document.getElementById('聯絡資訊');
+        const btn = document.querySelector('.toggle-btn');
+
+        if (content.style.height === '0px' || content.style.height === '') {
+          // 開啟
+          content.style.height = 'auto';
+          const height = content.offsetHeight + 'px'; // 取得實際高度
+          content.style.height = '0px'; // 先設定為 0 以便觸發過渡
+          setTimeout(() => {
+            content.style.height = height; // 再設定為實際高度
+          }, 0);
+          btn.textContent = '-';
+        } else {
+          // 關閉
+          content.style.height = content.offsetHeight + 'px'; // 設定為當前高度以觸發過渡
+          setTimeout(() => {
+            content.style.height = '0px'; // 再設定為 0
+          }, 0);
+          btn.textContent = '+';
+        }
+      }
+
+      // 回頁頂
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // 捲動顯示回頂鍵
+      window.onscroll = function() {
+        const scrollTop = document.getElementById('scrollTop');
+        const logo = document.querySelector('.logo-container');
+        const logoBottom = logo.offsetTop + logo.offsetHeight;
+        
+        if (window.pageYOffset > logoBottom) {
+          scrollTop.style.display = 'flex';
+        } else {
+          scrollTop.style.display = 'none';
+        }
+      };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            :::::::::           :::    :::::::::::           :::
+          :+:    :+:        :+: :+:      :+:             :+: :+:
+          +:+    +:+       +:+   +:+     +:+            +:+   +:+
+        +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+        +#+    +#+      +#+     +#+    +#+           +#+     +#+
+      #+#    #+#      #+#     #+#    #+#           #+#     #+#
+      #########       ###     ###    ###           ###     ###
+
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+      // 取data並解密
+      const 產品展示內容 = [
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-6e4a99ee-cc58-4b63-b91b-b02ea8ddc935.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-b19445c5-b21c-4c65-b94c-b0a79cec62a3.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-e2b0ac34-7d0a-49e5-a648-04408e803353.webp', 'url': 'https://lin.ee/416xnF3'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-933cc30f-153a-4582-b9ac-cad57e27f6fd.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-e310ee29-f6a5-4875-9bcd-34d6e32144a7.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-f716aa22-6d80-465d-8095-5019459972b5.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-557bc8f3-4a6a-4192-a346-78fa83e7ed89.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-bf68e2be-66e7-424a-86da-060d0b9f93a0.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-8c903573-e9c6-48a2-9e69-46b7ca8b76e5.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-80edffac-a2c7-4d31-b8ef-967977b772ba.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-7a733175-f9e6-4b21-8669-ceecc2f787e9.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-be56719b-d180-4891-9fda-1c932ae3f503.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-1b04530a-df99-44c6-9e5a-2c4fd72e2393.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-a10aa07b-fe9d-4c8e-b9b1-1091f09e4fee.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-e1f90752-5fd3-481e-97c5-fa41d0830472.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-7ab6b0cc-d0fa-41ae-bd3e-9a10a8fd3b42.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-0b0617ee-c9ca-4c69-a547-6536bc6601b3.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-bb0dcbf6-d1b3-4ef7-a462-147f545ccfd9.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-087cbf17-54fa-4aa2-8e73-af4a6f233f01.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-31308f55-4b9f-473b-a2bf-67c786eb9d5d.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-1f49be94-d64a-41a0-9e05-2e6302a91360.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-73d2790d-ec64-42aa-a773-470e70f8f1ae.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-568d44a9-b37c-4451-9875-8fce19d79904.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-ce304a78-2fef-4b9c-8f78-413db9e901cd.webp', 'url': ''},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-1a8bed55-ebf4-4186-87c2-9db948a6840b.webp', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-ae58eea2-a130-44a8-aa1d-2978f759bc85.webp', 'url': ''}
+      ];
+      //eval(CryptoJS.AES.decrypt(產品展示1217內容, 摸老婆).toString(CryptoJS.enc.Utf8))
+
+
+      
+      const 走馬燈內容 = [
+        {'字': '🌟 加LINE立即領取500元搬家優惠金 ✨', 'url': 'https://lin.ee/exeQ2Yx'},
+        {'字': '🌟 點這裡！即可快速加LINE使用最高優惠 ✨', 'url': 'https://lin.ee/exeQ2Yx'}
+      ];
+      
+      const 關於我們 = [
+        {'字':`
+        誠鑫搬家<br>各式各樣大型小型及整層搬家皆可<br>小資學生女性套房搬遷首選！<br>
+        小資學生女性套房搬遷<br>免動手代客精緻打包<br>超重型、特殊物品搬遷<br>
+        鋼琴搬運、古董家具搬運<br>吊車服務、廢棄物清運、居家清潔等<br>
+        我們全都可以一條龍幫你服務到家！<br>加LINE發問即可享有免費線上估價！`}
+      ];
+
+      const 聯絡資訊 = [
+        {'字':`LINE ID：<a href="https://line.me/R/ti/p/@457ffejd" target="_blank" rel="noreferrer noopener">@457ffejd</a>`},
+        {'字':`營業時間：週一 至 週日｜08:00 – 23:00`}];
+        
+      const 社交帳號 = [
+        {'html': `<a href="https://line.me/ti/p/@example">
+          <svg class="line-icon" viewBox="0 0 24 24">
+            <path fill="#888" d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988-2.595c.129 0 .234.105.234.234v4.153h2.287c.129 0 .233.104.233.233v.842c0 .129-.104.234-.233.234h-3.363c-.063 0-.119-.025-.161-.065-.043-.043-.072-.1-.072-.169v-5.229c0-.129.104-.233.233-.233h.842zm14.992 0c.129 0 .233.105.233.234v.842c0 .129-.104.234-.233.234h-2.287v.883h2.287c.129 0 .233.105.233.234v.842c0 .129-.104.234-.233.234h-2.287v.884h2.287c.129 0 .233.105.233.233v.842c0 .129-.104.234-.233.234h-3.363c-.063 0-.12-.025-.162-.065-.043-.043-.071-.1-.071-.169v-5.229c0-.129.104-.233.233-.233h3.363zm-10.442.001c.129 0 .234.105.234.234v5.229c0 .129-.105.234-.234.234h-.842c-.129 0-.234-.105-.234-.234v-5.229c0-.129.105-.234.234-.234h.842zm2.127 0h.891l2.368 3.354v-3.354c0-.129.105-.234.234-.234h.842c.129 0 .234.105.234.234v5.229c0 .129-.105.234-.234.234h-.841l-2.421-3.354v3.354c0 .129-.105.234-.234.234h-.839c-.129 0-.234-.105-.234-.234v-5.229c0-.129.105-.234.234-.234z"/>
+          </svg>
+        </a>`
+        }
+      ];
+
+
+
+      // 顯示內容
+      function _顯示內容(data,sel) {
+
+        for (let 內容 of data){
+          let 單個內容, all內容
+
+          /***************** 走馬燈 ******************/
+          if (sel == '走馬燈') all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+          
+
+          /***************** 產品展示 ******************/
+          if (sel == '產品展示'){
+            單個內容 = `<img class="responsive-image" src="${內容.圖}" >`;
+            if (內容.url != '') {
+              單個內容 = 
+                `
+                <a href="${內容.url}" target="_blank">
+                  <img class="responsive-image" src="${內容.圖}" >
+                </a>
+                `
+              }
+            all內容 = `<div class="image-container">${單個內容}</div>`;
+          }
+        
+          /***************** 關於我們 ******************/
+          if (sel == '關於我們') all內容 = `<p>${內容.字}</p>`;
+          
+          /***************** 聯絡資訊 ******************/
+          if (sel == '聯絡資訊') all內容 = `<p>${內容.字}</p>`;
+
+
+          /***************** 社交帳號 ******************/
+          if (sel == '社交帳號') all內容 = 內容.html;
+          
+
+
+          // 加入DOM
+          $(`#${sel}`).append(all內容);
+        }
+      }
+
+
+
+
+      _顯示內容(產品展示內容,'產品展示')
+      _顯示內容(走馬燈內容,'走馬燈')
+      _顯示內容(關於我們,'關於我們')
+      _顯示內容(聯絡資訊,'聯絡資訊')
+      _顯示內容(社交帳號,'社交帳號')
+
+    </script>
+  </body>
+</html>
