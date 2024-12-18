@@ -106,8 +106,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
 
 
-  <script src="../../mokJsapi/mokJsApi.js"></script> 
-  <script sr1111111c="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+  <script sr555c="../../mokJsapi/mokJsApi.js"></script> 
+  <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
   
   </head>
 
@@ -157,6 +157,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 <body>
   <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
+  <samp id="您已登錄其他服務" class="none">您已登錄服務! 請先登出並清除記錄再使用其他服務!</samp>
 
   <header>
     <h1 id="網站標題">莫氏倉庫管理系統</h1>
@@ -203,19 +204,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <h2>您的公司名稱</h2>
           <input type="text" id="網頁標題Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
           <button class="btn" onclick="_更新數據B('VIP的網料', document.getElementById('網頁標題Input').value, 數據庫位)" >更新公司名稱</button>
-        
       
       </div>
     </section>
 
-    
-    
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     <a id="backToTopBtn" href="#searchInput"> ^ </a>
     
   </div>
-
-  
 </body>
 
 
@@ -259,84 +255,75 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   // mokaki ////////////////// 必須放頭
 
   let 已登入帳號 = _帳戶名稱() 
-
     , 帳號數據庫 = _數據文件()
     , 本頁數據庫編號 = '莫氏倉庫管理系統產品料'
     , 數據庫位 = '.io/d0/'
+    , 產品料 = null;
 
-  function _必須放頭() {
+    async function _必須放頭() {
+      if (已登入帳號) {
+        _不同分流退出()
+        產品料 = await _取本頁數據庫(本頁數據庫編號, '產品料','html碼');
+      }
 
-    // 取帳號資料
-    _取本頁數據庫('VIP的網料','離線VIP網料')
+      _aki睇錯([
+        `已登入帳號: ${已登入帳號}`,
+        `帳號數據庫: ${帳號數據庫}`,
+        `本頁數據庫編號: ${本頁數據庫編號}`,
+        `數據庫位: ${數據庫位}`
+      ]);
 
-    if (已登入帳號) _取本頁數據庫(本頁數據庫編號,'產品料') // eval(localStorage.getItem('產品料'))
+      _不同分流退出()
 
-    // 沒登入時記錄現在的網模版
-    //else localStorage.setItem('VIP註冊時的網模版', decodeURIComponent(location.href.split(總網址)[1].split('.html')[0])+'.html');
-    
-    
-    _aki睇錯([
-      `已登入帳號: ${已登入帳號}`,
-      `帳號數據庫: ${帳號數據庫}`,
-      `本頁數據庫編號: ${本頁數據庫編號}`,
-      `數據庫位: ${數據庫位}`
-    ]);
-
-    _不同分流退出()
-
-  // 顯示搜尋結果
-  $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
+      // 顯示搜尋結果
+      $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
 
   }
 
 
-  function _檢查VIP網() {
+  async function _檢查VIP網() {
 
     // VIP的網標題
-    網站標題 = localStorage.getItem('離線VIP網料')
-
+    網站標題 = await _取本頁數據庫('VIP的網料', '離線VIP網料','html碼');
     if(!網站標題) return
 
     $('#有網頁標題再顯').show();
 
+    // qqqqqqqqqqqqqq
     document.title = 網站標題;
-    document.getElementById('網站標題').innerHTML = 網站標題;
+    document.getElementById('網站標題').innerHTML = (網站標題);
     $('#網頁標題Input').val(網站標題);
 
-    // 改變 VIP的網 css
-    _changeStyle();
-
-    
+    _changeStyle(); // 改變 VIP的網 css
 
     // VIP自己登入
     if(已登入帳號) {
         // VIP的設置
         document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
 
-        _取本頁數據庫('VIP的UserID','VIP的UserID')
-        Vip的會員數 = localStorage.getItem('VIP的UserID');
+        Vip的會員數 = await _取本頁數據庫('VIP的UserID', 'VIP的UserID','html碼');
         $('#網站標題B').text(網站標題);
         if(Vip的會員數 != null){
-          $('#Vip會員數').text(Vip的會員數.split('\\').length - 1);
+          $('#Vip會員數').text(Vip的會員數.split('!!').length - 1);
         }
       }
 
     // VIP的user登入
-    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip我會員登入()" >免費使用</a>`
+    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip我會員登入()" >成員登入</a>`
     if(!已登入帳號) $('.dropdown').html(vip登入鍵);
 
     // VIP登入
-    if(!localStorage.getItem('VipAdmin標記')) $('.mokJsApi_copyright').prepend(vip登入鍵);
-    else{ // 新增成員
-      $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="新增成員()" >新增成員</a>`)
-    }
+    //if(!localStorage.getItem('VipAdmin標記')) $('.mokJsApi_copyright').prepend(vip登入鍵);
+    // 新增成員
+    if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="新增成員()" >新增成員</a>`)
+    //else $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="新增成員()" >新增44成員</a>`)
 
     _生成QRCode('VipPegaIDInput','您的網址qrcode')
     
   }
 
   function 新增成員() {
-    登出莫氏VIP(['帳戶名稱','VipAdmin標記']);
+    登出莫氏VIP(['帳戶名稱','VipAdmin標記']); // 數據文件
     window.location.href=`${location.href}#???`;
     _vipLogin分流('???',網站標題,'../login.html')
   }
@@ -394,7 +381,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
   // 取帳戶 數據 (庫存)
-  let inventoryData = eval(localStorage.getItem('產品料'))
+  let inventoryData = 產品料 
+  console.log('產品料 VIP==', 產品料);
+
   //  沒'產品料' = demo
   if(!inventoryData) inventoryData = [
   {
@@ -747,12 +736,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     else {console.log('未登入') }
     
     if(localStorage.getItem('VipAdmin標記')) {
-      //console.log('*** VIP帳號 ***') 
-
       $('.限AdminBtn').css('display', 'block');
-
       $('#dropdownToggle').text(`${已登入帳號} *`);
-
       $('.dropdown-content').prepend(`
           <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >設置</a>
       `);
@@ -772,7 +757,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         }
         });
     } catch (error) {console.log('未登入') }
-
   }
 
 
@@ -883,11 +867,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     `
   }
 
-
   帳號管理btn轉css()
   _導航換頁();
-
-
 
 </script>
 
@@ -936,16 +917,4 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     //進行翻譯
     setTimeout(function() { translate.execute()  }, 800);
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
