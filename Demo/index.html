@@ -56,6 +56,7 @@
 </head>
 <body>
 
+  <samp id="莫生查詢" style="display: none;">莫生我要查詢程式開發</samp>
 
 
   
@@ -149,13 +150,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     <section class="cta">
         <h2>準備好迎接數字未來了嗎？</h2>
-        <a href="https://wa.me/85264071181/?text=查詢程式開發" class="btn">聯繫未來</a>
+        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
     </section>
 </div>
 
 
 <footer>
-  <p class="copyright"></p>
+  
   <p class="mokJsApi_copyright">版權</p>
 </footer>
 
@@ -357,6 +358,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+      // 顯示聯莫
+      const 聯莫 = [
+        {'mail': 'moksurky@gmail.com'},
+        {'whatsapp': 'https://wa.me/85264071181/'},
+        {'WechatQR': ''},
+        {'instagram': 'https://www.instagram.com/moksurky2025/'},
+        {'line': 'https://line.me/ti/p/UlSPd7p9zh/'},
+        {'facebook': 'https://www.facebook.com/aki.mok.10/'},
+        {'telegram': 'http://t.me/mokaki/'}
+      ];
+      _顯示聯莫(聯莫);
+
+
 
 
       const 作品內容 = [
