@@ -41,8 +41,12 @@
         .floating-element {animation: float 3s ease-in-out infinite;opacity: 0;transition: opacity 0.5s ease;}
         .floating-element.active {opacity: 1;}
         </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
+    <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
+    <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -53,7 +57,9 @@
     
     
     <body>
-    
+        <samp id="莫生查詢" style="display: none;">莫生我要查詢科技應用</samp>
+
+
     <section class="section" style="background-image: url('bg1.png')">
         <div class="content">
             <h1 class="fade-in">莫氏科技集團</h1>
@@ -154,10 +160,9 @@
             </div>
             <div class="contact-info">
                 <p>莫氏科技集團有限公司</p>
-                <p>電話：(852) 6407 1181</p>
-                <p>電郵：moksurky2022@gmail.com</p>
             </div>
         </div>
+        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
     </section>
     
     <script>
@@ -267,6 +272,12 @@
             //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
             translate.execute();//進行翻譯 
+
+
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            ];
+            _顯示聯莫(聯莫);
         </script>
     </body>
     </html>

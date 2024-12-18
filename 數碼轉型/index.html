@@ -32,6 +32,13 @@
   .about-us::after {content: '';position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%2300ffff" stroke-width="0.5"/></svg>') repeat;opacity: 0.1;z-index: -1;}
 </style>
 
+<link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
+<!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
@@ -46,6 +53,8 @@
 
 
 <body>
+  <samp id="莫生查詢" style="display: none;">莫生我要查詢創新行業應用</samp>
+
   <div id="particles-js"></div>
   <div class="hologram"></div>
 <div class="scan-line"></div>
@@ -57,8 +66,8 @@
       <nav>
         <a href="#applications">Industry applications</a>
         <a href="#about">About us</a>
-        <a href="https://wa.me/85264071181/?text=查詢科技轉型">Contact</a>
         
+
       </nav>
     </div>
   </header>
@@ -69,6 +78,8 @@
     
     <section id="about" class="about-us"><!-- 關於 --></section>
 
+    <br>
+    <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
     <br>
     <p id="translate" style="text-align: center;" ></p>
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
@@ -169,5 +180,13 @@
         //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
         translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
         translate.execute();//進行翻譯 
+
+
+        // 顯示聯莫
+        const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+        ];
+        _顯示聯莫(聯莫);
+
+        
     </script>
 </html>
