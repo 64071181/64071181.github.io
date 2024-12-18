@@ -33,11 +33,20 @@
         #搜尋Perplexity{text-align: center;}
         #搜尋Perplexity a{text-decoration: none;color: #fab5f0;font-size: 1.5em;text-shadow: 0 0 10px rgba(79, 209, 197, 0.5);}
     </style>
+
+    <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
+    <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>
 </head>
 <body>
+
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢數位創意解決方案</samp>
+
 
 
 
@@ -63,6 +72,8 @@
 
     <div class="footer">
         <p class="mokJsApi_copyright">版權</p>
+        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+
     </div>
 
 </div>
@@ -73,6 +84,7 @@
         <li><a href="#" id="about-link">關於我們</a></li>
         <li id="translate"></li>
     </ul>
+    
     <div class="container">
         <input type="text" id="searchInput" placeholder="搜索工具、描述或關鍵字...">
     </div>
@@ -232,6 +244,14 @@ particlesJS('particles-js', {
 
 <script src="https://64071181.github.io/mokJsapi/mokJsApi.js">//jquery-3.7.0.js 放頭</script>
 <script>
+
+
+      // 顯示聯莫
+      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+      ];
+      _顯示聯莫(聯莫);
+
+
 // mokaki //////////////////
 mokJsApi_客戶追蹤();
 
