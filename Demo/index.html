@@ -147,10 +147,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <section id="contact">
         <h2>聯繫未來</h2>
         <p>想要了解更多關於我們的服務？歡迎隨時與我們聯繫！</p>
-        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+        <div id="ContactAKI" class="ContactAKI" "><!-- JS _顯示聯莫 --></div>
     </section>
 
-    <h2>準備好迎接數字未來了嗎？</h2>
+
+    <section style="clear: both;">
+      <h2>準備好迎接數字未來了嗎？</h2>
+    </section>
+    
 
 
 </div>
@@ -361,12 +365,6 @@ document.addEventListener('DOMContentLoaded', function() {
       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 
-      // 顯示聯莫
-      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
-      ];
-      _顯示聯莫(聯莫);
-
-
 
 
       const 作品內容 = [
@@ -418,6 +416,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       _顯示內容(作品內容,'作品')
+
+
 </script>
 
 
@@ -439,6 +439,12 @@ document.addEventListener('DOMContentLoaded', function() {
         translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
         translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
         translate.execute();//進行翻譯 
+
+
+      // 顯示聯莫
+      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+      ];
+      _顯示聯莫(聯莫);
     </script>
 
 
