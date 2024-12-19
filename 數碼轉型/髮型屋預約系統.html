@@ -1224,9 +1224,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
   async function _登入AKI(today) {
+
+    _檢查VIP網()
+
+
     if (!已登入帳號) return 
     _不同分流退出();
     
+    //console.log('預約日程表 ovg==', 預約日程表);
+
     /* VIP的user 登入VIP的網 qqq _vipLogin分流 == *** VIP帳號 *** */
 
       //console.log('預約日程表 ovg==', 預約日程表);
@@ -1299,7 +1305,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
+  function _檢查VIP網() { // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+    console.log(`帳號數據庫: ${帳號數據庫}`);
+    
+  }
 
 
 
@@ -1345,6 +1354,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   _MakeOVG_Data(today);
   _預約表(today);
 
+
+  console.log(`qqqqq:`);
+  //_檢查VIP網() // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
   _登入AKI(today); // 初始化預約表 // _查看預約日程表
   
   </script>
