@@ -1166,7 +1166,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   function _MakeCss() {
 
     // 沒標記退
-    if(!localStorage.getItem('VipAdmin標記')) return
+    if(!localStorage.getItem('VipAdmin標記')) {
+      _檢查VIP網();
+      return
+    }
 
     // VIP登入 轉 css
     $('#nav').html(`
@@ -1225,10 +1228,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   async function _登入AKI(today) {
 
-    _檢查VIP網()
+    
 
 
-    if (!已登入帳號) return 
+    //if (!已登入帳號) return 
     _不同分流退出();
     
     //console.log('預約日程表 ovg==', 預約日程表);
@@ -1306,6 +1309,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
   function _檢查VIP網() { // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+    console.log(`vip 的 user: ${帳號數據庫}`);
     console.log(`帳號數據庫: ${帳號數據庫}`);
     
   }
