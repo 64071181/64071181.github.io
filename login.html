@@ -119,6 +119,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <p id="translate" style="text-align: center;"></p>
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
 
+
+    <!--
+    <a href="javascript:void(0);" onclick="登出莫氏VIP(
+      ['帳戶名稱','數據文件','離線VIP網料', '產品料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版','琪琪髮型預約系統預約日程表','預約日程表B','VIP註冊時的網模版']
+    )">登出並清除記錄 aki</a>
+    -->
+
+
     <div class="panel-face front">
       <div class="auth-form" id="loginForm">
         <h2 id="登入">?登入</h2>
@@ -192,8 +200,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 <script>
 
-// qqqq vip login 
-
   let 帳號數據庫 = ''
     //, 數據中VIP的網模版
   /*
@@ -204,14 +210,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   上次網  = localStorage.getItem('上次網')
   console.log(`上次網: ${上次網}  這次網: ${由網}`);
   localStorage.setItem('上次網', 由網);
-  // 檢查上次登入網站 不同網站刪除分流記錄
-  if (localStorage.getItem('莫氏VIP分流') != 上次網) {
-    console.log(`不同網站刪除分流記錄`);
-    登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料', '琪琪髮型預約系統預約日程表', '公司資料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版', '預約日程表B','VIP註冊時的網模版'])
-  }
 
   // 各網login
   let 只有vipUser才會帶數據庫登入 //由vip的網站到此login
+
   // 用於對比入網和數據中模版是否一致 // _vipLogin分流@mokJsApi.js
     , 註冊時的網模版 = localStorage.getItem('VIP註冊時的網模版')
   function 各網login(){
@@ -248,8 +250,13 @@ async function 登入(){
     , 真帳號 = sha256(`0mo${帳號}kL${由網}V0`)
     , 真帳密 = sha256(`${密碼}0mo${帳號}kL${由網}V0`)
 
+    console.log(`真帳密 ${真帳密}`);
     // VIP的User登入 不回來
-    if (只有vipUser才會帶數據庫登入) _檢查VIP的User是否存在(登入帳號,真帳密);
+    if (只有vipUser才會帶數據庫登入) {
+      //console.log('只有vipUser才會帶數據庫登入1111',只有vipUser才會帶數據庫登入);
+      _檢查VIP的User是否存在(登入帳號,真帳密,只有vipUser才會帶數據庫登入);
+      return;
+    }
 
     let 在不 = await _檢查帳號是否存在(真帳號);
 
@@ -331,21 +338,20 @@ async function 註冊(vip=''){
   if (vip === 'VIP的User') {
     //賦值準備寫入
     帳號數據庫 = 只有vipUser才會帶數據庫登入
-    /*
-    _取本頁數據庫('VIP的UserID','VIP的UserID') 
-    舊的VIPUserID = localStorage.getItem('VIP的UserID');
-    */
-    舊的VIPUserID = await _取本頁數據庫('VIP的UserID', 'VIP的UserID');
+    舊的VIPUserID = await _取本頁數據庫('VIP的UserID', 'VIP的UserID','html碼'); 
+
     // 如VIP的UserID數據庫存在,檢查帳號存在
-    if(舊的VIPUserID.indexOf(檢測號) !== -1) {
+    if(舊的VIPUserID && 舊的VIPUserID.indexOf(檢測號) !== -1) {
       console.log(`${創建明文}已被使用`);
       $('.提示訊息').text(`${創建明文}已被使用`);
       return;
     }
 
-    數據驗證碼 = `${舊的VIPUserID}${真帳密}${檢測號}`
+    數據驗證碼 = `${舊的VIPUserID}${真帳密}${檢測號}%`
+    //數據驗證碼 = `${舊的VIPUserID}${真帳密}${檢測號}$`
     數據庫位 = `.io/${只有vipUser才會帶數據庫登入.split('/')[3]}/`
-    _更新數據B('VIP的UserID', 數據驗證碼, 數據庫位)
+    _更新數據B('VIP的UserID', `${數據驗證碼}`, 數據庫位)
+    //_更新數據B('VIP的UserID', 數據驗證碼, 數據庫位) qqq
     return;
   } 
 
