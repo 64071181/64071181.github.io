@@ -473,23 +473,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-    // qqqqqqqqqqqqq
-    琪琪髮型預約系統 base data
-    下載預約日程表 轉 excle
-
-    教學影片:
-    注册流程
-    登入流程
-    設置公司資料
-    新增產品資料
-    公司查詢預約日程表
-    登出流程
-    展示預約系統
-
-    客戶預約流程
-
-    客戶查詢預約服務
-    師傅查詢預約客戶
 
 
 
@@ -500,11 +483,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       </div>
       <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     </nav>
+
     
 
   </div>
   
-
 
 
 
@@ -603,28 +586,42 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-// qqqqqqqqqqqqq
-  // 點擊按鈕事件
-  $('#下載預約日程表').click(function () {
-    // 將 JSON 轉為字串
-    const jsonString = JSON.stringify(預約日程表, null, 4);
-                
-    // 建立一個 Blob 對象
-    const blob = new Blob([jsonString], { type: 'text/plain' });
-                
+
+
+
+// 點擊按鈕事件
+$('#下載預約日程表').click(function () {
+    // 格式化預約日程表的資料
+    let formattedText = '';
+
+    for (const [date, slots] of Object.entries(預約日程表)) {
+        formattedText += `日期: ${date}\n`;
+        for (const [time, entries] of Object.entries(slots)) {
+            for (const entry of entries) {
+                formattedText += `    時間: ${time}, 名字: ${entry.name}, 電話: ${entry.phone}, 服務: ${entry.service}\n`;
+            }
+            formattedText += '-'.repeat(3)+'\n';
+        }
+        formattedText += '-'.repeat(8)+'\n';
+    }
+
+    // 建立 Blob 對象
+    const blob = new Blob([formattedText], { type: 'text/plain' });
+
     // 建立一個隱藏的下載連結
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'data.txt';
+    link.download = '下載預約日程表.txt';
     link.style.display = 'none';
-                
+
     // 將連結加入頁面並模擬點擊
     document.body.appendChild(link);
     link.click();
-                
+
     // 點擊後移除連結
     document.body.removeChild(link);
-  });
+});
+
 
 
 
