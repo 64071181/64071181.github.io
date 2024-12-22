@@ -112,6 +112,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     .data-row button.delete {float: right; background-color: #f44336;}
 
 
+    .廣告位 {transition: all 0.3s ease;background: rgb(236, 0, 0);background-size: auto;background-repeat: no-repeat;display: block;height: 100px;width: 100%;max-width: 300px;}
+    /* 開關容器 */
+    .toggle-廣告功能開關 {position: relative;margin: 2%;width: 84px;height: 50px;text-align: center;font-size: 20px;line-height: 40px;}
+    /* 隱藏原始 checkbox */
+    .toggle-廣告功能開關 input {opacity: 0;width: 0;height: 0;}
+    /* 滑動條樣式 */
+    .slider {position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;background-color: #ccc;border-radius: 25px;transition: background-color 0.4s;}
+    /* 滑動按鈕樣式 */
+    .slider::before {position: absolute;content: "";height: 42px;width: 42px;left: -1px;background-color: #888;border-radius: 42px;transition: transform 0.4s;}
+    /* 選擇 On 狀態的樣式 */
+    input:checked + .slider {background-color: #5d53e2;}
+    input:checked + .slider::before {transform: translateX(43px);}
+
 
   </style>
 
@@ -189,6 +202,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <div id="電地" style="text-align: center; padding: 5%;">
     <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
   </div>
+
+  <a href="#" >
+    <div class="container 廣告位" id="廣告位1" style='background-image: url(../PayAki/payBG2.png);'>
+    </div>
+  </a>
+
+
   <div class="container">
 
 
@@ -248,6 +268,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       <hr style="clear: both;margin-top: 5%;">
       <div class="services" id="價目表"><!-- js 價目表 --></div>
       <hr style="clear: both;margin-top: 50%;">
+
+      <a href="#" >
+        <div class="container 廣告位" id="廣告位2" style='background-image: url(../PayAki/payBG2.png);'>
+        </div>
+      </a>
+
 
       <div class="booking-form">
 
@@ -388,6 +414,23 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <input type="text" id="文字色Input" placeholder="請修改您的文字色" title="請修改您的文字色" >
           
           <hr>
+
+
+
+
+
+
+          <h2>廣告功能</h2>開啟廣告功能將會在您的網站上顯示廣告，您將可按展示次數賺取廣告費。
+
+          <div class="toggle-廣告功能開關">
+            <input type="checkbox" id="廣告功能開關" />
+            <label for="廣告功能開關" class="slider">on      off</label>
+          </div>
+
+
+
+
+
         </div>
 
           <button class="btn" onclick="_更新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >更新公司資料</button>
@@ -473,7 +516,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
+    <a href="#" >
+      <div class="container 廣告位" id="廣告位3" style='background-image: url(../PayAki/payBG2.png);'>
+      </div>
+    </a>
 
 
     <nav style="text-align: center;">
@@ -485,6 +531,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </nav>
 
     
+
+
 
   </div>
   
@@ -563,7 +611,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     };
 
     //ovg 不用公司名,等vip set 再出設定
-    公司資料 = [{ '公司ws': '64071181', '公司地址': `中環1號`, '營業時間': '13:15', '打烊時間': '17:30', '每時段': '15', '時段做客上限': '3'}];
+    公司資料 = [{ '公司ws': '64071181', '公司地址': `中環1號`, '營業時間': '13:15', '打烊時間': '17:30', '每時段': '15', '時段做客上限': '3', '廣告功能': 'true'}];
 
     產品資料 = [//ovg
       { 師傅: '無指定師傅', 收費: 400, 放假: [],密碼: '' }
@@ -1231,7 +1279,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
+    
 
 
 
@@ -1289,6 +1337,10 @@ function _更新野(數據id, data位) {
       新data.push($(`#${data}`).val()) // 存每個data
       data內id.push(data.split('Input')[0]) // 存每個data的id
     }
+
+    //廣告功能
+    新data.push(廣告功能) ;
+    data內id.push('廣告功能');
 
     // 組合所有新數據
     all新數據 = `[{`;
@@ -1466,7 +1518,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       //console.log('預約日程表 ovg==', 預約日程表);
       預約日程表B = await _取本頁數據庫('琪琪髮型預約系統預約日程表', '琪琪髮型預約系統預約日程表','JSON');  
       if (預約日程表B) 預約日程表 = JSON.parse(預約日程表B)
-      console.log('預約日程表 VIP==', 預約日程表);
+      //console.log('預約日程表 VIP==', 預約日程表);
 
       //console.log('公司資料 ovg==', 公司資料);
       公司資料B = await _取本頁數據庫('公司資料', '公司資料','html碼');
@@ -1504,6 +1556,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         <a href="https://www.google.com/maps/search/?api=1&query=${公司資料[0].公司地址}" target="_blank"><i class='fas fa-map-marker-alt'></i> <samp class="fa">${公司資料[0].公司地址}</samp></a>
       `);
 
+      廣告功能 = eval(公司資料[0].廣告功能);
+      if(廣告功能 == false) $('.廣告位').hide();
+
       $('.有網頁標題再顯').show();
 
       // 使用 jQuery 修改 CSS Variables
@@ -1516,6 +1571,38 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // VIP的網址
     document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
     _生成QRCode('VipPegaIDInput','您的網址qrcode')
+    
+
+
+
+
+    // 初始廣告功能值
+    //let 廣告功能 = true;
+    // 頁面加載後根據廣告功能值設定開關預設狀態
+    $(document).ready(function () {
+      const 開關 = $('#廣告功能開關');
+      // 設定預設狀態
+      if (廣告功能) {
+        開關.prop('checked', true);
+        //console.log(`預設狀態：開啟`);
+      } else {
+        開關.prop('checked', false);
+        //console.log(`預設狀態：關閉`);
+      }
+      // 綁定開關狀態改變事件
+      開關.change(function () {
+        if ($(this).is(':checked')) {
+          廣告功能 = true;
+          //console.log(`開關已開啟=${廣告功能}`);
+        } else {
+          廣告功能 = false;
+          //console.log(`開關已關閉=${廣告功能}`);
+        }
+      });
+    });
+
+
+
     
     // VIP的會員數
     //_取本頁數據庫('VIP的UserID','VIP的UserID')
@@ -1577,6 +1664,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   let 已登入帳號 = _帳戶名稱() 
     , 帳號數據庫 = _數據文件()
     , 數據庫位 = '.io/d0/'
+    , 廣告功能 = true
     , 預約日程表
     , 公司資料
     , 產品資料
