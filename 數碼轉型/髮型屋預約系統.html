@@ -112,7 +112,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     .data-row button.delete {float: right; background-color: #f44336;}
 
 
-    .廣告位 {transition: all 0.3s ease;background: rgb(236, 0, 0);background-size: auto;background-repeat: no-repeat;display: block;height: 100px;width: 100%;max-width: 300px;}
+    .廣告位 {transition: all 0.3s ease;background: rgb(236, 0, 0);background-size: auto;background-repeat: no-repeat;display: none;height: 100px;width: 100%;max-width: 300px;}  /* // qqqq */
     /* 開關容器 */
     .toggle-廣告功能開關 {position: relative;margin: 2%;width: 84px;height: 50px;text-align: center;font-size: 20px;line-height: 40px;}
     /* 隱藏原始 checkbox */
@@ -204,7 +204,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   </div>
 
   <a href="#" >
-    <div class="container 廣告位" id="廣告位1" style='background-image: url(../PayAki/payBG2.png);'>
+    <div class="container 廣告位" id="廣告位1" style='background-image: url();'>
     </div>
   </a>
 
@@ -270,7 +270,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       <hr style="clear: both;margin-top: 50%;">
 
       <a href="#" >
-        <div class="container 廣告位" id="廣告位2" style='background-image: url(../PayAki/payBG2.png);'>
+        <div class="container 廣告位" id="廣告位2" style='background-image: url();'>
         </div>
       </a>
 
@@ -517,7 +517,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
     <a href="#" >
-      <div class="container 廣告位" id="廣告位3" style='background-image: url(../PayAki/payBG2.png);'>
+      <div class="container 廣告位" id="廣告位3" style='background-image: url();'>
       </div>
     </a>
 
@@ -1557,7 +1557,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       `);
 
       廣告功能 = eval(公司資料[0].廣告功能);
-      if(廣告功能 == false) $('.廣告位').hide();
+      //if(廣告功能 == false) $('.廣告位').hide();
+      if(廣告功能 == true) $('.廣告位').show(); // qqqq
 
       $('.有網頁標題再顯').show();
 
@@ -1664,7 +1665,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   let 已登入帳號 = _帳戶名稱() 
     , 帳號數據庫 = _數據文件()
     , 數據庫位 = '.io/d0/'
-    , 廣告功能 = true
+    , 廣告功能 = false // qqqq
     , 預約日程表
     , 公司資料
     , 產品資料
