@@ -764,6 +764,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         admin明文 = false;
         if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1])
         if (sha256(admin明文) == AdminPW) $('nav').addClass('active');
+        $("body").css("background-color", "#000");
       };
 
 
