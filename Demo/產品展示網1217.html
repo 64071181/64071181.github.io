@@ -20,7 +20,14 @@
     <style>
       :root {--主題色: #54d6f4;--走馬燈文字色: #edff66;}
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
+
+
       .logo-container {height: 50px;width: 100%;background-color: var(--主題色); display: flex;justify-content: center;align-items: center;}
+
+      /* 回頂鍵 */
+      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+
+
       .logo {color: white;font-size: 24px;font-weight: bold;}
       .logo img {height: 100%;width: auto;}
 
@@ -31,21 +38,29 @@
       .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
       .marquee-item a {text-decoration: none;color: var(--走馬燈文字色); }
       .marquee-item a:hover {text-decoration: underline;}
-
-
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
+
+
+      /* 產品展示 */
       .image-container {width: 100%;text-align: center;}
       .responsive-image {max-width: 100%;height: auto;}
+      @media (min-width: 768px) {.responsive-image , .輪播圖, .image-container iframe{  height: auto;  width: 50%;max-width: 760px;}}
       
-      @media (min-width: 768px) {.responsive-image {  height: auto;  width: 50%;max-width: 760px;}}
-      
+      .image-container iframe{height: auto;min-height: 300px;}
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
-
       .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
-
       .contact-title {font-size: 24px;height: 50px;display: flex;justify-content: space-between;align-items: center;}
       .toggle-btn {cursor: pointer;font-size: 24px;}
       .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
+
+      /* 輪播圖 */
+      .輪播圖 {position: relative;overflow: hidden;border: 2px solid #ccc;border-radius: 10px;margin: auto;}
+      .輪播圖-images {display: flex;transition: transform 0.5s ease-in-out;width: 100%;}
+      .輪播圖-images img {object-fit: cover;width: 100%;height: auto;}
+      .輪播圖 button {position: absolute;top: 50%;transform: translateY(-50%);background-color: rgba(0, 0, 0, 0);border:none; cursor: pointer;z-index: 10;width: 40%;height: 80%;}
+      .輪播圖 button.prev {left: 0px;}
+      .輪播圖 button.next {right: 0px;}
+
 
       /* line圖示 */
       .social-links {margin: 20px ;}
@@ -53,7 +68,6 @@
       .line-icon:hover > path{fill: #00B900;}
 
       .copyright {text-align: center;padding: 20px;background: #f8f8f8;}
-      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
       
       @keyframes scrollUp {0% { transform: translateY(100%); }
         100% { transform: translateY(-100%); }
@@ -84,6 +98,9 @@
       input:checked + .slider::before {transform: translateX(43px);}
 
       button.delete {background-color: #f44336;}
+
+
+
 
 
 
@@ -201,6 +218,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 <section id="產品展示page" class="section">
   <div class="container">
     <h2>產品展示</h2>
+    yt影片 = Share > Embed > 貼在展示內容<br>
+    輪播圖 = 展示內容 > 圖1ulr,圖2ulr,圖3ulr...
+
+
     <div id="產品展示input">
       <div id="產i0">
         <input type="text" placeholder="請輸入產品圖片" title="請輸入產品圖片" >
@@ -375,7 +396,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         const itemHeight = $items.outerHeight();
         const itemCount = $items.length;
         let currentIndex = 0;
-
         function scrollMarquee() {
           currentIndex++;
           if (currentIndex >= itemCount) {
@@ -396,7 +416,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       function toggleContact() {
         const content = document.getElementById('聯絡資訊');
         const btn = document.querySelector('.toggle-btn');
-
         if (content.style.height === '0px' || content.style.height === '') {
           // 開啟
           content.style.height = 'auto';
@@ -416,6 +435,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         }
       }
 
+
+
+
       // 回頁頂
       function scrollToTop() {
         window.scrollTo({
@@ -423,24 +445,69 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           behavior: 'smooth'
         });
       }
+      /* 回頂鍵 */
+      let lastScrollTop = 0;
+      let isScrollingUp = false;
+      window.addEventListener('scroll', function() {
+          // 獲取當前滾動位置
+          let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      // 捲動顯示回頂鍵
-      window.onscroll = function() {
-        const scrollTop = document.getElementById('scrollTop');
-        const logo = document.querySelector('.logo-container');
-        const logoBottom = logo.offsetTop + logo.offsetHeight;
-        
-        if (window.pageYOffset > logoBottom) {
-          scrollTop.style.display = 'flex';
-        } else {
-          scrollTop.style.display = 'none';
-        }
-      };
+          // 判斷滾動方向
+          if (currentScrollTop < lastScrollTop) {
+              isScrollingUp = true;
+          } else {
+              isScrollingUp = false;
+          }
+          // 更新上一次的滾動位置
+          lastScrollTop = currentScrollTop;
+          // 顯示或隱藏「回到頂部」按鈕
+          toggleScrollTopButton();
+      });
+      function toggleScrollTopButton() {
+          const scrollTopButton = document.getElementById('scrollTop');
+          const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
+
+          if (isScrollingUp && lastScrollTop > displayThreshold) {
+              scrollTopButton.style.display = 'flex';
+          } else {
+              scrollTopButton.style.display = 'none';
+          }
+      }
 
 
 
 
-
+            /**/
+      // 輪播圖
+      function _輪播圖動() {
+          const images = document.querySelector('.輪播圖-images');
+          const prevButton = document.querySelector('.prev');
+          const nextButton = document.querySelector('.next');
+          let currentIndex = 0;
+          const imageCount = images.children.length;
+          function updateCarousel() {
+              const containerWidth = images.parentElement.clientWidth; // 獲取容器寬度
+              const offset = -currentIndex * containerWidth;
+              images.style.transform = `translateX(${offset}px)`;
+          }
+          prevButton.addEventListener('click', () => {
+              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+              updateCarousel();
+          });
+          nextButton.addEventListener('click', () => {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+          });
+          // 自動播放功能
+          setInterval(() => {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+          }, 3000); // 每 3 秒切換一次
+          // 初始化輪播圖位置
+          updateCarousel();
+          // 當窗口大小改變時，更新輪播圖位置
+          window.addEventListener('resize', updateCarousel);
+      }
 
 
 
@@ -478,10 +545,16 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       let 產品展示 = [
         {'產品展示圖': '001.webp', '產品展示url': ''},
+        { '產品展示圖': '<iframe width="560" height="315" src="https://www.youtube.com/embed/NNV7EYAsIpI?si=QD1uL88OtuHhGm0Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>', '產品展示url': '' },
+        
+        {'產品展示圖': '001.webp,002.webp', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
+        
         {'產品展示圖': '002.webp', '產品展示url': 'https://lin.ee/exeQ2Yx'},
         {'產品展示圖': '003.webp', '產品展示url': 'https://lin.ee/416xnF3'}
       ];
 
+
+      
 
       
       let 走馬燈 = [
@@ -557,23 +630,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       // 顯示內容
       async function _顯示內容(sel) {
-        // qqqqqqqqqqqqqq
-
         let 內容data = eval(sel);
-
-        /*
-        let sel = sel.split(各網)[0];
-        //console.log(`${sel} sel==`,sel);
-        //console.log(`${sel} sel==`,sel);
-
-        let 內容data = eval(sel);
-        //console.log(`${sel} ovg==`,內容data);
-        
-        let dataB = await _取本頁數據庫(sel, 'aa','html碼');
-        if (dataB) 內容data = eval(dataB);
-        //console.log(`${sel} VIP==`,內容data);
-        */
-
 
         if (sel == '公司資料'){
             // 初始營業狀態
@@ -677,14 +734,40 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
           /***************** 產品展示 ******************/
           if (sel == '產品展示'){
+            // 只圖
             $內容圖 = $(`<img class="responsive-image" src="${內容.產品展示圖}" >`);
             單個內容 = $內容圖
+            // 有ulr圖
             if (內容.產品展示url != '') 單個內容 = $(`<a href="${內容.產品展示url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
+            // yt片
+            if (內容.產品展示圖.includes('<iframe')) {
+              整尺寸 = 內容.產品展示圖.split('src')[1]
+              整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
+              單個內容 = 整尺寸; // 直接插入yt片
+              }
+
+            // 輪播圖
+            if (內容.產品展示圖.includes(',')){
+              // 取輪播料
+              整組輪播圖 = 內容.產品展示圖.split(',')
+              $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+              for (let i = 0; i < 整組輪播圖.length; i++) {
+                $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
+                第n輪圖 = $輪圖;
+                // a 有問題不做
+                $輪播圖容器.append(第n輪圖);
+              }
+              單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+            }
+
             all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
             // 加載錯誤時隱藏該圖片
             $內容圖.on("error", function () {
-              all內容.remove(); // 移除整個容器
+              if (!/<iframe|,/.test(內容.產品展示圖)) all內容.remove(); // 移除整個容器
             });
+
+            // admin
             $(`#產品展示input div`).eq(cont).find("input").eq(0).val(內容.產品展示圖);
             $(`#產品展示input div`).eq(cont).find("input").eq(1).val(內容.產品展示url);
             增加Input('產品展示')
@@ -731,6 +814,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+
+      
 
 
 
@@ -1029,8 +1114,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             if (!營業狀態) return;
 
             // 顯示內容
-            ['公司資料', '產品展示', '關於我們', '聯絡資訊', '社交帳號'].forEach(_顯示內容);
+            ['公司資料',  '關於我們', '聯絡資訊', '社交帳號'].forEach(_顯示內容);
             _顯示內容('走馬燈').then(_走馬燈動);
+            _顯示內容('產品展示').then(_輪播圖動);
         })
         .catch(console.error); // 捕捉並打印錯誤
   }
