@@ -21,15 +21,19 @@
       :root {--主題色: #54d6f4;--走馬燈文字色: #edff66;}
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
 
+      /* 上拉顯示logo位 下拉隱藏 */
+      body{margin-top: 50px;}
+      .logo-container {height: 50px;width: 100%;background-color: var(--主題色); display: flex;justify-content: center;align-items: center;
+      position: fixed;top: 0;z-index: 11;transition: .5s ;}
 
-      .logo-container {height: 50px;width: 100%;background-color: var(--主題色); display: flex;justify-content: center;align-items: center;}
+      .logo {color: white;font-size: 24px;font-weight: bold;}
+      .logo img {height: 100%;width: auto;}
 
       /* 回頂鍵 */
       .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
 
 
-      .logo {color: white;font-size: 24px;font-weight: bold;}
-      .logo img {height: 100%;width: auto;}
+      
 
       /* 走馬燈 */
       .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
@@ -73,6 +77,7 @@
         100% { transform: translateY(-100%); }
       }
 
+      
       /* admin */
       .btn {border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: auto; text-align: center;}
       .section,nav,#AdminSet { display: none;}
@@ -96,32 +101,16 @@
       /* 選擇 On 狀態的樣式 */
       input:checked + .slider {background-color: #5d53e2;}
       input:checked + .slider::before {transform: translateX(43px);}
-
       button.delete {background-color: #f44336;}
-
-
-
-
-
-
     </style>
     <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-
-
-
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-    <script src="../../mokJsapi/mokJsApi.js"></script> 
-    <script sr2222c="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
     <script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
-
-
-
 
   </head>
 <body>
@@ -466,12 +455,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       function toggleScrollTopButton() {
           const scrollTopButton = document.getElementById('scrollTop');
           const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
-
           if (isScrollingUp && lastScrollTop > displayThreshold) {
               scrollTopButton.style.display = 'flex';
+              $('.logo-container').css('top', '0px'); // 顯示logo位
           } else {
               scrollTopButton.style.display = 'none';
+              $('.logo-container').css('top', '-50px'); // 隱藏logo位
           }
+          // 顯示logo位
+          if (lastScrollTop < 20) $('.logo-container').css('top', '0px');
+
+
       }
 
 
