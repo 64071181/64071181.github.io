@@ -1,0 +1,1009 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="shortcut icon" type="image/x-icon" href="" />
+    <link rel="icon" type="image/x-icon" href="" />
+    <link rel="apple-touch-icon" type="image/x-icon" href="" />
+    <meta content="" property="og:image:alt">
+    <meta content="" property="og:title">
+    <meta content="" property="og:site_name">
+    <meta content="" name="copyright">
+    <meta content="" name="description">
+    <meta content="" property="og:description">
+    <meta content="" property="og:image">
+    <meta content="" property="og:image:secure_url">
+    <meta content="website" property="og:type">
+
+
+    <style>
+      :root {--主題色: #54d6f4;--走馬燈文字色: #edff66;}
+      * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
+
+      /* 上拉顯示logo位 下拉隱藏 */
+      body{margin-top: 50px;}
+      .logo-container {height: 50px;width: 100%;background-color: var(--主題色); display: flex;justify-content: center;align-items: center;
+      position: fixed;top: 0;z-index: 11;transition: .5s ;}
+
+      .logo {color: white;font-size: 24px;font-weight: bold;}
+      .logo img {height: 100%;width: auto;}
+
+      /* 回頂鍵 */
+      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);z-index: 12;}
+
+      /* 走馬燈 */
+      .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
+      .marquee-container:hover .marquee-content {animation-play-state: paused;}
+      .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;transition: transform 0.5s ease-in-out; /* 滑動時添加平滑效果 */}      
+      .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
+      .marquee-item a {text-decoration: none;color: var(--走馬燈文字色); }
+      .marquee-item a:hover {text-decoration: underline;}
+      .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
+
+      /* 產品展示 */
+      .image-container {width: 100%;text-align: center;}
+      .responsive-image {max-width: 100%;height: auto;}
+      @media (min-width: 768px) {.responsive-image , .輪播圖, .image-container iframe{  height: auto;  width: 50%;max-width: 760px;}}
+      
+      .image-container iframe{height: auto;min-height: 300px;}
+      .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
+      .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
+      .contact-title {font-size: 24px;height: 50px;display: flex;justify-content: space-between;align-items: center;}
+      .toggle-btn {cursor: pointer;font-size: 24px;}
+      .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
+
+      /* 輪播圖 */
+      .輪播圖 {position: relative;overflow: hidden;border: 2px solid #ccc;border-radius: 10px;margin: auto;}
+      .輪播圖-images {display: flex;transition: transform 0.5s ease-in-out;width: 100%;}
+      .輪播圖-images img {object-fit: cover;width: 100%;height: auto;}
+      .輪播圖 button {position: absolute;top: 50%;transform: translateY(-50%);background-color: rgba(0, 0, 0, 0);border:none; cursor: pointer;z-index: 10;width: 40%;height: 80%;}
+      .輪播圖 button.prev {left: 0px;}
+      .輪播圖 button.next {right: 0px;}
+
+      @keyframes scrollUp {0% { transform: translateY(100%); }
+        100% { transform: translateY(-100%); }
+      }
+
+      .廣告位 {transition: all 0.3s ease;background: rgb(236, 0, 0);background-size: auto;background-repeat: no-repeat;display: none;height: 100px;width: 100%;max-width: 300px;}
+
+      /* admin */
+      .btn {border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: auto; text-align: center;}
+      .section,/*.ADminNav,*/#AdminSet { display: none;}
+      nav{padding: 1%;z-index: 99;}
+      .active { display: block;}
+      .container {max-width: 760px;margin: 2rem auto;padding: 0 1rem;}
+      h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--主題色); }
+      input, select, textarea,button {width: 98%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;margin: 1%;}
+
+      ._更新btn{background: var(--主題色);}
+    </style>
+
+    <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+  </head>
+<body>
+  <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::       ::::::::       :::::::::    :::   :::
+     :+:    :+:     :+:    :+:      :+:    :+:   :+:   :+:
+    +:+    +:+     +:+    +:+      +:+    +:+    +:+ +:+
+   +#++:++#+      +#+    +:+      +#+    +:+     +#++:
+  +#+    +#+     +#+    +#+      +#+    +#+      +#+
+ #+#    #+#     #+#    #+#      #+#    #+#      #+#
+#########       ########       #########       ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+
+<nav class="ADminNav" style="text-align: center;"><!-- JS _顯示admin後台 --></nav>
+
+<nav id="PageNav" style="text-align: center;">
+  <a class="btn" href="#" onclick="_導航換頁('主頁')">主頁</a>
+  <a class="btn" href="#關於我們" >關於我們</a>
+  <!-- JS 產品類型 -->
+</nav>
+
+
+
+
+
+
+
+
+
+
+<section id="主頁page" class="section active">
+  <div class="logo-container"><div class="logo"><img id="logo" ></div></div>
+
+  <a href="#" >
+    <div class="container 廣告位" id="廣告位1" style='background-image: url();'>
+    </div>
+  </a>
+
+  <div id="產品展示"><!-- JS 產品類型 --></div>
+
+  <a href="#" >
+    <div class="container 廣告位" id="廣告位2" style='background-image: url();'>
+    </div>
+  </a>
+
+  <div id="關於我們" class="company-intro"><!-- JS 關於我們內容 --></div>
+
+  <a href="#" >
+    <div class="container 廣告位" id="廣告位3" style='background-image: url();'>
+    </div>
+  </a>
+
+  <nav style="text-align: center;">
+    <br>
+    <div id="nav">
+      <button class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn('瑞瑞產品展示系統','#???');" >💎 免費使用瑞瑞產品展示系統</button>
+    </div>
+    <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+  </nav>
+
+  <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+</section>
+
+
+
+
+
+
+<!-- JS admin 產品展示編輯位 -->
+
+
+
+
+
+<section id="關於我們page" class="section">
+  <div class="container">
+    <h2>關於我們</h2>
+    <textarea id="關於我們字Input" placeholder="請修改您的關於我們" title="請修改您的關於我們" ></textarea>
+    <hr>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="公司資料page" class="section">
+  <div class="container">
+
+    <!-- 公司網址 -->
+    <h2 title="將您的網址分享給您的使用者">您的網址</h2>
+    <a onclick="_下載QRCode('您的網址qrcode')"><canvas id="您的網址qrcode">您的網址qrcode</canvas></a>
+    <br><br>
+    <a class="btn" href='https://wa.me/85264071181/?text=我要購買VIP' >網址太長嗎? VIP會員可享專屬網址!!</a>
+    <br>
+    <input type="text" id="VipPegaIDInput" placeholder="請先修改您的公司名稱" title="您的網址" onclick="copyToClipboard('VipPegaIDInput')" readonly>
+    <hr>
+
+
+
+
+    <h2>管理員密碼</h2>
+    <input type="text" id="管理員密碼OUT" placeholder="請填寫您現在的管理員密碼" title="請填寫您現在的管理員密碼" >
+    <input type="password" id="管理員密碼Input" placeholder="請修改您新的的管理員密碼" title="請修改您新的的管理員密碼" >
+    <input type="password" id="管理員密碼BBB" placeholder="請重複輸入您新的的管理員密碼" title="請重複輸入您新的的管理員密碼" >
+
+    <h2>廣告功能</h2>開啟廣告功能將會在您的網站上顯示廣告，您將可按展示次數賺取廣告費。
+    <div class="toggle-狀態開關">
+      <input type="checkbox" id="廣告功能開關" />
+      <label for="廣告功能開關" class="slider">on      off</label>
+    </div>
+
+    <h2>Google Tag Manager code1</h2>
+    <textarea id="GTM1Input" placeholder="請修改您的GTM1" title="請修改您的GTM1" ></textarea>
+    <h2>Google Tag Manager code2</h2>
+    <textarea id="GTM2Input" placeholder="請修改您的GTM2" title="請修改您的GTM2" ></textarea>
+    <h2>Google Search Console code</h2>
+    <textarea id="GSCInput" placeholder="請修改您的GSC" title="請修改您的GSC" ></textarea>
+    <hr><br>
+    <h2>公司名稱</h2>
+    <input type="text" id="公司名Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
+    <h2>公司標題</h2>
+    <input type="text" id="公司標題Input" placeholder="請修改您的公司標題" title="請修改您的公司標題" >
+    <h2>公司簡介</h2>
+    <input type="text" id="公司簡介Input" placeholder="請修改您的公司簡介" title="請修改您的公司簡介" >
+    <h2>LOGO圖片</h2>
+    <input type="text" id="LOGO圖片Input" placeholder="請修改您的LOGO圖片" title="請修改您的LOGO圖片" >
+    <h2>分頁圖示</h2>
+    <input type="text" id="分頁圖示Input" placeholder="請修改您的分頁圖示" title="請修改您的分頁圖示" >
+    <h2>社群封面</h2>
+    <input type="text" id="社群封面Input" placeholder="請修改您的社群封面" title="請修改您的社群封面" >
+    <hr><br>
+    <a href="https://codepen.io/98672794/pen/yLwQzjd" target="_blank" ><i class="fa fa-paint-brush" aria-hidden="true"></i></a>
+    <h2>主題色</h2>
+    <input type="text" id="主題色Input" placeholder="請修改您的主題色" title="請修改您的主題色" >
+
+    <hr><br>
+
+    <h2>產品類型</h2>
+    <input type="text" id="產品類型1" placeholder="請修改您的產品類型1" title="請修改您的產品類型1" >
+    <input type="text" id="產品類型2" placeholder="請修改您的產品類型2" title="請修改您的產品類型2" >
+    <input type="text" id="產品類型3" placeholder="請修改您的產品類型3" title="請修改您的產品類型3" >
+    <input type="text" id="產品類型4" placeholder="請修改您的產品類型4" title="請修改您的產品類型4" >
+    <input type="text" id="產品類型5" placeholder="請修改您的產品類型5" title="請修改您的產品類型5" >
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            ::::::::       ::::::::       ::::::::
+          :+:    :+:     :+:    :+:     :+:    :+:
+        +:+            +:+            +:+
+        +#+            +#++:++#++     +#++:++#++
+      +#+                   +#+            +#+
+      #+#    #+#     #+#    #+#     #+#    #+#
+      ########       ########       ########
+
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+
+
+
+      // 回頁頂
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+      /* 回頂鍵 */
+      let lastScrollTop = 0;
+      let isScrollingUp = false;
+      window.addEventListener('scroll', function() {
+          // 獲取當前滾動位置
+          let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+          // 判斷滾動方向
+          if (currentScrollTop < lastScrollTop) {
+              isScrollingUp = true;
+          } else {
+              isScrollingUp = false;
+          }
+          // 更新上一次的滾動位置
+          lastScrollTop = currentScrollTop;
+          // 顯示或隱藏「回到頂部」按鈕
+          toggleScrollTopButton();
+      });
+      function toggleScrollTopButton() {
+          const scrollTopButton = document.getElementById('scrollTop');
+          const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
+          if (isScrollingUp && lastScrollTop > displayThreshold) {
+              scrollTopButton.style.display = 'flex';
+              $('.logo-container').css('top', '0px'); // 顯示logo位
+          } else {
+              scrollTopButton.style.display = 'none';
+              $('.logo-container').css('top', '-50px'); // 隱藏logo位
+          }
+          // 顯示logo位
+          if (lastScrollTop < 20) $('.logo-container').css('top', '0px');
+      }
+
+
+
+
+
+
+
+
+
+      // 輪播圖
+      function _輪播圖動() {
+          const images = document.querySelector('.輪播圖-images');
+          const prevButton = document.querySelector('.prev');
+          const nextButton = document.querySelector('.next');
+          let currentIndex = 0;
+          const imageCount = images.children.length;
+          function updateCarousel() {
+              const containerWidth = images.parentElement.clientWidth; // 獲取容器寬度
+              const offset = -currentIndex * containerWidth;
+              images.style.transform = `translateX(${offset}px)`;
+          }
+          prevButton.addEventListener('click', () => {
+              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+              updateCarousel();
+          });
+          nextButton.addEventListener('click', () => {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+          });
+          // 自動播放功能
+          setInterval(() => {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+          }, 3000); // 每 3 秒切換一次
+          // 初始化輪播圖位置
+          updateCarousel();
+          // 當窗口大小改變時，更新輪播圖位置
+          window.addEventListener('resize', updateCarousel);
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            :::::::::           :::    :::::::::::           :::
+          :+:    :+:        :+: :+:      :+:             :+: :+:
+          +:+    +:+       +:+   +:+     +:+            +:+   +:+
+        +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+        +#+    +#+      +#+     +#+    +#+           +#+     +#+
+      #+#    #+#      #+#     #+#    #+#           #+#     #+#
+      #########       ###     ###    ###           ###     ###
+
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+      let 產品展示1 = [
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s3.jpg', '產品展示url': ''},
+        { '產品展示圖': '<iframe width="560" height="315" src="https://www.youtube.com/embed/NNV7EYAsIpI?si=QD1uL88OtuHhGm0Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>', '產品展示url': '' },
+        
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h3.jpeg,https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h2.jpeg', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
+        
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s1.jpg', '產品展示url': 'https://lin.ee/exeQ2Yx'},
+        {'產品展示圖': '003.webp', '產品展示url': 'https://lin.ee/416xnF3'}
+      ],
+      
+      產品展示2 = [
+        {'產品展示圖': 'https://yt3.ggpht.com/0ySzCl6W1DLGstRW4TOaOYTzOKx_0zJn9CAtZ_GUF-81N36t2UA7loiMrTewX0vm2v7BnXcf=s48-c-k-c0x00ffffff-no-rj', '產品展示url': ''}
+      ],
+      產品展示3,產品展示4,產品展示5,
+
+
+      關於我們 = [
+        {'關於我們字':`sss`}
+      ],
+      關於我們B = [
+        {'關於我們字':`
+        誠鑫搬家<br>各式各樣大型小型及整層搬家皆可<br>小資學生女性套房搬遷首選！<br>
+        小資學生女性套房搬遷<br>免動手代客精緻打包<br>超重型、特殊物品搬遷<br>
+        鋼琴搬運、古董家具搬運<br>吊車服務、廢棄物清運、居家清潔等<br>
+        我們全都可以一條龍幫你服務到家！<br>加LINE發問即可享有免費線上估價！`}
+      ],
+      
+
+
+      公司資料 = [
+        { 
+          '廣告功能':'false',
+          '公司名': '誠鑫搬家',
+          '公司標題': `r精緻型專業搬遷、廠房辦公室搬運最優解｜誠鑫搬家｜北部地區首選、台北市、新北市、桃園市、基隆市`,
+          '公司簡介':'各式各樣大型小型及整層搬家皆可，小資學生女性套房搬遷首選！免動手代客精緻打包、超重型、特殊物品搬遷、鋼琴搬運、古董家具搬運、吊車服務、廢棄物清運、居家清潔等，誠鑫搬家全都可以一條龍幫你服務到家！加LINE發問即可享有免費線上估價！',
+          'LOGO圖片':'01-頁首LOGO.png',
+          '分頁圖示':'02-Favicon分頁圖示.png',
+          '社群封面':'https://gs.liteshop.tw/public/meta_og_image/4cFJZCxH9xndRKyC9YEHDDWy/06-社群封面-1200x630(2).webp',
+          '主題色':'#54d6f4',
+          '走馬燈文字色':'#edff66',
+          'GTM1':'',
+          'GTM2':'',
+          'GSC':'',
+          '產品類型1':'好好',
+          '產品類型2':'大大',
+          '產品類型3':'',
+          '產品類型4':'',
+          '產品類型5':'',
+        }
+      ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      :::::::::           :::        ::::::::       ::::::::::
+     :+:    :+:        :+: :+:     :+:    :+:      :+:
+    +:+    +:+       +:+   +:+    +:+             +:+
+   +#++:++#+       +#++:++#++:   :#:             +#++:++#
+  +#+             +#+     +#+   +#+   +#+#      +#+
+ #+#             #+#     #+#   #+#    #+#      #+#
+###             ###     ###    ########       ##########
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+      // 顯示主頁page
+
+      // 顯示內容
+      async function _顯示內容(sel) {
+        let 內容data = eval(sel);
+
+        if (sel == '公司資料'){
+            // 初始廣告功能
+            const 開關 = $('#廣告功能開關');
+            // 設定預設狀態
+            if (廣告功能) {
+              開關.prop('checked', true);
+              //console.log(`預設狀態：開啟`);
+            } else {
+              開關.prop('checked', false);
+              //console.log(`預設狀態：關閉`);
+            }
+            // 綁定開關狀態改變事件
+            開關.change(function () {
+              if ($(this).is(':checked')) {
+                廣告功能 = true;
+                //console.log(`開關已開啟=${廣告功能}`);
+              } else {
+                廣告功能 = false;
+                //console.log(`開關已關閉=${廣告功能}`);
+              }
+            });
+
+            // Google工具
+            $("head").append(_特別字處理(內容data[0].GTM1));
+            $('#GTM1Input').val(_特別字處理(內容data[0].GTM1));
+            
+            $("body").prepend(內容data[0].GTM2);
+            $('#GTM2Input').val(內容data[0].GTM2);
+            // GSC 
+            $("head").append(內容data[0].GSC);
+            $('#GSCInput').val(內容data[0].GSC);
+            
+            // 公司名
+            $('meta[property="og:site_name"]').attr("content", 內容data[0].公司名);
+            $('meta[name="copyright"]').attr("content", 內容data[0].公司名);
+            $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by ${內容data[0].公司名}`)
+            $('#公司名Input').val(內容data[0].公司名);
+
+            // 公司標題
+            $("title").text(內容data[0].公司標題);
+            $('meta[property="og:title"]').attr("content", 內容data[0].公司標題);
+            $('meta[property="og:image:alt"]').attr("content", 內容data[0].公司標題);
+            $('#公司標題Input').val(內容data[0].公司標題);
+
+            // 公司簡介
+            $('meta[property="og:description"]').attr("content", 內容data[0].公司簡介);
+            $('meta[name="description"]').attr("content", 內容data[0].公司簡介);
+            $('#公司簡介Input').val(內容data[0].公司簡介);
+
+            // LOGO圖片
+            $("#logo").attr("src", 內容data[0].LOGO圖片)
+            // 檢查是否已存在 <link rel="icon">
+            let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
+            $('#LOGO圖片Input').val(內容data[0].LOGO圖片);
+
+            // 分頁圖示
+            if ($favicon.length) {
+                // 替換現有的分頁圖示
+                $favicon.attr("href", 內容data[0].分頁圖示).attr("type", "image/x-icon");
+            } else {
+                // 如果不存在，新增 <link rel="icon">
+                $("head").append(
+                    `<link rel="icon" type="image/x-icon" href="${內容data[0].分頁圖示}">`
+                );
+            }
+            $('#分頁圖示Input').val(內容data[0].分頁圖示);
+            
+            // 社群封面
+            $('meta[property="og:image"]').attr("content", 內容data[0].社群封面);
+            $('meta[property="og:image:secure_url"]').attr("content", 內容data[0].社群封面);
+            $('#社群封面Input').val(內容data[0].社群封面);
+
+            // css
+            document.documentElement.style.setProperty("--主題色", 內容data[0].主題色);
+            $('#主題色Input').val(內容data[0].主題色);
+
+            //產品類型
+            for (let i = 1; i <= 5; i++) {
+              產類名 = 內容data[0][`產品類型${i}`];
+              if(產類名){
+                $('#產品展示').append(`<div id="產品展示${i}" class="container"><h2>${產類名}</h2></div> `);
+                $('#PageNav').append(`<a class="btn" href="#產品展示${i}" >${產類名}</a>`)
+                $(`#產品展示${i}page div h2`).html(`${產類名}`)
+
+                $(`#產品類型${i}`).val(產類名);
+              }
+            }
+        }
+
+
+        let cont = 0;
+        for (let 內容 of 內容data){
+          let 單個內容, all內容
+
+          /***************** 產品展示 ******************/
+          if (sel.indexOf('產品展示') != -1){
+
+            // 只圖
+            $內容圖 = $(`<img class="responsive-image" src="${內容.產品展示圖}" >`);
+            單個內容 = $內容圖
+            // 有ulr圖
+            if (內容.產品展示url != '') 單個內容 = $(`<a href="${內容.產品展示url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
+            // yt片
+            if (內容.產品展示圖.includes('<iframe')) {
+              整尺寸 = 內容.產品展示圖.split('src')[1]
+              整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
+              單個內容 = 整尺寸; // 直接插入yt片
+              }
+
+            // 輪播圖
+            if (內容.產品展示圖.includes(',')){
+              // 取輪播料
+              整組輪播圖 = 內容.產品展示圖.split(',')
+              $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+              for (let i = 0; i < 整組輪播圖.length; i++) {
+                $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
+                第n輪圖 = $輪圖;
+                // a 有問題不做
+                $輪播圖容器.append(第n輪圖);
+              }
+              單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+            }
+
+            all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
+            // 加載錯誤時隱藏該圖片
+            $內容圖.on("error", function () {
+              if (!/<iframe|,/.test(內容.產品展示圖)) all內容.remove(); // 移除整個容器
+            });
+
+            // admin
+            $(`#${sel}iinput div`).eq(cont).find("input").eq(0).val(內容.產品展示圖);
+            $(`#${sel}iinput div`).eq(cont).find("input").eq(1).val(內容.產品展示url);
+            增加Input(sel)
+          }
+
+
+          /***************** 關於我們 ******************/
+          if (sel == '關於我們') {
+            all內容 = `<p>${內容.關於我們字}</p>`;
+            $('#關於我們字Input').val(內容.關於我們字);
+          }
+          
+      
+          // 加入DOM
+          $(`#${sel}`).append(all內容);
+          cont+=1
+        }
+      }
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+          :::        :::::::::         :::   :::       :::::::::::       ::::    :::
+       :+: :+:      :+:    :+:       :+:+: :+:+:          :+:           :+:+:   :+:
+     +:+   +:+     +:+    +:+      +:+ +:+:+ +:+         +:+           :+:+:+  +:+
+   +#++:++#++:    +#+    +:+      +#+  +:+  +#+         +#+           +#+ +:+ +#+
+  +#+     +#+    +#+    +#+      +#+       +#+         +#+           +#+  +#+#+#
+ #+#     #+#    #+#    #+#      #+#       #+#         #+#           #+#   #+#+#
+###     ###    #########       ###       ###     ###########       ###    ####
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+
+
+
+
+      function _導航換頁(page) {
+        // 隱頁 - .active
+        $('.section').removeClass('active');
+        // 顯頁 + .active
+        $(`#${page}page`).addClass('active');
+      };
+
+
+
+
+
+      // 增加Input
+      let 產計 = 1;
+      function 增加Input(類型) {
+        //console.log('類型',類型);
+        let I_cont   = 產計;
+            
+        $(`#${類型}iinput`).append(`
+          <div id="${類型}${I_cont}">
+            <input type="text" placeholder="請輸入${類型}內容${I_cont}" title="請輸入${類型}內容${I_cont}" >
+            <input type="text" placeholder="請輸入${類型}的連結${I_cont}" title="請輸入${類型}的連結${I_cont}">
+            <button class="btn delete" onclick="刪除Input('${類型}${I_cont}')">刪除</button>
+            <hr>
+          </div>
+        `)
+
+        I_cont+=1
+        產計 = I_cont;
+      };
+
+
+
+      function 刪除Input(id) {
+        $(`#${id}`).remove();
+      }
+
+
+
+      function _取Input(id) { 
+        const inputs = document.querySelectorAll(`#${id}iinput div input`);
+        let 整合多條數據 = `${數據分隔符}${id}${數據分隔符B}[`
+          , 展示類型 = '圖'
+          , skipNext = false;
+
+        // 將內容組合為指定的格式
+        inputs.forEach((input, index) => {
+        if (index % 2 === 0) {
+          // 偶數索引 (產品展示圖)
+          if (!input.value.trim()) {
+            skipNext = true; // 標記跳過下一個奇數索引
+            return; // 偶數索引為空，跳過當前
+          }
+          skipNext = false; // 如果偶數索引有值，取消跳過標記
+          整合多條數據 += `{'產品展示圖': '${input.value}', `;
+        } else if (!skipNext) {
+          // 奇數索引 (產品展示url)
+          整合多條數據 += `'產品展示url': '${input.value}'},\n`;
+        }
+      });
+
+        整合多條數據 += "];"; // 結尾補上陣列符號
+        //console.log(整合多條數據);
+        return 整合多條數據;
+      }
+
+
+
+
+
+      function _驗管理員密碼() {
+        let OVG256 = 公司資料[0].管理員密碼
+        
+          , 原密碼輸入256 = sha256($('#管理員密碼OUT').val())
+          , 新密碼明文 = $('#管理員密碼Input').val()
+          , 新密碼256 = sha256(新密碼明文)
+          , 確認新密碼256 = sha256($('#管理員密碼BBB').val());
+
+        if (!新密碼明文) return OVG256; // 新密碼為空
+        if (原密碼輸入256 !== OVG256) return OVG256; // 原密碼錯
+        if (新密碼256 !== 確認新密碼256) return OVG256; // 新密碼不一致
+
+        return 新密碼256;
+      }
+
+
+
+
+      function _特別字處理(文字) {
+          文字 = 文字.replace(/script/g, '哩咖食友朋'); // 精確匹配完整的 "script"
+          文字 = 文字.replace(/哩咖食友朋/g, 'script'); // 精確匹配完整的 "哩咖食友朋"
+          文字 = 文字.replace(/'/g,'"').replace(/<br>/g,'')
+          return 文字;
+      }
+
+
+
+
+
+
+
+      const 數據分隔符 = '\n$%$'
+          , 數據分隔符B = '#$#$';
+      function _更新all資料(數據id, data位) {
+        // up新數據
+        let 新data , data內id, all新數據, 數據的val;
+        新data = []
+        data內id = [] 
+        for (data of data位) {
+          data內id.push(data.split('Input')[0]) // 存每個data的id
+
+          數據的val = $(`#${data}`).val().replace(/\n/g,"<br>");
+          if (data == '管理員密碼Input') 數據的val = _驗管理員密碼();
+          if (data == 'GTM1Input' || data == 'GTM2Input' || data == 'GSCInput') 數據的val = _特別字處理(數據的val);
+
+          新data.push(數據的val) // 存每個data
+        }
+
+        //廣告功能
+        if (數據id == '公司資料'){
+          新data.push(廣告功能) ;
+          data內id.push('廣告功能');
+        }
+
+        // 組合所有新數據
+        all新數據 = `${數據分隔符}${數據id}${數據分隔符B}[{`;
+        // 確保每個 id 對應一個值
+        for (let i = 0; i < data內id.length; i++) {
+          all新數據 += `${data內id[i]}:'${新data[i]}',`;
+        }
+        // 去除最後多餘的逗號並補上結尾括號
+        all新數據 = all新數據.slice(0, -1) + `}];`;
+
+        //console.log(`all公司資料=${all新數據}!!!`);
+        return all新數據;
+      }
+
+      function _更新all野() {
+        let 公司資料 = _更新all資料(
+          '公司資料', ['管理員密碼Input', 'GTM1Input', 'GTM2Input', 'GSCInput', '公司名Input', '公司標題Input', '公司簡介Input', 'LOGO圖片Input', '分頁圖示Input', '社群封面Input', '主題色Input','產品類型1', '產品類型2', '產品類型3', '產品類型4', '產品類型5']
+        )
+        , 關於我們 = _更新all資料('關於我們', ['關於我們字Input'])
+        , 產品展示 = Array.from({ length: 5 }, (_, i) => _取Input(`產品展示${i + 1}`))
+        , 所有資料 = 公司資料 + 關於我們 + 產品展示.join('');
+
+        //console.log(`所有資料=${所有資料}!!!`);
+        _更新數據B(本頁數據庫id, 所有資料, cut文件前綴)
+      }
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+  /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+   :::     :::       :::::::::::       :::::::::
+  :+:     :+:           :+:           :+:    :+:
+ +:+     +:+           +:+           +:+    +:+
++#+     +:+           +#+           +#++:++#+
++#+   +#+            +#+           +#+
+#+#+#+#             #+#           #+#
+ ###           ###########       ###
+
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+  
+  const 登出離線數據 = ['帳戶名稱','數據文件','離線VIP網料', '琪琪髮型預約系統預約日程表', '公司資料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版', '預約日程表B','VIP註冊時的網模版']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      ::::::::   :::::::::::           :::        :::::::::   :::::::::::
+    :+:    :+:      :+:             :+: :+:      :+:    :+:      :+:
+   +:+             +:+            +:+   +:+     +:+    +:+      +:+
+  +#++:++#++      +#+           +#++:++#++:    +#++:++#:       +#+
+        +#+      +#+           +#+     +#+    +#+    +#+      +#+
+#+#    #+#      #+#           #+#     #+#    #+#    #+#      #+#
+########       ###           ###     ###    ###    ###      ###
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+    // 取vip數據
+    let 已登入帳號 = _帳戶名稱() 
+    , 帳號數據庫 = _數據文件()
+    , cut文件前綴 = `.io/d0/`
+    , 廣告功能 = false
+    , 本頁數據庫id = 0;
+    
+    if (帳號數據庫) 本頁數據庫id = 帳號數據庫.split(cut文件前綴)[1];
+
+  async function Start() {
+    //console.log(`帳號數據庫=${帳號數據庫}!!!`);
+      _不同分流退出();
+
+      // 取數據庫內容
+      let Alldata = await _取本頁數據庫(本頁數據庫id, 'Alldata','html碼');
+            
+      if (Alldata){
+        Alldata = Alldata.split(數據分隔符);  // 折分數據
+        //console.log(`Alldata1==`,Alldata);
+        [公司資料, 關於我們, 產品展示1, 產品展示2, 產品展示3, 產品展示4, 產品展示5] = Alldata.slice(1, 8).map(data => eval(data.split(數據分隔符B)[1]));
+        console.log(`公司資料==`,公司資料);console.log(`關於我們==`,關於我們);console.log(`產品展示1==`,產品展示1);console.log(`產品展示2==`,產品展示2);console.log(`產品展示3==`,產品展示3);console.log(`產品展示4==`,產品展示4);console.log(`產品展示5==`,產品展示5);
+      }
+
+      // _顯示admin後台
+      if(localStorage.getItem('VipAdmin標記')) {
+
+        // VIP的網址
+        document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
+        _生成QRCode('VipPegaIDInput','您的網址qrcode')
+        
+        
+        $('.ADminNav').html(`
+          <button class=" _更新btn btn" onclick="_更新all野()" >更新資料</button>
+          <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')" >主頁</button>
+          <button class="btn" id="關於我們btn" onclick="_導航換頁('關於我們')" >關於我們</button>
+          <button class="btn" id="公司資料btn" onclick="_導航換頁('公司資料')" >公司資料</button>
+        `);
+        for (let i = 1; i <= 5; i++){
+          $('.ADminNav').append(`<button class="btn" id="產品展示${i}btn" onclick="_導航換頁('產品展示${i}')" >產品展示${i}</button>`); // 產品展示btn
+
+          // admin 產品展示編輯位
+          $('#主頁page').after(`
+            <section id="產品展示${i}page" class="section">
+              <div class="container">
+                <h2>產品展示${i}</h2>
+                yt影片 = Share > Embed > 貼在展示內容<br>
+                輪播圖 = 展示內容 > 圖1ulr,圖2ulr,圖3ulr...
+                <div id="產品展示${i}iinput">
+                  <div id="產品展示${i}i0">
+                    <input type="text" placeholder="請輸入產品圖片" title="請輸入產品圖片" >
+                    <input type="text" placeholder="請輸入產品的連結" title="請輸入產品的連結">
+                    <button class="btn delete" onclick="刪除Input('產品展示${i}i0')">刪除</button>
+                    <hr>
+                  </div>
+                  
+                </div>
+                <button class="btn" onclick="增加Input('產品展示${i}')" >新增產品圖片</button>
+              </div>
+            </section>
+          `);
+        }
+        
+        $('.ADminNav').append(`<button class="btn delete" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn();">登出</button>`)
+      }
+
+      廣告功能 = eval(公司資料[0].廣告功能)
+      if(廣告功能 == true) $('.廣告位').show();
+
+      // 顯示內容
+      ['公司資料',  '關於我們'].forEach(_顯示內容);
+      for (let i = 1; i <= 5; i++) { _顯示內容(`產品展示${i}`).then(_輪播圖動); }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Start()
+    </script>
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+    <script>
+      translate.service.use('client.edge');
+      //載入內容後再進行翻譯
+      setTimeout(function() { translate.execute();  }, 2000); 
+    </script>
+  </body>
+</html>
