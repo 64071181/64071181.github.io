@@ -59,7 +59,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     body{margin-top: 50px;}
     .fa,.fab,.fas {font-size: 2rem;height: 2rem;}
     a{text-decoration: none;color: var(--標題色);}
-    .none{display:none;}
     * { scrollbar-width: none; /* 滾動條美化 */}
     .主題色{color: var(--主題色); } 
     .按鈕色{color: var(--按鈕色); }
@@ -112,48 +111,32 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     .data-row button.delete {float: right; background-color: #f44336;}
 
 
-    .廣告位 {transition: all 0.3s ease;background: rgb(236, 0, 0);background-size: auto;background-repeat: no-repeat;display: none;height: 100px;width: 100%;max-width: 300px;}  /* // qqqq */
-    /* 開關容器 */
-    .toggle-廣告功能開關 {position: relative;margin: 2%;width: 84px;height: 50px;text-align: center;font-size: 20px;line-height: 40px;}
-    /* 隱藏原始 checkbox */
-    .toggle-廣告功能開關 input {opacity: 0;width: 0;height: 0;}
-    /* 滑動條樣式 */
-    .slider {position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;background-color: #ccc;border-radius: 25px;transition: background-color 0.4s;}
-    /* 滑動按鈕樣式 */
-    .slider::before {position: absolute;content: "";height: 42px;width: 42px;left: -1px;background-color: #888;border-radius: 42px;transition: transform 0.4s;}
-    /* 選擇 On 狀態的樣式 */
-    input:checked + .slider {background-color: #5d53e2;}
-    input:checked + .slider::before {transform: translateX(43px);}
-
 
   </style>
 
-  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>
+  <!--<script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
   
   
-  <script src="../../mokJsapi/mokJsApi.js"></script> 
-  <script sr2222c="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
+  <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
   
   </head>
   <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢髮型屋預約系統</samp>
-  <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
-  <samp id="小於打烊" class="none">營業時間必須小於打烊時間!</samp>
-  <samp id="時段已滿" class="none">此時段已滿，請選擇其他時間!</samp>
-  <samp id="有效電話" class="none">請輸入有效的電話號碼!</samp>
-  <samp id="填必要料" class="none">請填寫所有必要資料!</samp>
-
-  <samp id="填必要料" class="none">請填寫所有必要資料!</samp>
-  <samp id="您已登錄其他服務" class="none">您已登錄服務! 請先登出並清除記錄再使用其他服務!</samp>
+    <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
+    <samp id="小於打烊" class="none">營業時間必須小於打烊時間!</samp>
+    <samp id="時段已滿" class="none">此時段已滿，請選擇其他時間!</samp>
+    <samp id="有效電話" class="none">請輸入有效的電話號碼!</samp>
+    <samp id="填必要料" class="none">請填寫所有必要資料!</samp>
+    <samp id="您已登錄其他服務" class="none">您已登錄服務! 請先登出並清除記錄再使用其他服務!</samp>
 
 
 
@@ -194,7 +177,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
-  <div id="網站標題" class="header">
+  <div id="本公司名稱" class="header">
     <h1>琪琪髮型預約系統</h1>
     <p>專業髮型設計，為您打造完美造型</p>
   </div>
@@ -361,7 +344,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <hr>
 
           <!--<h2>現有<strong id="Vip會員數" style="color: #3498db;">0</strong>位成員</h2>
-          新增成員<a onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記']);登入莫氏VIP('${網站標題}')" href='../login.html'>新增成員</a>
+          新增成員<a onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記']);登入莫氏VIP('${本公司名稱}')" href='../login.html'>新增成員</a>
           <hr>-->
 
           <!-- 公司網址 -->
@@ -422,7 +405,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
           <h2>廣告功能</h2>開啟廣告功能將會在您的網站上顯示廣告，您將可按展示次數賺取廣告費。
 
-          <div class="toggle-廣告功能開關">
+          <div class="toggle-狀態開關">
             <input type="checkbox" id="廣告功能開關" />
             <label for="廣告功能開關" class="slider">on      off</label>
           </div>
@@ -525,7 +508,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <nav style="text-align: center;">
       <br>
       <div id="nav">
-        <a class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出登入ViP('#???');" >💎 免費使用琪琪髮型預約系統</a>
+        <a class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn('琪琪髮型預約系統','#???');" >💎 免費使用琪琪髮型預約系統</a>
       </div>
       <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     </nav>
@@ -1441,7 +1424,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       <button class="btn" id="訂單btn" onclick="_導航換頁('查看訂單')" ><i class="fa fa-list-alt" aria-hidden="true"></i></button>
 
-      <button class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出登入ViP();"><i class="fa fa-times" ></i></button>
+      <button class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn();"><i class="fa fa-times" ></i></button>
     `)
 
   }
@@ -1492,12 +1475,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
   
   const 登出離線數據 = ['帳戶名稱','數據文件','離線VIP網料', '琪琪髮型預約系統預約日程表', '公司資料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版', '預約日程表B','VIP註冊時的網模版']
-  function 登出登入ViP(sel='') {
-    console.log(`登出登入ViP登出登入ViP...`);
-    // if sel == '#???' // 去Login頁
-    window.location.href=`${location.href}${sel}`;
-    _vipLogin分流('???','琪琪髮型預約系統','../login.html');
-  }
 
 
 
@@ -1540,11 +1517,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     if(公司資料[0].公司名) {
       //console.log(`公司資料[0].公司名=${公司資料[0].公司名}`);
       document.title = 公司資料[0].公司名;
-      $('#網站標題').html(`
+      $('#本公司名稱').html(`
         <h1>${公司資料[0].公司名}</h1>
         <p>${公司資料[0].公司簡介}</p>
       `);
-      $('#網站標題B').text(公司資料[0].公司名);
+      $('#本公司名稱B').text(公司資料[0].公司名);
       入料 = ['公司名','公司簡介', '公司ws', '公司地址', '營業時間', '打烊時間', '每時段', '時段做客上限', '主題色', '按鈕色', '標題色', '文字色'];
       for (入單料 of 入料) {
         $('#'+入單料+'Input').val(公司資料[0][入單料]);
@@ -1668,24 +1645,33 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 廣告功能 = false // qqqq
     , 預約日程表
     , 公司資料
-    , 產品資料
+    , 產品資料;
+    
 
-  // 設定日期選擇器的最小日期為今天
-  const dateInput = document.querySelector('input[type="date"]');
-  const today = new Date().toISOString().split('T')[0];
-  dateInput.min = today; // 預約日期 預設為今天
+    function Start() {
+      // 設定日期選擇器的最小日期為今天
+      const dateInput = document.querySelector('input[type="date"]');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today; // 預約日期 預設為今天
 
-  // 選擇日期
-  dateInput.addEventListener('change', (e) => {
-    _預約表(e.target.value);
-  });
+      // 選擇日期
+      dateInput.addEventListener('change', (e) => {
+        _預約表(e.target.value);
+      });
 
-  // 生成模擬數據
-  _MakeOVG_Data(today);
-  _預約表(today);
+      // 生成模擬數據
+      _MakeOVG_Data(today);
+      _預約表(today);
 
-  _登入AKI(today); // 初始化預約表 // _查看預約日程表
-  
+      _登入AKI(today); // 初始化預約表 // _查看預約日程表
+      
+    }
+
+    const akiADMIN = true;
+
+    琪琪修改()// aki admin
+    Start()
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">// 保存圖片</script>
 

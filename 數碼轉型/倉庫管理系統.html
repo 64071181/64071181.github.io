@@ -106,8 +106,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
 
 
-  <script sr555c="../../mokJsapi/mokJsApi.js"></script> 
+  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
   <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+
   
   </head>
 
@@ -160,7 +161,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <samp id="您已登錄其他服務" class="none">您已登錄服務! 請先登出並清除記錄再使用其他服務!</samp>
 
   <header>
-    <h1 id="網站標題">莫氏倉庫管理系統</h1>
+    <h1 id="本公司名稱">莫氏倉庫管理系統</h1>
     <p id="translate"></p>
   </header>
 
@@ -189,7 +190,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       <div class="content">
 
         <div id="有網頁標題再顯" class="none" >
-          <h2 title="您的會員數"><strong id="網站標題B">公司名稱</strong>現有<strong id="Vip會員數" style="color: #3498db;">0</strong>位成員</h2>
+          <h2 title="您的會員數"><strong id="本公司名稱B">公司名稱</strong>現有<strong id="Vip會員數" style="color: #3498db;">0</strong>位成員</h2>
           <hr>
 
           <h2 title="將您的網址分享給您的使用者">您的網址</h2>
@@ -203,8 +204,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
           <h2>您的公司名稱</h2>
           <input type="text" id="網頁標題Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
-          <button class="btn" onclick="_更新數據B('VIP的網料', document.getElementById('網頁標題Input').value, 數據庫位)" >更新公司名稱</button>
-      
+          <button class="btn" onclick="_更新數據B('公司資料', document.getElementById('網頁標題Input').value, 數據庫位);//VIP的網料" >更新公司名稱</button>
+                          
       </div>
     </section>
 
@@ -284,15 +285,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   async function _檢查VIP網() {
 
     // VIP的網標題
-    網站標題 = await _取本頁數據庫('VIP的網料', '離線VIP網料','html碼');
-    if(!網站標題) return
+    本公司名稱 = await _取本頁數據庫('公司資料', '離線VIP網料','html碼');// VIP的網料
+    if(!本公司名稱) return
 
     $('#有網頁標題再顯').show();
 
     // qqqqqqqqqqqqqq
-    document.title = 網站標題;
-    document.getElementById('網站標題').innerHTML = (網站標題);
-    $('#網頁標題Input').val(網站標題);
+    document.title = 本公司名稱;
+    document.getElementById('本公司名稱').innerHTML = (本公司名稱);
+    $('#網頁標題Input').val(本公司名稱);
 
     _changeStyle(); // 改變 VIP的網 css
 
@@ -302,7 +303,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
 
         Vip的會員數 = await _取本頁數據庫('VIP的UserID', 'VIP的UserID','html碼');
-        $('#網站標題B').text(網站標題);
+        $('#本公司名稱B').text(本公司名稱);
         if(Vip的會員數 != null){
           $('#Vip會員數').text(Vip的會員數.split('!!').length - 1);
         }
@@ -325,12 +326,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   function 新增成員() {
     登出莫氏VIP(['帳戶名稱','VipAdmin標記']); // 數據文件
     window.location.href=`${location.href}#???`;
-    _vipLogin分流('???',網站標題,'../login.html')
+    _vipLogin分流('???',本公司名稱,'../login.html')
   }
 
   function Vip我會員登入() {
     window.location.href=`${location.href}#???`;
-    _vipLogin分流('???',網站標題,'../login.html')
+    _vipLogin分流('???',本公司名稱,'../login.html')
   }
 
     _必須放頭()
@@ -869,7 +870,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   帳號管理btn轉css()
   _導航換頁();
-
+  琪琪修改()// aki admin
 </script>
 
 
