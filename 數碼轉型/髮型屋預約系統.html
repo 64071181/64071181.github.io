@@ -341,9 +341,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <input type="text" id="公司簡介Input" placeholder="請修改您的公司簡介" title="請修改您的公司簡介" >
           <hr>
 
-          <!--<h2>現有<strong id="Vip會員數" style="color: #3498db;">0</strong>位成員</h2>
-          新增成員<a onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記']);登入莫氏VIP('${本公司名稱}')" href='../login.html'>新增成員</a>
-          <hr>-->
+          <!-- 新增成員 -->
 
           <!-- 公司網址 -->
           <h2 title="將您的網址分享給您的使用者">您的網址</h2>
@@ -506,7 +504,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <nav style="text-align: center;">
       <br>
       <div id="nav">
-        <a class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn('琪琪髮型預約系統','#???');" >💎 免費使用琪琪髮型預約系統</a>
+        <a class="btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('琪琪髮型預約系統');" >💎 免費使用琪琪髮型預約系統</a>
       </div>
       <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     </nav>
@@ -1410,7 +1408,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       <button class="btn" id="訂單btn" onclick="_導航換頁('查看訂單')" ><i class="fa fa-list-alt" aria-hidden="true"></i></button>
 
-      <button class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn();"><i class="fa fa-times" ></i></button>
+      <button class="btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('琪琪髮型預約系統','出');"><i class="fa fa-times" ></i></button>
     `)
 
   }
@@ -1575,7 +1573,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     
 
     // vip的useer的注冊鍵
-    //$('#nav').html(`<a class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出登入ViP('#???');" >💎 免費使用琪琪髮型預約系統</a>`)
     _MakeCss()
   }
 

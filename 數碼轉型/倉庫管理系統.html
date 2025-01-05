@@ -165,7 +165,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <nav>
     <a href="javascript:void(0);" id="庫存btn" onclick="_導航換頁('庫存')" class="page用btn" >庫存</a>
     <div class="dropdown">
-      <a href="javascript:void(0);" onclick="window.location.href=`${location.href}#???`;_vipLogin分流('???','莫氏倉庫管理系統','../login.html')" >免費使用</a>
+      <a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統');" >免費使用</a>
     </div>
   </nav>
 
@@ -279,6 +279,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       // 顯示搜尋結果
       $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
 
+
+      帳號管理btn轉css()
   }
 
 
@@ -310,19 +312,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       }
 
     // VIP的user登入
-    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip我會員登入()" >成員登入</a>`
+    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統','新')" >成員登入</a>`
     if(!已登入帳號) $('.dropdown').html(vip登入鍵);
 
     // VIP登入
     //if(!localStorage.getItem('VipAdmin標記')) $('.mokJsApi_copyright').prepend(vip登入鍵);
     // 新增成員
-    if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="新增成員()" >新增成員</a>`)
+    if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統','新')" >新增成員</a>`)
     //else $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="新增成員()" >新增44成員</a>`)
 
     _生成QRCode('VipPegaIDInput','您的網址qrcode')
     
   }
 
+  /*
   function 新增成員() {
     登出莫氏VIP(['帳戶名稱','VipAdmin標記']); // 數據文件
     window.location.href=`${location.href}#???`;
@@ -333,6 +336,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     window.location.href=`${location.href}#???`;
     _vipLogin分流('???',本公司名稱,'../login.html')
   }
+  */
 
   琪琪修改()
   // 最少等500ms 才檢查VIP網
@@ -725,13 +729,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   // mokaki ////////////////// 要放模版後
   function 帳號管理btn轉css() {
 
+    console.log(`帳號管理btn轉css==已登入帳號=${已登入帳號}`)
+
     if (已登入帳號) {
       $('.dropdown').html(`
         <p id="dropdownToggle">${已登入帳號}</p>
         <div class="dropdown-content">
-          <!--<a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>-->
-
-          <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料', '產品料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版'])">登出並清除記錄</a>
+          <a id="登入Btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統','出')">登出</a>
         </div>
       `);
     }
@@ -847,7 +851,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     `
   }
 
-  帳號管理btn轉css()
+  //帳號管理btn轉css()
 
 </script>
 
