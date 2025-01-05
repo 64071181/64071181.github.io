@@ -201,7 +201,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
           <h2>您的公司名稱</h2>
           <input type="text" id="網頁標題Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
-          <button class="btn" onclick="_更新數據B('公司資料', document.getElementById('網頁標題Input').value, 數據庫位);//VIP的網料" >更新公司名稱</button>
+          <button class="btn" onclick="_更新數據B('公司資料', document.getElementById('網頁標題Input').value, cut文件前綴);//VIP的網料" >更新公司名稱</button>
                           
       </div>
     </section>
@@ -252,14 +252,16 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 <script>
   // mokaki ////////////////// 必須放頭
 
-  let 已登入帳號 = _帳戶名稱() 
-    , 帳號數據庫 = _數據文件()
+  let 已登入帳號 
+    , 帳號數據庫
     , 本頁數據庫編號 = '莫氏倉庫管理系統產品料'
-    , 數據庫位 = '.io/d0/'
+    , cut文件前綴 = '.io/d0/'
     , 產品料 = null
     , 本公司名稱 = '莫氏倉庫管理系統';
 
-    async function _必須放頭() {
+    async function Start() {
+      已登入帳號 = _帳戶名稱() 
+      帳號數據庫 = _數據文件()
       if (已登入帳號) {
         //_不同分流退出()
         產品料 = await _取本頁數據庫(本頁數據庫編號, '產品料','html碼');
@@ -269,7 +271,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         `已登入帳號: ${已登入帳號}`,
         `帳號數據庫: ${帳號數據庫}`,
         `本頁數據庫編號: ${本頁數據庫編號}`,
-        `數據庫位: ${數據庫位}`
+        `cut文件前綴: ${cut文件前綴}`
       ]);
 
       _不同分流退出()
@@ -332,9 +334,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     _vipLogin分流('???',本公司名稱,'../login.html')
   }
 
-    _必須放頭()
-    // 最少等500ms 才檢查VIP網
-    setTimeout(function() { _檢查VIP網()  }, 300);
+  琪琪修改()
+  // 最少等500ms 才檢查VIP網
+  setTimeout(function() { _檢查VIP網()  }, 300);
 
 </script>
 
@@ -588,7 +590,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     };
     
     inventoryData.push(newItem);
-    _更新數據B(本頁數據庫編號, inventoryData, 數據庫位)
+    _更新數據B(本頁數據庫編號, inventoryData, cut文件前綴)
     renderInventoryList();
 
   }
@@ -652,7 +654,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         inventoryData[index] = newItem;
       }
 
-      _更新數據B(本頁數據庫編號, inventoryData, 數據庫位)
+      _更新數據B(本頁數據庫編號, inventoryData, cut文件前綴)
       renderInventoryList();
     }
   }
@@ -668,7 +670,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     if (confirm('確定要刪除此項目嗎？')) {
       inventoryData = inventoryData.filter(item => item.code !== code);
 
-      _更新數據B(本頁數據庫編號, inventoryData, 數據庫位)
+      _更新數據B(本頁數據庫編號, inventoryData, cut文件前綴)
       renderInventoryList();
     }
   }
