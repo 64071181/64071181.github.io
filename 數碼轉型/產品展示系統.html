@@ -85,14 +85,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
     
-
-    <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
-    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
-
+    
+    <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
 
   </head>
 <body>
-  <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
+  
 
 
 
@@ -703,13 +701,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-      function _導航換頁(page) {
-        // 隱頁 - .active
-        $('.section').removeClass('active');
-        // 顯頁 + .active
-        $(`#${page}page`).addClass('active');
-      };
-
 
 
 
@@ -931,18 +922,31 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
     // 取vip數據
-    let 已登入帳號 = _帳戶名稱() 
-    , 帳號數據庫 = _數據文件()
-    , cut文件前綴 = `.io/d0/`
-    , 廣告功能 = false
-    , 產品展示類型上限 = 4
-    , 本頁數據庫id = 0
-    , 本公司名稱 = '瑞瑞產品展示系統';
+    let 已登入帳號 
+    , 帳號數據庫
+    , cut文件前綴
+    , 廣告功能
+    , 產品展示類型上限
+    , 本頁數據庫id
+    , 本公司名稱;
     
-    if (帳號數據庫) 本頁數據庫id = 帳號數據庫.split(cut文件前綴)[1];
 
   async function Start() {
     //console.log(`帳號數據庫=${帳號數據庫}!!!`);
+
+
+    已登入帳號 = _帳戶名稱() 
+    帳號數據庫 = _數據文件()
+    cut文件前綴 = `.io/d0/`
+    廣告功能 = false
+    產品展示類型上限 = 4
+    本頁數據庫id = 0
+    本公司名稱 = '瑞瑞產品展示系統';
+    
+    if (帳號數據庫) 本頁數據庫id = 帳號數據庫.split(cut文件前綴)[1];
+
+
+
       _不同分流退出();
 
       // 取數據庫內容
@@ -1013,8 +1017,25 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
   
-  Start()
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+琪琪修改();
     </script>
     <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
     <script>

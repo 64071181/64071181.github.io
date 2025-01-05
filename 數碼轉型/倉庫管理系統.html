@@ -106,10 +106,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
 
 
-  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
-  <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
 
-  
+
   </head>
 
 
@@ -157,8 +156,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 -->
 
 <body>
-  <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
-  <samp id="您已登錄其他服務" class="none">您已登錄服務! 請先登出並清除記錄再使用其他服務!</samp>
 
   <header>
     <h1 id="本公司名稱">莫氏倉庫管理系統</h1>
@@ -166,7 +163,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   </header>
 
   <nav>
-    <a href="#" id="庫存btn" class="page用btn" >庫存</a>
+    <a href="javascript:void(0);" id="庫存btn" onclick="_導航換頁('庫存')" class="page用btn" >庫存</a>
     <div class="dropdown">
       <a href="javascript:void(0);" onclick="window.location.href=`${location.href}#???`;_vipLogin分流('???','莫氏倉庫管理系統','../login.html')" >免費使用</a>
     </div>
@@ -259,11 +256,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 帳號數據庫 = _數據文件()
     , 本頁數據庫編號 = '莫氏倉庫管理系統產品料'
     , 數據庫位 = '.io/d0/'
-    , 產品料 = null;
+    , 產品料 = null
+    , 本公司名稱 = '莫氏倉庫管理系統';
 
     async function _必須放頭() {
       if (已登入帳號) {
-        _不同分流退出()
+        //_不同分流退出()
         產品料 = await _取本頁數據庫(本頁數據庫編號, '產品料','html碼');
       }
 
@@ -729,7 +727,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       $('.dropdown').html(`
         <p id="dropdownToggle">${已登入帳號}</p>
         <div class="dropdown-content">
-          <a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>
+          <!--<a id="登入Btn" href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','VipAdmin標記'])">登出</a>-->
+
           <a href="javascript:void(0);" onclick="登出莫氏VIP(['帳戶名稱','數據文件','離線VIP網料', '產品料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版'])">登出並清除記錄</a>
         </div>
       `);
@@ -740,7 +739,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       $('.限AdminBtn').css('display', 'block');
       $('#dropdownToggle').text(`${已登入帳號} *`);
       $('.dropdown-content').prepend(`
-          <a href="javascript:void(0);" id="VIP設置btn" class="page用btn" >設置</a>
+          <a href="javascript:void(0);" onclick="_導航換頁('VIP設置')" id="VIP設置btn" class="page用btn" >設置</a>
       `);
     }
 
@@ -784,33 +783,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   }
 
 
-  function _導航換頁() {
-    // 顯示所有項目
-    document.addEventListener("DOMContentLoaded", function() {
-        const navLinks = document.querySelectorAll(".page用btn");
-        const sections = document.querySelectorAll(".section");
 
-        // 預設顯示庫存page
-        const defaultSection = document.getElementById("庫存page");
-        defaultSection.classList.add("active");
-        
-        navLinks.forEach(link => {
-            link.addEventListener("click", function(event) {
-                event.preventDefault(); // 防止默認行為
+  
 
-                // 隱藏所有 section
-                sections.forEach(section => {
-                    section.classList.remove("active");
-                });
 
-                // 顯示對應的 section
-                const targetId = this.id === "庫存btn" ? "庫存page" : "VIP設置btn" ? "VIP設置page" : null;
-                const targetSection = document.getElementById(targetId);
-                targetSection.classList.add("active");
-            });
-        });
-    });
-  }
+
 
 
   function _changeStyle() {
@@ -869,7 +846,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   }
 
   帳號管理btn轉css()
-  _導航換頁();
 
 </script>
 

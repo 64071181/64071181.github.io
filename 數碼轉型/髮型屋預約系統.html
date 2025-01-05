@@ -125,18 +125,16 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
   
   
-  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
-  <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
-  
+  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
+
+
   </head>
-  <body>
-    <samp id="莫生查詢" style="display: none;">莫生我要查詢髮型屋預約系統</samp>
-    <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
+  <body>    
     <samp id="小於打烊" class="none">營業時間必須小於打烊時間!</samp>
     <samp id="時段已滿" class="none">此時段已滿，請選擇其他時間!</samp>
     <samp id="有效電話" class="none">請輸入有效的電話號碼!</samp>
-    <samp id="填必要料" class="none">請填寫所有必要資料!</samp>
-    <samp id="您已登錄其他服務" class="none">您已登錄服務! 請先登出並清除記錄再使用其他服務!</samp>
+    
+    
 
 
 
@@ -1395,18 +1393,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
-  function _導航換頁(page) {
-    // <section id="預約page" class="section active"> 
-
-    // 隱頁 - .active
-    $('.section').removeClass('active');
-    // 顯頁 + .active
-    $(`#${page}page`).addClass('active');
-  }
-
-
-
   function _MakeCss() {
 
     // 沒標記退
@@ -1645,7 +1631,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 廣告功能 = false // qqqq
     , 預約日程表
     , 公司資料
-    , 產品資料;
+    , 產品資料
+    , 本公司名稱 = '琪琪髮型預約系統';
     
 
     function Start() {
