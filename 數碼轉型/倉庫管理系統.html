@@ -51,7 +51,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <style id="ChangCss">
 
     .限AdminBtn{display:none;}
-    #searchInput, #VipPegaIDInput, #網頁標題Input {width: 95%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
+    #searchInput, #VipPegaIDInput, #公司名Input {width: 95%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
     #searchInput:focus {outline: none;box-shadow: 0 0 0 2px #4fd1c5;    }
 
 
@@ -94,7 +94,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     /* 滾動條美化 Firefox */
     * { scrollbar-width: none; /* 滾動條寬度 */}
     /* 返回頂端 */
-    #backToTopBtn {position: relative;bottom: 30px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
+    #backToTopBtn {position: relative;bottom: 50px;left: 90%;z-index: 99;background-color: #2977ac00;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
     #backToTopBtn:hover {background-color: #5fb8f3;}
 
     .none{display:none;}
@@ -169,10 +169,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </div>
   </nav>
 
+
+
   <div class="container">
 
+    
     <section id="庫存page" class="section active">
         <div class="content">
+
+          <a href="#" >
+            <div class="container 廣告位" id="廣告位1" style='background-image: url();'>
+            </div>
+          </a>
+    
           <h2>庫存概覽</h2>
           <input type="text" id="searchInput" placeholder="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字" title="搜索產品編號、產品條碼、庫存位置、負責人...任何關鍵字">
           <br><br>
@@ -183,8 +192,21 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         </div>
     </section>
 
+
+
+
+
+
+
+
+
     <section id="VIP設置page" class="section">
       <div class="content">
+
+        <a href="#" >
+          <div class="container 廣告位" id="廣告位2" style='background-image: url();'>
+          </div>
+        </a>
 
         <div id="有網頁標題再顯" class="none" >
           <h2 title="您的會員數"><strong id="本公司名稱B">公司名稱</strong>現有<strong id="Vip會員數" style="color: #3498db;">0</strong>位成員</h2>
@@ -200,14 +222,35 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         </div>
 
           <h2>您的公司名稱</h2>
-          <input type="text" id="網頁標題Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
-          <button class="btn" onclick="_更新數據B('公司資料', document.getElementById('網頁標題Input').value, cut文件前綴);//VIP的網料" >更新公司名稱</button>
+          <input type="text" id="公司名Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
+          
                           
+          <h2>廣告功能</h2>開啟廣告功能將會在您的網站上顯示廣告，您將可按展示次數賺取廣告費。
+
+          <div class="toggle-狀態開關">
+            <input type="checkbox" id="廣告功能開關" />
+            <label for="廣告功能開關" class="slider">on      off</label>
+          </div>
+
+          <button class="btn" onclick="_更新野('公司資料', ['公司名Input']);" >更新資料</button>
+
+          <a href="#" >
+            <div class="container 廣告位" id="廣告位3" style='background-image: url();'>
+            </div>
+          </a>
+
+          
       </div>
     </section>
 
+    
+    <div id="nav" style="text-align: center;">
+      <a class="btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統');" >💎 免費使用莫氏倉庫管理系統</a>
+    </div>
+
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     <a id="backToTopBtn" href="#searchInput"> ^ </a>
+
     
   </div>
 </body>
@@ -256,8 +299,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 帳號數據庫
     , 本頁數據庫編號 = '莫氏倉庫管理系統產品料'
     , cut文件前綴 = '.io/d0/'
+    , 廣告功能 = false 
     , 產品料 = null
-    , 本公司名稱 = '莫氏倉庫管理系統';
+    , 本公司名稱 = 版模 = '莫氏倉庫管理系統';
 
     async function Start() {
       已登入帳號 = _帳戶名稱() 
@@ -267,13 +311,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         產品料 = await _取本頁數據庫(本頁數據庫編號, '產品料','html碼');
       }
 
-      _aki睇錯([
-        `已登入帳號: ${已登入帳號}`,
-        `帳號數據庫: ${帳號數據庫}`,
-        `本頁數據庫編號: ${本頁數據庫編號}`,
-        `cut文件前綴: ${cut文件前綴}`
-      ]);
-
       _不同分流退出()
 
       // 顯示搜尋結果
@@ -281,21 +318,60 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
       帳號管理btn轉css()
+
+
+
   }
 
 
   async function _檢查VIP網() {
 
     // VIP的網標題
-    本公司名稱 = await _取本頁數據庫('公司資料', '離線VIP網料','html碼');// VIP的網料
-    if(!本公司名稱) return
+    // 本公司名稱 = await _取本頁數據庫('公司資料', '公司資料','html碼');// VIP的網料
+    //if(!本公司名稱) return
+    公司資料B = await _取本頁數據庫('公司資料', '公司資料','html碼');
+    if (公司資料B) 公司資料 = eval(公司資料B)
+
+    本公司名稱 = 公司資料[0].公司名
+
+    document.title = 本公司名稱;
+    document.getElementById('本公司名稱').innerHTML = (本公司名稱);
+    $('#公司名Input').val(本公司名稱);
+
+
+    //廣告功能
+    廣告功能 = eval(公司資料[0].廣告功能);
+    if(廣告功能 == true) $('.廣告位').show();
+
+    // 初始廣告功能值
+    //let 廣告功能 = true;
+    // 頁面加載後根據廣告功能值設定開關預設狀態
+    $(document).ready(function () {
+      const 開關 = $('#廣告功能開關');
+      // 設定預設狀態
+      if (廣告功能) {
+        開關.prop('checked', true);
+        //console.log(`預設狀態：開啟`);
+      } else {
+        開關.prop('checked', false);
+        //console.log(`預設狀態：關閉`);
+      }
+      // 綁定開關狀態改變事件
+      開關.change(function () {
+        if ($(this).is(':checked')) {
+          廣告功能 = true;
+          //console.log(`開關已開啟=${廣告功能}`);
+        } else {
+          廣告功能 = false;
+          //console.log(`開關已關閉=${廣告功能}`);
+        }
+      });
+    });
+
+    if(!帳號數據庫) return; // 未登入vip網
 
     $('#有網頁標題再顯').show();
 
-    // qqqqqqqqqqqqqq
-    document.title = 本公司名稱;
-    document.getElementById('本公司名稱').innerHTML = (本公司名稱);
-    $('#網頁標題Input').val(本公司名稱);
 
     _changeStyle(); // 改變 VIP的網 css
 
@@ -312,35 +388,97 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       }
 
     // VIP的user登入
-    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統','新')" >成員登入</a>`
+    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('${本公司名稱}','新')" >成員登入</a>`;
     if(!已登入帳號) $('.dropdown').html(vip登入鍵);
 
-    // VIP登入
-    //if(!localStorage.getItem('VipAdmin標記')) $('.mokJsApi_copyright').prepend(vip登入鍵);
+
     // 新增成員
-    if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('莫氏倉庫管理系統','新')" >新增成員</a>`)
-    //else $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="新增成員()" >新增44成員</a>`)
+    if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('${本公司名稱}','新')" >新增成員</a>`)
 
     _生成QRCode('VipPegaIDInput','您的網址qrcode')
-    
   }
 
-  /*
-  function 新增成員() {
-    登出莫氏VIP(['帳戶名稱','VipAdmin標記']); // 數據文件
-    window.location.href=`${location.href}#???`;
-    _vipLogin分流('???',本公司名稱,'../login.html')
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::    :::       :::::::::       :::::::::           :::    :::::::::::           :::
+    :+:    :+:       :+:    :+:      :+:    :+:        :+: :+:      :+:             :+: :+:
+   +:+    +:+       +:+    +:+      +:+    +:+       +:+   +:+     +:+            +:+   +:+
+  +#+    +:+       +#++:++#+       +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+ +#+    +#+       +#+             +#+    +#+      +#+     +#+    +#+           +#+     +#+
+#+#    #+#       #+#             #+#    #+#      #+#     #+#    #+#           #+#     #+#
+########        ###             #########       ###     ###    ###           ###     ###
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+
+
+
+function _更新野(數據id, data位) {
+
+  // up新數據
+  let 新data , data內id, 數據的val, all新數據;
+  
+  新data = []
+  data內id = [] 
+  for (data of data位) {
+    data內id.push(data.split('Input')[0]) // 存每個data的id
+
+    數據的val = $(`#${data}`).val().replace(/\n/g,"<br>");
+    新data.push(數據的val) // 存每個data
   }
 
-  function Vip我會員登入() {
-    window.location.href=`${location.href}#???`;
-    _vipLogin分流('???',本公司名稱,'../login.html')
+  //廣告功能
+  if (數據id == '公司資料'){
+    新data.push(廣告功能) ;
+    data內id.push('廣告功能');
   }
-  */
+  // 組合所有新數據
+  all新數據 = `[{`;
+  // 確保每個 id 對應一個值
+  for (let i = 0; i < data內id.length; i++) {
+    all新數據 += `${data內id[i]}:'${新data[i]}',`;
+  }
+  // 去除最後多餘的逗號並補上結尾括號
+  all新數據 = all新數據.slice(0, -1) + `}];`;
+
+  //console.log(`all新數據=${all新數據}!!!`);
+  _更新數據B(數據id, all新數據, cut文件前綴)
+
+}
+
+
+
+
+
+
 
   琪琪修改()
   // 最少等500ms 才檢查VIP網
   setTimeout(function() { _檢查VIP網()  }, 300);
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 
@@ -381,13 +519,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 -->
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
+公司資料 = [{ '公司名': '莫氏倉庫管理系統', '廣告功能': 'false'}];
 
   // 取帳戶 數據 (庫存)
   let inventoryData = 產品料 
-  console.log('產品料 VIP==', 產品料);
+  //console.log('產品料 VIP==', 產品料);
 
   //  沒'產品料' = demo
   if(!inventoryData) inventoryData = [
@@ -729,8 +869,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   // mokaki ////////////////// 要放模版後
   function 帳號管理btn轉css() {
 
-    console.log(`帳號管理btn轉css==已登入帳號=${已登入帳號}`)
-
     if (已登入帳號) {
       $('.dropdown').html(`
         <p id="dropdownToggle">${已登入帳號}</p>
@@ -801,7 +939,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     style.innerHTML = `
       
     .限AdminBtn{display:none;}
-    #searchInput, #VipPegaIDInput, #網頁標題Input {width: 95%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
+    #searchInput, #VipPegaIDInput, #公司名Input {width: 95%;padding: 10px;border: none;border-radius: 5px;background-color: rgba(42, 42, 58, 0.8);color: #e0e0e0;font-size: 1em;backdrop-filter: blur(5px);    }
     #searchInput:focus {outline: none;box-shadow: 0 0 0 2px #4fd1c5;    }
 
 
@@ -845,13 +983,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     /* 滾動條美化 Firefox */
     * { scrollbar-width: none; /* 滾動條寬度 */}
     /* 返回頂端 */
-    #backToTopBtn {position: relative;bottom: 30px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
+    #backToTopBtn {position: relative;bottom: 50px;left: 90%;z-index: 99;background-color: #297fb900;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
     #backToTopBtn:hover {background-color: #5fb8f3;}
     .none{display:none;}
     `
   }
-
-  //帳號管理btn轉css()
 
 </script>
 
