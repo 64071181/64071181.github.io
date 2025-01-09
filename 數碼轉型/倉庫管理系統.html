@@ -368,6 +368,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       });
     });
 
+    //_aki睇錯([`帳號數據庫=${帳號數據庫}`])
+
     if(!帳號數據庫) return; // 未登入vip網
 
     $('#有網頁標題再顯').show();
@@ -877,7 +879,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         </div>
       `);
     }
-    else {console.log('未登入') }
+    //else {console.log('未登入') }
     
     if(localStorage.getItem('VipAdmin標記')) {
       $('.限AdminBtn').css('display', 'block');
@@ -900,7 +902,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           dropdownContent.style.height = '0px';
         }
         });
-    } catch (error) {console.log('未登入') }
+    } catch (error) {return}
   }
 
 

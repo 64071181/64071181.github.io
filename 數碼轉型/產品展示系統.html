@@ -427,36 +427,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-      let 產品展示1 = [
-        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s3.jpg', '產品展示url': ''},
-        { '產品展示圖': '<iframe width="560" height="315" src="https://www.youtube.com/embed/NNV7EYAsIpI?si=QD1uL88OtuHhGm0Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>', '產品展示url': '' },
-        
-        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h3.jpeg,https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h2.jpeg', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
-        
-        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s1.jpg', '產品展示url': 'https://lin.ee/exeQ2Yx'},
-        {'產品展示圖': '003.webp', '產品展示url': 'https://lin.ee/416xnF3'}
-      ],
-      
-      產品展示2 = [
-        {'產品展示圖': 'https://yt3.ggpht.com/0ySzCl6W1DLGstRW4TOaOYTzOKx_0zJn9CAtZ_GUF-81N36t2UA7loiMrTewX0vm2v7BnXcf=s48-c-k-c0x00ffffff-no-rj', '產品展示url': ''}
-      ],
-      產品展示3,產品展示4,產品展示5,
-
-
-      關於我們 = [
-        {'關於我們字':`sss`}
-      ],
-      關於我們B = [
-        {'關於我們字':`
-        誠鑫搬家<br>各式各樣大型小型及整層搬家皆可<br>小資學生女性套房搬遷首選！<br>
-        小資學生女性套房搬遷<br>免動手代客精緻打包<br>超重型、特殊物品搬遷<br>
-        鋼琴搬運、古董家具搬運<br>吊車服務、廢棄物清運、居家清潔等<br>
-        我們全都可以一條龍幫你服務到家！<br>加LINE發問即可享有免費線上估價！`}
-      ],
-      
-
-
-      公司資料 = [
+公司資料 = [
         { 
           '廣告功能':'false',
           '公司名': '誠鑫搬家',
@@ -475,12 +446,23 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           '產品類型3':'',
           '產品類型4':'',
           '產品類型5':'',
-        }
-      ];
+        },
+        {'關於我們字':`sss`},
 
-
-
-
+        { '產品展示':[
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s3.jpg', '產品展示url': ''},
+        { '產品展示圖': '<iframe width="560" height="315" src="https://www.youtube.com/embed/NNV7EYAsIpI?si=QD1uL88OtuHhGm0Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>', '產品展示url': '' },
+        
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h3.jpeg,https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h2.jpeg', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
+        
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s1.jpg', '產品展示url': 'https://lin.ee/exeQ2Yx'},
+        {'產品展示圖': '003.webp', '產品展示url': 'https://lin.ee/416xnF3'}
+      ]},
+      {
+        '產品展示' :[
+        {'產品展示圖': 'https://yt3.ggpht.com/0ySzCl6W1DLGstRW4TOaOYTzOKx_0zJn9CAtZ_GUF-81N36t2UA7loiMrTewX0vm2v7BnXcf=s48-c-k-c0x00ffffff-no-rj', '產品展示url': ''}
+      ]},
+    ];
 
 
 
@@ -515,6 +497,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       // 顯示內容
       async function _顯示內容(sel) {
         let 內容data = eval(sel);
+        let 單個內容, all內容;
 
         if (sel == '公司資料'){
             // 初始廣告功能
@@ -539,65 +522,65 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             });
 
             // Google工具
-            $("head").append(_特別字處理(內容data[0].GTM1));
-            $('#GTM1Input').val(_特別字處理(內容data[0].GTM1));
+            $("head").append(_特別字處理(內容data.GTM1));
+            $('#GTM1Input').val(_特別字處理(內容data.GTM1));
             
-            $("body").prepend(內容data[0].GTM2);
-            $('#GTM2Input').val(內容data[0].GTM2);
+            $("body").prepend(內容data.GTM2);
+            $('#GTM2Input').val(內容data.GTM2);
             // GSC 
-            $("head").append(內容data[0].GSC);
-            $('#GSCInput').val(內容data[0].GSC);
+            $("head").append(內容data.GSC);
+            $('#GSCInput').val(內容data.GSC);
             
             // 公司名
-            本公司名稱 = 內容data[0].公司名;
+            本公司名稱 = 內容data.公司名;
             $('#本公司名稱').text(本公司名稱);
-            $('meta[property="og:site_name"]').attr("content", 內容data[0].公司名);
-            $('meta[name="copyright"]').attr("content", 內容data[0].公司名);
-            $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by ${內容data[0].公司名}`)
-            $('#公司名Input').val(內容data[0].公司名);
+            $('meta[property="og:site_name"]').attr("content", 內容data.公司名);
+            $('meta[name="copyright"]').attr("content", 內容data.公司名);
+            $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by ${內容data.公司名}`)
+            $('#公司名Input').val(內容data.公司名);
 
             // 公司標題
-            $("title").text(內容data[0].公司標題);
-            $('meta[property="og:title"]').attr("content", 內容data[0].公司標題);
-            $('meta[property="og:image:alt"]').attr("content", 內容data[0].公司標題);
-            $('#公司標題Input').val(內容data[0].公司標題);
+            $("title").text(內容data.公司標題);
+            $('meta[property="og:title"]').attr("content", 內容data.公司標題);
+            $('meta[property="og:image:alt"]').attr("content", 內容data.公司標題);
+            $('#公司標題Input').val(內容data.公司標題);
 
             // 公司簡介
-            $('#本公司簡介').text(內容data[0].公司簡介);
-            $('meta[property="og:description"]').attr("content", 內容data[0].公司簡介);
-            $('meta[name="description"]').attr("content", 內容data[0].公司簡介);
-            $('#公司簡介Input').val(內容data[0].公司簡介);
+            $('#本公司簡介').text(內容data.公司簡介);
+            $('meta[property="og:description"]').attr("content", 內容data.公司簡介);
+            $('meta[name="description"]').attr("content", 內容data.公司簡介);
+            $('#公司簡介Input').val(內容data.公司簡介);
 
             // LOGO圖片
-            $("#logo").attr("src", 內容data[0].LOGO圖片)
+            $("#logo").attr("src", 內容data.LOGO圖片)
             // 檢查是否已存在 <link rel="icon">
             let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
-            $('#LOGO圖片Input').val(內容data[0].LOGO圖片);
+            $('#LOGO圖片Input').val(內容data.LOGO圖片);
 
             // 分頁圖示
             if ($favicon.length) {
                 // 替換現有的分頁圖示
-                $favicon.attr("href", 內容data[0].分頁圖示).attr("type", "image/x-icon");
+                $favicon.attr("href", 內容data.分頁圖示).attr("type", "image/x-icon");
             } else {
                 // 如果不存在，新增 <link rel="icon">
                 $("head").append(
-                    `<link rel="icon" type="image/x-icon" href="${內容data[0].分頁圖示}">`
+                    `<link rel="icon" type="image/x-icon" href="${內容data.分頁圖示}">`
                 );
             }
-            $('#分頁圖示Input').val(內容data[0].分頁圖示);
+            $('#分頁圖示Input').val(內容data.分頁圖示);
             
             // 社群封面
-            $('meta[property="og:image"]').attr("content", 內容data[0].社群封面);
-            $('meta[property="og:image:secure_url"]').attr("content", 內容data[0].社群封面);
-            $('#社群封面Input').val(內容data[0].社群封面);
+            $('meta[property="og:image"]').attr("content", 內容data.社群封面);
+            $('meta[property="og:image:secure_url"]').attr("content", 內容data.社群封面);
+            $('#社群封面Input').val(內容data.社群封面);
 
             // css
-            document.documentElement.style.setProperty("--主題色", 內容data[0].主題色);
-            $('#主題色Input').val(內容data[0].主題色);
+            document.documentElement.style.setProperty("--主題色", 內容data.主題色);
+            $('#主題色Input').val(內容data.主題色);
 
             //產品類型
             for (let i = 1; i <= 產品展示類型上限; i++) {
-              產類名 = 內容data[0][`產品類型${i}`];
+              產類名 = 內容data[`產品類型${i}`];
               if(產類名){
                 $('#產品展示').append(`<div id="產品展示${i}" class="container"><h2>${產類名}</h2></div> `);
                 $('#PageNav').append(`<a class="btn" href="#產品展示${i}" >${產類名}</a>`)
@@ -608,68 +591,69 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             }
         }
 
-        let cont = 0;
-        for (let 內容 of 內容data){
-          let 單個內容, all內容
+        /***************** 產品展示 ******************/
+        if (sel.indexOf('產品展示') != -1){
+          //console.log(`sel==`,sel);
+            let cont = 0;
+              for (let 內容 of 內容data.產品展示){
+                let 產品展示字 = false;
+                // 只圖
+                if (內容.產品展示圖 && !內容.產品展示url) 單個內容 = $(`<img class="responsive-image" src="${內容.產品展示圖}" >`);
+                // 有ulr圖
+                if (內容.產品展示圖 && 內容.產品展示url) 單個內容 = $(`<a href="${內容.產品展示url}" target="_blank"></a>`).append($(`<img class="responsive-image" src="${內容.產品展示圖}" >`));
+                // 純字
+                if (內容.產品展示url && !內容.產品展示圖) {
+                    單個內容 = $(`<p>${內容.產品展示url}</p>`);
+                    產品展示字 = true; 
+                }
+                // yt片
+                if (內容.產品展示圖.includes('<iframe')) {
+                  整尺寸 = 內容.產品展示圖.split('src')[1]
+                  整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
+                  單個內容 = 整尺寸; // 直接插入yt片
+                }
+                // 輪播圖
+                if (內容.產品展示圖.includes(',')){
+                  // 取輪播料
+                  整組輪播圖 = 內容.產品展示圖.split(',')
+                  $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+                  for (let i = 0; i < 整組輪播圖.length; i++) {
+                    $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
+                    第n輪圖 = $輪圖;
+                    // a 有問題不做
+                    $輪播圖容器.append(第n輪圖);
+                  }
+                  單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+                }
+                all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
+                // 加載錯誤時隱藏該圖片
+                if (內容.產品展示圖) {
+                    all內容.find("img").on("error", function () {
+                        if (!/<iframe|,/.test(內容.產品展示圖) && !產品展示字) {
+                            all內容.remove();
+                        }
+                    });
+                }
+                // admin
+                $(`#${sel}iinput div`).eq(cont).find("input").eq(0).val(內容.產品展示圖);
+                $(`#${sel}iinput div`).eq(cont).find("input").eq(1).val(內容.產品展示url);
+                增加Input(sel)
+                
+                // 加入DOM
+                $(`#${sel}`).append(all內容);
 
-
-          /***************** 產品展示 ******************/
-          if (sel.indexOf('產品展示') != -1){
-            let 產品展示字 = false;
-            // 只圖
-            if (內容.產品展示圖 && !內容.產品展示url) 單個內容 = $(`<img class="responsive-image" src="${內容.產品展示圖}" >`);
-            // 有ulr圖
-            if (內容.產品展示圖 && 內容.產品展示url) 單個內容 = $(`<a href="${內容.產品展示url}" target="_blank"></a>`).append($(`<img class="responsive-image" src="${內容.產品展示圖}" >`));
-            // 純字
-            if (內容.產品展示url && !內容.產品展示圖) {
-                單個內容 = $(`<p>${內容.產品展示url}</p>`);
-                產品展示字 = true; 
-            }
-            // yt片
-            if (內容.產品展示圖.includes('<iframe')) {
-              整尺寸 = 內容.產品展示圖.split('src')[1]
-              整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
-              單個內容 = 整尺寸; // 直接插入yt片
-            }
-            // 輪播圖
-            if (內容.產品展示圖.includes(',')){
-              // 取輪播料
-              整組輪播圖 = 內容.產品展示圖.split(',')
-              $輪播圖容器 = $('<div class="輪播圖-images"></div>');
-              for (let i = 0; i < 整組輪播圖.length; i++) {
-                $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
-                第n輪圖 = $輪圖;
-                // a 有問題不做
-                $輪播圖容器.append(第n輪圖);
-              }
-              單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
-            }
-            all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
-            // 加載錯誤時隱藏該圖片
-            if (內容.產品展示圖) {
-                all內容.find("img").on("error", function () {
-                    if (!/<iframe|,/.test(內容.產品展示圖) && !產品展示字) {
-                        all內容.remove();
-                    }
-                });
-            }
-            // admin
-            $(`#${sel}iinput div`).eq(cont).find("input").eq(0).val(內容.產品展示圖);
-            $(`#${sel}iinput div`).eq(cont).find("input").eq(1).val(內容.產品展示url);
-            增加Input(sel)
-          }
-
-
-          /***************** 關於我們 ******************/
-          if (sel == '關於我們') {
-            all內容 = `<p>${內容.關於我們字}</p>`;
-            $('#關於我們字Input').val(內容.關於我們字);
-          }
+                cont+=1
+              }              
           
-          // 加入DOM
-          $(`#${sel}`).append(all內容);
-          cont+=1
         }
+
+        /***************** 關於我們 ******************/
+        if (sel == '關於我們') {
+          all內容 = `<p>${內容data.關於我們字}</p>`;
+          $('#關於我們字Input').val(內容data.關於我們字);
+          $(`#${sel}`).append(all內容);
+        }
+        
       }
 
 
@@ -739,7 +723,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       function _取Input(id) { 
           const inputs = document.querySelectorAll(`#${id}iinput div input`);
-          let 整合多條數據 = `${數據分隔符}${id}${數據分隔符B}[`
+          let 整合多條數據 = `{'產品展示':[\n`
             , tempData = {}
             , hasData = false;
 
@@ -754,7 +738,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
                   if (tempData['產品展示圖'] || tempData['產品展示url']) {
                       // 如果奇數或偶數有內容，將其加入整合數據
-                      整合多條數據 += `{'產品展示圖': '${tempData['產品展示圖']}', '產品展示url': '${tempData['產品展示url']}'},\n`;
+                      整合多條數據 += `{'產品展示圖': '${tempData['產品展示圖']}', '產品展示url': '${tempData['產品展示url']}'},\n\n`;
                       hasData = true; // 標記為有數據
                   }
 
@@ -766,7 +750,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
               return ''; // 如果沒有有效數據，返回空字符串
           }
 
-          整合多條數據 += '];'; // 結尾補上陣列符號
+          整合多條數據 += ']},'; // 結尾補上陣列符號
           //console.log(整合多條數據);
           return 整合多條數據;
       }
@@ -797,7 +781,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           data內id.push(data.split('Input')[0]) // 存每個data的id
 
           數據的val = $(`#${data}`).val().replace(/\n/g,"<br>");
-          if (data == '管理員密碼Input') 數據的val = _修改密碼(版模);
+          //if (data == '管理員密碼Input') 數據的val = _修改密碼(版模);
           if (data == 'GTM1Input' || data == 'GTM2Input' || data == 'GSCInput') 數據的val = _特別字處理(數據的val);
 
           新data.push(數據的val) // 存每個data
@@ -810,13 +794,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         }
 
         // 組合所有新數據
-        all新數據 = `${數據分隔符}${數據id}${數據分隔符B}[{`;
+        all新數據 = `{`;
+        //all新數據 = `${數據分隔符}${數據id}${數據分隔符B}[{`;
         // 確保每個 id 對應一個值
         for (let i = 0; i < data內id.length; i++) {
           all新數據 += `${data內id[i]}:'${新data[i]}',`;
         }
         // 去除最後多餘的逗號並補上結尾括號
-        all新數據 = all新數據.slice(0, -1) + `}];`;
+        all新數據 = all新數據.slice(0, -1) + `},`;
 
         //console.log(`all公司資料=${all新數據}!!!`);
         return all新數據;
@@ -836,24 +821,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         )
         , 關於我們 = _更新all資料('關於我們', ['關於我們字Input'])
         , 產品展示 = Array.from({ length: 產品展示類型上限 }, (_, i) => _取Input(`產品展示${i + 1}`))
-        , 所有資料 = 公司資料 + 關於我們 + 產品展示.join('');
+        , 所有資料 = `[\n${公司資料}\n\n${關於我們}\n\n${產品展示.join('\n')}];`;
 
         //console.log(`所有資料=${所有資料}!!!`);
-        //_更新數據B(本頁數據庫id, 所有資料, cut文件前綴)
+        _更新數據B('公司資料', 所有資料, cut文件前綴);
+
       }
-
-
-
-
-
-
-      
-
-
-
-
-
-
 
 
 
@@ -890,29 +863,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , cut文件前綴 = `.io/d0/`
     , 廣告功能 = false
     , 產品展示類型上限 = 4
-    , 本頁數據庫id = 0
     , 本公司名稱 = 版模 = '瑞瑞產品展示系統';
     
-
   async function Start() {
-    //console.log(`帳號數據庫=${帳號數據庫}!!!`);
-
-    已登入帳號 = _帳戶名稱() 
-    帳號數據庫 = _數據文件()
-    if (帳號數據庫) 本頁數據庫id = 帳號數據庫.split(cut文件前綴)[1];
-
-
+      已登入帳號 = _帳戶名稱() 
+      帳號數據庫 = _數據文件()
 
       _不同分流退出();
 
+      // 從 公司資料 中提取索引 0 到 6（共 7 個項目）的值。
+      [公司資料, 關於我們, 產品展示1, 產品展示2, 產品展示3, 產品展示4, 產品展示5] = 公司資料.slice(0, 產品展示類型上限+3);
+
+
       // 取數據庫內容
-      let Alldata = await _取本頁數據庫(本頁數據庫id, 'Alldata','html碼');
+      let Alldata1 = await _取本頁數據庫('公司資料', 'Alldata1','html碼');
             
-      if (Alldata){
-        Alldata = Alldata.split(數據分隔符);  // 折分數據
-        //console.log(`Alldata1==`,Alldata);
-        [公司資料, 關於我們, 產品展示1, 產品展示2, 產品展示3, 產品展示4, 產品展示5] = Alldata.slice(1, 8).map(data => eval(data.split(數據分隔符B)[1]));
-        //console.log(`公司資料==`,公司資料);console.log(`關於我們==`,關於我們);console.log(`產品展示1==`,產品展示1);console.log(`產品展示2==`,產品展示2);console.log(`產品展示3==`,產品展示3);console.log(`產品展示4==`,產品展示4);console.log(`產品展示5==`,產品展示5);
+      if (Alldata1){
+        Alldata = eval(Alldata1);
+        [公司資料, 關於我們, 產品展示1, 產品展示2, 產品展示3, 產品展示4, 產品展示5] = Alldata.slice(0, 產品展示類型上限+3);
       }
 
       // _顯示admin後台
@@ -963,7 +931,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       }
 
-      廣告功能 = eval(公司資料[0].廣告功能)
+      廣告功能 = eval(公司資料.廣告功能)
       if(廣告功能 == true) $('.廣告位').show();
 
       // 顯示內容
@@ -976,7 +944,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-  
 
 
 
@@ -985,13 +952,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
-/*
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    console.log(`allkey = ${key}: ${localStorage.getItem(key)}`);
-  }
-  */
 
 
 
