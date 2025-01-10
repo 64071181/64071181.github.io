@@ -239,7 +239,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 就算同帳號在不同網也不能共用
 */
 async function 登入(){
-
   let 登入帳號  =$( "#登入帳號" ).val()
     , 登入密碼  =$( "#登入密碼" ).val()
     , 帳號 = sha256(登入帳號)
@@ -334,9 +333,12 @@ async function 註冊(vip=''){
 
   // VIP的User註冊
   if (vip === 'VIP的User') {
+
     //賦值準備寫入
     帳號數據庫 = 只有vipUser才會帶數據庫登入
     舊的VIPUserID = await _取本頁數據庫('VIP的UserID', 'VIP的UserID','html碼'); 
+
+    console.log(`${舊的VIPUserID}==舊的VIPUserID`);
 
     // 如VIP的UserID數據庫存在,檢查帳號存在
     if(舊的VIPUserID && 舊的VIPUserID.indexOf(檢測號) !== -1) {
