@@ -235,7 +235,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <button class="btn" onclick="_更新野('公司資料', ['公司名Input']);" >更新資料</button>
 
           <a href="#" >
-            <div class="container 廣告位" id="廣告位3" style='background-image: url();'>
+            <div class="廣告位" id="廣告位3" style='background-image: url();'>
             </div>
           </a>
 
@@ -293,6 +293,98 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 <script>
+
+
+
+async function _檢查VIP網() {
+
+// VIP的網標題
+// 本公司名稱 = await _取本頁數據庫('公司資料', '公司資料','html碼');// VIP的網料
+//if(!本公司名稱) return
+公司資料B = await _取本頁數據庫('公司資料', '公司資料','html碼');
+if (公司資料B) 公司資料 = eval(公司資料B)
+
+本公司名稱 = 公司資料[0].公司名
+
+document.title = 本公司名稱;
+document.getElementById('本公司名稱').innerHTML = (本公司名稱);
+$('#公司名Input').val(本公司名稱);
+
+
+//廣告功能
+廣告功能 = eval(公司資料[0].廣告功能);
+if(廣告功能 == true) $('.廣告位').show();
+
+// 初始廣告功能值
+//let 廣告功能 = true;
+// 頁面加載後根據廣告功能值設定開關預設狀態
+$(document).ready(function () {
+  const 開關 = $('#廣告功能開關');
+  // 設定預設狀態
+  if (廣告功能) {
+    開關.prop('checked', true);
+    //console.log(`預設狀態：開啟`);
+  } else {
+    開關.prop('checked', false);
+    //console.log(`預設狀態：關閉`);
+  }
+  // 綁定開關狀態改變事件
+  開關.change(function () {
+    if ($(this).is(':checked')) {
+      廣告功能 = true;
+      //console.log(`開關已開啟=${廣告功能}`);
+    } else {
+      廣告功能 = false;
+      //console.log(`開關已關閉=${廣告功能}`);
+    }
+  });
+});
+
+//_aki睇錯([`帳號數據庫=${帳號數據庫}`])
+
+if(!帳號數據庫) return; // 未登入vip網
+
+帳號管理btn轉css()
+
+$('#有網頁標題再顯').show();
+
+
+_changeStyle(); // 改變 VIP的網 css
+
+// VIP自己登入
+if(已登入帳號) {
+    // VIP的設置
+    document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
+
+    Vip的會員數 = await _取本頁數據庫('VIP的UserID', 'VIP的UserID','html碼');
+    $('#本公司名稱B').text(本公司名稱);
+    if(Vip的會員數 != null){
+      $('#Vip會員數').text(Vip的會員數.split('%').length - 1);
+    }
+  }
+
+// VIP的user登入
+vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('${本公司名稱}','新')" >成員登入</a>`;
+if(!已登入帳號) $('.dropdown').html(vip登入鍵);
+
+
+// 新增成員
+if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('${本公司名稱}','新')" >新增成員</a>`)
+
+_生成QRCode('VipPegaIDInput','您的網址qrcode')
+
+
+
+}
+
+
+
+
+
+
+
+
+
   // mokaki ////////////////// 必須放頭
 
   let 已登入帳號 
@@ -302,6 +394,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 廣告功能 = false 
     , 產品料 = null
     , 本公司名稱 = 版模 = '莫氏倉庫管理系統';
+
+
+
 
     async function Start() {
       已登入帳號 = _帳戶名稱() 
@@ -316,89 +411,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       // 顯示搜尋結果
       $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.inventory-item'); });
 
-
-      帳號管理btn轉css()
-
-
-
+      _檢查VIP網()
   }
 
 
-  async function _檢查VIP網() {
 
-    // VIP的網標題
-    // 本公司名稱 = await _取本頁數據庫('公司資料', '公司資料','html碼');// VIP的網料
-    //if(!本公司名稱) return
-    公司資料B = await _取本頁數據庫('公司資料', '公司資料','html碼');
-    if (公司資料B) 公司資料 = eval(公司資料B)
-
-    本公司名稱 = 公司資料[0].公司名
-
-    document.title = 本公司名稱;
-    document.getElementById('本公司名稱').innerHTML = (本公司名稱);
-    $('#公司名Input').val(本公司名稱);
-
-
-    //廣告功能
-    廣告功能 = eval(公司資料[0].廣告功能);
-    if(廣告功能 == true) $('.廣告位').show();
-
-    // 初始廣告功能值
-    //let 廣告功能 = true;
-    // 頁面加載後根據廣告功能值設定開關預設狀態
-    $(document).ready(function () {
-      const 開關 = $('#廣告功能開關');
-      // 設定預設狀態
-      if (廣告功能) {
-        開關.prop('checked', true);
-        //console.log(`預設狀態：開啟`);
-      } else {
-        開關.prop('checked', false);
-        //console.log(`預設狀態：關閉`);
-      }
-      // 綁定開關狀態改變事件
-      開關.change(function () {
-        if ($(this).is(':checked')) {
-          廣告功能 = true;
-          //console.log(`開關已開啟=${廣告功能}`);
-        } else {
-          廣告功能 = false;
-          //console.log(`開關已關閉=${廣告功能}`);
-        }
-      });
-    });
-
-    //_aki睇錯([`帳號數據庫=${帳號數據庫}`])
-
-    if(!帳號數據庫) return; // 未登入vip網
-
-    $('#有網頁標題再顯').show();
-
-
-    _changeStyle(); // 改變 VIP的網 css
-
-    // VIP自己登入
-    if(已登入帳號) {
-        // VIP的設置
-        document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
-
-        Vip的會員數 = await _取本頁數據庫('VIP的UserID', 'VIP的UserID','html碼');
-        $('#本公司名稱B').text(本公司名稱);
-        if(Vip的會員數 != null){
-          $('#Vip會員數').text(Vip的會員數.split('!!').length - 1);
-        }
-      }
-
-    // VIP的user登入
-    vip登入鍵 = `<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('${本公司名稱}','新')" >成員登入</a>`;
-    if(!已登入帳號) $('.dropdown').html(vip登入鍵);
-
-
-    // 新增成員
-    if(localStorage.getItem('VipAdmin標記')) $('.dropdown-content').prepend(`<a href="javascript:void(0);" onclick="Vip登入莫氏系統2025('${本公司名稱}','新')" >新增成員</a>`)
-
-    _生成QRCode('VipPegaIDInput','您的網址qrcode')
-  }
 
 
 
@@ -468,18 +485,7 @@ function _更新野(數據id, data位) {
 
 
   琪琪修改()
-  // 最少等500ms 才檢查VIP網
-  setTimeout(function() { _檢查VIP網()  }, 300);
-
-
-
-
-
-
-
-
-
-
+  
 
 
 </script>
