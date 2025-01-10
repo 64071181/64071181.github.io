@@ -1,0 +1,1729 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+        :::   :::       ::::::::       :::    :::           :::        :::    :::       :::::::::::
+      :+:+: :+:+:     :+:    :+:      :+:   :+:          :+: :+:      :+:   :+:            :+:
+    +:+ +:+:+ +:+    +:+    +:+      +:+  +:+          +:+   +:+     +:+  +:+             +:+
+   +#+  +:+  +#+    +#+    +:+      +#++:++          +#++:++#++:    +#++:++              +#+
+  +#+       +#+    +#+    +#+      +#+  +#+         +#+     +#+    +#+  +#+             +#+
+ #+#       #+#    #+#    #+#      #+#   #+#        #+#     #+#    #+#   #+#            #+#
+###       ###     ########       ###    ###       ###     ###    ###    ###       ###########
+
+202412042245                                         mokaki
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>琪琪髮型預約系統</title>
+
+  <style>
+    html {scroll-behavior: smooth;}
+    body {margin: 0 ;font-family: "微軟正黑體", sans-serif;background: #f7f7f7;color: var(--文字色);}
+    
+    /* aki */
+    :root {--主題色: #263238;--按鈕色: #455a64;--標題色: #ffb300;--文字色: #000;}
+    @media (max-width: 768px) {  .services {  grid-template-columns: 1fr;}}
+    .translateSelectLanguage{position: absolute;top:0px;}
+    body{margin-top: 50px;}
+    .fa,.fab,.fas {font-size: 2rem;height: 2rem;}
+    a{text-decoration: none;color: var(--標題色);}
+    * { scrollbar-width: none; /* 滾動條美化 */}
+    .主題色{color: var(--主題色); } 
+    .按鈕色{color: var(--按鈕色); }
+    .標題色{color: var(--標題色); }
+    .文字色,p {color: var(--文字色); }
+    
+    /* 平滑滾動效果 */
+    .header {background: var(--主題色);padding: 1rem;text-align: center;box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    .container {max-width: 1000px;margin: 2rem auto;padding: 0 1rem;}
+    
+    /* 隱藏顯示版塊 */  
+    .section { display: none;   }
+    .section.active { display: block;}
+    .btn {border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: auto; text-align: center;}
+    .booking-form {background: white;padding: 2rem;border-radius: 10px;box-shadow: 0 0 20px rgba(0,0,0,0.1);}
+    .form-group {margin-bottom: 1.5rem;}
+    h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--標題色);}
+    input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
+    .services {grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));gap: 1rem;margin: 2rem 0;}
+    .service-card {float: left;width: auto;height: 130px; margin: 1%; background: white;padding: 1.5rem;border-radius: 8px;text-align: center;transition: transform 0.3s;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+    .service-card:hover {transform: translateY(-5px);}
+    button,.按鈕 {background: var(--按鈕色);color: var(--標題色);padding: 1rem 2rem;border: none;border-radius: 5px;font-size: 2rem;cursor: pointer;transition: background 0.3s;width: 100%;}
+    button:hover,.按鈕:hover {background: var(--主題色);}
+
+    .預約成功message {display: none;z-index: 2; background: var(--按鈕色);color: var(--文字色);padding: 1rem;border-radius: 5px;position: fixed;left: 5%;top: 5%;padding: 5%;font-size: 30px;}
+    #退出按鈕{display: none;z-index: 1;position: fixed;top: 0px;right: 0px;left: 0;bottom: 0;background: #000000cb;transition: background 0.3s;}
+
+    /* New CSS for schedule */
+    .schedule {margin: 2rem 0;background: white;padding: 1rem;border-radius: 10px;}
+    .hour-row {display: grid;grid-template-columns: repeat(4, 1fr);gap: 0.5rem;margin-bottom: 0.5rem;padding: 0.5rem;background: #f8f9fa;border-radius: 5px;}
+    .hour-label {font-weight: bold;margin-bottom: 0.5rem;}
+    .time-slot {padding: 0.5rem;margin: 0.25rem 0;border-radius: 5px;display: flex;justify-content: space-between;align-items: center;}
+    .time-slot a {height: 100%;width: 100%;text-align: center;}
+    .time-slot.available {background: var(--按鈕色);cursor: pointer;}
+    .time-slot.available:hover {background: var(--主題色);}
+    .time-slot.booked,.service-card.booked {background: #ffebee;opacity: 0.3;cursor: not-allowed;}
+
+    /* 查看預約日程表 */
+    .schedule-container {max-width: 800px;margin: 0 auto;background-color: white;padding: 20px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .date-header {background-color: var(--主題色);color: var(--標題色); padding: 10px;border-radius: 5px;margin-bottom: 15px; }
+    .time-slot {border: 1px solid #ddd;margin-bottom: 15px;border-radius: 5px; }
+    .time-header {background-color: var(--主題色);padding: 10px;font-weight: bold;border-bottom: 1px solid #ddd;border-radius: 5px 5px 0 0; }
+    .appointments {padding: 10px; }
+    .appointment {border-bottom: 1px solid #eee;padding: 10px;display: grid;grid-template-columns: 1fr 1fr 2fr;gap: 10px; }
+    .appointment:last-child {border-bottom: none; }
+    .filters {margin-bottom: 20px;display: flex;gap: 15px;align-items: center; }
+    .filters select, .filters input {padding: 8px;border-radius: 4px;border: 1px solid #ddd; }
+
+    .data-row button {margin: 5px;padding: 8px 15px;border: none;border-radius: 4px;cursor: pointer;color: white;width: auto;}
+    .data-row button.delete {float: right; background-color: #f44336;}
+
+
+
+  </style>
+
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <!--<script src="https://64071181.github.io/d/64071181data.js">//64071181 page data</script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
+  
+  
+  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
+
+
+  </head>
+  <body>    
+    <samp id="小於打烊" class="none">營業時間必須小於打烊時間!</samp>
+    <samp id="時段已滿" class="none">此時段已滿，請選擇其他時間!</samp>
+    <samp id="有效電話" class="none">請輸入有效的電話號碼!</samp>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::       ::::::::       :::::::::    :::   :::
+     :+:    :+:     :+:    :+:      :+:    :+:   :+:   :+:
+    +:+    +:+     +:+    +:+      +:+    +:+    +:+ +:+
+   +#++:++#+      +#+    +:+      +#+    +:+     +#++:
+  +#+    +#+     +#+    +#+      +#+    +#+      +#+
+ #+#    #+#     #+#    #+#      #+#    #+#      #+#
+#########       ########       #########       ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+  <div id="本公司名稱" class="header">
+    <h1>琪琪髮型預約系統</h1>
+    <p>專業髮型設計，為您打造完美造型</p>
+  </div>
+
+  <div id="電地" style="text-align: center; padding: 5%;">
+    <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+  </div>
+
+  <a href="#" >
+    <div class="container 廣告位" id="廣告位1" style='background-image: url();'>
+    </div>
+  </a>
+
+
+  <div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="預約page" class="section active">
+
+      <div>
+        <h3>查詢已預約服務</h3>
+        <br>
+          <label>預約名稱</label>
+          <input type="text" required id="查詢預約name" placeholder="請輸入您預約時的名稱">
+          <br><br>
+          <label>預約電話</label>
+          <input type="tel" required id="查詢預約phone" placeholder="請輸入您預約時的聯絡電話">
+          <br><br>
+        <button onclick="查詢已預約服務()">查詢</button>
+        <h2 id="查詢已預約結果" class="none">找不到符合的資料!</h2>
+        <ul id="師傅查詢預約result"></ul>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <hr style="clear: both;margin-top: 5%;">
+      <div class="services" id="價目表"><!-- js 價目表 --></div>
+      <hr style="clear: both;margin-top: 50%;">
+
+      <a href="#" >
+        <div class="container 廣告位" id="廣告位2" style='background-image: url();'>
+        </div>
+      </a>
+
+
+      <div class="booking-form">
+
+        <div class="schedule" id="schedule"><!-- js 可预约时段 --></div>
+
+
+
+        <form id="appointmentForm">
+          <div class="form-group">
+            <label>名稱</label>
+            <input type="text" required name="name" placeholder="請輸入您的名稱">
+          </div>
+          <div class="form-group">
+            <label>電話</label>
+            <input type="tel" required name="phone" placeholder="請輸入您的聯絡電話">
+          </div>
+          <div class="form-group">
+            <label>指定師傅</label>
+            <select required name="service" id="選服務"><!-- 這裡將由JavaScript動態填充數據 --></select>
+          </div>
+          <div class="form-group">
+            <label>預約日期</label>
+            <input type="date" required name="date" id="預約日期">
+          </div>
+          <div class="form-group">
+            <label>預約時間</label>
+            <input type="time" required name="time" readonly>
+          </div>
+          <button type="submit" id="確認預約" >確認預約</button>
+        </form>
+
+        <div class="預約成功message" id="successMessage" style="text-align: center;">
+          <h1>預約成功！
+            <a class="按鈕" href="javascript:void(0);" id="保存圖片"><i class="fa fa-save" ></i></a>
+          </h1>
+          <br>
+          <div style="text-align: left;">
+            <p><i class="fa fa-address-card" ></i> <samp id="客名" class="fa"></samp></p>
+            <p><i class="fa fa-phone" ></i> <samp id="客Ws" class="fa"></samp></p>
+            <p><i class="fa fa-table" ></i> <samp id="客時" class="fa"></samp></p>
+            <p><i class="fa fa-cut" ></i> <samp id="客買" class="fa"></samp></p>
+          </div>
+          <hr>
+          <h1 id="公名"></h1><br>
+          <p id="公ws"  ></p><br>
+          <p id="公址"  ></p><br>
+          <hr>
+        </div>
+        <a href="javascript:void(0);" id="退出按鈕" ></a>
+        
+
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="VIP設置page" class="section">
+      <div class="content">
+
+        <h2>您的公司名稱</h2>
+        <input type="text" id="公司名Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
+
+        <div class="有網頁標題再顯 none" >
+
+          <h2>公司簡介</h2>請用一句口號來介紹您的公司，讓使用者能快速了解您的服務。
+          <input type="text" id="公司簡介Input" placeholder="請修改您的公司簡介" title="請修改您的公司簡介" >
+          <hr>
+
+          <!-- 新增成員 -->
+
+          <!-- 公司網址 -->
+          <h2 title="將您的網址分享給您的使用者">您的網址</h2>
+          <a onclick="_下載QRCode('您的網址qrcode')"><canvas id="您的網址qrcode">您的網址qrcode</canvas></a>
+          <br><br>
+          <a class="btn" href='https://wa.me/85264071181/?text=我要購買VIP' >網址太長嗎? VIP會員可享專屬網址!!</a>
+          <br>
+          <input type="text" id="VipPegaIDInput" placeholder="請先修改您的公司名稱" title="您的網址" onclick="copyToClipboard('VipPegaIDInput')" readonly>
+          <hr>
+
+          <!-- 公司資料 -->
+          <h2>公司Whatsapp</h2>填寫您的Whatsapp，讓客戶能直接與您聯絡。
+          <input type="text" id="公司wsInput" placeholder="請修改您的公司Whatsapp" title="請修改您的公司Whatsapp" >
+          <h2>公司地址</h2>
+          <input type="text" id="公司地址Input" placeholder="請修改您的公司地址" title="請修改您的公司地址" >
+
+          <h2>公司營業時間</h2>
+          <input type="time" required name="time" id="營業時間Input" value="11:15">
+
+          <h2>公司打烊時間</h2>
+          <input type="time" required name="time" id="打烊時間Input" value="18:15">
+  
+          <h2>公司每個服務時段</h2> 請填寫您公司每次服務的平均需時(分鐘),方便管理預約。(5、10、15、20、30、60分鐘)
+          <select id="每時段Input">
+            <option value="5">5分鐘</option>
+            <option value="10" selected>10分鐘</option>
+            <option value="15">15分鐘</option>
+            <option value="20">20分鐘</option>
+            <option value="30">30分鐘</option>
+            <option value="60">60分鐘</option>
+          </select>
+
+          <h2>公司每時段服務顧客上限</h2> 每個服務時段,最多可同時服務多少個顧客
+          <input type="text" id="時段做客上限Input" placeholder="請修改您的公司每時段服務顧客上限" title="請修改您的公司每時段服務顧客上限" value="1" >
+          <hr>
+
+          <!-- 公司用色 -->
+          <a href="https://codepen.io/98672794/pen/yLwQzjd" target="_blank" ><i class="fa fa-paint-brush" aria-hidden="true"></i></a>
+          <h2>主題色<samp class="主題色 fa">&diams;</samp> </h2>首頁橫幅、按鈕選擇時的高亮色 
+          <input type="text" id="主題色Input" placeholder="請修改您的主題色" title="請修改您的主題色" >
+          
+          <h2>按鈕色 <samp class="按鈕色 fa">&diams;</samp></h2>
+          <input type="text" id="按鈕色Input" placeholder="請修改您的按鈕色" title="請修改您的按鈕色" >
+
+          <h2>標題色 <samp class="標題色 fa">&diams;</samp></h2>標題、按鈕文字色
+          <input type="text" id="標題色Input" placeholder="請修改您的標題色" title="請修改您的標題色" >
+
+          <h2>文字色 <samp class="文字色 fa">&diams;</samp></h2>其他文字的顏色
+          <input type="text" id="文字色Input" placeholder="請修改您的文字色" title="請修改您的文字色" >
+          
+          <hr>
+
+
+
+
+
+
+          <h2>廣告功能</h2>開啟廣告功能將會在您的網站上顯示廣告，您將可按展示次數賺取廣告費。
+
+          <div class="toggle-狀態開關">
+            <input type="checkbox" id="廣告功能開關" />
+            <label for="廣告功能開關" class="slider">on      off</label>
+          </div>
+
+
+
+
+
+        </div>
+
+          <button class="btn" onclick="_更新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >更新公司資料</button>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="查看訂單page" class="section">
+      <div class="schedule-container">
+        <h1>查看預約日程表</h1> 
+        <button id="下載預約日程表">下載預約日程表</button>
+        <div class="filters">
+            <label>選擇日期：<input type="date" id="dateFilter"></label>
+            <label>選擇時段：
+                <select id="timeFilter">
+                    <option value="">所有時段</option>
+                </select>
+            </label>
+        </div>
+        <div class="appointment">
+          
+      </div>
+        <div id="Vip查看訂單List"></div>
+      </div>
+    </section>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="產品設置page" class="section">
+      <div id="addForm">
+          <h3>新增產品/服務/項目或師傅的資料</h3>
+          <input type="text" id="產品資料Name" placeholder="請填寫產品/服務/項目或師傅名稱">
+          <input type="number" id="fee" placeholder="收費金額">
+          <input type="text" id="holidays" placeholder="休假日期 (用逗號分隔)" class="holiday-input">
+
+          <br><br>
+          <input type="text" id="查日程密碼" placeholder="請填寫師傅獨立的日程表查詢密碼">
+          <br><br>
+          <button onclick="add產品資料();_更新數據B('產品資料', 產品資料, cut文件前綴);">新增產品</button>
+      </div>
+      <hr>
+      <div id="dataList"></div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="#" >
+      <div class="container 廣告位" id="廣告位3" style='background-image: url();'>
+      </div>
+    </a>
+
+
+    <nav style="text-align: center;">
+      <br>
+      <div id="nav">
+        <a class="btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('琪琪髮型預約系統');" >💎 免費使用琪琪髮型預約系統</a>
+      </div>
+      <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+    </nav>
+
+    
+
+
+
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::           :::    :::::::::::           :::
+     :+:    :+:        :+: :+:      :+:             :+: :+:
+    +:+    +:+       +:+   +:+     +:+            +:+   +:+
+   +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+  +#+    +#+      +#+     +#+    +#+           +#+     +#+
+ #+#    #+#      #+#     #+#    #+#           #+#     #+#
+#########       ###     ###    ###           ###     ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+  function _MakeOVG_Data(今日) { // 今日日期
+    //console.log('今日...',今日);
+
+    // 模擬已預約的時段
+    預約日程表 = { //ovg
+      [今日]: 
+      { // 使用 today 變數作為鍵
+        '15:15': [
+          {  'name': 'vvvv',  'phone': '888',  'service': 'ss'  },  
+          {  'name': 'mmm',  'phone': '9999',  'service': 'aaaa'  },  
+          {  'name': 'ooo',  'phone': '0000',  'service': 'nnnn'}  ]  
+        ,'15:30': [  
+          {  'name': 'a99a',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
+          {  'name': 'bb',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
+          {  'name': 'cc',  'phone': '64071181',  'service': '無指定師傅 $ 400'} ]  
+        ,'17:15': [
+          {  'name': '陳太',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
+          {  'name': '陳生',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
+          {  'name': 'dmo',  'phone': '64071181',  'service': '無指定師傅 $ 400'}  ]  
+        ,'13:15': [
+          {  'name': '5555',  'phone': '888',  'service': 'ss'  },  
+          {  'name': '666',  'phone': '9999',  'service': 'aaaa'  },  
+          {  'name': '777',  'phone': '0000',  'service': 'nnnn'}  ]  
+      } 
+    };
+
+    //ovg 不用公司名,等vip set 再出設定
+    公司資料 = [{ '公司ws': '64071181', '公司地址': `中環1號`, '營業時間': '13:15', '打烊時間': '17:30', '每時段': '15', '時段做客上限': '3', '廣告功能': 'true'}];
+
+    產品資料 = [//ovg
+      { 師傅: '無指定師傅', 收費: 400, 放假: [],密碼: '' }
+      , { 師傅: '1號師傅', 收費: 500, 放假: [2, 5, 7, 22],密碼: '123' }
+      ,  { 師傅: '2號師傅', 收費: 600, 放假: [3, 8, 15, 21],密碼: '456' }
+      ,  { 師傅: '3號師傅', 收費: 700, 放假: [1, 4, 10, 20],密碼: '789' }
+      ,  { 師傅: '4號師傅', 收費: 800, 放假: [6, 11, 17, 25],密碼: 'sss' }
+    ];
+  }
+
+  function _checkType(料) {
+    if (Array.isArray(料)) {
+        console.log("這是一個列表（陣列）");
+    } else if (typeof 料 === "string") {
+        console.log("這是一個字串");
+    } else {
+        console.log("這既不是列表也不是字串");
+    }
+}
+
+
+
+
+
+
+// 點擊按鈕事件
+$('#下載預約日程表').click(function () {
+    // 格式化預約日程表的資料
+    let formattedText = '';
+
+    for (const [date, slots] of Object.entries(預約日程表)) {
+        formattedText += `日期: ${date}\n`;
+        for (const [time, entries] of Object.entries(slots)) {
+            for (const entry of entries) {
+                formattedText += `    時間: ${time}, 名字: ${entry.name}, 電話: ${entry.phone}, 服務: ${entry.service}\n`;
+            }
+            formattedText += '-'.repeat(3)+'\n';
+        }
+        formattedText += '-'.repeat(8)+'\n';
+    }
+
+    // 建立 Blob 對象
+    const blob = new Blob([formattedText], { type: 'text/plain' });
+
+    // 建立一個隱藏的下載連結
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = '下載預約日程表.txt';
+    link.style.display = 'none';
+
+    // 將連結加入頁面並模擬點擊
+    document.body.appendChild(link);
+    link.click();
+
+    // 點擊後移除連結
+    document.body.removeChild(link);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      :::::::::           :::        ::::::::       ::::::::::
+     :+:    :+:        :+: :+:     :+:    :+:      :+:
+    +:+    +:+       +:+   +:+    +:+             +:+
+   +#++:++#+       +#++:++#++:   :#:             +#++:++#
+  +#+             +#+     +#+   +#+   +#+#      +#+
+ #+#             #+#     #+#   #+#    #+#      #+#
+###             ###     ###    ########       ##########
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+  /***************** 預約表 *****************/
+  // 檢查是否為師傅的放假日
+  function isHoliday(放假日, 日期) {
+    const day = new Date(日期).getDate();
+    return 放假日.includes(day);
+  }
+
+  function 時間轉分鐘(時間字串) {
+    const [小時, 分鐘] = 時間字串.split(':').map(Number);
+    return 小時 * 60 + 分鐘; // 將時間轉換為總分鐘數
+  }
+
+  // 生成時間選項
+  function _預約表(date) {
+
+    const 開始時間 = 時間轉分鐘(公司資料[0].營業時間);
+    const 結束時間 = 時間轉分鐘(公司資料[0].打烊時間);
+    const 時段間隔 = parseInt(公司資料[0].每時段, 10); // 每時段的
+    
+    // 位置
+    const 選服務 = document.getElementById('選服務');
+    const 價目表 = document.getElementById('價目表');
+    價目表.innerHTML = 選服務.innerHTML = ''; // 清空選服務
+
+    產品資料.forEach((item) => {
+      // 價目表
+      const 選服務item = document.createElement('div');
+      選服務item.className = 'service-card';
+
+      假日 = ''
+      if (item.放假.length > 0) 假日 = `<p>假日 ${item.放假.join(',')} 號</p>`
+
+      選服務item.innerHTML = `
+        <h3>${item.師傅}</h3>
+        <p>$ ${item.收費}</p>
+        <p>${假日}</p>
+      `;
+      價目表.appendChild(選服務item); // 將卡片加入到價目表
+      
+      // 當師傅放假時，跳過顯示
+      if (isHoliday(item.放假, date)) {
+        console.log(`${item.師傅} 在 ${date} 放假`);
+        選服務item.className = 'service-card booked';
+        return;
+      }
+      
+      // 服務選項
+      const option = document.createElement('option'); // 建立 <option> 元素
+      option.value = `${item.師傅} $ ${item.收費}`; // 設定選項的值
+      option.textContent = `${item.師傅} $ ${item.收費}`; // 設定選項的顯示文字
+      選服務.appendChild(option); // 將選項加入到 <select> 中
+    });
+
+    // 日程表
+    const schedule = document.getElementById('schedule');
+    schedule.innerHTML = `<h3>${date} 可預約時段</h3>`;
+    $('#預約日期').val(date)
+
+    
+    // + 將字串轉數字
+    for (let hour = 公司資料[0].營業時間; hour < 公司資料[0].打烊時間; hour++) {
+      const hourRow = document.createElement('div');
+      hourRow.className = 'hour-row';
+
+      for (let 分鐘數 = 開始時間; 分鐘數 < 結束時間; 分鐘數 += 時段間隔) {
+        const 小時 = Math.floor(分鐘數 / 60).toString().padStart(2, '0');
+        const 分鐘 = (分鐘數 % 60).toString().padStart(2, '0');
+        const timeString = `${小時}:${分鐘}`;
+
+        // 檢查該時段是否已滿
+        const 預約筆數 = 預約日程表[date]?.[timeString]?.length || 0;
+        const 時段已滿 = 預約筆數 >= +公司資料[0].時段做客上限; // 假設每時段最多 3 筆預約
+
+        // 建立時段元素
+        const timeSlot = document.createElement('div');
+        timeSlot.className = `time-slot ${時段已滿 ? 'booked' : 'available'}`;
+        timeSlot.innerHTML = `<a>${timeString}</a>`;
+        
+        if (!時段已滿) {
+          timeSlot.querySelector('a').addEventListener('click', (event) => {
+            event.preventDefault(); // 防止預設行為
+            document.querySelector('input[name="time"]').value = timeString;
+
+            // 平滑滾動到頁底
+            $('html, body').animate({
+              scrollTop: $('#確認預約').offset().top
+            }, 500);
+          });
+        } else timeSlot.innerHTML = `<a>(客滿)</a>`; // 顯示客滿訊息
+        hourRow.appendChild(timeSlot);
+      }
+      schedule.appendChild(hourRow);
+    }
+  }
+
+
+
+
+
+
+
+
+
+  /*************************************************/
+  /***************** 查看預約日程表 *****************/
+  /*************************************************/
+  function _查看預約日程表(scheduleData,today) {
+    //const today = new Date().toISOString().split('T')[0];
+    const dateFilter = document.getElementById('dateFilter');
+    const timeFilter = document.getElementById('timeFilter');
+    const scheduleContainer = document.getElementById('Vip查看訂單List');
+
+    // 設置日期過濾器的預設值為今天
+    dateFilter.value = today;
+
+    // 更新時段選項
+    function updateTimeOptions(date) {
+        timeFilter.innerHTML = '<option value="">所有時段</option>';
+        if (scheduleData[date]) {
+            Object.keys(scheduleData[date]).forEach(time => {
+                const option = document.createElement('option');
+                option.value = time;
+                option.textContent = time;
+                timeFilter.appendChild(option);
+            });
+        }
+    }
+
+    // 顯示日程表
+    function displaySchedule() {
+        const selectedDate = dateFilter.value;
+        const selectedTime = timeFilter.value;
+        scheduleContainer.innerHTML = '';
+
+        if (!scheduleData[selectedDate]) {
+            scheduleContainer.innerHTML = '<p>該日期沒有預約記錄</p>';
+            return;
+        }
+
+        const dateDiv = document.createElement('div');
+        dateDiv.innerHTML = `
+            <div class="date-header">
+                ${new Date(selectedDate).toLocaleDateString('zh-HK', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    weekday: 'long'
+                })}
+            </div>
+        `;
+
+        const times = selectedTime ? [selectedTime] : Object.keys(scheduleData[selectedDate]);
+
+        times.forEach(time => {
+            const timeSlotDiv = document.createElement('div');
+            timeSlotDiv.className = 'time-slot';
+
+            let appointmentsHtml = '';
+            scheduleData[selectedDate][time].forEach(appointment => {
+                appointmentsHtml += `
+                    <div class="appointment">
+                        <div>${appointment.name}</div>
+                        <div>${appointment.phone}</div>
+                        <div>${appointment.service}</div>
+                    </div>
+                `;
+            });
+
+            timeSlotDiv.innerHTML = `
+                <div class="time-header">${time}</div>
+                <div class="appointments">
+                    ${appointmentsHtml}
+                </div>
+            `;
+
+            dateDiv.appendChild(timeSlotDiv);
+        });
+
+
+        scheduleContainer.appendChild(dateDiv);
+    }
+
+    // 事件監聽器
+    dateFilter.addEventListener('change', function() {
+        updateTimeOptions(this.value);
+        displaySchedule();
+    });
+
+    timeFilter.addEventListener('change', displaySchedule);
+
+    // 初始化顯示
+    updateTimeOptions(today);
+    displaySchedule();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*************************************************/
+  /***************** 提交預約表單 *****************/
+  /*************************************************/
+
+  document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    if (!data.name || !data.phone || !data.service || !data.date || !data.time) {
+      _返液alert('#填必要料')
+      return;
+    }
+    
+    const phonePattern = /^[0-9]{8}$/;
+    if (!phonePattern.test(data.phone)) {
+      _返液alert('#有效電話')
+      return;
+    }
+
+    // 初始化該日期和時間的預約列表
+    if (!預約日程表[data.date]) {
+      預約日程表[data.date] = {};
+    }
+
+    //console.log(`${預約日程表[data.date][data.time]}==預約日程表[data.date][data.time]`);
+    if (!預約日程表[data.date][data.time]) {
+      預約日程表[data.date][data.time] = []; // 將該時段設定為一個空陣列
+    }
+
+    // 檢查該時段是否已達上限
+    if (預約日程表[data.date][data.time].length >= +公司資料[0].時段做客上限) {
+      _返液alert('#時段已滿')
+      return;
+    }
+
+    // 新增預約至該時段
+    預約日程表[data.date][data.time].push({
+      name: data.name,
+      phone: data.phone,
+      service: data.service
+    });
+
+    // 確認預約成功
+    $('#客名').text(data.name);
+    $('#客Ws').text(data.phone);
+    $('#客時').text(` ${data.date}  ${data.time}`);
+    $('#客買').text(data.service);
+    $('#公名').text(公司資料[0].公司名);
+
+    $('#公ws').html(`<a class="按鈕" href="https://wa.me/${公司資料[0].公司ws}/?text=${data.name}%0A${data.date}%20|%20${data.time}%0A${data.service}" target="_blank"><i class='fab fa-whatsapp'></i> <samp class="fa">${公司資料[0].公司ws}</samp></a>`);
+
+    $('#公址').html(`<a class="按鈕" href="https://www.google.com/maps/search/?api=1&query=${公司資料[0].公司地址}" target="_blank"><i class='fas fa-map-marker-alt'></i> <samp class="fa">${公司資料[0].公司地址}</samp></a>`);
+
+    $('#退出按鈕').show();
+    $('#successMessage').show();
+    this.reset();
+    _預約卡片功能(data.date,data.time);
+
+    _預約表(data.date);
+    //console.log('琪琪髮型預約系統預約日程表=',預約日程表);
+    _更新數據B('琪琪髮型預約系統預約日程表', 預約日程表, cut文件前綴)
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function _預約卡片功能(date,time){
+    
+    // 退出按鈕
+    document.getElementById('退出按鈕').addEventListener('click', (event) => {
+      event.preventDefault(); // 防止預設的跳轉行為
+      location.reload(); // 重新整理網頁
+    });
+
+    // 保存圖片
+    確認預約成功 = document.getElementById('successMessage')
+    const saveButton = document.getElementById('保存圖片');
+    saveButton.addEventListener('click', () => {
+      html2canvas(確認預約成功).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = `${公司資料[0].公司名}_${date}_${time}.png`; // 圖片檔案名稱
+        link.href = canvas.toDataURL('image/png'); // 將 Canvas 轉為圖片 URL
+        link.click(); // 模擬點擊下載
+      });
+    });
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+     :::    :::       ::::::::       ::::::::::       :::::::::
+    :+:    :+:      :+:    :+:      :+:              :+:    :+:
+   +:+    +:+      +:+             +:+              +:+    +:+
+  +#+    +:+      +#++:++#++      +#++:++#         +#++:++#:
+ +#+    +#+             +#+      +#+              +#+    +#+
+#+#    #+#      #+#    #+#      #+#              #+#    #+#
+########        ########       ##########       ###    ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+  function 查詢已預約服務() {
+
+    預約name = $('#查詢預約name').val();
+    預約phone = $('#查詢預約phone').val();
+    if (!預約name || !預約phone) {_返液alert('#填必要料'); return;}
+
+    //console.log(`預約name=${預約name} 預約phone=${預約phone}`);
+    //console.log('琪琪髮型預約系統預約日程表=',預約日程表);
+
+    師傅 = _師傅查詢預約(預約name,預約phone); //不是師傅查回來下一步
+
+    let found = false;
+        $.each(預約日程表, function (dateC, timesC) {
+            $.each(timesC, function (timeC, entries) {
+                entries.forEach(entry => {
+                    if (entry.name === 預約name && entry.phone === 預約phone) {
+                        found = true;
+
+                        // 查詢已預約結果
+                        $('#客名').text(entry.name);
+                        $('#客Ws').text(entry.phone);
+                        $('#客時').text(` ${dateC}  ${timeC}`);
+                        $('#客買').text(entry.service);
+                        $('#公名').text(公司資料[0].公司名);
+
+                        $('#公ws').html(`<a class="按鈕" href="https://wa.me/${公司資料[0].公司ws}/?text=${entry.name}%0A${dateC}%20|%20${timeC}%0A${entry.service}" target="_blank"><i class='fab fa-whatsapp'></i> <samp class="fa">${公司資料[0].公司ws}</samp></a>`);
+
+                        $('#公址').html(`<a class="按鈕" href="https://www.google.com/maps/search/?api=1&query=${公司資料[0].公司地址}" target="_blank"><i class='fas fa-map-marker-alt'></i> <samp class="fa">${公司資料[0].公司地址}</samp></a>`);
+
+                        $('#退出按鈕').show();
+                        $('#successMessage').show();
+                        _預約卡片功能(dateC,timeC)
+
+                    }
+                });
+            });
+        });
+        if (!found && !師傅)  $('#查詢已預約結果').show();
+  }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+          :::        :::::::::         :::   :::       :::::::::::       ::::    :::
+       :+: :+:      :+:    :+:       :+:+: :+:+:          :+:           :+:+:   :+:
+     +:+   +:+     +:+    +:+      +:+ +:+:+ +:+         +:+           :+:+:+  +:+
+   +#++:++#++:    +#+    +:+      +#+  +:+  +#+         +#+           +#+ +:+ +#+
+  +#+     +#+    +#+    +#+      +#+       +#+         +#+           +#+  +#+#+#
+ #+#     #+#    #+#    #+#      #+#       #+#         #+#           #+#   #+#+#
+###     ###    #########       ###       ###     ###########       ###    ####
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+  function _師傅查詢預約(name,pws){
+    //console.log(`_師傅查詢預約=`);
+    //console.log(`產品資321料==${產品資料}`);
+    const 師傅查詢預約result = $('#師傅查詢預約result');
+    
+    師傅查詢預約result.empty(); // 清空舊結果
+
+        // 驗證師傅與密碼是否匹配
+        const matchedProduct = 產品資料.find(item => item.師傅 === name && item.密碼 === pws);
+        if (!matchedProduct) return false; //不是師傅查回 查詢已預約服務
+
+        // 匹配的師傅名稱
+        const matchedMaster = matchedProduct.師傅;
+        let found = false;
+
+        // 遍歷預約日程表，查找 service 中包含匹配的師傅名稱的資料
+        $.each(預約日程表, function (date, times) {
+            $.each(times, function (time, entries) {
+                entries.forEach(entry => {
+                    if (entry.service.includes(matchedMaster)) {
+                        found = true;
+                        師傅查詢預約result.append(
+                            `<li>預約時間：${date} ${time} | 客戶名：${entry.name} | 聯絡：${entry.phone} | 服務:${entry.service}</li><hr>`
+                        );
+                    }
+                });
+            });
+        });
+    return true; // 是師傅查 不顯 查詢已預約結果
+    };
+
+
+
+
+
+
+
+
+    function _display產品資料() {
+        const dataList = document.getElementById('dataList');
+        dataList.innerHTML = '<h3>現有資料</h3>';
+        
+        產品資料.forEach((master, index) => {
+
+            let 師查密 = ''
+            if (master.密碼) 師查密 = master.密碼
+            const div = document.createElement('div');
+            div.className = 'data-row';
+            div.innerHTML = `
+              <p style="float:left;">
+                <strong>${master.師傅}</strong> | 
+                $ ${master.收費} | 
+                <strong>休假日期:</strong> ${master.放假.join(', ')}
+                <br>
+                ${師查密}
+              </p>
+
+              <button class="delete" onclick="deleteMaster(${index})">刪除</button>
+              <hr class="clear-float">
+            `;
+            dataList.appendChild(div);
+        });
+
+        /*
+        // 顯示JSON格式
+        const jsonDiv = document.createElement('div');
+        jsonDiv.innerHTML = `
+            <h3>JSON 資料:</h3>
+            <pre>${JSON.stringify(產品資料, null, 2)}</pre>
+        `;
+        dataList.appendChild(jsonDiv);
+        */
+    }
+
+
+
+
+
+
+
+
+
+
+
+    
+    function add產品資料() {
+        const 產品資料Name = document.getElementById('產品資料Name').value;
+        const fee = parseInt(document.getElementById('fee').value);
+        const holidaysInput = document.getElementById('holidays').value;
+
+        const 查碼 = document.getElementById('查日程密碼').value;
+
+        // 檢查必要欄位是否填寫
+        if (!產品資料Name || isNaN(fee)) {
+            alert('請填寫完整資料！');
+            return;
+        }
+
+        // 將輸入的假期字串分割成陣列，並過濾掉空白和重複的值
+        let holidays = holidaysInput
+            .split(',') // 分割字串
+            .filter(value => value.trim() !== '') // 過濾掉空白
+            .map(Number) // 轉換為數字
+            .filter((value, index, self) => !isNaN(value) && self.indexOf(value) === index); // 刪除重複的數字
+
+        // 將假期直接存儲為陣列
+        產品資料.push({
+            "師傅": 產品資料Name,
+            "收費": fee,
+            "放假": holidays,
+            "密碼": 查碼 // 這裡存儲為陣列
+        });
+
+        // 清空輸入欄位
+        document.getElementById('產品資料Name').value = '';
+        document.getElementById('fee').value = '';
+        document.getElementById('holidays').value = '';
+        document.getElementById('查日程密碼').value = '';
+
+        _display產品資料();
+    }
+
+
+
+
+
+
+
+    
+    function deleteMaster(index) {
+        if (confirm('確定要刪除這筆資料嗎？')) {
+            產品資料.splice(index, 1);
+            _display產品資料();
+        }
+    }
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+     :::    :::       :::::::::       :::::::::           :::    :::::::::::           :::
+    :+:    :+:       :+:    :+:      :+:    :+:        :+: :+:      :+:             :+: :+:
+   +:+    +:+       +:+    +:+      +:+    +:+       +:+   +:+     +:+            +:+   +:+
+  +#+    +:+       +#++:++#+       +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+ +#+    +#+       +#+             +#+    +#+      +#+     +#+    +#+           +#+     +#+
+#+#    #+#       #+#             #+#    #+#      #+#     #+#    #+#           #+#     #+#
+########        ###             #########       ###     ###    ###           ###     ###
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+function _更新野(數據id, data位) {
+
+  //篩選條件
+  if ($('#營業時間Input').val() >= $('#打烊時間Input').val()) {
+    _返液alert('#小於打烊')
+    return;
+  }
+  // up新數據
+  let 新data , data內id, all新數據;
+  // 有多個data位
+  if(Array.isArray(data位)) {
+    //console.log('有多個data位...');
+    新data = []
+    data內id = [] 
+    for (data of data位) {
+      新data.push($(`#${data}`).val()) // 存每個data
+      data內id.push(data.split('Input')[0]) // 存每個data的id
+    }
+
+    //廣告功能
+    新data.push(廣告功能) ;
+    data內id.push('廣告功能');
+
+    // 組合所有新數據
+    all新數據 = `[{`;
+    // 確保每個 id 對應一個值
+    for (let i = 0; i < data內id.length; i++) {
+      all新數據 += `${data內id[i]}:'${新data[i]}',`;
+    }
+    // 去除最後多餘的逗號並補上結尾括號
+    all新數據 = all新數據.slice(0, -1) + `}]`;
+  }
+  // 只有一個data位
+  else {
+    //console.log('只有一個data位...');
+    新data = $(`#${data位}`).val();
+    all新數據 = 新data;
+  }
+
+  console.log(`all新數據=${all新數據}!!!`);
+  _更新數據B(數據id, all新數據, cut文件前綴)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      ::::::::       ::::::::       ::::::::
+    :+:    :+:     :+:    :+:     :+:    :+:
+   +:+            +:+            +:+
+  +#+            +#++:++#++     +#++:++#++
+ +#+                   +#+            +#+
+#+#    #+#     #+#    #+#     #+#    #+#
+########       ########       ########
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+
+
+
+  function _MakeCss() {
+
+    // 沒標記退
+    if(!localStorage.getItem('VipAdmin標記')) return
+
+    // VIP登入 轉 css
+    $('#nav').html(`
+      <p>${已登入帳號} 歡迎回來!</p>
+
+      <button class="btn" id="預約btn" onclick="_導航換頁('預約')" ><i class="fa fa-home" aria-hidden="true"></i></button>
+
+      <button class="btn" id="VIP設置btn" onclick="_導航換頁('VIP設置')" ><i class="fa fa-cogs" aria-hidden="true"></i></button>
+
+      <button class="btn" id="產品設置btn" onclick="_導航換頁('產品設置')" ><i class="fa fa-gift" aria-hidden="true"></i></button>
+
+      <button class="btn" id="訂單btn" onclick="_導航換頁('查看訂單')" ><i class="fa fa-list-alt" aria-hidden="true"></i></button>
+
+      <button class="btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('琪琪髮型預約系統','出');"><i class="fa fa-times" ></i></button>
+    `)
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+   :::     :::       :::::::::::       :::::::::
+  :+:     :+:           :+:           :+:    :+:
+ +:+     +:+           +:+           +:+    +:+
++#+     +:+           +#+           +#++:++#+
++#+   +#+            +#+           +#+
+#+#+#+#             #+#           #+#
+ ###           ###########       ###
+
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+  
+  const 登出離線數據 = ['帳戶名稱','數據文件','離線VIP網料', '琪琪髮型預約系統預約日程表', '公司資料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版', '預約日程表B','VIP註冊時的網模版']
+
+
+
+
+  function _睇罕竹() {
+    for (ww of 登出離線數據){
+      console.log(`${ww}==${localStorage.getItem(ww)}`);
+    }
+
+  }
+
+
+
+  async function _登入AKI(today) {
+
+    _不同分流退出();
+  
+      //console.log('預約日程表 ovg==', 預約日程表);
+      預約日程表B = await _取本頁數據庫('琪琪髮型預約系統預約日程表', '琪琪髮型預約系統預約日程表','JSON');  
+      if (預約日程表B) 預約日程表 = JSON.parse(預約日程表B)
+      //console.log('預約日程表 VIP==', 預約日程表);
+
+      //console.log('公司資料 ovg==', 公司資料);
+      公司資料B = await _取本頁數據庫('公司資料', '公司資料','html碼');
+      if (公司資料B) 公司資料 = eval(公司資料B)
+      //console.log('公司資料 VIP==', 公司資料);
+
+      //console.log('產品資料 ovg==', 產品資料);
+      產品資料B = await _取本頁數據庫('產品資料', '產品資料','html碼');
+      if (產品資料B) 產品資料 = eval(產品資料B)
+      //console.log('產品資料 VIP==', 產品資料);
+
+      // 初始化預約表
+      _預約表(today);
+      _查看預約日程表(預約日程表,today);
+
+      // 初始顯示
+      _display產品資料();
+
+    if(公司資料[0].公司名) {
+      //console.log(`公司資料[0].公司名=${公司資料[0].公司名}`);
+      document.title = 公司資料[0].公司名;
+      $('#本公司名稱').html(`
+        <h1>${公司資料[0].公司名}</h1>
+        <p>${公司資料[0].公司簡介}</p>
+      `);
+      $('#本公司名稱B').text(公司資料[0].公司名);
+      入料 = ['公司名','公司簡介', '公司ws', '公司地址', '營業時間', '打烊時間', '每時段', '時段做客上限', '主題色', '按鈕色', '標題色', '文字色'];
+      for (入單料 of 入料) {
+        $('#'+入單料+'Input').val(公司資料[0][入單料]);
+      };
+
+      $('#電地').html(`
+        <a href="https://wa.me/${公司資料[0].公司ws}/?text=${公司資料[0].公司名}您好"  target="_blank"><i class='fab fa-whatsapp'></i> <samp class="fa">${公司資料[0].公司ws}</samp></a>
+        <hr>
+        <a href="https://www.google.com/maps/search/?api=1&query=${公司資料[0].公司地址}" target="_blank"><i class='fas fa-map-marker-alt'></i> <samp class="fa">${公司資料[0].公司地址}</samp></a>
+      `);
+
+      廣告功能 = eval(公司資料[0].廣告功能);
+      if(廣告功能 == true) $('.廣告位').show(); 
+
+      $('.有網頁標題再顯').show();
+
+      // 使用 jQuery 修改 CSS Variables
+      document.documentElement.style.setProperty("--主題色", 公司資料[0].主題色);
+      document.documentElement.style.setProperty("--按鈕色", 公司資料[0].按鈕色);
+      document.documentElement.style.setProperty("--標題色", 公司資料[0].標題色);
+      document.documentElement.style.setProperty("--文字色", 公司資料[0].文字色);
+    }
+
+    // VIP的網址
+    document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
+    _生成QRCode('VipPegaIDInput','您的網址qrcode')
+    
+
+
+
+
+    // 初始廣告功能值
+    //let 廣告功能 = true;
+    // 頁面加載後根據廣告功能值設定開關預設狀態
+    $(document).ready(function () {
+      const 開關 = $('#廣告功能開關');
+      // 設定預設狀態
+      if (廣告功能) {
+        開關.prop('checked', true);
+        //console.log(`預設狀態：開啟`);
+      } else {
+        開關.prop('checked', false);
+        //console.log(`預設狀態：關閉`);
+      }
+      // 綁定開關狀態改變事件
+      開關.change(function () {
+        if ($(this).is(':checked')) {
+          廣告功能 = true;
+          //console.log(`開關已開啟=${廣告功能}`);
+        } else {
+          廣告功能 = false;
+          //console.log(`開關已關閉=${廣告功能}`);
+        }
+      });
+    });
+
+
+
+    
+    // VIP的會員數
+    //_取本頁數據庫('VIP的UserID','VIP的UserID')
+    //Vip的會員數 = localStorage.getItem('VIP的UserID');
+    //if(Vip的會員數) $('#Vip會員數').text(Vip的會員數.split('\\').length - 1);
+    
+
+    // vip的useer的注冊鍵
+    _MakeCss()
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      ::::::::   :::::::::::           :::        :::::::::   :::::::::::
+    :+:    :+:      :+:             :+: :+:      :+:    :+:      :+:
+   +:+             +:+            +:+   +:+     +:+    +:+      +:+
+  +#++:++#++      +#+           +#++:++#++:    +#++:++#:       +#+
+        +#+      +#+           +#+     +#+    +#+    +#+      +#+
+#+#    #+#      #+#           #+#     #+#    #+#    #+#      #+#
+########       ###           ###     ###    ###    ###      ###
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+  // 取vip數據
+  let 已登入帳號
+    , 帳號數據庫
+    , cut文件前綴 = '.io/d0/'
+    , 廣告功能 = false
+    , 預約日程表
+    , 公司資料
+    , 產品資料
+    , 本公司名稱 = 版模 = '琪琪髮型預約系統';
+    
+
+    function Start() {
+      已登入帳號 = _帳戶名稱() 
+      帳號數據庫 = _數據文件()
+      // 設定日期選擇器的最小日期為今天
+      const dateInput = document.querySelector('input[type="date"]');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today; // 預約日期 預設為今天
+
+      // 選擇日期
+      dateInput.addEventListener('change', (e) => {
+        _預約表(e.target.value);
+      });
+
+      // 生成模擬數據
+      _MakeOVG_Data(today);
+      _預約表(today);
+
+      _登入AKI(today); // 初始化預約表 // _查看預約日程表
+      
+    }
+
+
+    琪琪修改()
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">// 保存圖片</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::            :::        ::::    :::       ::::::::      :::    :::
+     :+:          :+: :+:      :+:+:   :+:      :+:    :+:     :+:    :+:
+    +:+         +:+   +:+     :+:+:+  +:+      +:+            +:+    +:+
+   +#+        +#++:++#++:    +#+ +:+ +#+      :#:            +#+    +:+
+  +#+        +#+     +#+    +#+  +#+#+#      +#+   +#+#     +#+    +#+
+ #+#        #+#     #+#    #+#   #+#+#      #+#    #+#     #+#    #+#
+########## ###     ###    ###    ####       ########       ########
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+
+
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+  <script>
+      // 顯示聯莫
+      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+      ];
+      
+      translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+      //進行翻譯
+      setTimeout(function() { translate.execute();_顯示聯莫(聯莫);  }, 2000); // js更新要等
+  </script>
+  </body>
+  </html>

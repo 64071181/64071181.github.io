@@ -1,0 +1,378 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>琪琪食飯公司 - 美味健康午餐外送</title>
+        <style>
+            body {font-family: 'Noto Sans TC', sans-serif;line-height: 1.6;color: #333;max-width: 1200px;margin: 0 auto;padding: 20px;background-color: #f7f7f7;}
+            header {text-align: center;padding: 20px 0;background-color: #ff9900;color: white;border-radius: 10px;}
+            h1 {font-size: 2.5em;margin-bottom: 10px;}
+            nav {margin-top: 20px;}
+            nav a {color: white;text-decoration: none;padding: 5px 10px;margin: 0 5px;background-color: #ff7700;border-radius: 5px;transition: background-color 0.3s;}
+            nav a:hover {background-color: #ff5500;}
+            .分頁內容 {display: flex;flex-wrap: wrap;justify-content: space-around;margin-top: 30px;max-width: auto;text-align: center;}
+            .menu-item {background-color: white;border-radius: 10px;padding: 20px;margin: 10px;/*width: calc(33.33% - 20px);*/
+                width: 330px;box-shadow: 0 4px 6px rgba(0,0,0,0.1);transition: transform 0.3s;}
+            .menu-item:hover {transform: translateY(-5px);}
+            .menu-item img {width: 100%;height: 200px;object-fit: cover;border-radius: 5px;}
+            .menu-item h3 {margin-top: 10px;color: #ff9900;}
+            .price {font-weight: bold;color: #ff7700;font-size: 1.2em;}
+            .add-to-cart {background-color: #ff9900;color: white;border: none;padding: 10px 15px;border-radius: 5px;cursor: pointer;transition: background-color 0.3s;}
+            .add-to-cart:hover {background-color: #ff7700;}
+            #cart {position: fixed;top: 20px;right: 20px;background-color: white;padding: 10px;border-radius: 5px;box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+            footer {text-align: center;margin-top: 50px;padding: 20px;background-color: #ff9900;color: white;border-radius: 10px;}
+        </style>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.js">//jq</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">//shr256</script>
+
+
+        <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
+    </head>
+    <body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <header><!-- js動態填充 --></header>
+
+        <main id="內容"><!-- js動態填充 --></main>
+
+        <div id="cart">
+            <h3>購物車</h3>
+            <ul id="cart-items"></ul>
+            <p>總計：<span id="cart-total">$0</span></p>
+            <div id="cartButtons">
+                <!-- 送外賣版 <a href="#order">結帳</a> --> 
+                <button id="checkout" >結帳</button>
+            </div>
+        </div>
+
+        <footer>
+            <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
+            <a href="#網站標題"> ^ </a>
+        </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::           :::    :::::::::::           :::
+     :+:    :+:        :+: :+:      :+:             :+: :+:
+    +:+    +:+       +:+   +:+     +:+            +:+   +:+
+   +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+  +#+    +#+      +#+     +#+    +#+           +#+     +#+
+ #+#    #+#      #+#     #+#    #+#           #+#     #+#
+#########       ###     ###    ###           ###     ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+        const 標題聯絡 =[ '琪琪食飯公司','健康午餐、美味外送', '85264071181']
+
+        const 目錄 = [ '今日餐單', '其他小食', '關於我們', '客戶需知'] 
+
+        const 今日餐單 = [
+
+        ,{ "圖": "https://yt3.ggpht.com/kvd5mFnIjfILUQQJbr0TfCT7drT1Z9E0Zv8f8XCQHJDXD4NJUK3b-UWodzeRx3XAEamIc_SNKKQ=s48-c-k-c0x00ffffff-no-rj",
+        "餐名": "A餐：輕盈沙拉碗",
+        "介紹": "新鮮蔬菜搭配嫩煎雞胸肉，健康美味！",
+        "價格": "80" },
+        { "圖": "",
+        "餐名": "B餐：鮭魚糙米套餐",
+        "介紹": "營養均衡的完美組合，適合注重健康的你！",
+        "價格": "95" },
+        { "圖": "",
+        "餐名": "C餐：泰式咖哩雞",
+        "介紹": "香濃咖哩搭配嫩嫩雞肉，異國風味一次滿足！",
+        "價格": "52" },
+        { "圖": "",
+        "餐名": "D餐：義式番茄肉丸麵",
+        "介紹": "鮮嫩牛肉搭配甜潤洋蔥，日式風味十足！",
+        "價格": "54" },
+        { "圖": "",
+        "餐名": "E餐：日式牛丼",
+        "介紹": "香濃咖哩搭配嫩嫩雞肉，異國風味一次滿足！",
+        "價格": "85" },
+        { "圖": "",
+        "餐名": "X餐：今日驚喜",
+        "介紹": "由主廚精心準備的特別餐點，每日更換，充滿驚喜！",
+        "價格": "100" },
+        ];
+
+        const 其他小食 = [{ "圖": "","餐名": "季節水果沙拉", "介紹": "新鮮應季水果，清爽可口！","價格": "45" },{ "圖": "","餐名": "希臘優格", "介紹": "濃郁優格搭配香脆堅果和天然蜂蜜。","價格": "38" },];
+
+        const 關於我們 = ['<p>我們成立於2020年，我們致力於為忙碌的上班族提供健康美味的午餐選擇。我們的廚師團隊每天精心準備新鮮食材，確保每一份餐點都充滿美味與營養。</p>'];
+
+        const 客戶需知 = ['<ul><li>取餐時間：週一至週五 11:30-18:00</li><li>最低訂購金額：$10</li><li>付款方式：現金、八達通、微信支付、支付寶</li><li>如需取消訂單，請於取餐時間前1小時聯繫我們</li></ul>'];
+
+        const 送餐聯絡資訊 = ['<form><label for="name">姓名：</label><input type="text" id="name" name="name" required><label for="phone">電話：</label><input type="tel" id="phone" name="phone" required><label for="address">送餐地址：</label><textarea id="address" name="address" required></textarea><label for="notes">備註：</label><textarea id="notes" name="notes"></textarea><button id="checkout" type="submit">確認訂單</button></form>'];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* 
+        用:
+
+        備好data (d): const 目錄 = []
+        const 目錄 = eval(CryptoJS.AES.decrypt(宣傳王目錄data, 摸老婆).toString(CryptoJS.enc.Utf8))
+
+        顯示內容(目錄,'#導航欄')
+        顯示內容(今日餐單, '#menu1 .分頁內容')
+        */
+
+        function 顯示內容(內容, 顯示位) {
+            const 顯示位B = $(顯示位);
+            顯示位B.empty(); // 清空內容
+
+            // 標題聯絡
+            if (顯示位 == '#網站標題') {
+                // 加入主要內容
+                const 頭板塊 = $(`
+                    <h1 id="網站標題">${內容[0]}</h1>
+                    <h2>${內容[1]}</h2>
+                    <nav id="導航欄"><!-- js動態填充 --></nav>
+                    <p id="translate"></p>
+                `);
+                $('header').append(頭板塊);
+            }
+
+            // 導航欄 + 內容板塊
+            else if (顯示位 == '#導航欄') {
+                const 主要內容位 = $('#內容');
+                主要內容位.empty(); // 清空內容
+
+                內容.forEach(內容 => {
+                    // 加入導航欄
+                    const 每個導航 = $(`<a href="#${內容}">${內容}</a>`);
+                    顯示位B.append(每個導航);
+
+                    // 送外賣版
+                    if (內容 == '送餐聯絡資訊') {$('#cartButtons').html(`<a href="#order">結帳</a>`);}
+
+                    // 加入主要內容
+                    const 每個內容板塊 = $(`
+                        <section id="${內容}">
+                            <h2>${內容}</h2>
+                            <div class="分頁內容"><!-- js動態填充 --></div>
+                        </section>
+                    `);
+                    主要內容位.append(每個內容板塊);
+                });
+            }
+
+            // 文章data     
+            else if (顯示位 == '#關於我們 .分頁內容' || 顯示位 == '#客戶需知 .分頁內容') {
+                內容.forEach(內容 => {
+                    顯示位B.append(內容);
+                });
+            }
+
+            // 產品data
+            else {
+                內容.forEach(內容 => {
+                    const 每個內容 = $(`
+                        <div class="menu-item">
+                            ${內容.圖 ? `<img src="${內容.圖}" alt="${內容.餐名}" width="300" height="200">` : ''}
+                            <h3>${內容.餐名}</h3>
+                            <p>${內容.介紹}</p>
+                            <p class="price">$${內容.價格}</p>
+                            <button class="add-to-cart">加入購物車</button>
+                        </div>
+                    `);
+                    顯示位B.append(每個內容);
+                });
+            }
+
+        }
+
+
+        // 顯示內容
+        顯示內容(標題聯絡,'#網站標題')
+        顯示內容(目錄,'#導航欄')
+        顯示內容(今日餐單, '#今日餐單 .分頁內容')
+        顯示內容(其他小食, '#其他小食 .分頁內容')
+        顯示內容(關於我們, '#關於我們 .分頁內容')
+        顯示內容(客戶需知, '#客戶需知 .分頁內容')
+        //顯示內容(送餐聯絡資訊, '#送餐聯絡資訊 .分頁內容')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::      :::    :::   :::::::::::        ::::::::           :::    :::::::::::
+     :+:    :+:     :+:    :+:       :+:           :+:    :+:        :+: :+:      :+:
+    +:+    +:+     +:+    +:+       +:+           +:+              +:+   +:+     +:+
+   +#++:++#+      +#+    +:+       +#+           +#+             +#++:++#++:    +#+
+  +#+    +#+     +#+    +#+       +#+           +#+             +#+     +#+    +#+
+ #+#    #+#     #+#    #+#       #+#           #+#    #+#      #+#     #+#    #+#
+#########       ########        ###            ########       ###     ###    ###
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+        // 簡單的購物車功能
+        const cart = [];
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const checkoutButton = document.getElementById('checkout');
+
+        
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const menuItem = button.closest('.menu-item');
+                const name = menuItem.querySelector('h3').textContent;
+                const price = parseFloat(menuItem.querySelector('.price').textContent.replace('$', ''));
+                cart.push({ name, price });
+                updateCart();
+
+                
+            });
+        });
+
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'txt'; // 加 .txt className
+                li.textContent = `${item.name} - $${item.price}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+            cartTotal.className = 'txt';
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // 打開ws下訂單
+        checkoutButton.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('購物車是空的！請先加入商品。');
+            } else {
+                // 取 訂單內容 並 轉為ws字符
+                const 訂單內容 = $('#cart .txt').map(function() {
+                    return $(this).text(); // 取得每個 .txt 的純文字
+                }).get();
+                訂單內容B = 訂單內容.join('%0A').replace(" ","%20")
+                //console.log('訂單內容=',訂單內容B);
+                cart.length = 0;
+                updateCart()
+                ws訂單ulr = `https://wa.me/${標題聯絡[2]}/?text=${訂單內容B}`
+                window.open(ws訂單ulr, '_blank');
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <script s2222222rc="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+    <script>
+        translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+        //進行翻譯
+        setTimeout(function() { translate.execute()  }, 800);
+    </script>
+</body>
+</html>
