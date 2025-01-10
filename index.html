@@ -31,16 +31,12 @@
 
 
 
-  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
-
-
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <!--  --><script src="數碼轉型/00mokJsApi.js"></script> 
-  <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+  <script src="../mokJsapi/a.js"></script>
   
   <meta name="google-site-verification" content="zKKu5phgon5Fp0BeiCOzKKveF1F_iRW9W9cbctL3Hl4" />
 </head>
@@ -375,7 +371,7 @@
         gameOverScreen.style.display = 'block';
       }
   
-      function init() {
+      function Start() {
         score = parseInt(localStorage.getItem('cuteAnimalPortalDashScore')) || 0;
         updateScore(0);
         updateCharacterSelect();
@@ -461,8 +457,8 @@
       shareScoreButton.addEventListener('click', shareScore);
   
   
-      init();
-
+      //Start();
+      琪琪修改('../')
 
 
 

@@ -22,12 +22,12 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../mokJsapi/aki.css">
+
 
     <title>商戶列表|Mok's Group Limited</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
-    <script src="../mokJsapi/mokJsApi.js"></script>
+    <script src="../mokJsapi/a.js"></script>
 </head>
 <body>
 
@@ -116,12 +116,13 @@
             });
         }
     
-        
+        function Start(){ 
+            取得倉庫內容();
+            $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.member-card',true); });
+        }
 
         // 開始執行
-        取得倉庫內容();
-
-        $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.member-card',true); });
+        琪琪修改('../')
     </script>
 
 
