@@ -119,11 +119,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
 
 
-    <!--
-    <a href="javascript:void(0);" onclick="登出莫氏VIP(
-      ['帳戶名稱','數據文件','離線VIP網料', '產品料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版','琪琪髮型預約系統預約日程表','預約日程表B','VIP註冊時的網模版']
-    )">登出並清除記錄 aki</a>
-    -->
+    
 
 
     <div class="panel-face front">
@@ -134,6 +130,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         <input id="登入密碼" type="password" placeholder="密碼" required>
         <button onclick="登入()"  type="submit">登入</button>
         <div class="switch-form" onclick="switchForm('register')">新用戶註冊</div>
+
+        <a href="javascript:void(0);" onclick="localStorage.clear();" style="text-decoration: none;">.</a>
+  
 
       </div>
     </div>
@@ -207,13 +206,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   */
   const 由網  = localStorage.getItem('莫氏VIP分流')
   上次網  = localStorage.getItem('上次網')
-  console.log(`上次網: ${上次網}  這次網: ${由網}`);
+  console.log(`上次網: ${上次網}  這次網: ${由網} `);
   localStorage.setItem('上次網', 由網);
 
   // 各網login
   let 只有vipUser才會帶數據庫登入 //由vip的網站到此login
 
-  // 用於對比入網和數據中模版是否一致 // _vipLogin分流@mokJsApi.js
+  // 用於對比入網和數據中模版是否一致 // Vip登入莫氏系統2025@mokJsApi.js
     , 註冊時的網模版 = localStorage.getItem('VIP註冊時的網模版')
   function 各網login(){
 
@@ -247,9 +246,9 @@ async function 登入(){
     , 密碼 = sha256(登入密碼)
 
     , 真帳號 = sha256(`0mo${帳號}kL${由網}V0`)
-    , 真帳密 = sha256(`${密碼}0mo${帳號}kL${由網}V0`)
+    , 真帳密 = sha256(`${密碼}0mo${帳號}kL${由網}V0`);
 
-    console.log(`真帳密 ${真帳密}`);
+    
     // VIP的User登入 不回來
     if (只有vipUser才會帶數據庫登入) {
       //console.log('只有vipUser才會帶數據庫登入1111',只有vipUser才會帶數據庫登入);
@@ -347,10 +346,8 @@ async function 註冊(vip=''){
     }
 
     數據驗證碼 = `${舊的VIPUserID}${真帳密}${檢測號}%`
-    //數據驗證碼 = `${舊的VIPUserID}${真帳密}${檢測號}$`
-    數據庫位 = `.io/${只有vipUser才會帶數據庫登入.split('/')[3]}/`
-    _更新數據B('VIP的UserID', `${數據驗證碼}`, 數據庫位)
-    //_更新數據B('VIP的UserID', 數據驗證碼, 數據庫位) qqq
+    cut文件前綴 = `.io/${只有vipUser才會帶數據庫登入.split('/')[3]}/`
+    _更新數據B('VIP的UserID', `${數據驗證碼}`, cut文件前綴)
     return;
   } 
 

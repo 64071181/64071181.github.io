@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 設定基本樣式 */
+            body {font-family: Arial, sans-serif;margin: 0;padding: 20px;background: #f5f5f5;}
+            .member-list {max-width: 800px;margin: 0 auto;}
+            .member-card {background: white;border-radius: 8px;padding: 15px;margin-bottom: 15px;box-shadow: 0 2px 4px rgba(0,0,0,0.1);display: flex;align-items: center;transition: transform 0.2s;}
+            .member-card:hover {transform: translateY(-2px);box-shadow: 0 4px 8px rgba(0,0,0,0.2);}
+            .member-avatar {width: 60px;height: 60px;border-radius: 50%;margin-right: 15px;background: #e0e0e0;display: flex;align-items: center;justify-content: center;}
+            .member-avatar img {width: 100%;height: 100%;border-radius: 50%;object-fit: cover;}
+            .member-avatar .no-avatar {color: #999;font-size: 24px;}
+            .member-info {flex: 1;}
+            .member-name {font-size: 18px;font-weight: bold;margin-bottom: 5px;color: #333;}
+            .member-url {color: #2196F3;text-decoration: none;font-size: 14px;}
+            .member-url:hover {text-decoration: underline;}
+            h1 {text-align: center;color: #333;margin-bottom: 30px;}
+            .translateSelectLanguage{position: absolute;top:0;left: 0;right: 0; height: 50px;border-radius: 5%;}
+            body{margin-top: 50px;}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../mokJsapi/aki.css">
+
+    <title>商戶列表|Mok's Group Limited</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+    <script src="../mokJsapi/mokJsApi.js"></script>
+</head>
+<body>
+
+    <div class="member-list">
+        <h1>商戶列表|Mok's Group Limited</h1>
+
+        <div class="搜索的框">
+            <input type="text" id="searchInput" placeholder="搜索商戶、系統、描述或關鍵字..." title="搜索商戶、系統、描述或關鍵字...">
+        </div>
+
+        <div id="搜尋Perplexity"></div>
+
+        <div id="memberContainer"><!-- 會員卡片將由 JavaScript 動態生成 --></div>
+    </div>
+
+    <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+    <p id="translate"></p>
+    <p class="mokJsApi_copyright">版權</p>
+
+
+
+
+    <script>
+        const repo = "64071181";
+        const 官網 = "https://64071181.github.io";
+        let members = [];
+    
+        async function 取得倉庫內容() {
+            // 呼叫 GitHub API，取得倉庫的目錄內容
+            const apiURL = `https://api.github.com/repos/${repo}/d0/contents/`;
+    
+            try {
+                const data = await $.getJSON(apiURL);
+                for (const item of data) {
+                    if (item.type === "file") {
+                        帳號數據庫 = `${官網}/d0/${item.name}`;
+
+                        料 = await _取本頁數據庫('公司資料', '料', 'html碼');
+                        網 = await _取本頁數據庫('VIP的網模版', '網', '不用解謝謝');
+    
+                        if (料) {
+                            const 公司資料 = eval(料);
+                            // 將取得的資料加入 members 陣列
+                            members.push({
+                                name: 公司資料[0].公司名 || "未知名稱",
+                                url: `${官網}/?0x${item.name}`,
+                                avatar: 公司資料[0].LOGO圖片 || null,
+                                模版: 網.split('數碼轉型/')[1].split('.html')[0]
+                            });
+                        }
+
+                    }
+                }
+                //console.log('members',members); // 確保數據正確取得
+                renderMembers(); // 確保在數據載入完成後渲染會員列表
+            } catch (error) {
+                console.log("無法取得資料，請檢查倉庫名稱或 API 限制。", error);
+            }
+        }
+    
+        function renderMembers() {
+            const container = document.getElementById('memberContainer');
+            container.innerHTML = ""; // 確保每次渲染前清空內容
+    
+            members.forEach(member => {
+                const memberCard = document.createElement('a');
+                memberCard.className = 'member-card';
+                memberCard.href = member.url;
+                memberCard.target = '_blank';
+    
+                const avatarHtml = member.avatar
+                    ? `<img src="${member.avatar}" alt="${member.name}的頭像">`
+                    : `<div class="no-avatar">🏢</div>`;
+    
+                    memberCard.innerHTML = `
+                        <div class="member-avatar">
+                            ${avatarHtml}
+                        </div>
+                        <div class="member-info">
+                            <div class="member-name">${member.name}</div>
+                            <p>${member.模版}</p>
+                        </div>
+                    `;
+    
+                container.appendChild(memberCard);
+            });
+        }
+    
+        
+
+        // 開始執行
+        取得倉庫內容();
+
+        $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.member-card',true); });
+    </script>
+
+
+
+</body>
+
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+<script>
+    // 翻譯 
+    //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 顯示聯莫
+    const 聯莫 = [
+        'moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+    ];
+    _顯示聯莫(聯莫);
+
+</script>
+
+
+</html>
