@@ -371,11 +371,16 @@
         gameOverScreen.style.display = 'block';
       }
   
+      // 顯示聯莫
+      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+      ];
       function Start() {
         score = parseInt(localStorage.getItem('cuteAnimalPortalDashScore')) || 0;
         updateScore(0);
         updateCharacterSelect();
         characterSelect.style.display = 'block';
+
+        _顯示聯莫(聯莫);
       }
   
 
@@ -488,10 +493,8 @@
 
     網頁分流();
 
-    // 顯示聯莫
-    const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
-    ];
-    _顯示聯莫(聯莫);
+    
+    
 
   </script>
 
