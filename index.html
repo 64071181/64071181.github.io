@@ -39,6 +39,8 @@
   <script src="../mokJsapi/a.js"></script>
   
   <meta name="google-site-verification" content="zKKu5phgon5Fp0BeiCOzKKveF1F_iRW9W9cbctL3Hl4" />
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+
 </head>
   <body>
 
@@ -375,10 +377,23 @@
       const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
       ];
       function Start() {
+
+        網頁分流();
+
+        
         score = parseInt(localStorage.getItem('cuteAnimalPortalDashScore')) || 0;
         updateScore(0);
         updateCharacterSelect();
         characterSelect.style.display = 'block';
+
+        
+
+        // 翻譯 
+        //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+        translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+        translate.execute();//進行翻譯 
+
+        
 
         _顯示聯莫(聯莫);
       }
@@ -484,15 +499,15 @@
 
   </body>
 
-  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
   <script>
+    /*
       // 翻譯 
       //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
       translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
       translate.execute();//進行翻譯 
 
     網頁分流();
-
+*/
     
     
 
