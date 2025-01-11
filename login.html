@@ -247,7 +247,8 @@ async function 登入(){
     , 真帳號 = sha256(`0mo${帳號}kL${由網}V0`)
     , 真帳密 = sha256(`${密碼}0mo${帳號}kL${由網}V0`);
 
-    
+    _aki睇錯([`@@=真帳號=${真帳號}`])
+
     // VIP的User登入 不回來
     if (只有vipUser才會帶數據庫登入) {
       //console.log('只有vipUser才會帶數據庫登入1111',只有vipUser才會帶數據庫登入);

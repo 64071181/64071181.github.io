@@ -28,8 +28,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
     <script src="../mokJsapi/a.js"></script>
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
 </head>
 <body>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢商戶加盟</samp>
 
     <div class="member-list">
         <h1>商戶列表|Mok's Group Limited</h1>
@@ -55,7 +57,7 @@
         const 官網 = "https://64071181.github.io";
         let members = [];
     
-        async function 取得倉庫內容() {
+        async function 取得gh庫內容() {
             // 呼叫 GitHub API，取得倉庫的目錄內容
             const apiURL = `https://api.github.com/repos/${repo}/d0/contents/`;
     
@@ -116,67 +118,41 @@
             });
         }
     
-        function Start(){ 
-            取得倉庫內容();
+        function Start(){
             $('#searchInput').on('input', function() { _Aki搜尋($(this).val(),'.member-card',true); });
         
-                // 顯示聯莫
+            // 顯示聯莫
             const 聯莫 = [
                 'moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
             ];
             _顯示聯莫(聯莫);
+
+            取得gh庫內容().then(_翻譯);
+            
             
         }
 
+        function _翻譯(){ 
+            // 翻譯 
+            //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        
         // 開始執行
         琪琪修改('../')
+        _翻譯()
     </script>
 
 
 
 </body>
 
+<!--
 <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
 <script>
-    // 翻譯 
-    //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
-    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
-    translate.execute();//進行翻譯 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
-
+-->
 
 </html>
