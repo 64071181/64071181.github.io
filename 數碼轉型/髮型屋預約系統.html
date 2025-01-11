@@ -127,6 +127,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   
   <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
 
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">// 保存圖片</script>
 
   </head>
   <body>    
@@ -1458,17 +1461,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
   
-  const 登出離線數據 = ['帳戶名稱','數據文件','離線VIP網料', '琪琪髮型預約系統預約日程表', '公司資料', 'VIP的UserID','VipAdmin標記','數據中VIP的網模版', '預約日程表B','VIP註冊時的網模版']
 
 
-
-
-  function _睇罕竹() {
-    for (ww of 登出離線數據){
-      console.log(`${ww}==${localStorage.getItem(ww)}`);
-    }
-
-  }
 
 
 
@@ -1631,6 +1625,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 本公司名稱 = 版模 = '琪琪髮型預約系統';
     
 
+    // 顯示聯莫
+    const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+    ];
+
+
+
+
     function Start() {
       已登入帳號 = _帳戶名稱() 
       帳號數據庫 = _數據文件()
@@ -1643,87 +1644,34 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       dateInput.addEventListener('change', (e) => {
         _預約表(e.target.value);
       });
-
+      
       // 生成模擬數據
       _MakeOVG_Data(today);
       _預約表(today);
 
       _登入AKI(today); // 初始化預約表 // _查看預約日程表
       
+      _顯示聯莫(聯莫);
     }
 
 
+  function _翻譯(){ 
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+  }
+
+
+
+    _翻譯()
     琪琪修改()
 
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">// 保存圖片</script>
+  
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-      :::            :::        ::::    :::       ::::::::      :::    :::
-     :+:          :+: :+:      :+:+:   :+:      :+:    :+:     :+:    :+:
-    +:+         +:+   +:+     :+:+:+  +:+      +:+            +:+    +:+
-   +#+        +#++:++#++:    +#+ +:+ +#+      :#:            +#+    +:+
-  +#+        +#+     +#+    +#+  +#+#+#      +#+   +#+#     +#+    +#+
- #+#        #+#     #+#    #+#   #+#+#      #+#    #+#     #+#    #+#
-########## ###     ###    ###    ####       ########       ########
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
--->
-
-
-  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
-  <script>
-      // 顯示聯莫
-      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
-      ];
-      
-      translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
-      //進行翻譯
-      setTimeout(function() { translate.execute();_顯示聯莫(聯莫);  }, 2000); // js更新要等
-  </script>
   </body>
   </html>
