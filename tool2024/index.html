@@ -153,10 +153,6 @@ function 顯示關於我們(內容s) {
     });
 }
 
-// 顯示內容
-renderTools(toolsData);
-顯示關於我們(關於我們列表);
-
 
 // 搜尋功能 ///////////////////////////////////
 // 顯示搜尋結果
@@ -204,14 +200,7 @@ $('#searchInput').on('input', allDisplay);
 
 
 // 添加科技感動畫 ///////////////////////////////////
-setInterval(() => {
-    const toolItems = document.querySelectorAll('.tool-item');
-    const randomItem = toolItems[Math.floor(Math.random() * toolItems.length)];
-    randomItem.classList.add('glow');
-    setTimeout(() => {
-        randomItem.classList.remove('glow');
-    }, 2000);
-}, 3000);
+
 // 粒子背景效果
 particlesJS('particles-js', {
     particles: {
@@ -242,20 +231,25 @@ particlesJS('particles-js', {
     translate.execute();//進行翻譯 
 </script>
 
-<script src="https://64071181.github.io/mokJsapi/mokJsApi.js">//jquery-3.7.0.js 放頭</script>
+<script src="../../mokJsapi/a.js"></script>
 <script>
 
 
-      // 顯示聯莫
-      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
-      ];
-      _顯示聯莫(聯莫);
+function Start() {
+    // 顯示內容
+    renderTools(toolsData);
+    顯示關於我們(關於我們列表);
+    // 顯示聯莫
+    const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+    ];
+    _顯示聯莫(聯莫);
+
+    _客戶追蹤();
+}
+
+琪琪修改('../../')
 
 
-// mokaki //////////////////
-mokJsApi_客戶追蹤();
-
-$(document).ready(防止複製及禁用滑鼠右鍵())
 </script>
 
 
