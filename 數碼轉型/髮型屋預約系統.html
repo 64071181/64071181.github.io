@@ -9,8 +9,18 @@
 
 
 
+<!--
+qqqq
+
+產品新增刪除 確定
 
 
+教學片
+
+宣片
+
+202501170147
+-->
 
 
 
@@ -401,13 +411,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+          <div id="廣告功能Box"></div>
 
-          <h2>廣告功能</h2>開啟廣告功能將會在您的網站上顯示廣告，您將可按展示次數賺取廣告費。
-
-          <div class="toggle-狀態開關">
-            <input type="checkbox" id="廣告功能開關" />
-            <label for="廣告功能開關" class="slider">on      off</label>
-          </div>
 
 
 
@@ -415,7 +420,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         </div>
 
-          <button class="btn" onclick="_更新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >更新公司資料</button>
+          <button class="btn" onclick="_更新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >保存公司資料</button>
       </div>
     </section>
 
@@ -478,10 +483,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           <br><br>
           <input type="text" id="查日程密碼" placeholder="請填寫師傅獨立的日程表查詢密碼">
           <br><br>
-          <button onclick="add產品資料();_更新數據B('產品資料', 產品資料, cut文件前綴);">新增產品</button>
+          <button class="btn" onclick="add產品資料();">新增</button>
       </div>
       <hr>
       <div id="dataList"></div>
+
+      <br><br>
+      <button onclick="_更新數據B('產品資料', 產品資料, cut文件前綴);">保存</button>
 
     </section>
 
@@ -574,9 +582,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       [今日]: 
       { // 使用 today 變數作為鍵
         '15:15': [
-          {  'name': 'vvvv',  'phone': '888',  'service': 'ss'  },  
-          {  'name': 'mmm',  'phone': '9999',  'service': 'aaaa'  },  
-          {  'name': 'ooo',  'phone': '0000',  'service': 'nnnn'}  ]  
+          {  'name': 'vvvv',  'phone': '888',  'service': '1號師傅'  },  
+          {  'name': 'mmm',  'phone': '9999',  'service': '2號師傅'  },  
+          {  'name': 'ooo',  'phone': '0000',  'service': '3號師傅'}  ]  
         ,'15:30': [  
           {  'name': 'a99a',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
           {  'name': 'bb',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
@@ -586,8 +594,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           {  'name': '陳生',  'phone': '64071181',  'service': '無指定師傅 $ 400'  },  
           {  'name': 'dmo',  'phone': '64071181',  'service': '無指定師傅 $ 400'}  ]  
         ,'13:15': [
-          {  'name': '5555',  'phone': '888',  'service': 'ss'  },  
-          {  'name': '666',  'phone': '9999',  'service': 'aaaa'  },  
+          {  'name': '5555',  'phone': '888',  'service': '1號師傅'  },  
+          {  'name': '666',  'phone': '9999',  'service': '無指定師傅'  },  
           {  'name': '777',  'phone': '0000',  'service': 'nnnn'}  ]  
       } 
     };
@@ -635,8 +643,10 @@ $('#下載預約日程表').click(function () {
         formattedText += '-'.repeat(8)+'\n';
     }
 
-    // 建立 Blob 對象
-    const blob = new Blob([formattedText], { type: 'text/plain' });
+    // 添加 UTF-8 BOM 以解決中文亂碼問題
+    const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+    const blob = new Blob([bom, formattedText], { type: 'text/plain;charset=utf-8' });
+
 
     // 建立一個隱藏的下載連結
     const link = document.createElement('a');
@@ -1059,6 +1069,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                         $('#客名').text(entry.name);
                         $('#客Ws').text(entry.phone);
                         $('#客時').text(` ${dateC}  ${timeC}`);
+                        $('#客買').text(entry.service);
                         $('#客買').text(entry.service);
                         $('#公名').text(公司資料[0].公司名);
 
