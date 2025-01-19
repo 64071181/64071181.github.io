@@ -91,13 +91,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     .section { max-height: 0;overflow: hidden;transition: max-height 0.5s ease;    }
     .section.active { max-height: calc(100% - 50px); /* 設定為父容器的 100% */overflow-y: auto; /* 顯示滾動條 */}
     
-    /* 滾動條美化 Firefox */
-    * { scrollbar-width: none; /* 滾動條寬度 */}
     /* 返回頂端 */
     #backToTopBtn {position: relative;bottom: 50px;left: 90%;z-index: 99;background-color: #2977ac00;color: white;border: none;padding: 10px 15px;border-radius: 50%;cursor: pointer;}
     #backToTopBtn:hover {background-color: #5fb8f3;}
 
-    .none{display:none;}
 
   </style>
 
@@ -106,7 +103,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js">//QRcode</script>
 
 
-  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
+  <script src="../../mokjsapi/a.js">//琪琪修改</script>
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 
@@ -522,7 +519,7 @@ function _更新野(數據id, data位) {
 
 
 
-  琪琪修改()
+琪琪修改('../../')
   
 
 
