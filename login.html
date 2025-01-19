@@ -45,8 +45,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   @keyframes gridMove {0% { transform: translateY(0); }
     100% { transform: translateY(50px); }
   }
-  .none{display:none;}
-  
+
   .container {display: flex;justify-content: center;align-items: center;height: 100%;perspective: 1000px;}
   .auth-panel {width: 300px;height: 400px;position: relative;transform-style: preserve-3d;transition: transform 0.6s;}
   .panel-face {position: absolute;width: 100%;height: 100%;backface-visibility: hidden;background: rgba(10, 10, 32, 0.8);border: 2px solid var(--neon-blue);display: flex;justify-content: center;align-items: center;padding: 20px;box-sizing: border-box;}
@@ -65,10 +64,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">//shr256</script>
-
-
-
 <script src="../mokJsapi/a.js"></script>
+<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
 
 </head>
 
@@ -83,13 +80,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
-
-
-<!--
-
-
--->
 
 
 <!--
@@ -113,14 +103,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <samp id="更新約需5分鐘" class="none">更新約需5分鐘，請耐心等待。</samp>
 
 <div class="cyber-grid"></div>
+
 <div class="container">
   <div class="auth-panel" id="authPanel">
-    <p id="translate" style="text-align: center;"></p>
-    <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
 
-
-    
-
+    <p class="mokJsApi_copyright">版權</p>
 
     <div class="panel-face front">
       <div class="auth-form" id="loginForm">
@@ -130,12 +117,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         <input id="登入密碼" type="password" placeholder="密碼" required>
         <button onclick="登入()"  type="submit">登入</button>
         <div class="switch-form" onclick="switchForm('register')">新用戶註冊</div>
-
         <a href="javascript:void(0);" onclick="localStorage.clear();" style="text-decoration: none;">.</a>
-  
-
       </div>
     </div>
+
+
     <div class="panel-face back">
       <div class="auth-form" id="registerForm">
         <h2 id="註冊">?註冊</h2>
@@ -148,6 +134,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       </div>
     </div>
 
+    
   </div>
 </div>
 
@@ -211,13 +198,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   // 各網login
   let 只有vipUser才會帶數據庫登入 //由vip的網站到此login
-
   // 用於對比入網和數據中模版是否一致 // Vip登入莫氏系統2025@mokJsApi.js
     , 註冊時的網模版 = localStorage.getItem('VIP註冊時的網模版')
+
   function Start(){
-
-    
-
     // 判斷是否有分流記錄
     if (由網 != null) $('#登入, #註冊').html(`<a href="./${註冊時的網模版}">${由網}</a>`);
     else $('.container').html(`<h2 style="display: block; width: 100%;"><a href="./${註冊時的網模版}">返回</a></h2><h1 style="display: block; width: 100%;"><a href="https://64071181.github.io/">Mok's Group Limited </a></h1>`);
@@ -225,8 +209,27 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // 註冊鍵轉 vipUser註冊
     只有vipUser才會帶數據庫登入 = _數據文件() 
     if (只有vipUser才會帶數據庫登入) $('#註冊鍵').html(`<button onclick="註冊('VIP的User')" type="submit">註冊</button>`)
+    _翻譯()
+  }
 
-}
+
+  function _翻譯(){ 
+    // 翻譯 
+    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+    translate.execute();//進行翻譯 
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -294,9 +297,6 @@ async function 登入(){
             $('.提示訊息').text(`密碼不符`)
         }
     })
-
-
-
 }
 
 
@@ -307,8 +307,14 @@ async function 登入(){
 
 
 
-async function 註冊(vip=''){
 
+
+
+
+
+
+
+async function 註冊(vip=''){
   /*
   <script src="https://64071181.github.io/d0/008">
   註冊或登入：新用戶名+密=戶口文件名，記到d0，已有帳號直接用文件名內資料。
@@ -471,64 +477,4 @@ style.textContent = `
 document.head.appendChild(style);
 </script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-      :::            :::        ::::    :::       ::::::::      :::    :::
-     :+:          :+: :+:      :+:+:   :+:      :+:    :+:     :+:    :+:
-    +:+         +:+   +:+     :+:+:+  +:+      +:+            +:+    +:+
-   +#+        +#++:++#++:    +#+ +:+ +#+      :#:            +#+    +:+
-  +#+        +#+     +#+    +#+  +#+#+#      +#+   +#+#     +#+    +#+
- #+#        #+#     #+#    #+#   #+#+#      #+#    #+#     #+#    #+#
-########## ###     ###    ###    ####       ########       ########
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
--->
-
-<script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
-<script>
-    // 翻譯 
-    //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
-    translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
-    translate.execute();//進行翻譯 
-</script>
-
-
-
 </html>
