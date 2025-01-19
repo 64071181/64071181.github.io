@@ -21,17 +21,6 @@
       :root {--主題色: #54d6f4;--走馬燈文字色: #edff66;}
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
 
-      /* 上拉顯示logo位 下拉隱藏 */
-      body{margin-top: 50px;}
-      .logo-container {height: 50px;width: 100%;background-color: var(--主題色); display: flex;justify-content: center;align-items: center;
-      position: fixed;top: 0;z-index: 11;transition: .5s ;}
-
-      .logo {color: white;font-size: 24px;font-weight: bold;height: 100%;}
-      .logo img {height: 100%;width: auto;}
-
-      /* 回頂鍵 */
-      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);z-index: 12;}
-
       /* 走馬燈 */
       .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
       .marquee-container:hover .marquee-content {animation-play-state: paused;}
@@ -42,6 +31,8 @@
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
       /* 產品展示 */
+      #PageNav{margin-top: 0px;}
+      .ADminNav{margin-top: 100px;}
       .image-container {width: 100%;text-align: center;}
       .responsive-image {max-width: 100%;height: auto;}
       @media (min-width: 768px) {.responsive-image , .輪播圖, .image-container iframe{  height: auto;  width: 80%;max-width: 960px;}}
@@ -168,12 +159,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   <nav style="text-align: center;">
     <br>
     <div id="nav">
-      <!--
-      <button class="btn" href="javascript:void(0);" onclick="登出莫氏VIP(登出離線數據);登出再登入ViPBtn('瑞瑞產品展示系統','#???');" >💎 免費使用瑞瑞產品展示系統</button>
-      -->
       <button class="btn" href="javascript:void(0);" onclick="Vip登入莫氏系統2025('瑞瑞產品展示系統');" >💎 免費使用瑞瑞產品展示系統</button>
-
-
     </div>
     <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
   </nav>
@@ -313,44 +299,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-      // 回頁頂
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }
-      /* 回頂鍵 */
-      let lastScrollTop = 0;
-      let isScrollingUp = false;
-      window.addEventListener('scroll', function() {
-          // 獲取當前滾動位置
-          let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-          // 判斷滾動方向
-          if (currentScrollTop < lastScrollTop) {
-              isScrollingUp = true;
-          } else {
-              isScrollingUp = false;
-          }
-          // 更新上一次的滾動位置
-          lastScrollTop = currentScrollTop;
-          // 顯示或隱藏「回到頂部」按鈕
-          toggleScrollTopButton();
-      });
-      function toggleScrollTopButton() {
-          const scrollTopButton = document.getElementById('scrollTop');
-          const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
-          if (isScrollingUp && lastScrollTop > displayThreshold) {
-              scrollTopButton.style.display = 'flex';
-              $('.logo-container').css('top', '0px'); // 顯示logo位
-          } else {
-              scrollTopButton.style.display = 'none';
-              $('.logo-container').css('top', '-50px'); // 隱藏logo位
-          }
-          // 顯示logo位
-          if (lastScrollTop < 20) $('.logo-container').css('top', '0px');
-      }
 
 
 
@@ -431,7 +380,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           '公司名': '誠鑫搬家',
           '公司標題': `r精緻型專業搬遷、廠房辦公室搬運最優解｜誠鑫搬家｜北部地區首選、台北市、新北市、桃園市、基隆市`,
           '公司簡介':'各式各樣大型小型及整層搬家皆可，小資學生女性套房搬遷首選！免動手代客精緻打包、超重型、特殊物品搬遷、鋼琴搬運、古董家具搬運、吊車服務、廢棄物清運、居家清潔等，誠鑫搬家全都可以一條龍幫你服務到家！加LINE發問即可享有免費線上估價！',
-          'LOGO圖片':'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/Amy%E5%81%A5%E5%BA%B7%E5%B3%B6logo.png',
+          'LOGO圖片':'https://i.meee.com.tw/QHsmTRN.png',
           '分頁圖示':'02-Favicon分頁圖示.png',
           '社群封面':'https://gs.liteshop.tw/public/meta_og_image/4cFJZCxH9xndRKyC9YEHDDWy/06-社群封面-1200x630(2).webp',
           '主題色':'#54d6f4',

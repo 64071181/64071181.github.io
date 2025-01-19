@@ -9,21 +9,6 @@
 
 
 
-<!--
-qqqq
-
-產品新增刪除 確定
-
-
-教學片
-
-宣片
-
-202501170147
--->
-
-
-
 
 
 
@@ -65,20 +50,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     /* aki */
     :root {--主題色: #263238;--按鈕色: #455a64;--標題色: #ffb300;--文字色: #000;}
     @media (max-width: 768px) {  .services {  grid-template-columns: 1fr;}}
-    .translateSelectLanguage{position: absolute;top:0px;}
-    body{margin-top: 50px;}
-    .fa,.fab,.fas {font-size: 2rem;height: 2rem;}
-    a{text-decoration: none;color: var(--標題色);}
-    * { scrollbar-width: none; /* 滾動條美化 */}
-    .主題色{color: var(--主題色); } 
-    .按鈕色{color: var(--按鈕色); }
-    .標題色{color: var(--標題色); }
-    .文字色,p {color: var(--文字色); }
-    
-    /* 平滑滾動效果 */
-    .header {background: var(--主題色);padding: 1rem;text-align: center;box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-    .container {max-width: 1000px;margin: 2rem auto;padding: 0 1rem;}
-    
+
+
+
+
+
+
     /* 隱藏顯示版塊 */  
     .section { display: none;   }
     .section.active { display: block;}
@@ -188,6 +165,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
+
+  <div class="logo-container"><div class="logo"><img id="本公司logo" ></div></div>
+
   <div id="本公司名稱" class="header">
     <h1>琪琪髮型預約系統</h1>
     <p>專業髮型設計，為您打造完美造型</p>
@@ -346,12 +326,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       <div class="content">
 
         <h2>您的公司名稱</h2>
-        <input type="text" id="公司名Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
+        <input type="text" id="公司名Input" class="要up" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
 
         <div class="有網頁標題再顯 none" >
 
           <h2>公司簡介</h2>請用一句口號來介紹您的公司，讓使用者能快速了解您的服務。
-          <input type="text" id="公司簡介Input" placeholder="請修改您的公司簡介" title="請修改您的公司簡介" >
+          <input type="text" id="公司簡介Input" class="要up" placeholder="請修改您的公司簡介" title="請修改您的公司簡介" >
+
+          <h2>LOGO圖片</h2>
+          <input type="text" id="LOGO圖片Input" class="要up" placeholder="請帖上您的LOGO圖片網址" title="請帖上您的LOGO圖片網址" >
+
+
           <hr>
 
           <!-- 新增成員 -->
@@ -367,18 +352,18 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
           <!-- 公司資料 -->
           <h2>公司Whatsapp</h2>填寫您的Whatsapp，讓客戶能直接與您聯絡。
-          <input type="text" id="公司wsInput" placeholder="請修改您的公司Whatsapp" title="請修改您的公司Whatsapp" >
+          <input type="text" id="公司wsInput" class="要up" placeholder="請修改您的公司Whatsapp" title="請修改您的公司Whatsapp" >
           <h2>公司地址</h2>
-          <input type="text" id="公司地址Input" placeholder="請修改您的公司地址" title="請修改您的公司地址" >
+          <input type="text" id="公司地址Input" class="要up" placeholder="請修改您的公司地址" title="請修改您的公司地址" >
 
           <h2>公司營業時間</h2>
-          <input type="time" required name="time" id="營業時間Input" value="11:15">
+          <input type="time" required name="time" id="營業時間Input" class="要up" value="11:15">
 
           <h2>公司打烊時間</h2>
-          <input type="time" required name="time" id="打烊時間Input" value="18:15">
+          <input type="time" required name="time" id="打烊時間Input" class="要up" value="18:15">
   
           <h2>公司每個服務時段</h2> 請填寫您公司每次服務的平均需時(分鐘),方便管理預約。(5、10、15、20、30、60分鐘)
-          <select id="每時段Input">
+          <select id="每時段Input" class="要up">
             <option value="5">5分鐘</option>
             <option value="10" selected>10分鐘</option>
             <option value="15">15分鐘</option>
@@ -388,22 +373,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           </select>
 
           <h2>公司每時段服務顧客上限</h2> 每個服務時段,最多可同時服務多少個顧客
-          <input type="text" id="時段做客上限Input" placeholder="請修改您的公司每時段服務顧客上限" title="請修改您的公司每時段服務顧客上限" value="1" >
+          <input type="text" id="時段做客上限Input" class="要up" placeholder="請修改您的公司每時段服務顧客上限" title="請修改您的公司每時段服務顧客上限" value="1" >
           <hr>
 
           <!-- 公司用色 -->
           <a href="https://codepen.io/98672794/pen/yLwQzjd" target="_blank" ><i class="fa fa-paint-brush" aria-hidden="true"></i></a>
           <h2>主題色<samp class="主題色 fa">&diams;</samp> </h2>首頁橫幅、按鈕選擇時的高亮色 
-          <input type="text" id="主題色Input" placeholder="請修改您的主題色" title="請修改您的主題色" >
+          <input type="text" id="主題色Input" class="要up" placeholder="請修改您的主題色" title="請修改您的主題色" >
           
           <h2>按鈕色 <samp class="按鈕色 fa">&diams;</samp></h2>
-          <input type="text" id="按鈕色Input" placeholder="請修改您的按鈕色" title="請修改您的按鈕色" >
+          <input type="text" id="按鈕色Input" class="要up" placeholder="請修改您的按鈕色" title="請修改您的按鈕色" >
 
           <h2>標題色 <samp class="標題色 fa">&diams;</samp></h2>標題、按鈕文字色
-          <input type="text" id="標題色Input" placeholder="請修改您的標題色" title="請修改您的標題色" >
+          <input type="text" id="標題色Input" class="要up" placeholder="請修改您的標題色" title="請修改您的標題色" >
 
           <h2>文字色 <samp class="文字色 fa">&diams;</samp></h2>其他文字的顏色
-          <input type="text" id="文字色Input" placeholder="請修改您的文字色" title="請修改您的文字色" >
+          <input type="text" id="文字色Input" class="要up" placeholder="請修改您的文字色" title="請修改您的文字色" >
           
           <hr>
 
@@ -420,7 +405,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         </div>
 
-          <button class="btn" onclick="_更新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >保存公司資料</button>
+          <button class="btn" onclick="_更新野('公司資料')" >保存公司資料</button>
       </div>
     </section>
 
@@ -519,6 +504,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       </div>
       <p class="mokJsApi_copyright" style="text-align: center;">版權</p>
     </nav>
+
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
 
     
 
@@ -702,6 +689,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 ###             ###     ###    ########       ##########
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+
 
   /***************** 預約表 *****************/
   // 檢查是否為師傅的放假日
@@ -1312,13 +1304,26 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
-function _更新野(數據id, data位) {
 
-  //篩選條件
+function _篩選條件() {
   if ($('#營業時間Input').val() >= $('#打烊時間Input').val()) {
     _返液alert('#小於打烊')
-    return;
+    return false;
   }
+  return true;
+}
+
+
+function _更新野(數據id) {
+
+  //篩選條件
+  if (!_篩選條件()) return;
+
+  // 取得 class="要up" 的元素中所有具有 id
+  const data位 = $(".要up").map(function () {
+      return $(this).attr("id");
+  }).get();
+
   // up新數據
   let 新data , data內id, all新數據;
   // 有多個data位
@@ -1481,20 +1486,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     _不同分流退出();
   
-      //console.log('預約日程表 ovg==', 預約日程表);
       預約日程表B = await _取本頁數據庫('琪琪髮型預約系統預約日程表', '琪琪髮型預約系統預約日程表','JSON');  
       if (預約日程表B) 預約日程表 = JSON.parse(預約日程表B)
-      //console.log('預約日程表 VIP==', 預約日程表);
 
-      //console.log('公司資料 ovg==', 公司資料);
       公司資料B = await _取本頁數據庫('公司資料', '公司資料','html碼');
       if (公司資料B) 公司資料 = eval(公司資料B)
-      //console.log('公司資料 VIP==', 公司資料);
-
-      //console.log('產品資料 ovg==', 產品資料);
+    
       產品資料B = await _取本頁數據庫('產品資料', '產品資料','html碼');
       if (產品資料B) 產品資料 = eval(產品資料B)
-      //console.log('產品資料 VIP==', 產品資料);
 
       // 初始化預約表
       _預約表(today);
@@ -1504,13 +1503,34 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       _display產品資料();
 
     if(公司資料[0].公司名) {
-      //console.log(`公司資料[0].公司名=${公司資料[0].公司名}`);
       document.title = 公司資料[0].公司名;
       $('#本公司名稱').html(`
         <h1>${公司資料[0].公司名}</h1>
         <p>${公司資料[0].公司簡介}</p>
       `);
       $('#本公司名稱B').text(公司資料[0].公司名);
+
+      // LOGO圖片
+      $("#本公司logo").attr("src", 公司資料[0].LOGO圖片)
+      // 檢查是否已存在 <link rel="icon">
+      let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
+      $('#LOGO圖片Input').val(公司資料[0].LOGO圖片);
+
+      // 分頁圖示
+      if ($favicon.length) {
+        // 替換現有的分頁圖示
+        $favicon.attr("href", 公司資料[0].LOGO圖片).attr("type", "image/x-icon");
+      } else {
+        // 如果不存在，新增 <link rel="icon">
+        $("head").append(
+        `<link rel="icon" type="image/x-icon" href="${公司資料[0].LOGO圖片}">`
+        );
+      }
+
+
+
+
+
       入料 = ['公司名','公司簡介', '公司ws', '公司地址', '營業時間', '打烊時間', '每時段', '時段做客上限', '主題色', '按鈕色', '標題色', '文字色'];
       for (入單料 of 入料) {
         $('#'+入單料+'Input').val(公司資料[0][入單料]);
