@@ -66,7 +66,9 @@
       h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--主題色); }
       input, select, textarea,button {width: 98%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;margin: 1%;}
 
-      ._更新btn{background: var(--主題色);}
+      ._導航btn{padding: 1%;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;margin: 1%;display: inline-block;}
+      ._更新btn,._導航btn{background: var(--主題色);}
+      ._更新btn{width: 100%;}
     </style>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -111,8 +113,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 <nav class="ADminNav" style="text-align: center;"><samp class="All上傳圖片教學 none"></samp><!-- JS _顯示admin後台 --></nav>
 
 <nav id="PageNav" style="text-align: center;">
-  <a class="btn" href="#" onclick="_導航換頁('主頁')">主頁</a>
-  <a class="btn" href="#關於我們" >關於我們</a>
+  <a class="btn _導航btn" href="#" onclick="_導航換頁('主頁')">主頁</a>
+  <a class="btn _導航btn" href="#關於我們" >關於我們</a>
   <!-- JS 產品類型 -->
 </nav>
 
@@ -307,37 +309,43 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
       // 輪播圖
       function _輪播圖動() {
-          const images = document.querySelector('.輪播圖-images');
-          const prevButton = document.querySelector('.prev');
-          const nextButton = document.querySelector('.next');
-          let currentIndex = 0;
-          const imageCount = images.children.length;
-          function updateCarousel() {
-              const containerWidth = images.parentElement.clientWidth; // 獲取容器寬度
-              const offset = -currentIndex * containerWidth;
-              images.style.transform = `translateX(${offset}px)`;
-          }
-          prevButton.addEventListener('click', () => {
-              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-              updateCarousel();
-          });
-          nextButton.addEventListener('click', () => {
-              currentIndex = (currentIndex + 1) % imageCount;
-              updateCarousel();
-          });
-          // 自動播放功能
-          setInterval(() => {
-              currentIndex = (currentIndex + 1) % imageCount;
-              updateCarousel();
-          }, 3000); // 每 3 秒切換一次
-          // 初始化輪播圖位置
-          updateCarousel();
-          // 當窗口大小改變時，更新輪播圖位置
-          window.addEventListener('resize', updateCarousel);
-      }
+    const carousels = document.querySelectorAll('.輪播圖'); // 選取所有輪播圖容器
+    carousels.forEach(carousel => {
+        const images = carousel.querySelector('.輪播圖-images');
+        const prevButton = carousel.querySelector('.prev');
+        const nextButton = carousel.querySelector('.next');
+        let currentIndex = 0;
+        const imageCount = images.children.length;
 
+        function updateCarousel() {
+            const containerWidth = images.parentElement.clientWidth; // 獲取容器寬度
+            const offset = -currentIndex * containerWidth;
+            images.style.transform = `translateX(${offset}px)`;
+        }
 
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+            updateCarousel();
+        });
 
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % imageCount;
+            updateCarousel();
+        });
+
+        // 自動播放功能
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % imageCount;
+            updateCarousel();
+        }, 3000); // 每 3 秒切換一次
+
+        // 初始化輪播圖位置
+        updateCarousel();
+
+        // 當窗口大小改變時，更新輪播圖位置
+        window.addEventListener('resize', updateCarousel);
+    });
+}
 
 
 
@@ -390,7 +398,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         },
         {'關於我們字':`歡迎加入莫氏集團有限公司大家庭！<br><br>
         我們的平台專為企業經營者和企業家設計， 提供一體化資源網路，説明您整合業務資源， 展開連接， 並將您的業務提升到新的高度。
-        <br><br>
+        <br>
         **平台資源**
         <br><br>
         - 商業教育
@@ -419,14 +427,18 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         
         {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h3.jpeg,https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/h2.jpeg', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
         
-        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s1.jpg', '產品展示url': 'https://lin.ee/exeQ2Yx'},
-        {'產品展示圖': '003.webp', '產品展示url': 'https://lin.ee/416xnF3'}
+        {'產品展示圖': 'https://98672794.github.io/healthisland%E5%81%A5%E5%BA%B7%E5%B3%B6/AmyIMG/s1.jpg', '產品展示url': 'https://lin.ee/exeQ2Yx'}
       ]},
 
 
       {
         '產品展示' :[
-        {'產品展示圖': 'https://yt3.ggpht.com/0ySzCl6W1DLGstRW4TOaOYTzOKx_0zJn9CAtZ_GUF-81N36t2UA7loiMrTewX0vm2v7BnXcf=s48-c-k-c0x00ffffff-no-rj', '產品展示url': ''}
+        {'產品展示圖': 'https://i.meee.com.tw/GvY6sOo.jpeg,https://i.meee.com.tw/Fn6qMYt.jpeg,https://i.meee.com.tw/nPLkhBs.jpeg,https://i.meee.com.tw/eamc571.jpeg,https://i.meee.com.tw/H7e3wMc.jpeg,https://i.meee.com.tw/Rl3hS65.jpeg', '產品展示url': '321'}
+      ]},
+
+      {
+        '產品展示' :[
+        {'產品展示圖': 'https://i.meee.com.tw/GvY6sOo.jpeg,https://i.meee.com.tw/Fn6qMYt.jpeg,', '產品展示url': '321,24'}
       ]},
 
       
@@ -551,7 +563,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
               產類名 = 內容data[`產品類型${i}`];
               if(產類名){
                 $('#產品展示').append(`<div id="產品展示${i}" class="container"><h2>${產類名}</h2></div> `);
-                $('#PageNav').append(`<a class="btn" href="#產品展示${i}" >${產類名}</a>`)
+                $('#PageNav').append(`<a class="btn _導航btn" href="#產品展示${i}" >${產類名}</a>`)
                 $(`#產品展示${i}page div h2`).html(`${產類名}`)
                 $(`#產品類型${i}`).val(產類名);
               }
@@ -580,11 +592,25 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                   整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
                   單個內容 = 整尺寸; // 直接插入yt片
                 }
+
+
+
+
+
+
+
+
+
+
+
+
                 // 輪播圖
                 if (內容.產品展示圖.includes(',')){
                   // 取輪播料
                   整組輪播圖 = 內容.產品展示圖.split(',')
                   $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+                  
                   for (let i = 0; i < 整組輪播圖.length; i++) {
                     $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
                     第n輪圖 = $輪圖;
@@ -593,6 +619,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                   }
                   單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
                 }
+
+
+
+
+
+
+
                 all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
                 // 加載錯誤時隱藏該圖片
                 if (內容.產品展示圖) {
@@ -868,7 +901,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         _生成QRCode('VipPegaIDInput','您的網址qrcode')
         
         $(".All上傳圖片教學").removeClass("none");
-        
+
         $('.ADminNav').append(`
           <button class=" _更新btn btn" onclick="_更新all野()" >更新資料</button>
           <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')" >主頁</button>
