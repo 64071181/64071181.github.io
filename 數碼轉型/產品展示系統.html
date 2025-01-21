@@ -108,7 +108,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
 
-<nav class="ADminNav" style="text-align: center;"><!-- JS _顯示admin後台 --></nav>
+<nav class="ADminNav" style="text-align: center;"><samp class="All上傳圖片教學"></samp><!-- JS _顯示admin後台 --></nav>
 
 <nav id="PageNav" style="text-align: center;">
   <a class="btn" href="#" onclick="_導航換頁('主頁')">主頁</a>
@@ -833,7 +833,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     , 產品展示類型上限 = 4
     , 本公司名稱 = 版模 = '瑞瑞產品展示系統';
     
+
+
+
+
+
   async function Start() {
+
       已登入帳號 = _帳戶名稱() 
       帳號數據庫 = _數據文件()
 
@@ -862,7 +868,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         _生成QRCode('VipPegaIDInput','您的網址qrcode')
         
         
-        $('.ADminNav').html(`
+        $('.ADminNav').append(`
           <button class=" _更新btn btn" onclick="_更新all野()" >更新資料</button>
           <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')" >主頁</button>
           <button class="btn" id="關於我們btn" onclick="_導航換頁('關於我們')" >關於我們</button>
@@ -876,6 +882,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             <section id="產品展示${i}page" class="section">
               <div class="container">
                 <h2>產品展示${i}</h2>
+                
                 yt影片 = Share > Embed > 貼在展示內容<br>
                 輪播圖 = 展示內容 > 圖1ulr,圖2ulr,圖3ulr...<br>
                 文章   = 圖 = '' > ulr = 文章內容
