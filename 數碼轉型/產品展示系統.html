@@ -108,7 +108,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
 
-<nav class="ADminNav" style="text-align: center;"><samp class="All上傳圖片教學"></samp><!-- JS _顯示admin後台 --></nav>
+<nav class="ADminNav" style="text-align: center;"><samp class="All上傳圖片教學 none"></samp><!-- JS _顯示admin後台 --></nav>
 
 <nav id="PageNav" style="text-align: center;">
   <a class="btn" href="#" onclick="_導航換頁('主頁')">主頁</a>
@@ -867,6 +867,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         document.getElementById('VipPegaIDInput').value = 帳號數據庫.replace('/d0/','/?0x').replace('/d/','/?0x');
         _生成QRCode('VipPegaIDInput','您的網址qrcode')
         
+        $(".All上傳圖片教學").removeClass("none");
         
         $('.ADminNav').append(`
           <button class=" _更新btn btn" onclick="_更新all野()" >更新資料</button>
