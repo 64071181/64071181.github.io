@@ -115,6 +115,8 @@
 
                         料 = await _取本頁數據庫('公司資料', '料', 'html碼');
                         網 = await _取本頁數據庫('VIP的網模版', '網', '不用解謝謝');
+
+                        推 = await _取本頁數據庫('推薦人', '推', 'JSON');
     
                         if (料) {
                             const 公司資料 = eval(料);
@@ -123,10 +125,11 @@
                                 name: 公司資料[0].公司名 || "未知名稱",
                                 url: `${官網}/?0x${item.name}`,
                                 avatar: 公司資料[0].LOGO圖片 || null,
-                                模版: 網.split('數碼轉型/')[1].split('.html')[0]
+                                簡介: 公司資料[0].公司簡介,
+                                模版: 網.split('數碼轉型/')[1].split('.html')[0],
+                                推薦人: 推
                             });
                         }
-
                     }
                 }
                 renderMembers(); // 確保在數據載入完成後渲染會員列表
@@ -140,11 +143,15 @@
             container.innerHTML = ""; // 確保每次渲染前清空內容
     
             members.forEach(member => {
+
+                let 推薦人位 = '';
+                if ((location.href).indexOf('?0x1181') != -1) 推薦人位 = `<p>${member.推薦人}</p>`;
                 const memberCard = document.createElement('a');
                 memberCard.className = 'member-card';
                 memberCard.href = member.url;
                 memberCard.target = '_blank';
     
+
                 const avatarHtml = member.avatar
                     ? `<img src="${member.avatar}" alt="${member.name}的頭像">`
                     : `<div class="no-avatar">🏢</div>`;
@@ -155,7 +162,10 @@
                         </div>
                         <div class="member-info">
                             <div class="member-name">${member.name}</div>
+                            <p>${member.簡介}</p>
                             <p>${member.模版}</p>
+                            <hr>
+                            ${推薦人位}
                         </div>
                     `;
     
