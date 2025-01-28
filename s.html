@@ -313,33 +313,36 @@
 
 async function 睇追蹤() {
     pw = _驗證密碼()
-    //if (_驗證密碼() !== 愛老婆)  return;
 
     追蹤類 = [];
     睇 = await fetch(`https://raw.githubusercontent.com/64071181/flow/main/flow`);
     all睇 = await 睇.text()
-    //console.log(`all睇=${all睇}`);
+    
 
-    all睇 = all睇.split("'//$$$$$$$$$$$$$$$$$$")
-    for (睇一 of all睇){
-      try{
-        睇一 = 睇一.replace(/\n/g,'').split("const ")[1].split(" = '")
-        //console.log(`睇一=${睇一}`);
-        追蹤類.push(睇一)
-      }
-      catch (error) {console.error( error);}
-    }
-    //console.log(`追蹤類=${追蹤類}`);
+    // 獲取整個已加密的flow數據內容
+    all睇 = all睇.split("const flow料 = '")[1].split("'//$$$$$$$$$$$$$$$$$$")[0]
+    flow料 = (CryptoJS.AES.decrypt(all睇, pw).toString(CryptoJS.enc.Utf8))
 
+    flow料B = flow料.split("@@@")
     $('#睇追蹤').html('');
-    for (追蹤內容 of 追蹤類){
-      內 = eval(CryptoJS.AES.decrypt(追蹤內容[1], pw).toString(CryptoJS.enc.Utf8))
-      //console.log(`${追蹤內容[0]}=${內}`);
-      $('#睇追蹤').append(`<h3>${追蹤內容[0]}</h3>`);
-      $('#睇追蹤').append(`<p>${內}</p>`);
-      $('#睇追蹤').append(`<hr><br>`);
-    }
 
+    for (睇一 of flow料B){
+      if (睇一.includes(".html")) {
+        單料 = 睇一.split(".html")
+        // 網址標題
+        $('#睇追蹤').append(`<h3>${單料[0]}.html</h3>`);
+
+        追蹤類 = 單料[1].split("%%")
+        for (追蹤內容 of 追蹤類){
+          console.log(`追蹤內容=${追蹤內容}`);
+          if (追蹤內容.includes("IP")){
+            $('#睇追蹤').append(`<p>${追蹤內容.replace(/%%/g, '<br><br>')}</p>`);
+            $('#睇追蹤').append(`<hr><br>`);
+          }
+        }
+      }
+
+    }
 }
 
 
