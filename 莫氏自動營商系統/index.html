@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莫氏自動營商系統</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: linear-gradient(135deg, #2a2a2a, #3d3d3d, #1a1a1a);
+          color: white;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+        }
+
+        h1 {
+            background: linear-gradient(to right, #666, #999, #666);
+            color: #eee;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+        }
+
+        button,.btn {
+            margin: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(to bottom, #555, #222);
+            color: white;
+            border: 2px solid #777;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 3px 5px rgba(255, 255, 255, 0.1), inset 0px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover, .btn:hover {
+            background: linear-gradient(to bottom, #777, #444);
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3), inset 0px 1px 5px rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        /* 讓表格在小螢幕上可橫向滾動 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: auto;
+        }
+
+        /* 設定 table 為 100% 適應父層 */
+        table {
+            width: 100%;
+            min-width: 800px; /* 避免過窄，讓內容正常顯示 */
+            border-collapse: collapse;
+            background: linear-gradient(to bottom, #444, #222);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 表格標題 */
+        th {
+            background: linear-gradient(to bottom, #777, #444);
+            color: #fff;
+            padding: 10px;
+            border: 1px solid #666;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* 表格內容 */
+        td {
+            padding: 10px;
+            border: 1px solid #555;
+            color: #ddd;
+            background: linear-gradient(to bottom, #333, #1a1a1a);
+        }
+
+        /* 偶數行的顏色交錯 */
+        tr:nth-child(even) td {
+            background: linear-gradient(to bottom, #3a3a3a, #222);
+        }
+
+        /* 滑鼠懸停時的效果 */
+        tr:hover td {
+            background: linear-gradient(to bottom, #666, #444);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* 手機版適應 */
+        @media screen and (max-width: 768px) {
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                min-width: 600px; /* 設定最小寬度，避免內容擠壓 */
+            }
+
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            button,.btn {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
+        a {
+            color: #0af;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0ff;
+            text-shadow: 0px 0px 5px #0ff;
+        }
+
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <h1>莫氏自動營商系統</h1>
+    <button onclick="addCustomer()">新增客戶數據</button>
+    
+    <a class="btn" href="email_marketing.html">自動電郵宣傳</a>
+    <a class="btn" href="whatsapp_reply.html">自動WhatsApp客服</a>
+    <button onclick="downloadCSV()">下載客戶數據</button>
+
+    
+    <!-- 新增檔案選擇器 -->
+    <input type="file" id="fileInput" accept=".csv">
+
+
+    <h2 id="現在狀態"></h2>
+    
+    <h3>客戶數據管理</h3>
+    <div class="table-container">
+      <table id="customerTable">
+          <thead>
+              <tr>
+                  <th>客戶公司名稱</th>
+                  <th>聯絡人</th>
+                  <th>電話號碼</th>
+                  <th>whatsapp號碼</th>
+                  <th>instagram帳號</th>
+                  <th>微信帳號</th>
+                  <th>email</th>
+                  <th>地址</th>
+                  <th>訂單記錄</th>
+                  <th>備註</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr id="noDataMessage">
+                  <td colspan="10">請將客戶資料的 CSV 檔案放到客戶資料文件夾</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+  <script>
+    function addCustomer() {
+        let table = document.getElementById("customerTable").getElementsByTagName('tbody')[0];
+        let row = table.insertRow();
+
+        for (let i = 0; i < 9; i++) {  // 前9個欄位為輸入框
+            let cell = row.insertCell(i);
+            cell.innerHTML = '<input type="text">';
+        }
+
+        // 第10個欄位（訂單記錄）額外處理
+        let orderCell = row.insertCell(9);
+        orderCell.innerHTML = '<input type="text" placeholder="訂單編號,訂單網址|..." style="width: 100%;">';
+
+        // 新增「確認加入」按鈕
+        let actionCell = row.insertCell(10);
+        let addButton = document.createElement("button");
+        addButton.textContent = "確認加入";
+        addButton.onclick = function() {
+            saveCustomer(row);
+        };
+        actionCell.appendChild(addButton);
+    }
+
+
+    
+    
+
+
+
+
+
+
+    function downloadCSV() {
+    let csv = "客戶公司名稱,聯絡人,電話號碼,whatsapp號碼,instagram帳號,微信帳號,email,地址,訂單記錄,備註\n";
+    let rows = document.querySelectorAll("#customerTable tbody tr");
+
+    rows.forEach(row => {
+        let rowData = [];
+        let cells = row.querySelectorAll("td");
+
+        // 確保排除最後一個單元格（即按鈕列）
+        cells = Array.from(cells); // 轉換為陣列，方便操作
+        cells.pop(); // 移除最後一個單元格（按鈕）
+
+        // 如果表格有 <th> 標題，確保每個標題也能被包含
+        let headerCells = row.querySelectorAll("th");
+        headerCells.forEach((headerCell, index) => {
+            rowData.push('"' + (headerCell.textContent || headerCell.innerText).trim() + '"');
+        });
+
+        // 遍歷每一個 <td> 單元格
+        cells.forEach((cell, index) => {
+            let cellContent = cell.textContent || cell.innerText;
+
+            // 如果是訂單記錄欄位，處理訂單號和訂單鏈接的格式
+            if (index === 8) {  // 訂單記錄處理
+                let rawData = cell.getAttribute("data-raw");  // 從 data-raw 屬性獲取原始數據
+                rowData.push('"' + rawData + '"');  // 訂單記錄加上引號
+            }
+            // 如果是備註欄位，處理備註的格式
+            else if (index === 9) {  // 備註欄位處理
+                rowData.push('"' + cellContent.replace(/,/g, "，") + '"');  // 備註加上引號
+            }
+            else {
+                // 處理其他欄位數據，避免 CSV 中的逗號干擾
+                rowData.push('"' + cellContent.replace(/,/g, "，") + '"');
+            }
+        });
+
+        csv += rowData.join(",") + "\n"; // 將整行數據以逗號分隔並加入 CSV 字串
+    });
+
+    // 生成 Blob 物件並觸發下載
+    let blob = new Blob([csv], { type: "text/csv" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "客戶資料_" + new Date().toLocaleString("zh-Hant", { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: false // 使用 24 小時制
+    }).replace(/[/: ]/g, "") + ".csv";
+    a.click(); // 觸發下載
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 初始加載預設 CSV 資料
+        document.addEventListener("DOMContentLoaded", function() {
+            // 預設讀取的檔案路徑
+            fetch("客戶資料/客戶資料.csv")
+                .then(response => response.text())
+                .then(csvText => {
+                    processCSV(csvText); // 處理預設的 CSV 資料
+                })
+                .catch(error => {
+                    console.error("載入預設 CSV 錯誤:", error);
+                });
+            
+            // 文件選擇器事件，讓使用者選擇自己的 CSV 檔案
+            document.getElementById("fileInput").addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                if (file && file.name.endsWith('.csv')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const csvText = e.target.result;
+                        processCSV(csvText); // 處理使用者選擇的 CSV
+                    };
+                    reader.readAsText(file);
+                } else {
+                    alert("請選擇一個 CSV 文件！");
+                }
+            });
+        });
+
+
+
+
+
+
+        // 處理 CSV 資料並更新表格
+        function processCSV(csvText) {
+            let rows = csvText.trim().split("\n").map(row => row.trim()).filter(row => row);
+            if (rows.length <= 1) return; // 若無數據則不處理
+
+            let table = document.getElementById("customerTable").getElementsByTagName('tbody')[0];
+            table.innerHTML = ""; // 清空預設內容
+
+            rows.slice(1).forEach(row => {  
+                let cols = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; // 正確解析 CSV
+                let tr = document.createElement("tr");
+
+                cols.forEach((col, index) => {
+                    let td = document.createElement("td");
+                    col = col.replace(/^"|"$/g, ""); // 去除 CSV 內的雙引號
+
+                    if (index === 8) {  // 訂單記錄處理
+                        td.dataset.raw = col; // 儲存原始訂單數據，確保「修改」時不遺失
+                        let orderData = col.split("|");
+                        td.innerHTML = orderData.map(order => {
+                            let [orderID, orderLink] = order.split(",");
+                            return `<a href="${orderLink.trim()}" target="_blank">${orderID.trim()}</a>`;
+                        }).join("<br>");
+                    } else {
+                        td.textContent = col;
+                    }
+                    tr.appendChild(td);
+                });
+
+                // 加入「修改」按鈕
+                let actionCell = document.createElement("td");
+                let editButton = document.createElement("button");
+                editButton.textContent = "修改";
+                editButton.onclick = function() {
+                    editCustomer(tr);
+                };
+                actionCell.appendChild(editButton);
+                tr.appendChild(actionCell);
+
+                table.appendChild(tr);
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+// 儲存新增的客戶數據
+function saveCustomer(row) {
+    let inputs = row.querySelectorAll("td input");
+    let rowData = [];
+
+    // 收集每一列的數據並移除輸入框
+    inputs.forEach(input => {
+        rowData.push(input.value.trim());
+        input.remove(); // 移除輸入框，轉換為靜態文本
+    });
+
+    row.innerHTML = ""; // 清空該列的內容，重新填充數據
+
+    rowData.forEach((data, index) => {
+        let cell = row.insertCell(index);
+
+        if (index === 8) {  // 訂單記錄處理
+            let orderData = data.split("|");
+            // 更新訂單記錄的 data-raw 屬性
+            cell.setAttribute("data-raw", data);
+            // 生成訂單記錄的超連結
+            cell.innerHTML = orderData.map(order => {
+                let [orderID, orderLink] = order.split(",");
+                orderID = orderID.trim();
+                orderLink = orderLink ? orderLink.trim() : "#";
+                return `<a href="${orderLink}" target="_blank">${orderID}</a>`;
+            }).join("<br>");
+        } else if (index === 9) {  // 備註欄位處理
+            cell.textContent = data; // 直接顯示備註文本
+        } else {
+            cell.textContent = data;
+        }
+    });
+
+    // 加入「刪除」按鈕
+    let actionCell = row.insertCell(10);
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "刪除";
+    deleteButton.onclick = function() {
+        row.remove();
+    };
+    actionCell.appendChild(deleteButton);
+}
+
+
+
+
+
+
+// 儲存修改後的客戶數據
+function saveEditedCustomer(row) {
+    let inputs = row.querySelectorAll("td input, td textarea");
+    let rowData = [];
+
+    inputs.forEach((input, index) => {
+        let value = input.value.trim();
+        rowData.push(value);
+    });
+
+    row.innerHTML = ""; // 清空該列的內容，重新填充數據
+
+    rowData.forEach((data, index) => {
+        let cell = row.insertCell(index);
+
+        if (index === 8) {  // 訂單記錄處理
+            cell.dataset.raw = data; // 儲存完整的訂單資料，避免丟失
+            let orderData = data.split("|");
+            cell.innerHTML = orderData.map(order => {
+                let [orderID, orderLink] = order.split(",");
+                return `<a href="${orderLink.trim()}" target="_blank">${orderID.trim()}</a>`;
+            }).join("<br>");
+        } else if (index === 9) {  // 備註欄位處理
+            cell.textContent = data; // 直接顯示備註文本
+        } else {
+            cell.textContent = data;
+        }
+    });
+
+    // 重新加回「修改」按鈕
+    let actionCell = row.insertCell(10);
+    let editButton = document.createElement("button");
+    editButton.textContent = "修改";
+    editButton.onclick = function() {
+        editCustomer(row);
+    };
+    actionCell.appendChild(editButton);
+}
+
+// 進入編輯模式
+function editCustomer(row) {
+    let cells = row.querySelectorAll("td");
+    
+    cells.forEach((cell, index) => {
+        if (index < 9) {  // 只處理前9欄，最後一欄是按鈕
+            let value = cell.dataset.raw || cell.textContent;
+
+            if (index === 8) {
+                // 訂單記錄使用 textarea
+                let textarea = document.createElement("textarea");
+                textarea.value = value;
+                textarea.style.width = "100%";
+                textarea.style.height = "80px"; // 訂單記錄較長，增加高度
+                textarea.title = "請輸入格式：訂單號1,訂單網址|訂單號2,訂單網址|..."; // 滑鼠懸停提示
+                cell.innerHTML = "";
+                cell.appendChild(textarea);
+            } else {
+                let input = document.createElement("input");
+                input.type = "text";
+                input.value = value;
+                cell.innerHTML = "";
+                cell.appendChild(input);
+            }
+        }
+    });
+
+    // 變更按鈕為「儲存」
+    let actionCell = row.lastChild;
+    actionCell.innerHTML = "";
+    let saveButton = document.createElement("button");
+    saveButton.textContent = "儲存";
+    saveButton.onclick = function() {
+        saveEditedCustomer(row); // 呼叫儲存修改的函數
+    };
+    actionCell.appendChild(saveButton);
+
+    // 保留備註欄位
+    let remarksCell = row.querySelector("td:nth-child(10)");
+    let remarksValue = remarksCell.textContent.trim();
+    remarksCell.innerHTML = ''; // 清空原有內容
+    let remarksInput = document.createElement("input");
+    remarksInput.value = remarksValue;  // 讓用戶可以編輯備註
+    remarksCell.appendChild(remarksInput);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
