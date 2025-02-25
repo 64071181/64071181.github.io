@@ -350,33 +350,6 @@
 
 
 
-        // 初始加載預設 CSV 資料
-        document.addEventListener("DOMContentLoaded", function() {
-            // 預設讀取的檔案路徑
-            fetch("客戶資料/客戶資料.csv")
-                .then(response => response.text())
-                .then(csvText => {
-                    processCSV(csvText); // 處理預設的 CSV 資料
-                })
-                .catch(error => {
-                    console.error("載入預設 CSV 錯誤:", error);
-                });
-            
-            // 文件選擇器事件，讓使用者選擇自己的 CSV 檔案
-            document.getElementById("fileInput").addEventListener("change", function(event) {
-                const file = event.target.files[0];
-                if (file && file.name.endsWith('.csv')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const csvText = e.target.result;
-                        processCSV(csvText); // 處理使用者選擇的 CSV
-                    };
-                    reader.readAsText(file);
-                } else {
-                    alert("請選擇一個 CSV 文件！");
-                }
-            });
-        });
 
 
 
