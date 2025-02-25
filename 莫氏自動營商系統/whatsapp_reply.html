@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莫氏自動營商系統|自動WhatsApp客服</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: linear-gradient(135deg, #2a2a2a, #3d3d3d, #1a1a1a);
+          color: white;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+        }
+
+        h1 {
+            background: linear-gradient(to right, #666, #999, #666);
+            color: #eee;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+        }
+
+        button,.btn {
+            margin: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(to bottom, #555, #222);
+            color: white;
+            border: 2px solid #777;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 3px 5px rgba(255, 255, 255, 0.1), inset 0px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover, .btn:hover {
+            background: linear-gradient(to bottom, #777, #444);
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3), inset 0px 1px 5px rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        /* 讓表格在小螢幕上可橫向滾動 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: auto;
+        }
+
+        /* 設定 table 為 100% 適應父層 */
+        table {
+            width: 100%;
+            min-width: 800px; /* 避免過窄，讓內容正常顯示 */
+            border-collapse: collapse;
+            background: linear-gradient(to bottom, #444, #222);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 表格標題 */
+        th {
+            background: linear-gradient(to bottom, #777, #444);
+            color: #fff;
+            padding: 10px;
+            border: 1px solid #666;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* 表格內容 */
+        td {
+            padding: 10px;
+            border: 1px solid #555;
+            color: #ddd;
+            background: linear-gradient(to bottom, #333, #1a1a1a);
+        }
+
+        /* 偶數行的顏色交錯 */
+        tr:nth-child(even) td {
+            background: linear-gradient(to bottom, #3a3a3a, #222);
+        }
+
+        /* 滑鼠懸停時的效果 */
+        tr:hover td {
+            background: linear-gradient(to bottom, #666, #444);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* 手機版適應 */
+        @media screen and (max-width: 768px) {
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                min-width: 600px; /* 設定最小寬度，避免內容擠壓 */
+            }
+
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            button,.btn {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
+        a {
+            color: #0af;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0ff;
+            text-shadow: 0px 0px 5px #0ff;
+        }
+
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <h1>莫氏自動營商系統|自動WhatsApp客服</h1>
+    <a class="btn" href="./">客戶數據</a>
+    <a class="btn" href="email_marketing.html">自動電郵宣傳</a>
+    <hr>
+    <button onclick="addReply()">新增回覆</button>
+    <button onclick="downloadReplyCSV()">下載Ws客服回覆</button>
+
+    
+    <!-- 新增檔案選擇器 -->
+    <input type="file" id="fileInput" accept=".csv">
+
+
+    <h2 id="現在狀態">自動WhatsApp客服</h2>
+    
+    <h3>ws服回覆管理</h3>
+    <div class="table-container">
+        <table id="replyTable">
+            <thead>
+                <tr>
+                    <th>客戶說</th>
+                    <th>客服回答</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="noDataMessage">
+                    <td colspan="2">點擊「新增回覆」開始添加常見問答</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    <script>
+
+
+
+
+
+// 新增 CSV 处理函数 (需放在文件最下方)
+function processReplyCSV(csvText) {
+  const table = document.getElementById("replyTable").getElementsByTagName('tbody')[0];
+  table.innerHTML = '';
+
+  // 强化 CSV 解析
+  const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '');
+  if (rows.length < 1) return;
+
+  // 检查表头格式
+  const headers = rows[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+  if (headers.length < 2) {
+    alert('CSV 格式错误，需要至少2个栏位 (客戶說, 客服回答)');
+    return;
+  }
+
+  // 处理数据行
+  rows.slice(1).forEach(row => {
+    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                   .map(col => col.replace(/^"|"$/g, '').trim());
+
+    const tr = document.createElement("tr");
+    
+    // 客戶說
+    const customerCell = tr.insertCell(0);
+    customerCell.innerHTML = cols[0]?.replace(/\n/g, '<br>') || '';
+
+    // 客服回答
+    const replyCell = tr.insertCell(1);
+    replyCell.innerHTML = cols[1]?.replace(/\n/g, '<br>') || '';
+
+    // 操作按钮
+    const actionCell = tr.insertCell(2);
+    actionCell.innerHTML = `
+      <button onclick="editReply(this)">編輯</button>
+      <button onclick="this.parentElement.parentElement.remove()">刪除</button>
+    `;
+
+    table.appendChild(tr);
+  });
+
+  // 移除初始提示
+  const noDataMsg = document.getElementById("noDataMessage");
+  if (noDataMsg) noDataMsg.remove();
+}
+
+// 文件选择事件监听 (添加在 script 底部)
+document.getElementById('fileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      processReplyCSV(e.target.result);
+    } catch (error) {
+      console.error('CSV 解析错误:', error);
+      alert('文件解析失败，请确认格式是否正确');
+    }
+  };
+  reader.readAsText(file, 'UTF-8');
+});
+
+
+
+
+        // 新增回覆功能
+        function addReply() {
+            let table = document.getElementById("replyTable").getElementsByTagName('tbody')[0];
+            let row = table.insertRow();
+            
+            // 客戶說欄位
+            let customerCell = row.insertCell(0);
+            customerCell.innerHTML = '<textarea style="width:100%; height:60px;"></textarea>';
+            
+            // 客服回答欄位
+            let replyCell = row.insertCell(1);
+            replyCell.innerHTML = '<textarea style="width:100%; height:60px;"></textarea>';
+            
+            // 操作按鈕
+            let actionCell = row.insertCell(2);
+            actionCell.innerHTML = `
+                <button onclick="saveReply(this)">儲存</button>
+                <button onclick="this.parentElement.parentElement.remove()">刪除</button>
+            `;
+        }
+
+        // 儲存回覆功能
+        function saveReply(button) {
+            let row = button.parentElement.parentElement;
+            let textareas = row.querySelectorAll('textarea');
+            
+            textareas.forEach((textarea, index) => {
+                let cell = row.cells[index];
+                cell.innerHTML = textarea.value.replace(/\n/g, '<br>');
+            });
+            
+            row.deleteCell(2); // 移除操作按鈕
+            let actionCell = row.insertCell(2);
+            actionCell.innerHTML = `
+                <button onclick="editReply(this)">編輯</button>
+                <button onclick="this.parentElement.parentElement.remove()">刪除</button>
+            `;
+        }
+
+        // 編輯回覆功能
+        function editReply(button) {
+            let row = button.parentElement.parentElement;
+            
+            [0, 1].forEach(index => {
+                let cell = row.cells[index];
+                const originalText = cell.innerHTML.replace(/<br>/g, '\n');
+                cell.innerHTML = `<textarea style="width:100%; height:60px;">${originalText}</textarea>`;
+            });
+            
+            row.deleteCell(2);
+            let actionCell = row.insertCell(2);
+            actionCell.innerHTML = `
+                <button onclick="saveReply(this)">儲存</button>
+                <button onclick="this.parentElement.parentElement.remove()">取消</button>
+            `;
+        }
+
+        // 下載 CSV 功能
+        function downloadReplyCSV() {
+            let csv = "客戶說,客服回答\n";
+            document.querySelectorAll('#replyTable tbody tr:not(#noDataMessage)').forEach(row => {
+                const cells = row.cells;
+                const customer = cells[0].innerText.replace(/\n/g, ' ').replace(/"/g, '""');
+                const reply = cells[1].innerText.replace(/\n/g, ' ').replace(/"/g, '""');
+                csv += `"${customer}","${reply}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = "客服回覆_" + new Date().toLocaleString("zh-Hant", { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit', 
+                hour12: false // 使用 24 小時制
+            }).replace(/[/: ]/g, "") + ".csv";
+
+
+
+            a.click();
+        }
+    </script>
+</body>
+</html>

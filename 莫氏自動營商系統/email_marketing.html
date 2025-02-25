@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莫氏自動營商系統|自動電郵宣傳</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: linear-gradient(135deg, #2a2a2a, #3d3d3d, #1a1a1a);
+          color: white;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+        }
+
+        h1 {
+            background: linear-gradient(to right, #666, #999, #666);
+            color: #eee;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+        }
+
+        button,.btn {
+            margin: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(to bottom, #555, #222);
+            color: white;
+            border: 2px solid #777;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 3px 5px rgba(255, 255, 255, 0.1), inset 0px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover, .btn:hover {
+            background: linear-gradient(to bottom, #777, #444);
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3), inset 0px 1px 5px rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        /* 讓表格在小螢幕上可橫向滾動 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: auto;
+        }
+
+        /* 設定 table 為 100% 適應父層 */
+        table {
+            width: 100%;
+            min-width: 800px; /* 避免過窄，讓內容正常顯示 */
+            border-collapse: collapse;
+            background: linear-gradient(to bottom, #444, #222);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 表格標題 */
+        th {
+            background: linear-gradient(to bottom, #777, #444);
+            color: #fff;
+            padding: 10px;
+            border: 1px solid #666;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* 表格內容 */
+        td {
+            padding: 10px;
+            border: 1px solid #555;
+            color: #ddd;
+            background: linear-gradient(to bottom, #333, #1a1a1a);
+        }
+
+        /* 偶數行的顏色交錯 */
+        tr:nth-child(even) td {
+            background: linear-gradient(to bottom, #3a3a3a, #222);
+        }
+
+        /* 滑鼠懸停時的效果 */
+        tr:hover td {
+            background: linear-gradient(to bottom, #666, #444);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* 手機版適應 */
+        @media screen and (max-width: 768px) {
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                min-width: 600px; /* 設定最小寬度，避免內容擠壓 */
+            }
+
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            button,.btn {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
+        a {
+            color: #0af;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0ff;
+            text-shadow: 0px 0px 5px #0ff;
+        }
+/* 新增電郵內容輸入框樣式 */
+#emailContent {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+/* 調整設定輸入框樣式 */
+#emailConfigTable input {
+  background: #444;
+  color: white;
+  border: 1px solid #666;
+  padding: 8px;
+  margin: 5px 0;
+}
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+<!-- 修改標題 -->
+<h1>莫氏自動營商系統|自動發送宣傳電郵</h1>
+
+<!-- 修改按鈕連結 -->
+<a class="btn" href="./">客戶數據</a>
+<a class="btn" href="whatsapp_reply.html">WhatsApp客服</a>
+<hr>
+
+<!-- 新增電郵配置表格 -->
+<div class="table-container">
+  <table id="emailConfigTable">
+    <tr>
+      <th colspan="2">Gmail 發送設定</th>
+    </tr>
+    <tr>
+      <td>Gmail 帳號<br><input type="text" id="gmailAccount" style="width:90%"></td>
+      <td>Gmail 金鑰<br><input type="password" id="gmailKey" style="width:90%"></td>
+    </tr>
+    <tr>
+      <th colspan="2">宣傳電郵內容</th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <textarea id="emailContent" style="width:95%;height:200px;background:#333;color:white;border:1px solid #555"></textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- 新增操作按鈕 -->
+<button onclick="saveEmailConfig()">儲存設定</button>
+<button onclick="downloadEmailCSV()">下載設定</button>
+<input type="file" id="emailFileInput" accept=".csv" style="margin-left:20px">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    <script>
+
+
+
+
+
+// 新增配置儲存功能
+function saveEmailConfig() {
+  const config = {
+    account: document.getElementById('gmailAccount').value,
+    key: document.getElementById('gmailKey').value,
+    content: document.getElementById('emailContent').value
+  };
+  localStorage.setItem('emailConfig', JSON.stringify(config));
+  alert('設定已儲存');
+}
+
+// 新增設定下載功能
+function downloadEmailCSV() {
+    const config = JSON.parse(localStorage.getItem('emailConfig') || '{}');
+  const csv = `gmail帳號,gmail key,宣傳電郵內容\n"${config.account || ''}","${config.key || ''}","${config.content || ''}"`;
+  
+  const blob = new Blob([csv], {type: 'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+
+
+
+  
+  a.download = "郵件設定_" + new Date().toLocaleString("zh-Hant", { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: false // 使用 24 小時制
+    }).replace(/[/: ]/g, "") + ".csv";
+
+
+
+  a.click();
+}
+
+// 新增檔案讀取功能
+document.getElementById('emailFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const rows = e.target.result.split('\n');
+    if (rows.length < 2) return;
+    
+    const configData = rows[1].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+      .map(col => col.replace(/^"|"$/g, ''));
+    
+    if (configData.length >= 3) {
+      document.getElementById('gmailAccount').value = configData[0];
+      document.getElementById('gmailKey').value = configData[1];
+      document.getElementById('emailContent').value = configData[2];
+      saveEmailConfig();
+    }
+  };
+  reader.readAsText(file);
+});
+
+// 頁面載入時讀取設定
+document.addEventListener('DOMContentLoaded', () => {
+    const config = JSON.parse(localStorage.getItem('emailConfig') || '{}');
+  document.getElementById('gmailAccount').value = config.account || '';
+  document.getElementById('gmailKey').value = config.key || '';
+  document.getElementById('emailContent').value = config.content || '';
+});
+
+
+
+
+    </script>
+</body>
+</html>
