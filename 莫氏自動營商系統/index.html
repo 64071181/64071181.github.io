@@ -350,6 +350,25 @@
 
 
 
+        // 初始加載預設 CSV 資料
+        document.addEventListener("DOMContentLoaded", function() {
+
+            
+            // 文件選擇器事件，讓使用者選擇自己的 CSV 檔案
+            document.getElementById("fileInput").addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                if (file && file.name.endsWith('.csv')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const csvText = e.target.result;
+                        processCSV(csvText); // 處理使用者選擇的 CSV
+                    };
+                    reader.readAsText(file);
+                } else {
+                    alert("請選擇一個 CSV 文件！");
+                }
+            });
+        });
 
 
 
