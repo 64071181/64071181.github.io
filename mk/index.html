@@ -257,15 +257,52 @@
             
             <button onclick="生成Deepseek提示词()">生成Deepseek提示词</button>
             <textarea id="生成結果" class="none" title="單擊複製" 
-            onclick="copyToClipboard('生成結果');";
+            onclick="copyToClipboard('生成結果');"
             readonly></textarea>
 
+            <a id="Deepseek" href="https://chat.deepseek.com/" target="_blank" class="none btn">打開Deepseek</a>
 
-            <div class="btn-group">
-                <a id="Deepseek" href="https://chat.deepseek.com/" target="_blank" class="none btn">打開Deepseek</a>
-                <a id="jimeng" href="https://www.jianying.com/ai-creator/storyboard" target="_blank" class="none btn">打開剪映</a>
+            <div id="整理Deepseek劇本" class="none">
+                <h3>Deepseek劇本整理</h3>
+                <input type="text" id="Deepseek劇本" title="複製Deepseek生成的javascript後貼到此處,再按一下" onclick="整理Deepseek出片文();顯示隱藏('#jimeng');" placeholder="複製Deepseek生成的javascript後貼到此處,再按一下">
+                <hr>
+
+                <h3>爆款标题</h3>
+                <textarea id="DS劇本_爆款标题" title="單擊複製" onclick="copyToClipboard('DS劇本_爆款标题');" readonly></textarea>
+
+                <h3>爆款關鍵字</h3>
+                <textarea id="DS劇本_關鍵字" title="單擊複製" onclick="copyToClipboard('DS劇本_關鍵字');" readonly></textarea>
+
+                <h3>分镜</h3>
+                <textarea id="DS劇本_分镜" title="單擊複製" onclick="copyToClipboard('DS劇本_分镜');" readonly></textarea>
+
+                <h3>徬白(手動複製)</h3>
+                <textarea id="DS劇本_徬白" title="手動複製每句" readonly></textarea>
+
             </div>
-            
+
+
+
+            <a id="jimeng" href="https://www.jianying.com/ai-creator/storyboard" target="_blank" class="none btn">打開剪映</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <hr>
             <button onclick="顯示隱藏('#爆款提示')">爆款提示:</button>
 
@@ -425,7 +462,7 @@
             1.幫我設計一個符合抖音爆款的标题。
             2.及給我一些符合抖音爆款的標籤關鍵字。
             3.請幫我設計一個符合抖音爆款影片的分镜劇本，我將要用在 剪影 的ai文本生成視頻，单分镜长度200字內，每分鏡時長3秒。单分鏡內容不要換行。每段分鏡換行
-            4.請幫我設計一個符合抖音爆款影片的徬白劇本，我將要用在 剪影 的ai文本生成視頻，单徬白长度200字內，每徬白時長3秒。单徬白內容不要換行,不要時間,不要其他描述,只留下徬白內容。
+            4.請幫我設計符合抖音爆款的徬白劇本，每段白长度200字內，每段徬白對應一個分鏡。单段徬白內容不要換行,不要時間,不要语气描述,不要其他描述,只留下徬白內容。
 
             請用以下方式給我結果，方便我用js切割:
                 爆款标题=[]
@@ -436,28 +473,24 @@
             謝謝。`
 
             $('#生成結果').val(提示词);
-            顯示隱藏('#生成結果,#Deepseek,#jimeng')
+            顯示隱藏('#生成結果,#Deepseek,#整理Deepseek劇本')
+
+        }
+
+        function 整理Deepseek出片文(){
+            要分內容 = ['爆款标题','關鍵字','分镜','徬白']
+            Deepseek劇本  = $(`#Deepseek劇本`).val()
+
+            for (i of 要分內容){
+                各內容 = Deepseek劇本.split(`${i}=[`)[1].split(']')[0].replace(/","/g,'\n').replace(/", "/g,'\n').replace(/"/g,'')
+                $(`#DS劇本_${i}`).val(各內容)
+            }
 
         }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 
