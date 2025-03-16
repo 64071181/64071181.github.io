@@ -130,7 +130,7 @@
         <section id="main" class="section active">
             <div class="btn-group">
 
-                <a href="./tool2024/?賺錢王In" target="_blank" class="btn">ai tool</a>
+                <a href="../tool2024/?賺錢王In" target="_blank" class="btn">ai tool</a>
 
                 <button onclick="showSection('AI出片')">AI出片小工具</button>
 
@@ -181,10 +181,30 @@
             <button onclick="showSection('main')">返回</button>
 
             <h1>AI出片小工具</h1>
-            <textarea id="影片主題" placeholder="請簡述您需要創作的影片主題" title="請簡述您需要創作的影片主題"></textarea>
-            <textarea id="影片內容" placeholder="請簡述影片中需要強調的內容" title="請簡述影片中需要強調的內容"></textarea>
 
-            <select id="主情緒槓桿" onchange="updateSubLever()" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
+            <h3>影片主題*</h3>
+            <textarea id="影片主題" class="記錄數據用" placeholder="請簡述您需要創作的影片主題" title="請簡述您需要創作的影片主題"></textarea>
+            <h3>強調內容*</h3>
+            <textarea id="影片內容" class="記錄數據用" placeholder="請簡述影片中需要強調的內容" title="請簡述影片中需要強調的內容"></textarea>
+
+
+
+            <h3>你的角色</h3>
+            <textarea id="你的角色" class="記錄數據用" placeholder="請簡述你的角色(我是一個科技商業顧問)" title="請簡述你的角色(我是一個科技商業顧問)"></textarea>
+            <h3>目標受眾</h3>
+            <textarea id="目標受眾" class="記錄數據用" placeholder="請簡述你的目標受眾(中小型企業老闆)" title="請簡述你的目標受眾(中小型企業老闆)"></textarea>
+            <h3>需要結果</h3>
+            <textarea id="需要結果" class="記錄數據用" placeholder="請簡述出片後需要的結果(引流觀眾購買我的服務)" title="請簡述出片後需要的結果(引流觀眾購買我的服務)"></textarea>
+
+
+
+
+
+
+
+
+            <h3>主情緒槓桿*</h3>
+            <select id="主情緒槓桿" class="記錄數據用" onchange="updateSubLever()" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
                 <option value="">請選擇主情緒槓桿</option>
                 <option value="多巴胺">多巴胺</option>
                 <option value="腎上腺素">腎上腺素</option>
@@ -199,7 +219,8 @@
                 <option value="攪笑">攪笑</option>
             </select>
 
-            <select id="副情緒槓桿" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
+            <h3>副情緒槓桿*</h3>
+            <select id="副情緒槓桿" class="記錄數據用" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
                 <option value="">請選擇副情緒槓桿</option>
                 <option value="多巴胺">多巴胺</option>
                 <option value="腎上腺素">腎上腺素</option>
@@ -216,6 +237,7 @@
 
             <hr>
 
+            <h3>影片時長*</h3>
             <button onclick="顯示隱藏('#流量優勢區間')">流量優勢區間:</button>
             <p id="流量優勢區間" class="none">
                 。抖音(7-15)秒<br>
@@ -229,10 +251,11 @@
                 。哔哩哔哩(30-1800)秒<br>
                 。youtube(600-1200)秒<br>
             </p>
-
-            <input type="number" id="影片時長" placeholder="影片時長（秒）" title="影片時長（秒）" min="7" step="1" value="10">
+            <input type="number" id="影片時長" class="記錄數據用" placeholder="影片時長（秒）" title="影片時長（秒）" min="7" step="1" value="10">
+            
+            <hr>
+            
             <button onclick="生成Deepseek提示词()">生成Deepseek提示词</button>
-
             <textarea id="生成結果" class="none" title="單擊複製" 
             onclick="copyToClipboard('生成結果');";
             readonly></textarea>
@@ -352,14 +375,26 @@
             主情緒槓桿 = $(`#主情緒槓桿`).val()
             副情緒槓桿 = $(`#副情緒槓桿`).val()
 
+            // 提示词優化
+            你的角色  = $(`#你的角色`).val()
+            目標受眾  = $(`#目標受眾`).val()
+            需要結果  = $(`#需要結果`).val()
+            角色B=受眾B=結果B = ''
+            if (你的角色 !== '') { 角色B = `我是一名${你的角色},` }
+            if (目標受眾 !== '') { 受眾B = `我的目標受眾是${目標受眾},` }
+            if (需要結果 !== '') { 結果B = `我希望${需要結果}。` }
+            提示词優化1 = `
+            ${角色B}${受眾B}${結果B}
+            `
+
             if (影片主題 === '' || 影片內容 === '' || 影片時長 === '' || 主情緒槓桿 === '' || 副情緒槓桿 === '') {
-                alert('請填寫所有欄位');
+                alert('請填寫所有 * 欄位');
                 return
             }
 
             提示词 = 
-
             `請幫我設計一個符合抖音爆款影片的劇本:
+                ${提示词優化1}
                 影片主題:
                     ${影片主題}。
                 內容強調:
@@ -431,43 +466,27 @@
 
 
 
-        function 記錄已填寫數據() {
-            // 獲取需要記錄的元素
-            const elements = {
-                數字人影片主題: document.getElementById("數字人影片主題"),
-                數字人影片內容: document.getElementById("數字人影片內容"),
 
-                影片主題: document.getElementById("影片主題"),
-                影片內容: document.getElementById("影片內容"),
-                主情緒槓桿: document.getElementById("主情緒槓桿"),
-                副情緒槓桿: document.getElementById("副情緒槓桿"),
-                影片時長: document.getElementById("影片時長"),
-            };
+        function 記錄已填寫數據() {
+            // 獲取所有帶有 class="auto-save" 的元素
+            const elements = document.querySelectorAll(".記錄數據用");
 
             // 頁面加載時，從 LocalStorage 恢復數據
             document.addEventListener("DOMContentLoaded", () => {
-                for (const [id, element] of Object.entries(elements)) {
-                const savedValue = localStorage.getItem(id);
+                elements.forEach(element => {
+                const savedValue = localStorage.getItem(element.id);
                 if (savedValue !== null) {
-                    if (element.tagName === "SELECT") {
-                    element.value = savedValue;
-                    } else {
-                    element.value = savedValue;
-                    }
+                    element.value = savedValue; // 適用於 input、textarea、select
                 }
-                }
+                });
             });
 
             // 監聽輸入事件，實時保存數據
-            for (const [id, element] of Object.entries(elements)) {
+            elements.forEach(element => {
                 element.addEventListener("input", () => {
-                localStorage.setItem(id, element.value);
+                localStorage.setItem(element.id, element.value);
                 });
-            }
-        }
-
-        function _打開url(url) {
-            window.open(url, "_blank");
+            });
         }
 
         // 分頁
