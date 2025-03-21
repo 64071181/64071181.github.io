@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mok's Group Limited | 賺錢王2024</title>
+    <style>
+        :root {--metal-1: #3a3a3a;    --metal-2: #5a5a5a;    --metal-3: #7a7a7a;    --text-color: #e0e0e0;}
+        * {box-sizing: border-box;    margin: 0;    padding: 0;    font-family: 'Segoe UI', sans-serif;}
+        body {background: linear-gradient(145deg, var(--metal-1), var(--metal-2));    color: var(--text-color);    min-height: 95vh;    padding: 20px;}
+        .container {max-width: 800px;    margin: 0 auto;    border: 1px solid var(--metal-3);    border-radius: 8px;    padding: 20px;    box-shadow: 0 4px 12px rgba(0,0,0,0.25);}
+        .section { flex-direction: column;    gap: 15px;padding: 2%;}
+        .active {display: flex;}
+        button, .btn {text-decoration: none; display: inline-block; margin: 1%; background: linear-gradient(to bottom, var(--metal-2), var(--metal-1));    border: 1px solid var(--metal-3);    color: var(--text-color);    padding: 12px 24px;    border-radius: 6px;    cursor: pointer;    transition: all 0.3s;}
+        button:hover, .btn:hover {filter: brightness(1.2);    transform: translateY(-1px);}
+        textarea, input, select {background: rgba(255,255,255,0.1);    border: 1px solid var(--metal-3);    color: var(--text-color);    padding: 10px;    border-radius: 4px;    width: 100%;    resize: vertical;}
+        h1 {text-align: center;    margin-bottom: 20px;    color: #fff;    text-shadow: 0 2px 4px rgba(0,0,0,0.3);}
+
+
+        textarea{height: 100%;}
+        .none{display: none;}
+        #比py監事的頁面說明 {height: 1px;overflow: hidden;}
+
+
+        @media (max-width: 480px) {
+            .container { padding: 15px;    }
+            button, .btn { width: 100%;    }
+        }
+    </style>
+      <!-- 聯莫 icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+    <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+
+    <script src="https://64071181.github.io/d/64071181data.js"></script>
+    <script src="https://64071181.github.io/mokJsapi/a.js">
+        /*
+        py被封,只能js
+        
+        */
+    </script>
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <div class="container" style="text-align: center;">
+        <h1>
+            <a href="../">Mok's Group Limited </a> | 賺錢王
+        </h1>
+        <p class="mokJsApi_copyright">版權</p>
+
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <!-- 寫網神器 -->
+        <section id="寫網神器" class="section">
+            <a href="./" class="btn">返回</a>
+
+            <h1>寫網神器</h1>
+            <hr>
+
+            <h3>網頁主題*</h3>
+            <textarea id="網頁主題" class="記錄數據用" placeholder="請簡述您需要創作的網頁主題" title="請簡述您需要創作的網頁主題"></textarea>
+            <h3>網頁內容*</h3>
+            <textarea id="網頁內容" class="記錄數據用" placeholder="請簡述網頁中需要強調的內容" title="請簡述網頁中需要強調的內容"></textarea>
+            <hr>
+
+            <button onclick="生成製作網頁提示词()">生成製作網頁提示词</button>
+            <textarea id="生成結果" class="none" title="單擊複製" 
+            onclick="copyToClipboard('生成結果');"
+            readonly></textarea>
+
+            <a id="websim" href="https://websim.ai/" target="_blank" class="none btn">打開websim.ai</a>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <script>
+        // 寫網神器
+        function 生成製作網頁提示词() {
+
+            網頁主題 = $(`#網頁主題`).val()
+            網頁內容 = $(`#網頁內容`).val()
+            
+
+            if (網頁主題 === '' || 網頁內容 === '' ) {
+                alert('請填寫所有 * 欄位');
+                return
+            }
+
+            提示词 = 
+            `請幫我製作一個${網頁主題}網頁
+            網頁內需要有:${網頁內容}。
+            謝謝。`
+
+            $('#生成結果').val(提示词);
+            顯示隱藏('#生成結果,#websim')
+
+        }
+
+
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function 記錄已填寫數據() {
+            // 獲取所有帶有 class="auto-save" 的元素
+            const elements = document.querySelectorAll(".記錄數據用");
+
+            // 頁面加載時，從 LocalStorage 恢復數據
+            document.addEventListener("DOMContentLoaded", () => {
+                elements.forEach(element => {
+                const savedValue = localStorage.getItem(element.id);
+                if (savedValue !== null) {
+                    element.value = savedValue; // 適用於 input、textarea、select
+                }
+                });
+            });
+
+            // 監聽輸入事件，實時保存數據
+            elements.forEach(element => {
+                element.addEventListener("input", () => {
+                localStorage.setItem(element.id, element.value);
+                });
+            });
+        }
+
+        // 分頁
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function 顯示隱藏(id) {
+            $(id).removeClass('none');
+        }
+
+        function 翻譯() {
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = [
+                'moksurky@gmail.com',
+                'https://wa.me/85264071181/',
+                'https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/',
+                'https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/',
+                'http://t.me/mokaki/'
+            ];
+            _顯示聯莫(聯莫);
+            
+            翻譯()
+        }
+
+        記錄已填寫數據()
+        琪琪修改();
+        
+
+    </script>
+</body>
+</html>

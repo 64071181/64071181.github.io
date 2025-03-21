@@ -132,7 +132,25 @@
 
                 <a href="../tool2024/?賺錢王In" target="_blank" class="btn">ai tool</a>
 
-                <button onclick="showSection('爆片神器')">爆片神器</button>
+                <a href="Explosive_video.html" class="btn">爆片神器</a>
+
+                <button onclick="showSection('口播神器')">口播神器</button>
+
+                <button onclick="showSection('小編神器')">小編神器</button>
+
+                <button onclick="showSection('小說神器')">小說神器</button>
+
+                <a href="web_make.html" class="btn">寫網神器</a>
+
+                <button onclick="showSection('Excel神器')">Excel神器</button>
+
+                <button onclick="showSection('會議神器')">會議神器</button>
+
+                <button onclick="showSection('合約神器')">合約神器</button>
+
+                <button onclick="showSection('間諜神器')">間諜神器</button>
+
+
 
                 <hr style="margin: 5%;">
                 <h1>賺錢王</h1>
@@ -152,216 +170,64 @@
 
 
 
-        <section id="數字人出片小工具" class="section">
+
+        <!-- Excel神器 -->
+        <section id="Excel神器" class="section">
             <button onclick="showSection('main')">返回</button>
-
-            <h1>數字人出片小工具</h1>
-            <textarea id="數字人影片主題" placeholder="請簡述您需要創作的影片主題" title="請簡述您需要創作的影片主題"></textarea>
-            <textarea id="數字人影片內容" placeholder="請簡述影片中需要強調的內容" title="請簡述影片中需要強調的內容"></textarea>
-
-
-
+            <h1>Excel神器</h1>
+            <p >自動化報表生成，Excel數據秒變可視化圖表</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
         </section>
 
 
-
-        
-
-
-
-
-
-
-
-
-
-
-        <!-- 爆片神器 -->
-        <section id="爆片神器" class="section">
+        <!-- 口播神器 -->
+        <section id="口播神器" class="section">
             <button onclick="showSection('main')">返回</button>
+            <h1>口播神器</h1>
+            <p >AI自動生成數字人口播影片</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
+        </section>
 
-            <h1>爆片神器</h1>
-            <p>爆片神器 + deepseek + 剪映 十分鐘生成爆款視頻</p>
-            <hr>
+        <!-- 小編神器 -->
+        <section id="小編神器" class="section">
+            <button onclick="showSection('main')">返回</button>
+            <h1>小編神器</h1>
+            <p >輸入產品關鍵詞→輸出100+種小紅書/抖音風格文案+標籤</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
+        </section>
 
+        <!-- 小說神器 -->
+        <section id="小說神器" class="section">
+            <button onclick="showSection('main')">返回</button>
+            <h1>小說神器</h1>
+            <p >AI自動生成故事影片劇本</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
+        </section>
 
-            <h3>影片主題*</h3>
-            <textarea id="影片主題" class="記錄數據用" placeholder="請簡述您需要創作的影片主題" title="請簡述您需要創作的影片主題"></textarea>
-            <h3>強調內容*</h3>
-            <textarea id="影片內容" class="記錄數據用" placeholder="請簡述影片中需要強調的內容" title="請簡述影片中需要強調的內容"></textarea>
-
-
-
-            <h3>你的角色</h3>
-            <textarea id="你的角色" class="記錄數據用" placeholder="請簡述你的角色(我是一個科技商業顧問)" title="請簡述你的角色(我是一個科技商業顧問)"></textarea>
-            <h3>目標受眾</h3>
-            <textarea id="目標受眾" class="記錄數據用" placeholder="請簡述你的目標受眾(中小型企業老闆)" title="請簡述你的目標受眾(中小型企業老闆)"></textarea>
-            <h3>需要結果</h3>
-            <textarea id="需要結果" class="記錄數據用" placeholder="請簡述出片後需要的結果(引流觀眾購買我的服務)" title="請簡述出片後需要的結果(引流觀眾購買我的服務)"></textarea>
-
-
-
-
-
-
-
-
-            <h3>主情緒槓桿*</h3>
-            <select id="主情緒槓桿" class="記錄數據用" onchange="updateSubLever()" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
-                <option value="">請選擇主情緒槓桿</option>
-                <option value="多巴胺">多巴胺</option>
-                <option value="腎上腺素">腎上腺素</option>
-                <option value="催產素">催產素</option>
-                <option value="恐懼">恐懼</option>
-                <option value="優越感">優越感</option>
-                <option value="好奇心">好奇心</option>
-                <option value="愧疚感">愧疚感</option>
-                <option value="歸屬感">歸屬感</option>
-                <option value="希望感">希望感</option>
-                <option value="悲傷感">悲傷感</option>
-                <option value="攪笑">攪笑</option>
-            </select>
-
-            <h3>副情緒槓桿*</h3>
-            <select id="副情緒槓桿" class="記錄數據用" title="情緒槓桿幫助你在內容創作中精準調動使用者情緒，可以大幅提升內容的感染力和傳播力！">
-                <option value="">請選擇副情緒槓桿</option>
-                <option value="多巴胺">多巴胺</option>
-                <option value="腎上腺素">腎上腺素</option>
-                <option value="催產素">催產素</option>
-                <option value="恐懼">恐懼</option>
-                <option value="優越感">優越感</option>
-                <option value="好奇心">好奇心</option>
-                <option value="愧疚感">愧疚感</option>
-                <option value="歸屬感">歸屬感</option>
-                <option value="希望感">希望感</option>
-                <option value="悲傷感">悲傷感</option>
-                <option value="攪笑">攪笑</option>
-            </select>
-
-            <hr>
-
-            <h3>影片時長*</h3>
-            <button onclick="顯示隱藏('#流量優勢區間')">流量優勢區間:</button>
-            <p id="流量優勢區間" class="none">
-                。抖音(7-15)秒<br>
-                。Instagram(15-30)秒<br>
-                。微信视频号(15-60)秒<br>
-                <br>
-                。小红书(30-120)秒<br>
-                。快手(30-180)秒<br>
-                <br>
-                。西瓜视频(180-600)秒<br>
-                。哔哩哔哩(30-1800)秒<br>
-                。youtube(600-1200)秒<br>
-            </p>
-            <input type="number" id="影片時長" class="記錄數據用" placeholder="影片時長（秒）" title="影片時長（秒）" min="7" step="1" value="10">
-            
-            <hr>
-            
-            <button onclick="生成Deepseek提示词()">生成Deepseek提示词</button>
-            <textarea id="生成結果" class="none" title="單擊複製" 
-            onclick="copyToClipboard('生成結果');"
-            readonly></textarea>
-
-            <a id="Deepseek" href="https://chat.deepseek.com/" target="_blank" class="none btn">打開Deepseek</a>
-
-            <div id="整理Deepseek劇本" class="none">
-                <h3>Deepseek劇本整理</h3>
-                <input type="text" id="Deepseek劇本" title="複製Deepseek生成的javascript後貼到此處,再按一下" onclick="整理Deepseek出片文();顯示隱藏('#jimeng,#上字幕');" placeholder="複製Deepseek生成的javascript後貼到此處,再按一下">
-                <hr>
-
-                <h3>爆款标题</h3>
-                <textarea id="DS劇本_爆款标题" title="單擊複製" onclick="copyToClipboard('DS劇本_爆款标题');" readonly></textarea>
-
-                <h3>爆款關鍵字</h3>
-                <textarea id="DS劇本_關鍵字" title="單擊複製" onclick="copyToClipboard('DS劇本_關鍵字');" readonly></textarea>
-
-                <h3>分镜</h3>
-                <textarea id="DS劇本_分镜" title="單擊複製" onclick="copyToClipboard('DS劇本_分镜');" readonly></textarea>
-
-                <h3>徬白(手動複製)</h3>
-                <textarea id="DS劇本_徬白" title="手動複製每句" readonly></textarea>
-
-            </div>
-
-
-
-            <a id="jimeng" href="https://www.jianying.com/ai-creator/storyboard" target="_blank" class="none btn">打開剪映</a>
-
-
-
-            <a id="上字幕" href="https://www.capcut.com/editor?scenario=custom" target="_blank" class="none btn">上字幕</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <hr>
-            <button onclick="顯示隱藏('#爆款提示')">爆款提示:</button>
-
-            <p id="爆款提示" class="none">
-                破圈傳播密碼:<br>
-                <br>
-                提示词優化:<br>
-                    你的角色(我是一個科技商業顧問)<br>
-                    目標受眾(中小型企業老闆)<br>
-                    需要效果(引流觀眾購買我的服務)<br>
-                    <br>
-                冷啟動:<br>
-                    先做短視頻，測試那類影片更多受眾。<br>
-                    再做長視頻，測試變現效果。<br>
-                    再做產品，盈利及建立品牌。<br>
-                    <br>
-                    模因（Meme）植入<br>
-                    嫁接全網熱風雲（綠幕彈吉他、「尊嘟假嘟」配音）<br>
-                    設計可二創模板（舞蹈動作/台詞接龍）<br>
-                    <br>
-                衝突經濟學:<br>
-                    製造「可站隊爭議」（支持某觀點VS反對派）<br>
-                    埋「釣魚點」引發產業KOL下場爭論（如故意質疑主流方法）<br>
-                    <br>
-                灰階測驗思維:<br>
-                    同一腳本做5版不同結尾（求助/挑釁/祝福）AB測試<br>
-                    <br>
-                利用「熱門長尾」組合拳：<br>
-                    70%熱門話題+30%垂類內容維持標籤<br>
-                    <br>
-                數據運作暗箱<br>
-                <br>
-                    冷啟動階段：<br>
-                        發布後1小時內人工幹預（精準搜尋關鍵字進入同賽道影片評論區導流）<br>
-                        利用「完播率權重」：前3秒設計「未完待續」鉤子（例：「最後有重磅福利」）<br>
-                        <br>
-                    破播放量層級後：<br>
-                        集中回覆爭議性評論，刺激二次推薦（演算法判定為高互動優質內容）<br>
-            </p>
-
-            
+        <!-- 會議神器 -->
+        <section id="會議神器" class="section">
+            <button onclick="showSection('main')">返回</button>
+            <h1>會議神器</h1>
+            <p >自動生成會議紀要+提取待辦事項</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
         </section>
 
 
+        <!-- 合約神器 -->
+        <section id="合約神器" class="section">
+            <button onclick="showSection('main')">返回</button>
+            <h1>合約神器</h1>
+            <p >ai分析合同漏洞</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
+        </section>
 
-
-
-
-
-
-
-
-
-
-
-
+        <!-- 間諜神器 -->
+        <section id="間諜神器" class="section">
+            <button onclick="showSection('main')">返回</button>
+            <h1>間諜神器</h1>
+            <p >ai分析對手網站，生成產品情報</p>
+            <a href="./" class="btn">開通會員免排隊使用所有功能</a>
+        </section>
 
     </div>
     <script>
@@ -378,121 +244,6 @@
 
 
 
-
-        // 爆片神器
-        // 爆片神器
-        // 爆片神器
-        // 爆片神器
-
-        function updateSubLever() {
-            const mainLever = document.getElementById("主情緒槓桿");
-            const subLever = document.getElementById("副情緒槓桿");
-            const selectedMainValue = mainLever.value;
-
-            // 重置所有选项为可选
-            for (let i = 0; i < subLever.options.length; i++) {
-                subLever.options[i].disabled = false;
-            }
-
-            // 禁用主情绪杠杆中已选的选项
-            if (selectedMainValue) {
-                for (let i = 0; i < subLever.options.length; i++) {
-                    if (subLever.options[i].value === selectedMainValue) {
-                        subLever.options[i].disabled = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-
-        function 生成Deepseek提示词() {
-
-            影片主題 = $(`#影片主題`).val()
-            影片內容 = $(`#影片內容`).val()
-            影片時長 = $(`#影片時長`).val()
-
-            主情緒槓桿 = $(`#主情緒槓桿`).val()
-            副情緒槓桿 = $(`#副情緒槓桿`).val()
-
-            // 提示词優化
-            你的角色  = $(`#你的角色`).val()
-            目標受眾  = $(`#目標受眾`).val()
-            需要結果  = $(`#需要結果`).val()
-            角色B=受眾B=結果B = ''
-            if (你的角色 !== '') { 角色B = `我是一名${你的角色},` }
-            if (目標受眾 !== '') { 受眾B = `我的目標受眾是${目標受眾},` }
-            if (需要結果 !== '') { 結果B = `我希望${需要結果}。` }
-            提示词優化1 = `
-            ${角色B}${受眾B}${結果B}
-            `
-
-            if (影片主題 === '' || 影片內容 === '' || 影片時長 === '' || 主情緒槓桿 === '' || 副情緒槓桿 === '') {
-                alert('請填寫所有 * 欄位');
-                return
-            }
-
-            提示词 = 
-            `請幫我設計一個符合抖音爆款影片的劇本:
-                ${提示词優化1}
-                影片主題:
-                    ${影片主題}。
-                內容強調:
-                    ${影片內容}。
-                情緒槓桿:
-                    ${主情緒槓桿}和${副情緒槓桿}。
-                影片時長:
-                    ${影片時長}秒。
-
-                請參考及加入以下内容价值底层逻辑:
-                    行动指令明确：
-                        步骤化教学（「3步拯救废片」比「摄影技巧」更易转化）
-                    炫耀资本：
-                        提供可展示成果（「用这个模板，领导夸我PPT像咨询公司」）
-                    强刺激开场：
-                        视觉冲击（高饱和度画面/快速剪辑）、情绪冲击（争议话题/悬念提问）。
-                    信息密度爆炸：
-                        用「前置信息」直接抛出痛点（如「月薪3千到3万，我只做了这1件事」），破除用户划走动机。
-                    算法识别信号：
-                        标题关键词+前3秒画面需高度匹配，提升平台推荐精准度（如「装修避坑」需出现施工现场画面）。
-                    反常识节奏：
-                        每數秒设置「认知颠覆点」（例：先展示失败案例再反转）
-                    伪互动陷阱：
-                        用「暂停猜结局」「评论区选A/B」提升完播率
-                    算法助推设计：
-                        关键帧插入高互动关键词（提问/挑战/投票）触发推荐机制
-            ---
-            1.幫我設計一個符合抖音爆款的标题。
-            2.及給我一些符合抖音爆款的標籤關鍵字。
-            3.請幫我設計一個符合抖音爆款影片的分镜劇本，我將要用在 剪影 的ai文本生成視頻，单分镜长度200字內，每分鏡時長3秒。单分鏡內容不要換行。每段分鏡換行
-            4.請幫我設計符合抖音爆款的徬白劇本，每段白长度200字內，每段徬白對應一個分鏡。单段徬白內容不要換行,不要時間,不要语气描述,不要其他描述,只留下徬白內容。
-
-            請用以下方式給我結果，方便我用js切割:
-                爆款标题=[]
-                關鍵字=[]
-                分镜=[]
-                徬白=[]
-
-            謝謝。`
-
-            $('#生成結果').val(提示词);
-            顯示隱藏('#生成結果,#Deepseek,#整理Deepseek劇本')
-
-        }
-
-        function 整理Deepseek出片文(){
-            要分內容 = ['爆款标题','關鍵字','分镜','徬白']
-            Deepseek劇本  = $(`#Deepseek劇本`).val()
-
-            for (i of 要分內容){
-                各內容 = Deepseek劇本.split(`${i}=[`)[1].split(']')[0].replace(/","/g,'\n').replace(/", "/g,'\n').replace(/"/g,'')
-                $(`#DS劇本_${i}`).val(各內容)
-            }
-
-        }
-
-
-
         
 
 
@@ -503,28 +254,7 @@
 
 
 
-        function 記錄已填寫數據() {
-            // 獲取所有帶有 class="auto-save" 的元素
-            const elements = document.querySelectorAll(".記錄數據用");
-
-            // 頁面加載時，從 LocalStorage 恢復數據
-            document.addEventListener("DOMContentLoaded", () => {
-                elements.forEach(element => {
-                const savedValue = localStorage.getItem(element.id);
-                if (savedValue !== null) {
-                    element.value = savedValue; // 適用於 input、textarea、select
-                }
-                });
-            });
-
-            // 監聽輸入事件，實時保存數據
-            elements.forEach(element => {
-                element.addEventListener("input", () => {
-                localStorage.setItem(element.id, element.value);
-                });
-            });
-        }
-
+        /**/
         // 分頁
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
@@ -532,10 +262,7 @@
             });
             document.getElementById(sectionId).classList.add('active');
         }
-
-        function 顯示隱藏(id) {
-            $(id).removeClass('none');
-        }
+        
 
         function 翻譯() {
             translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
