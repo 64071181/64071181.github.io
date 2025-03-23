@@ -28,8 +28,6 @@
     .share-option:hover {      background-color: #45a049;    }
     .宣文 {      width: auto;      height: auto;      margin: 5%;      background-color: #fff;      padding: 20px;      border-radius: 10px;      box-shadow: 0 0 10px rgba(0,0,0,0.1);    }
   
-    .bubble-element.CustomElement.baTraHaL.bubble-r-container.flex.row{display: none;}
-  
   </style>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -48,6 +46,12 @@
     window.chatPosition = "right-bottom";
     window.chatBalloonImg = '//a821d63e790a2b70ddeb996bbc284b53.cdn.bubble.io/f1742732657320x407713372944441800/WhatsApp%20Image%202025-03-17%20at%2021.32.13.jpeg';
     window.chatbotIframeSrc = 'https://go.aicado.ai/1xNLkoD';
+
+    document.querySelectorAll('.bubble-element.CustomElement.baTraHaL.bubble-r-container.flex.row').forEach(function(element) {
+        element.style.display = 'none';
+    });
+
+
   </script>
   
   <style>
