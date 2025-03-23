@@ -420,10 +420,14 @@
         _顯示聯莫(聯莫);
 
             
-        document.querySelectorAll('.bubble-element.CustomElement.baTraHaL.bubble-r-container.flex.row').forEach(function(element) {
-            element.style.display = 'none';
-        });
+        // 選取目標 div
+        var targetDiv = document.querySelector('.bubble-element.CustomElement.baTraHaL.bubble-r-container');
 
+        // 刪除所有內聯樣式
+        targetDiv.removeAttribute('style');
+
+        // 設置 display 為 none
+        targetDiv.style.display = 'none';
 
 
 
