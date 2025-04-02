@@ -22,17 +22,32 @@
         .reply-container { display: flex;align-items: center;gap: 10px; }
         .reply-inputs { flex-grow: 1; }
     </style>
+
+  <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
+  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
+
+
 </head>
 <body>
+    <samp id="莫生查詢" style="display: none;">莫生我要查詢whatsapp自動回覆程式</samp>
+
     <h1>Mok's Group Limited | whatsapp auto reply</h1>
     
+    
+
+    <p class="mokJsApi_copyright">版權</p>
+
     <div class="container">
 
         <!--  -->
         <samp>202504022241</samp>
         <br>
         <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws%E7%8E%8B.exe" download="ws王.exe">            
-            下載ws王.exe
+            <h3>下載ws王.exe</h3>
         </a>
 
         <hr>
@@ -100,7 +115,9 @@
             </p>
         </div>
 
-        <hr>
+
+        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+        <br>
         <!-- 部份4: 執行ws王 -->
         <div id="輸出結果">
             <button id="執行ws王" title="執行ws王" onclick="executeWs()">執行ws王</button>
@@ -223,7 +240,27 @@
             saveToLocalStorage('replies', JSON.stringify(replies));
         });
 
-        loadSavedData();
+        
+
+        function _翻譯(){ 
+            translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
+            translate.execute();//進行翻譯 
+        }
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+            ];
+            _顯示聯莫(聯莫);
+            _翻譯()
+
+
+            loadSavedData();
+        }
+
+        琪琪修改()
+
+
     </script>
 </body>
 </html>
