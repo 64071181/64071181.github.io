@@ -5,115 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mok's Group Limited | whatsapp auto reply</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(145deg, #323232, #182d42);
-            color: #ecf0f1;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2em;
-            text-shadow: 2px 2px 4px #000;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 12px;
-            background: #2f3030;
-            box-shadow: 4px 4px 8px #4c4c4c;
-        }
-
-        label, p {
-            margin: 10px 0 5px;
-        }
-
-        input, textarea, button {
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-        }
-
-        input, textarea {
-            width: 100%;
-        }
-
-        #執行ws王 {
-            background: #666666;
-            color: #000000;
-            font-size: 48px;
-            width: 100%;
-        }
-        
-        button {
-            background-color: #000000;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #484949;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .reply-group {
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .delete-btn {
-            position: absolute;
-            right: -40px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 30px;
-            height: 30px;
-            background-color: #ff4444;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            padding: 0;
-        }
-
-        .delete-btn:hover {
-            background-color: #cc0000;
-        }
-
-        .reply-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .reply-inputs {
-            flex-grow: 1;
-        }
+        body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
+        h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px #000; }
+        .container { max-width: 600px;margin: 0 auto;padding: 20px;border-radius: 12px;background: #2f3030;box-shadow: 4px 4px 8px #767676; }
+        label, p { margin: 10px 0 5px; }
+        input, textarea, button { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
+        input, textarea { width: 100%; }
+        #執行ws王 { background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
+        #執行ws王:hover { background: #484949; }
+        button { background-color: #000000;color: white;cursor: pointer; }
+        button:hover { background-color: #484949; }
+        .hidden { display: none; }
+        .reply-group { margin-bottom: 15px;position: relative; }
+        .delete-btn { position: absolute;right: -15px;top: 35%;transform: translateY(-50%);width: 30px;height: 30px;background-color: #ff4444;color: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 16px;padding: 0; }
+        .delete-btn:hover { background-color: #cc0000; }
+        .reply-container { display: flex;align-items: center;gap: 10px; }
+        .reply-inputs { flex-grow: 1; }
     </style>
 </head>
 <body>
     <h1>Mok's Group Limited | whatsapp auto reply</h1>
     
     <div class="container">
-        <samp>202503292012</samp>
 
+        <!--  -->
+        <samp>202504022241</samp>
         <br>
         <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws%E7%8E%8B202503292312.exe" download="ws王202503292312.exe">
             下載ws王.exe
         </a>
 
         <hr>
+        
+
         <!-- 部份1: 帳號 -->
         <label>手機地區號</label>
         <input id="regionCode" type="text" placeholder="例如: 86" title="例如: 86" required>
@@ -178,7 +102,9 @@
 
         <hr>
         <!-- 部份4: 執行ws王 -->
-        <button id="執行ws王" onclick="executeWs()">執行ws王</button>
+        <div id="輸出結果">
+            <button id="執行ws王" title="執行ws王" onclick="executeWs()">執行ws王</button>
+        </div>
     </div>
 
     <script>
@@ -232,7 +158,8 @@
 
             const hashValue = await sha256(regionCode + whatsappNumber);
 
-            const result = `
+            // 必須保留2行空白
+            const 執行碼 = `
 帳號1181 = "${hashValue}"
 国家代码 = "${regionCode}"
 电话号码 = "${whatsappNumber}"
@@ -241,9 +168,8 @@
 其他_xpaths = {${otherXpaths || '無'}}
 
 
-            `;
-            
-            navigator.clipboard.writeText(result);
+`; 
+            navigator.clipboard.writeText(執行碼);
             alert("已複製執行碼！請執行 ws王 程式,並貼上執行碼!!");
         }
 
