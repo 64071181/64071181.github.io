@@ -30,15 +30,12 @@
   <script src="https://64071181.github.io/mokJsapi/a.js">//琪琪修改</script>
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
-
 </head>
 <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢whatsapp自動回覆程式</samp>
+    <samp id="已複製執行碼" class="none">已複製執行碼！請執行 ws王 程式,並貼上執行碼!!</samp>
 
     <h1>Mok's Group Limited | whatsapp auto reply</h1>
-    
-    
-
     <p class="mokJsApi_copyright">版權</p>
 
     <div class="container">
@@ -52,7 +49,6 @@
 
         <hr>
         
-
         <!-- 部份1: 帳號 -->
         <label>手機地區號</label>
         <input id="regionCode" type="text" placeholder="例如: 86" title="例如: 86" required>
@@ -173,7 +169,7 @@
                 }
             });
 
-            const hashValue = await sha256(regionCode + whatsappNumber);
+            const hashValue = await sha256_for帳號1181(regionCode + whatsappNumber);
 
             // 必須保留2行空白
             const 執行碼 = `
@@ -187,10 +183,10 @@
 
 `; 
             navigator.clipboard.writeText(執行碼);
-            alert("已複製執行碼！請執行 ws王 程式,並貼上執行碼!!");
+            _返液alert('#已複製執行碼')
         }
 
-        async function sha256(message) {
+        async function sha256_for帳號1181(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
