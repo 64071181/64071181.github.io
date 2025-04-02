@@ -171,7 +171,14 @@
 
 `; 
             // ************* html py 交換 *************
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                alert("WebSocket 尚未連線");
+                return;
+            }
             socket.send(執行碼);
+            // /************* html py 交換 *************
+
+
             //navigator.clipboard.writeText(執行碼);
             //alert("已複製執行碼！請執行 ws王 程式,並貼上執行碼!!");
         }
@@ -179,19 +186,6 @@
 
         
         
-        let socket;
-        fetch("wss://742a-34-138-4-97.ngrok-free.app") // 請手動填寫 ngrok 公開 URL
-            .then(response => response.text())
-            .then(url => {
-                socket = new WebSocket(url);
-                socket.onmessage = function(event) {
-                    document.getElementById('輸出結果').html += `<p>${event.data}</p>`;
-                };
-            });
-
-
-
-        // /************* html py 交換 *************
 
 
 
@@ -248,6 +242,32 @@
         });
 
         loadSavedData();
+
+
+
+        let socket;
+
+        async function 建立連線() {
+            try {
+                // wss 必須在 HTTPS 網頁環境下才能正常使用
+                socket = new WebSocket("wss://e7e6-34-145-53-16.ngrok-free.app");
+
+                // 設定接收訊息
+                socket.onmessage = function(event) {
+                    document.getElementById('output').innerHTML += `<p>${event.data}</p>`;
+                };
+
+                socket.onopen = () => console.log("WebSocket 已連線");
+                socket.onerror = (error) => console.error("WebSocket 錯誤:", error);
+                socket.onclose = () => console.log("WebSocket 已關閉");
+                
+            } catch (error) {
+                console.error("WebSocket 連線失敗:", error);
+            }
+        }
+        // 頁面載入後自動建立連線
+        window.onload = 建立連線;
+
     </script>
 </body>
 </html>
