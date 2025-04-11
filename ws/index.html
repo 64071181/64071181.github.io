@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>莫氏金流商匯 | whatsapp auto reply</title>
+    <title>莫氏金流商匯 | ws鍠</title>
     <style>
         body { font-family: Arial, sans-serif;background: linear-gradient(145deg, #a8a8a8, #000000);color: #ecf0f1;padding: 20px; }
         h1 { text-align: center;margin-bottom: 20px;font-size: 2em;text-shadow: 2px 2px 4px #000; }
@@ -11,8 +11,8 @@
         label, p { margin: 10px 0 5px; }
         input, textarea, button { margin-bottom: 10px;padding: 8px;border-radius: 8px;border: none;outline: none; }
         input, textarea { width: 100%; }
-        #執行ws自動客服 { background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
-        #執行ws自動客服:hover { background: #484949; }
+        .大鍵 {border-radius: 10px; background: #282828;color: #bdbdbd;box-shadow: inset 25px 25px 50px rgba(139, 139, 139, 0.8);border: 1px solid #686868;font-size: 48px;width: 100%; }
+        .大鍵:hover { background: #484949; }
         button { background-color: #000000;color: white;cursor: pointer; }
         button:hover { background-color: #484949; }
         .hidden { display: none; }
@@ -21,6 +21,9 @@
         .delete-btn:hover { background-color: #777; }
         .reply-container { display: flex;align-items: center;gap: 10px; }
         .reply-inputs { flex-grow: 1; }
+
+        #ws鍠Setting{display: none;}
+
     </style>
 
   <!-- ws icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
@@ -31,67 +34,128 @@
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js">// 翻譯 放最後</script>
 
 </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <body>
     <samp id="莫生查詢" style="display: none;">莫生我要查詢whatsapp自動回覆程式</samp>
     <samp id="已複製執行碼" class="none">已複製執行碼！請執行 ws自動客服 程式,並貼上執行碼!!</samp>
 
-    <h1>莫氏金流商匯 | whatsapp auto reply</h1>
+    <h1><b id="_我司名"></b> | ws鍠</h1>
     <p class="mokJsApi_copyright">版權</p>
 
-    <div class="container">
 
-        <!--  -->
-        <samp>202504110232</samp>
-        <br>
-        <a href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws自動客服.exe" download="ws自動客服.exe">         
-            <h3>ws自動客服.exe</h3>
+    
+
+
+
+    <div id="下載ws鍠" class="container" style="padding: 20px;">
+        <a  href="https://github.com/64071181/64071181.github.io/raw/main/ws/ws鍠.exe" download="ws鍠.exe">         
+            <h3 class="大鍵" style="text-align: center;" title="下載ws鍠.exe">下載ws鍠.exe</h3>
         </a>
-
-        <hr>
         
-        <!-- 部份1: 帳號 -->
-        <label>手機地區號</label>
-        <input id="regionCode" type="text" placeholder="例如: 86" title="例如: 86" required>
-        <label>WhatsApp 號碼</label>
-        <input id="whatsappNumber" type="text" placeholder="輸入WhatsApp號碼" title="輸入WhatsApp號碼" required>
+    </div>
 
-        <!-- 部份2: 回覆內容 -->
-        <h3>回覆內容</h3>
-        <samp>不能用表情符號</samp>
-        <div id="replies">
-            <div class="reply-group">
-                <div class="reply-container">
-                    <div class="reply-inputs">
-                        <input placeholder="當客戶說..." title="當客戶說" value="hi">
-                        <textarea placeholder="自動回覆..." title="自動回覆">您好！請問有什麼可以幫您？</textarea>
-                    </div>
-                    <button class="delete-btn" onclick="deleteReply(this)">×</button>
-                </div>
-            </div>
-            <div class="reply-group">
-                <div class="reply-container">
-                    <div class="reply-inputs">
-                        <input placeholder="當客戶說..." title="當客戶說" value="你好">
-                        <textarea placeholder="自動回覆..." title="自動回覆">您好，歡迎聯絡客服，請說明您的需求。</textarea>
-                    </div>
-                    <button class="delete-btn" onclick="deleteReply(this)">×</button>
-                </div>
-            </div>
-            <div class="reply-group">
-                <div class="reply-container">
-                    <div class="reply-inputs">
-                        <input placeholder="當客戶說..." title="當客戶說" value="謝謝">
-                        <textarea placeholder="自動回覆..." title="自動回覆">不客氣，這是我們應該做的。</textarea>
-                    </div>
-                    <button class="delete-btn" onclick="deleteReply(this)">×</button>
-                </div>
-            </div>
-        </div>
-        <button onclick="addReply()">增加回覆內容</button>
 
-        <!-- 部份3: 登入流程_xpaths -->
-        <div id="xpaths" class="hidden">
-            <p id="loginXpaths">
+
+
+
+    <div class="container" style="padding: 20px;">
+        <p id="更新日期">202504120252</p>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/kL-MIgqy83s?si=mTr63BbqyCC63vVt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div id="ws鍠Setting" class="container" style="padding: 20px;">
+
+        
+            <!-- 部份1: 帳號 -->
+            <label>手機地區號</label>
+            <input id="regionCode" type="text" placeholder="例如: 86" title="例如: 86" required>
+            <label>WhatsApp 號碼</label>
+            <input id="whatsappNumber" type="text" placeholder="輸入WhatsApp號碼" title="輸入WhatsApp號碼" required>
+
+            <!-- 部份2: 回覆內容 -->
+            <h3>回覆內容</h3>
+            <samp>不能用表情符號</samp>
+            <div id="replies">
+                <div class="reply-group">
+                    <div class="reply-container">
+                        <div class="reply-inputs">
+                            <input placeholder="當客戶說..." title="當客戶說" value="hi">
+                            <textarea placeholder="自動回覆..." title="自動回覆">您好！請問有什麼可以幫您？</textarea>
+                        </div>
+                        <button class="delete-btn" onclick="deleteReply(this)">×</button>
+                    </div>
+                </div>
+                <div class="reply-group">
+                    <div class="reply-container">
+                        <div class="reply-inputs">
+                            <input placeholder="當客戶說..." title="當客戶說" value="你好">
+                            <textarea placeholder="自動回覆..." title="自動回覆">您好，歡迎聯絡客服，請說明您的需求。</textarea>
+                        </div>
+                        <button class="delete-btn" onclick="deleteReply(this)">×</button>
+                    </div>
+                </div>
+                <div class="reply-group">
+                    <div class="reply-container">
+                        <div class="reply-inputs">
+                            <input placeholder="當客戶說..." title="當客戶說" value="謝謝">
+                            <textarea placeholder="自動回覆..." title="自動回覆">不客氣，這是我們應該做的。</textarea>
+                        </div>
+                        <button class="delete-btn" onclick="deleteReply(this)">×</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="addReply()">增加回覆內容</button>
+
+            <!-- 部份3: 登入流程_xpaths -->
+            <div id="xpaths" class="hidden">
+                <p id="loginXpaths">
 # 必須按此排列
 '使用手機號碼登入':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[2]/div[1]/div[5]/span/div',
 '国家选择':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[1]/div[1]/button/div/div/div',
@@ -99,26 +163,71 @@
 '地区选择':'//*[@id="wa-popovers-bucket"]/div/div[2]/div/div[2]/div/div/div/div/div/div/button/div/div/div[2]/div/div/div',
 '电话号码':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[1]/div[2]/div/div/div/form/input',
 '登入按钮':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[3]/div[3]/button/div/div'
-            </p>
-            <!-- 部份4: 其他_xpaths -->
-            <p id="otherXpaths">
+                </p>
+                <!-- 部份4: 其他_xpaths -->
+                <p id="otherXpaths">
 '验证成功使用QR碼登入消失':'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div[7]/span/div',
 '验证字符頭':'//*[@id="app"]/div/div[2]/div[2]/div[1]/div/div/div[4]/div/div/div/div[',
 '验证字符尾':']/span',
 '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
 '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
 '對話輸入框':'//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[*]/p'
-            </p>
-        </div>
+                </p>
+            </div>
 
 
-        <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
-        <br>
-        <!-- 部份4: 執行ws自動客服 -->
-        <div id="輸出結果">
-            <button id="執行ws自動客服" title="執行ws自動客服" onclick="executeWs()">執行wsws自動客服</button>
-        </div>
+            <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+            <br>
+            <!-- 部份4: 執行ws鍠 -->
+            <button class="大鍵" title="執行ws鍠" onclick="執行ws鍠()">執行ws鍠</button>
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
         function saveToLocalStorage(key, value) {
@@ -153,7 +262,7 @@
             }
         }
 
-        async function executeWs() {
+        async function 執行ws鍠() {
             const regionCode = document.getElementById('regionCode').value;
             const whatsappNumber = document.getElementById('whatsappNumber').value;
             const loginXpaths = document.getElementById('loginXpaths').textContent.trim();
@@ -183,6 +292,7 @@
 
 `; 
             navigator.clipboard.writeText(執行碼);
+            // py 檢查 剪贴板 轉變執行
         }
 
         async function sha256_for帳號1181(message) {
@@ -242,7 +352,16 @@
             translate.execute();//進行翻譯 
         }
 
+
+        function _Flow(){ 
+            if (window.location.href.indexOf('?ExeIn') !== -1) {
+                $('#ws鍠Setting').show();     // 隐藏元素
+                $('#下載ws鍠').hide();        // 显示元素
+            }
+        }
+
         function Start() {
+            _Flow()
             // 顯示聯莫
             const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
             ];
