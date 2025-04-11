@@ -1,7 +1,7 @@
 <html>
     <head>
       <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>莫氏金流商匯| 聯絡我們</title>
+      <title>莫氏金流商匯|聯絡我們</title>
 
       <style>
           * {margin: 0;padding: 0;box-sizing: border-box;}
@@ -15,7 +15,15 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           
       <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-      <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+
+      
+      <!-- <script src="https://64071181.github.io/mokJsapi/mokJsApi.js" ></script>
+
+      <script src="../mokJsapi/mokJsApi.js" ></script>-->
+
+      <script src="../mokJsapi/a.js"></script>
+
+
       <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
     </head>
 
@@ -32,7 +40,7 @@
 
 
 
-
+    
 
 
 
@@ -91,15 +99,20 @@
         translate.execute();//進行翻譯 
       }
 
-      // 用ulr?字做聯字
-      if ((location.href).indexOf('???') != -1){
-        聯字 = location.href.split("???")[1]
-        $('#莫生查詢').text(聯字);
+
+      function Start() {
+        // 用ulr?字做聯字
+        if ((location.href).indexOf('???') != -1){
+          聯字 = location.href.split("???")[1]
+          $('#莫生查詢').text(聯字);
+        }
+
+        _翻譯()
+        // 顯示聯莫
+        const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'];
+        _顯示聯莫(聯莫);
       }
 
-      _翻譯()
-      // 顯示聯莫
-      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'];
-      _顯示聯莫(聯莫);
+      琪琪修改()
     </script>
 </html>
