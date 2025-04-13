@@ -161,7 +161,7 @@
                 <!-- 部份4: 其他_xpaths -->
                 <p id="otherXpaths">
 '验证成功使用QR碼登入消失':'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div/div[7]/span/div',
-'验证字符頭':'//*[@id="app"]/div/div[2]/div[2]/div[1]/div/div/div[4]/div/div/div/div[',
+'验证字符頭':'//*[@id="app"]/div/div[2]/div[2]/div[*]/div/div/div[4]/div/div/div/div[',
 '验证字符尾':']/span',
 '對話列表':'//*[@id="pane-side"]/div[*]/div/div',
 '客戶信息位':'.//div/div/div/div[2]/div[2]/div[1]/span/span',
@@ -275,8 +275,7 @@
             const hashValue = await sha256_for帳號1181(regionCode + whatsappNumber);
 
             // 必須保留2行空白
-            const 執行碼 = `
-帳號1181 = "${hashValue}"
+            const 執行碼 = `帳號1181 = "${hashValue}"
 国家代码 = "${regionCode}"
 电话号码 = "${whatsappNumber}"
 回覆內容 = ${JSON.stringify(replies, null, 2)}
