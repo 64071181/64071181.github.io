@@ -1,6 +1,6 @@
 <p>
         您好<br>
-        我們是 <b id="_我司名">莫氏金流商匯</b><br><br>
+        我們是 <a href="https://64071181.github.io/"><b id="_我司名">莫氏金流商匯</b></a> <br><br>
         成立於2006年<br>
         專注於企業流程自動化與數據驅動決策，  <br>
         透過AI模型整合營銷、金流、客戶管理三大核心，  <br>
@@ -27,3 +27,4 @@
         &nbsp;&nbsp;&nbsp;自動化發送促銷Email<br>
         &nbsp;&nbsp;&nbsp;自動化whatsapp客服<br>
       </p>
+
