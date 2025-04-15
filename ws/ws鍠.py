@@ -160,7 +160,6 @@ def _Chrome設定():
     # Chrome配置选项
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--log-level=3')  # 只显示严重错误
-    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-infobars')
     chrome_options.add_argument('--remote-debugging-port=9222')
@@ -288,9 +287,9 @@ def _登入ws_等待對話列表出現():
         )
         return True
     except TimeoutException:
-        檢字 += 1
-        if 檢字 > 3:
-            檢字 = 0
+        檢列 += 1
+        if 檢列 > 3:
+            檢列 = 0
             _請告知作者更新('對話列表', 其他_xpaths['對話列表'])
         return False
 
@@ -865,10 +864,8 @@ def 檢查並刪除舊版本():
 ###     ###    #########       ###       ###     ###########       ###    ####
 '''
 
-def _Admin模式():
-    admin = None
-    if admin == True:
-        input('***_Admin模式***\n按任何鍵執行下步...')
+def _Admin模式(txt):
+    input(f'*** {txt} _Admin模式***\n按任何鍵執行下步...')
 
 
 
@@ -939,7 +936,7 @@ def _執行Ws自動客服():
         time.sleep(1)  # 避免过高频率检查
 
     # 写入内容覆盖剪贴板
-    pyperclip.copy('莫氏金流商匯 ws鍠')
+    #pyperclip.copy('莫氏金流商匯 ws鍠')
 
     獲取用戶輸入(current_clipboard)
 
