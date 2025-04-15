@@ -434,6 +434,7 @@ def _登入ws(国家代码,电话号码):
             print(f"登入WhatsApp超时，刷新页面...")
             continue
 
+    time.sleep(random.uniform(3.5, 6.8))        
     # 段6 = send登入信息比admin
     _send登入信息比admin()
 
