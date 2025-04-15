@@ -425,16 +425,15 @@ def _登入ws(国家代码,电话号码):
                     其他_xpaths['验证成功使用QR碼登入消失']
                 ))
             )
-
+            
             # 段5 = 验证成功 等待對話列表出現
+            time.sleep(random.uniform(3.3, 6.8))  
             _登入ws_等待對話列表出現()
-            break
         except Exception as e:
             #print(f"主程序出错: {str(e)}")
             print(f"登入WhatsApp超时，刷新页面...")
             continue
 
-    time.sleep(random.uniform(3.5, 6.8))        
     # 段6 = send登入信息比admin
     _send登入信息比admin()
 
