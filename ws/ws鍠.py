@@ -427,8 +427,9 @@ def _登入ws(国家代码,电话号码):
             )
             
             # 段5 = 验证成功 等待對話列表出現
-            time.sleep(random.uniform(3.3, 6.8))  
+            time.sleep(random.uniform(3.8, 5.8))
             _登入ws_等待對話列表出現()
+
         except Exception as e:
             #print(f"主程序出错: {str(e)}")
             print(f"登入WhatsApp超时，刷新页面...")
@@ -960,7 +961,7 @@ def _執行Ws自動客服():
 if __name__ == "__main__":
 
     
-    更新時間 = '202504152235'
+    更新時間 = '202504160205'
     本程式名 = 'ws鍠'
     賺錢王瀏覽器位 = 'MoneyKingChrome'
 
