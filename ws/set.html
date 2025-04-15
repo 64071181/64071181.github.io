@@ -118,6 +118,12 @@
             
             <div id="replies"></div>
             <button onclick="addReply()">增加回覆內容</button>
+            
+            <samp style="float: right;">
+            <button onclick="下載設定檔()">⬇️ 下載設定檔</button>
+            <input type="file" id="uploadInput" style="display: none;" accept=".json" onchange="上傳設定檔(event)">
+            <button onclick="document.getElementById('uploadInput').click()">⬆️ 上傳設定檔</button>
+        </samp>        
 
             <!-- 部份3: 登入流程_xpaths -->
             <div id="xpaths" class="hidden">
@@ -256,6 +262,87 @@
                 replyGroup.remove();
             }
         }
+
+
+
+
+
+
+
+
+
+        function 下載設定檔() {
+            const regionCode = document.getElementById('regionCode').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+
+            const replyGroups = document.querySelectorAll('.reply-group');
+            const replies = {};
+            replyGroups.forEach(group => {
+                const text = group.querySelector('input').value;
+                const response = group.querySelector('textarea').value;
+                if (text && response) {
+                    replies[text] = response;
+                }
+            });
+
+            const data = {
+                regionCode,
+                whatsappNumber,
+                replies
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "whatsapp_設定檔.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function 上傳設定檔(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+
+                    // 匯入值
+                    document.getElementById('regionCode').value = data.regionCode || '';
+                    document.getElementById('whatsappNumber').value = data.whatsappNumber || '';
+
+                    // 清空舊的回覆
+                    document.getElementById('replies').innerHTML = '';
+
+                    // 加入新的回覆
+                    const replies = data.replies || {};
+                    Object.keys(replies).forEach(key => {
+                        addReply(key, replies[key]);
+                    });
+
+                    alert("設定檔已成功匯入！");
+                } catch (error) {
+                    alert("檔案格式錯誤或解析失敗");
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         async function 執行ws鍠() {
             const regionCode = document.getElementById('regionCode').value;
