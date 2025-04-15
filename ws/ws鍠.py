@@ -27,6 +27,9 @@ import requests
 import subprocess
 import random
 
+# Windows API 阻止系统休眠
+import ctypes
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -156,6 +159,8 @@ def _Chrome設定():
 
     # Chrome配置选项
     chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--log-level=3')  # 只显示严重错误
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-infobars')
     chrome_options.add_argument('--remote-debugging-port=9222')
@@ -224,6 +229,8 @@ class ReloadPageException(Exception):
     """自定义异常用于触发页面重载"""
     pass
 
+
+
 def _檢查元素存在(xpath):
     try:
         driver.find_element(By.XPATH, xpath)
@@ -232,49 +239,81 @@ def _檢查元素存在(xpath):
         return False
 
 
-def _檢查點擊(位置,xpath, timeout=30):
+
+查點 = 0
+def _檢查點擊(位置,xpath, timeout=10):
+    global 查點
     try:
         element = WebDriverWait(driver, timeout).until(
             EC.element_to_be_clickable((By.XPATH, xpath))
         )
         element.click()
-        #print(f"找到{位置}元素: {xpath}")
         return True
     except Exception as e:
-        print(f"請告知作者更新:\n https://api.whatsapp.com/send/?phone={官Ws}&text=找不到{位置}元素: {xpath}")
+        查點 += 1
+        if 查點 > 3:
+            查點 = 0
+            _請告知作者更新(位置, xpath)
         return False
 
 
-def _檢查文字輸入(位置,xpath, text, timeout=30):
+
+檢字 = 0
+def _檢查文字輸入(位置,xpath, text, timeout=10):
+    global 檢字
     if _檢查元素存在(xpath):
         element = WebDriverWait(driver, timeout).until(
             EC.visibility_of_element_located((By.XPATH, xpath))
         )
         element.send_keys(text)
-        #print(f"成功输入文本到: {xpath}")
         return True
     else:
-        print(f"請告知作者更新:\n https://api.whatsapp.com/send/?phone={官Ws}&text=找不到{位置}元素: {xpath}")
+        檢字 += 1
+        if 檢字 > 3:
+            檢字 = 0
+            _請告知作者更新(位置, xpath)
         return False
 
 
-def _等待顯示聯絡人框架():
-    while True:
-        try:
-            # 使用复合定位策略提高稳定性
-            WebDriverWait(driver, 30).until(
-                EC.presence_of_element_located((
-                    By.XPATH, 其他_xpaths['對話列表']
-                ))
-            )
-            break
-        except TimeoutException:
-            print(f"等待聯絡人加载超时，刷新页面...")
-            driver.refresh()
-            continue
+
+檢列 = 0
+def _登入ws_等待對話列表出現():
+    global 檢列
+    try:
+        WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((
+            By.XPATH, 
+            其他_xpaths['對話列表']  # 同时验证属性
+        ))
+        )
+        return True
+    except TimeoutException:
+        檢字 += 1
+        if 檢字 > 3:
+            檢字 = 0
+            _請告知作者更新('對話列表', 其他_xpaths['對話列表'])
+        return False
 
 
 
+def _請告知作者更新(位置名, xpath):
+    print(f'''請告知作者更新:
+        https://api.whatsapp.com/send/?phone={官Ws}&text=找不到{位置名}元素[{xpath}]
+        ''')
+
+
+
+
+def _WindowsAPI阻止系统休眠():
+    # 定义常量
+    ES_CONTINUOUS = 0x80000000
+    ES_SYSTEM_REQUIRED = 0x00000001
+    ES_DISPLAY_REQUIRED = 0x00000002
+    # 阻止系统休眠和关闭显示器
+    ctypes.windll.kernel32.SetThreadExecutionState(
+        ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED
+    )
+    
 
 
 
@@ -405,17 +444,6 @@ def _登入ws(国家代码,电话号码):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 def _send登入信息比admin():
     driver.get(f"https://api.whatsapp.com/send/?phone={官Ws}&text={月費用戶}%0D%0A{本程式名}%0D%0A{帳號1181}")
 
@@ -440,49 +468,21 @@ def _send登入信息比admin():
 
 
 
-
-
-
-
-
-
-
-
-
-
-def _登入ws_等待對話列表出現():
-    while True:
-        try:
-            WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((
-                By.XPATH, 
-                其他_xpaths['對話列表']  # 同时验证属性
-            ))
-            )
-            return True
-        except TimeoutException:
-            return False
-
-
-
-
-
-
-
-
-
-
-
-
-
 計等錢 = 0
 def _ws自動客服():
     global 計等錢
-    _等待顯示聯絡人框架()
+
+    while True:
+        try:
+            _登入ws_等待對話列表出現()
+            break
+        except:
+            continue
     
     while True:
-        計等錢 += 1
+        計等錢 +=1
         print(f"你已收到{計等錢}萬元")
+
         try:
             # 每次迭代時重新獲取 chat_list
             chat_list = WebDriverWait(driver, 30).until(
@@ -655,11 +655,9 @@ def _解析輸入內容(輸入文本):
 
 
 def 獲取帳號資料(帳號):
-    url = "https://github.com/64071181/64071181.github.io/blob/main/ws/d"
-
     try:
         # 獲取網頁內容
-        response = requests.get(url)
+        response = requests.get(VipDurl)
         response.raise_for_status()  # 檢查請求是否成功
         
         # 搜索 帳號1181
@@ -965,13 +963,14 @@ def _執行Ws自動客服():
 if __name__ == "__main__":
 
     
-    更新時間 = '202504140033'
+    更新時間 = '202504152235'
     本程式名 = 'ws鍠'
     賺錢王瀏覽器位 = 'MoneyKingChrome'
 
 
     官Ws = '85264071181'
     Ws客服官網 = 'https://64071181.github.io/'
+    VipDurl = "https://github.com/64071181/64071181.github.io/blob/main/ws/d"
 
     月費用戶 = False 
     試用次數 = 10
@@ -991,7 +990,7 @@ if __name__ == "__main__":
 
     _執行Ws自動客服()
 
-    print(f'''
+    print(f'''321
             _\|/_
             (o o)
     +----oOO--U--OOo-------------------------{更新時間}-+
@@ -1011,6 +1010,7 @@ if __name__ == "__main__":
     +-----------------------------------------------------+
     ''')
 
+    _WindowsAPI阻止系统休眠()
     _登入ws(国家代码,电话号码)
     _ws自動客服()
 
