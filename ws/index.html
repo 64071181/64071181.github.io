@@ -23,9 +23,9 @@
 
         .container {max-width: 1200px;margin: 0 auto;padding: 2rem;position: relative;}
 
-        header {text-align: center;padding: 4rem 0;background: var(--metal);background-clip: text;-webkit-text-fill-color: transparent;position: relative;}
+        header {text-align: center;padding: 4rem 0;background: var(--metal);background-clip: text;-webkit-text-fill-color: #fff;position: relative;}
 
-        h1 {font-size: 3.5rem;margin-bottom: 1rem;text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);}
+        h1 {font-size: 3.5rem;margin-bottom: 1rem;text-shadow: 0 0 15px gold;}
 
         li {list-style: none;}
 
@@ -33,7 +33,7 @@
 
         .card:hover {transform: translateY(-5px);}
 
-        .industry-solutions {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 1.5rem;margin: 3rem 0;}
+        #開通會員, .industry-solutions {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 1.5rem;margin: 3rem 0;}
 
         .highlight {color: var(--gold);font-weight: bold;animation: 
             float 3s ease-in-out infinite,metalShine 4s linear infinite;}
@@ -75,7 +75,11 @@
             h1 {font-size: 2.5rem; }
         }
 
+        .會員卡{opacity: 1; transform: translateY(0px); transition: 2s cubic-bezier(0.25, 0.1, 0.25, 1);}
+        
+        
         .刪除線{text-decoration: solid line-through gold 4px;}
+
     </style>
 
 
@@ -164,7 +168,7 @@
             WS鍠 是一款專為 WhatsApp 設計的自動回覆程式，讓您無需手動操作，即可輕鬆管理您的訊息。<br><br>
             透過設定觸發詞，當客戶發送指定訊息時，程式會自動回覆預設的內容，，無需人工干預，24小時即時服務。
             <br><br>
-            * 本程式只適用於 windows 電腦
+            
         </div>
 
         <div class="card">
@@ -200,29 +204,9 @@
 
 
         <h2 style="text-align: center; margin: 3rem 0">開通會員</h2>
-        <p style="text-align: center;">* 本程式只適用於 windows 電腦</p>
-        <div class="industry-solutions">
-            
-            <a title="立即開通1個月會員" class="card" style="opacity: 1; transform: translateY(0px); transition: 2s cubic-bezier(0.25, 0.1, 0.25, 1);" href="https://64071181.github.io/PayAki/index.html" target="_blank">
-                <h2>✦ 立即開通1個月會員</h2>
-                <br><br><br>
-                <h3>$2,000 港元</h3>
-            </a>
-
-            <a title="立即開通6個月會員" class="card" style="opacity: 1; transform: translateY(0px); transition: 2s cubic-bezier(0.25, 0.1, 0.25, 1);" href="https://64071181.github.io/PayAki/index.html" target="_blank">
-                <h2>✦ 立即開通6個月會員</h2>
-                <br>
-                <h3 class="刪除線">$12,000 港元</h3>
-                <h2 class="highlight" style="margin-top: 1rem">$10,800 港元</h2>
-            </a>
-
-            <a title="立即開通1年會員" class="card" style="opacity: 1; transform: translateY(0px); transition: 2s cubic-bezier(0.25, 0.1, 0.25, 1);" href="https://64071181.github.io/PayAki/index.html" target="_blank">
-                <h2>✦ 立即開通1年會員</h2>
-                <br>
-                <h3 class="刪除線">$24,000 港元</h3>
-                <h2 class="highlight" style="margin-top: 1rem">$19,200 港元</h2>
-            </a>
-
+        <p style="text-align: center;"></p>
+        <div id="開通會員">
+            <!-- 會員類別all -->
         </div>
 
         <h2>服務承諾：</h2><br>
@@ -322,6 +306,87 @@
             `;
             solutionsContainer.appendChild(card);
         });
+
+
+
+
+
+
+
+
+
+
+
+        const 會員類別all = [
+            '✦ 1個月會員','✦ 6個月會員','✦ 12個月會員',
+            '✦ 1個月vip會員','✦ 6個月vip會員','✦ 12個月vip會員'
+        ]
+        const 說明 = [
+            'windows 電腦執行','windows 電腦執行','windows 電腦執行',
+            '直接手機執行','直接手機執行','直接手機執行'
+        ]
+        const 會費 = [
+            '','12,000','24,000',
+            '','18,000','36,000'
+        ]
+        const 優惠會費 = [
+            '2,000','10,800 ','19,200',
+            '3,000','16,200','28,800'
+        ]
+        const 開通會員box = document.querySelector('#開通會員');
+
+        // 使用索引值遍历数组
+        會員類別all.forEach((會員類別, index) => {
+            const 卡 = document.createElement('a');
+            卡.className = 'card 會員卡';
+
+            卡.title = 會員類別;
+            卡.href = "https://64071181.github.io/PayAki/index.html";
+            卡.target = "_blank";
+
+
+            會費原價 = '<br>'
+            if (會費[index] != ''){
+                會費原價 = `<h3 class="刪除線">$${會費[index]}港元</h3>`
+            }
+
+            卡.innerHTML = `
+                <h2>${會員類別}</h2>
+                <br>
+                <p>${說明[index]}</p>
+                ${會費原價}
+                <div class="highlight" style="margin-top: 1rem">$${優惠會費[index]}港元</div>
+            `;
+            開通會員box.appendChild(卡);
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // 滚动动画效果
         const cards = document.querySelectorAll('.card');
