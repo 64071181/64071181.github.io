@@ -205,9 +205,7 @@
 
         <h2 style="text-align: center; margin: 3rem 0">開通會員</h2>
         <p style="text-align: center;"></p>
-        <div id="開通會員">
-            <!-- 會員類別all -->
-        </div>
+        <div id="開通會員"><!-- 會員類別all --></div>
 
         <h2>服務承諾：</h2><br>
         <h3>✦ 15天按比例退款保證！ ✦ 7天無理由退款保證！ <br>
@@ -347,7 +345,7 @@
 
             會費原價 = '<br>'
             if (會費[index] != ''){
-                會費原價 = `<h3 class="刪除線">$${會費[index]}港元</h3>`
+                會費原價 = `<p class="刪除線">$${會費[index]}港元</p>`
             }
 
             卡.innerHTML = `
@@ -355,7 +353,7 @@
                 <br>
                 <p>${說明[index]}</p>
                 ${會費原價}
-                <div class="highlight" style="margin-top: 1rem">$${優惠會費[index]}港元</div>
+                <h3 class="highlight" style="margin-top: 1rem">$${優惠會費[index]}港元</h3>
             `;
             開通會員box.appendChild(卡);
         });
