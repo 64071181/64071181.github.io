@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I人理髮專門店 - 香港首間I人專屬理髮空間</title>
+    <style>
+        :root {--primary: #2C3E50;--secondary: #3498DB;--accent: #1ABC9C;--light: #ECF0F1;--dark: #2C3E50; }
+        * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Noto Sans TC', sans-serif; }
+        body {background-color: #f8f9fa;color: #333;line-height: 1.6; }
+        .container {max-width: 1200px;margin: 0 auto;padding: 0 20px; }
+        
+        /* 头部样式 */
+        header {background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);color: white;padding: 1rem 0;position: sticky;top: 0;z-index: 100;box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-content {display: flex;justify-content: space-between;align-items: center; }
+        .logo {font-size: 1.8rem;font-weight: 700;display: flex;align-items: center; }
+        .logo-icon {margin-right: 10px;font-size: 2rem; }
+        nav ul {display: flex;list-style: none; }
+        nav li {margin-left: 2rem; }
+        nav a {color: white;text-decoration: none;font-weight: 500;transition: opacity 0.3s; }
+        nav a:hover {opacity: 0.8; }
+        
+        /* 英雄区域 */
+        .hero {background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;height: 80vh;display: flex;align-items: center;position: relative; }
+        .hero::before {content: '';position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(44, 62, 80, 0.85); }
+        .hero-content {position: relative;color: white;max-width: 700px;padding: 2rem; }
+        .hero h1 {font-size: 3.5rem;margin-bottom: 1.5rem;line-height: 1.2; }
+        .hero p {font-size: 1.5rem;margin-bottom: 2rem;max-width: 600px; }
+        .btn {display: inline-block;background-color: var(--accent);color: white;padding: 12px 30px;border-radius: 30px;text-decoration: none;font-weight: 600;font-size: 1.1rem;transition: all 0.3s;border: none;cursor: pointer; }
+        .btn:hover {background-color: #16a085;transform: translateY(-3px);box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-outline {background: transparent;border: 2px solid var(--accent);margin-left: 15px; }
+        
+        /* 核心理念 */
+        .concept {padding: 5rem 0;background-color: white; }
+        .section-title {text-align: center;margin-bottom: 3rem;font-size: 2.5rem;color: var(--primary); }
+        .features {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 2rem; }
+        .feature-card {background: var(--light);border-radius: 10px;padding: 2rem;text-align: center;transition: transform 0.3s; }
+        .feature-card:hover {transform: translateY(-10px); }
+        .feature-icon {font-size: 3rem;color: var(--accent);margin-bottom: 1.5rem; }
+        .feature-card h3 {margin-bottom: 1rem;color: var(--primary); }
+        
+        /* 预售方案 */
+        .funding {padding: 5rem 0;background-color: #f8f9fa; }
+        .pricing-cards {display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 2rem;margin-top: 2rem; }
+        .pricing-card {background: white;border-radius: 10px;overflow: hidden;box-shadow: 0 5px 15px rgba(0,0,0,0.1);transition: all 0.3s;position: relative; }
+        .pricing-card:hover {transform: scale(1.03);box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .pricing-card.popular::before {content: '最受歡迎';position: absolute;top: 15px;right: -30px;background: var(--accent);color: white;padding: 5px 30px;transform: rotate(45deg);font-size: 0.8rem;font-weight: bold; }
+        .pricing-header {background: var(--primary);color: white;padding: 1.5rem;text-align: center; }
+        .pricing-header h3 {font-size: 1.8rem;margin-bottom: 0.5rem; }
+        .pricing-price {font-size: 2.5rem;font-weight: 700; }
+        .pricing-body {padding: 2rem; }
+        .pricing-features {list-style: none;margin: 1.5rem 0; }
+        .pricing-features li {padding: 0.8rem 0;border-bottom: 1px solid #eee;display: flex;align-items: center; }
+        .pricing-features li:before {content: "✓";color: var(--accent);font-weight: bold;margin-right: 10px; }
+        
+        /* 进度条 */
+        .progress-section {padding: 4rem 0;background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);color: white;text-align: center; }
+        .progress-container {max-width: 800px;margin: 0 auto; }
+        .progress-title {font-size: 2.2rem;margin-bottom: 2rem; }
+        .progress-stats {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 2rem;margin-bottom: 2rem; }
+        .stat-box {background: rgba(255,255,255,0.1);padding: 1.5rem;border-radius: 10px; }
+        .stat-number {font-size: 2.5rem;font-weight: 700;margin-bottom: 0.5rem;color: var(--accent); }
+        .progress-bar-container {background: rgba(255,255,255,0.2);height: 20px;border-radius: 10px;margin: 2rem 0;overflow: hidden; }
+        .progress-bar {height: 100%;background: var(--accent);width: 65%; /* 动态更新 */
+            border-radius: 10px;transition: width 1s ease-in-out; }
+        
+        /* FAQ部分 */
+        .faq {padding: 5rem 0;background-color: white; }
+        .faq-container {max-width: 800px;margin: 0 auto; }
+        .faq-item {margin-bottom: 1.5rem;border: 1px solid #eee;border-radius: 8px;overflow: hidden; }
+        .faq-question {padding: 1.5rem;background: var(--light);font-weight: 600;cursor: pointer;display: flex;justify-content: space-between;align-items: center; }
+        .faq-answer {padding: 0 1.5rem;max-height: 0;overflow: hidden;transition: max-height 0.3s ease, padding 0.3s ease; }
+        .faq-answer.active {padding: 1.5rem;max-height: 500px; }
+        
+        /* 页脚 */
+        footer {background: var(--dark);color: white;padding: 3rem 0 2rem; }
+        .footer-content {display: grid;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));gap: 2rem;margin-bottom: 2rem; }
+        .footer-section h3 {margin-bottom: 1.5rem;font-size: 1.3rem; }
+        .contact-info {list-style: none; }
+        .contact-info li {margin-bottom: 1rem;display: flex;align-items: center; }
+        .social-links {display: flex;gap: 1rem;margin-top: 1rem; }
+        .social-links a {display: inline-block;width: 40px;height: 40px;background: rgba(255,255,255,0.1);border-radius: 50%;display: flex;align-items: center;justify-content: center;transition: background 0.3s; }
+        .social-links a:hover {background: var(--accent); }
+        .copyright {text-align: center;padding-top: 2rem;border-top: 1px solid rgba(255,255,255,0.1);font-size: 0.9rem;opacity: 0.7; }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {.hero h1 {font-size: 2.5rem; }
+            .hero p {font-size: 1.2rem; }
+            .section-title {font-size: 2rem; }
+            .header-content {flex-direction: column;    text-align: center; }
+            nav ul {margin-top: 1rem;    justify-content: center; }
+            nav li {margin: 0 1rem; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://xn--come-p35m.com/mokJsapi/a.js">//琪琪修改</script>
+
+
+
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf logo-icon"></i>
+                <span>I人理髮專門店</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#concept">核心理念</a></li>
+                    <li><a href="#funding">預售方案</a></li>
+                    <li><a href="#progress">預售進度</a></li>
+                    <li><a href="#faq">常見問題</a></li>
+                    <li><a href="https://64071181.github.io/PayAki/" class="btn">立即支持</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>終於，理髮可以一言不發</h1>
+            <p>香港首間I人專屬理髮空間 - 零社交壓力、無強迫推銷、全預約隔間體驗</p>
+            <div>
+                <a href="#funding" class="btn">預約寧靜體驗</a>
+                <a href="#concept" class="btn btn-outline">了解理念</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心理念 -->
+    <section id="concept" class="concept">
+        <div class="container">
+            <h2 class="section-title">我們的靜心理念</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-volume-mute feature-icon"></i>
+                    <h3>非必要不說話</h3>
+                    <p>髮型師只會進行必要溝通，全程零強迫社交，讓您享受純粹的理髮體驗</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-ban feature-icon"></i>
+                    <h3>絕對無推銷</h3>
+                    <p>從進門到離開，不會有任何產品推銷或加價項目，價格透明單一</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check feature-icon"></i>
+                    <h3>全預約制</h3>
+                    <p>精準時段預約，杜絕排隊等候，到店5分鐘內即可入座</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-border-all feature-icon"></i>
+                    <h3>獨立隔間</h3>
+                    <p>1.5米高屏風完全隔離鄰座，打造真正私人理髮空間</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 预售方案 -->
+    <section id="funding" class="funding">
+        <div class="container">
+            <h2 class="section-title">預售支持方案</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                您的支持不僅是預訂服務，更是參與一場「回歸寧靜」的運動<br>
+                限量400席，共同驗證香港需要這樣的空間
+            </p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>寧靜體驗者</h3>
+                        <div class="pricing-price">$200</div>
+                        <p>限量400位</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li>開業後免費理髮一次</li>
+                            <li>永久會員身份</li>
+                            <li>專屬預約通道</li>
+                            <li>創始支持者證書</li>
+                        </ul>
+                        <a href="https://64071181.github.io/PayAki/" class="btn" style="width: 100%; text-align: center;">立即支持</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="pricing-header" style="background: var(--accent);">
+                        <h3>深度寧靜者</h3>
+                        <div class="pricing-price">$2,000</div>
+                        <p>限量40位</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li>免費理髮十次（價值$2,000）</li>
+                            <li>高級護髮禮盒三選一（價值$300+）</li>
+                            <li>永久VIP會員身份</li>
+                            <li>專屬預約時段</li>
+                            <li>創始支持者銘牌</li>
+                        </ul>
+                        <a href="https://64071181.github.io/PayAki/" class="btn" style="width: 100%; text-align: center; background: var(--primary);">最佳選擇</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>寧靜創辦人</h3>
+                        <div class="pricing-price">$20,000</div>
+                        <p>限量4位</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li>免費理髮一百次（價值$20,000）</li>
+                            <li>高級護髮禮盒三選一（價值$300+）</li>
+                            <li>永久VVIP會員身份</li>
+                            <li>專屬黃金時段預約權</li>
+                            <li>首3年店鋪盈利分紅5%</li>
+                            <li>創始人牆留名</li>
+                        </ul>
+                        <a href="https://64071181.github.io/PayAki/" class="btn" style="width: 100%; text-align: center;">尊貴支持</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 进度条 -->
+    <section id="progress" class="progress-section">
+        <div class="container progress-container">
+            <h2 class="progress-title">預售進度實時更新</h2>
+            
+            <div class="progress-stats">
+                <div class="stat-box">
+                    <div class="stat-number">288</div>
+                    <div>已支持人數</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">72%</div>
+                    <div>目標達成率</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">23</div>
+                    <div>剩餘天數</div>
+                </div>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 72%;"></div>
+            </div>
+            
+            <p>還需112位支持者達成400人目標，共同創建香港首間I人理髮空間</p>
+        </div>
+    </section>
+
+    <!-- FAQ部分 -->
+    <section id="faq" class="faq">
+        <div class="container faq-container">
+            <h2 class="section-title">常見問題解答</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>真的可以全程不說話嗎？髮型師會不會覺得不禮貌？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>這是我們的核心價值！所有髮型師都經過專門培訓，完全理解並尊重您的安靜需求。入職前需通過「無聲理髮」測試，您只需在預約時詳細說明需求，過程中可用簡單手勢或平板指示調整。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>如果預售未達到400人目標怎麼辦？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>我們將全額退還所有支持款項，並額外贈送$100理髮券作為感謝。但我們相信香港需要這樣的空間，誠邀您分享給同為I人的朋友！</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>免費理髮服務有使用期限嗎？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>所有預售方案中的免費理髮需在開業後2年內使用完畢，未使用次數可轉讓但不能兌現。我們建議您按日常理髮頻率選擇合適方案。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>店鋪的具體位置在哪裡？何時開業？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>我們正在九龍核心商區（尖沙咀/旺角）洽談三個合適地點，將根據預售情況確定最終位置。達到400人目標後，預計3個月內完成裝修開業，支持者將優先收到開業通知。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>I人理髮專門店</h3>
+                    <p>香港首間專為內向者打造的無壓力理髮空間，重新定義理髮體驗。</p>
+                    <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+                </div>
+                
+                
+            </div>
+            
+            <div class="copyright">
+                <p class="mokJsApi_copyright">版權</p>香港I人理髮專門店 | 預售計劃
+            </div>
+
+            <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+
+        </div>
+    </footer>
+
+    <script>
+        // FAQ切换功能
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('active');
+                
+                const icon = question.querySelector('i');
+                if (answer.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // 模拟实时进度更新（实际使用时连接后端API）
+        function updateProgress() {
+            const progressBar = document.querySelector('.progress-bar');
+            const currentWidth = parseFloat(progressBar.style.width);
+            if (currentWidth < 100) {
+                progressBar.style.width = (currentWidth + 0.1) + '%';
+            }
+        }
+        setInterval(updateProgress, 5000);
+
+        function Start() {
+            // 顯示聯莫
+            const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/','https://github.com/GoldComeHK/GoldComeHK.github.io'
+            ];
+            _顯示聯莫(聯莫);
+        }
+        琪琪修改('https://xn--come-p35m.com/')
+
+
+
+    </script>
+</body>
+</html>
