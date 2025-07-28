@@ -30,7 +30,7 @@
         
         .subtitle::after {content: "";display: block;width: 120px;height: 3px;background: linear-gradient(to right, transparent, #d4af37, #c0c0c0, #d4af37, transparent);margin: 15px auto 0;border-radius: 50%; }
         
-        .main-content {display: flex;flex-direction: column;align-items: center;gap: 30px;width: 100%; }
+        .main-content {flex-direction: column;align-items: center;gap: 30px;width: 100%; }
         
         .camera-photo-container {position: relative;width: 100%;max-width: 500px;margin: 0 auto;border-radius: 20px;overflow: hidden;box-shadow: 
                 0 0 40px rgba(212, 175, 55, 0.5),
@@ -244,23 +244,19 @@
             <p id="messageDisplay" class="subtitle">璀璨容顏 · 極致評鑑</p>
         </div>
 
-        <div id="login-form">
-            <button onclick="loginWithGoogle()" class="btn"><i class="fa-brands fa-google"></i>登入</button>
-            <div id="error-message" class="error-message"></div>
-        </div>
+        
 
-        <div id="user-info" style="display: none;">
-        </div>
+
         
         <div class="main-content">
             <div class="camera-photo-container">
                 <!-- 顶部信息栏 - 左上角点数按钮，右上角评分 -->
                 <div class="top-info-bar">
                     <!-- 左上角点数按钮 -->
-                    <a href="https://64071181.github.io/PayAki/" class="points-btn" id="pointsBtn">
+                    <div class="points-btn">
                         <i class="fas fa-gem gem-icon"></i>
                         <span class="points-value user-score" id="pointsDisplay">0</span>
-                    </a>
+                    </div>
                     
                     <!-- 右上角评分显示 -->
                     <div class="score-display" id="scoreDisplay" style="display: none;">
@@ -270,6 +266,11 @@
                 
                 <video id="video" autoplay playsinline></video>
                 <canvas id="photoCanvas"></canvas>
+
+                <div id="login-form" class="camera-icon" style="z-index: 21;padding-left: 20px;padding-top: 20px;" >
+                    <i class="fa-brands fa-google" onclick="loginWithGoogle()"></i>
+                </div>
+
                 <div class="camera-icon" id="captureBtn">
                     <i class="fas fa-camera"></i>
                 </div>
@@ -307,7 +308,9 @@
 
 
 
-
+        <div id="user-info" style="display: none;">
+        </div>
+        <div id="error-message" class="error-message"></div>
 
 
 
@@ -346,7 +349,6 @@
             const scoreDisplay = document.getElementById('scoreDisplay');
             const pointsDisplay = document.getElementById('pointsDisplay');
             const messageDisplay = document.getElementById('messageDisplay');
-            const pointsBtn = document.getElementById('pointsBtn');
             const scoreValue = document.querySelector('.score-value');
             const errorMessage = document.getElementById('error-message');
 
@@ -411,6 +413,7 @@
             async function capturePhoto() {
                 if (window.userPoints <= 0) {
                     errorMessage.textContent = "寶石不足！";
+                    window.open("https://64071181.github.io/PayAki/", "_blank");
                     setTimeout(() => errorMessage.textContent = '', 3000);
                     return;
                 }
@@ -548,14 +551,7 @@
             retakeBtn.addEventListener('click', retakePhoto);
             downloadBtn.addEventListener('click', downloadPhoto);
             
-            // 点数按钮点击事件
-            /*
-            pointsBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                errorMessage.textContent = "點數由系統管理，無法重置";
-                setTimeout(() => errorMessage.textContent = '', 3000);
-            });
-            */
+
 
             // 初始化
             initCamera();
