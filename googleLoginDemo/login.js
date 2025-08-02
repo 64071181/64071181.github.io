@@ -9,23 +9,24 @@ u.html
 
 
 在index.html head 加入
+
 <script type="module" src="login.js"></script>
+<style>.hidden {display: none !important;}</style>
 
 
 在index.html body 加入
 
-    <!-- Google 登入 -->
         <div id="login-form">
             <!-- Google 登入鍵 登入後隱藏 -->
             <button onclick="loginWithGoogle()" class="大鍵" >Google 登入</button>
             <div id="error-message" class="error"></div>
         </div>
 
+        <div class="admin-panel hidden" > 
+            admin 功能 <!-- Google 登入後 admin 功能 -->
+        </div>
 
-        <div id="admin-panel" > admin 功能 <!-- Google 登入後 admin 功能 --></div>
-
-        
-        <div id="user-info" ><!-- Google 登入後 一般會員 功能 -->
+        <div class="user-info hidden" ><!-- Google 登入後 一般會員 功能 -->
             <button onclick="充值()" title="充值" >💰 = </button>
             <span class="user-score"  title="悠的點數" >0</span>
             🙂 = <span class="user-email"></span>
@@ -35,7 +36,7 @@ u.html
 
             <button class="大鍵"  title="執行搵客鍠 🔍" onclick="執行搵客鍠()">執行搵客鍠 🔍</button>
         </div>
-    <!-- Google 登入 -->
+
 
 
 */
@@ -293,13 +294,22 @@ onAuthStateChanged(auth, async (user) => {
         // 检查是否是管理员
         const isAdmin = await checkAdmin();
         if (isAdmin) {
-        document.getElementById('admin-panel').style.display = 'block';
-        document.getElementById('user-info').style.display = 'none';
+            //document.querySelectorAll('.admin-panel').classList.remove('hidden')
+            document.querySelectorAll('.admin-panel').forEach(el => {
+                el.classList.remove('hidden');
+            });
+            
+        //document.getElementById('admin-panel').style.display = 'block';
+        //document.getElementById('user-info').style.display = 'none';
         await loadAllUsers(); // 加载所有用户数据
         showSuccess("管理员登录成功");
         } else {
-        document.getElementById('user-info').style.display = 'block';
-        document.getElementById('admin-panel').style.display = 'none';
+            //document.querySelectorAll('.user-info').classList.remove('hidden')
+            document.querySelectorAll('.user-info').forEach(el => {
+                el.classList.remove('hidden');
+            });
+        //document.getElementById('user-info').style.display = 'block';
+        //document.getElementById('admin-panel').style.display = 'none';
         }
         
         // 公共加载部分
@@ -313,8 +323,8 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // 用户未登录状态
         document.getElementById('login-form').style.display = 'block';
-        document.getElementById('user-info').style.display = 'none';
-        document.getElementById('admin-panel').style.display = 'none';
+        //document.getElementById('user-info').style.display = 'none';
+        //document.getElementById('admin-panel').style.display = 'none';
     }
     });
 
@@ -788,6 +798,8 @@ window.loginWithGoogle = async () => {
 window.logout = async () => {
     try {
         await signOut(auth);
+        // 登出成功后刷新页面
+        window.location.reload();
     } catch (error) {
         showError(translateError(error.code));
     }
