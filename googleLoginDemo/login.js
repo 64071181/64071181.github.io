@@ -7,30 +7,25 @@
 https://console.firebase.google.com/
 
 
+
+新增應用程式 網頁
+copy CDN 碼貼到login.js
+
+
 Authentication 開始使用
 登入方式 google
-
 專案的支援電子郵件地址 你的
+
 
 設定 授權網域 
 測試用 = 127.0.0.1 
 正式用 = 你的網址
 
 
-
-
-
-新增應用程式 網頁
-
-copy CDN 碼貼到login.js
-
 Firestore Database
 建立資料庫 位置 hk
 正式模式
 貼上規則
-
-
-
 
 */
 
@@ -73,7 +68,30 @@ function isAdmin(uid) {
 
 
 
+/*
 
+http://127.0.0.1:5500/u.html
+用總admin帳號登入
+
+
+回到 Firestore Database
+
+複製 你的總admin帳號UID
+新增集合 
+集合 ID ： admins
+文件 ID： 你的總admin帳號UID
+
+新增欄位
+createdAt：  timestamp  現在
+
+新增欄位
+role：  string  admin
+
+回 http://127.0.0.1:5500/u.html
+看到 管理员控制台 = 成功
+
+
+*/
 
 
 
@@ -106,8 +124,6 @@ function isAdmin(uid) {
 
 
 const 新用戶送分 = 100; //202505152140
-const 推廣送分 = 25; //202505152140
-
 
 
 
@@ -143,8 +159,7 @@ const 推廣送分 = 25; //202505152140
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
+    getAuth,
     signInWithPopup, 
     GoogleAuthProvider, 
     onAuthStateChanged, 
@@ -168,14 +183,14 @@ import {
     getDocs
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 const firebaseConfig = {
-    apiKey: "AIzaSyDsfMDe0faS58jTTrd8iefsUF66bd1mnzA",
-    authDomain: "goldcomehk20250561544qqq.firebaseapp.com",
-    projectId: "goldcomehk20250561544qqq",
-    storageBucket: "goldcomehk20250561544qqq.appspot.com",
-    messagingSenderId: "690441786277",
-    appId: "1:690441786277:web:1e79f68b2c906ac9428e4c",
-    measurementId: "G-Q62XJZ5THV"
-};
+    apiKey: "AIzaSyADk5vkYQqpaWUW9tI5erXE6GM3HcVpH18",
+    authDomain: "ineed-545cd.firebaseapp.com",
+    projectId: "ineed-545cd",
+    storageBucket: "ineed-545cd.firebasestorage.app",
+    messagingSenderId: "417974294016",
+    appId: "1:417974294016:web:c54e783f518c230a242ae5",
+    measurementId: "G-QEWY170WME"
+  };
 
 // 初始化 Firebase
 const app = initializeApp(firebaseConfig);
