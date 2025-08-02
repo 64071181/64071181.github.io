@@ -1,5 +1,44 @@
 
 
+/*
+
+將
+login.js
+u.html
+放到 index同層
+
+
+在index.html head 加入
+<script type="module" src="login.js"></script>
+
+
+在index.html body 加入
+
+    <!-- Google 登入 -->
+        <div id="login-form">
+            <!-- Google 登入鍵 登入後隱藏 -->
+            <button onclick="loginWithGoogle()" class="大鍵" >Google 登入</button>
+            <div id="error-message" class="error"></div>
+        </div>
+
+
+        <div id="admin-panel" > admin 功能 <!-- Google 登入後 admin 功能 --></div>
+
+        
+        <div id="user-info" ><!-- Google 登入後 一般會員 功能 -->
+            <button onclick="充值()" title="充值" >💰 = </button>
+            <span class="user-score"  title="悠的點數" >0</span>
+            🙂 = <span class="user-email"></span>
+            <button onclick="logout()">登出</button>
+            <div id="success-message" class="success"></div>
+            <div id="db-error-message" class="error"></div>
+
+            <button class="大鍵"  title="執行搵客鍠 🔍" onclick="執行搵客鍠()">執行搵客鍠 🔍</button>
+        </div>
+    <!-- Google 登入 -->
+
+
+*/
 
 /*
 
