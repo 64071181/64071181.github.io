@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+  <!-- ** Basic Page Needs ** -->
+  <meta charset="utf-8">
+  <title>訂製圖書@mybookhk</title>
+
+  <!-- ** Mobile Specific Metas ** -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Vex HTML Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <!-- ** Plugins Needed for the Project ** -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid&#43;Serif:400%7cJosefin&#43;Sans:300,400,600,700 ">
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css ">
+  <link rel="stylesheet" href="plugins/themefisher-font/themefisher-font.min.css ">
+  <link rel="stylesheet" href="plugins/slick/slick.min.css ">
+  
+  <!-- Stylesheets -->
+  <link href="css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+      <!-- 聯莫 icon https://www.thinkcmf.com/font/font_awesome/icons.html -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://64071181.github.io/mokJsapi/a.js"></script>
+</head><body id="body">
+  <samp id="莫生查詢" style="display: none;">莫生我要查詢訂製圖書</samp>
+
+
+
+<!-- preloader start -->
+<div class="preloader"></div>
+<!-- preloader end -->
+
+<header class="navigation sticky-top bg-white">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="./">mybookhk</a>
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navigation">
+        <ul class="navbar-nav ml-auto mr-n0 mr-md-n3">
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="#products">作品集</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.youtube.com/@mybookhk" >youtube</a>
+          </li>
+
+
+          <li id="google_translate_element">
+            <!-- ============ Aki Web3Js ============ -->
+            <!-- =======html翻譯======= -->
+            <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_google_translate -->
+            <script type="text/javascript">
+            function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'cn'}, 'google_translate_element');
+            }
+            </script>
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+         </li>
+
+        </ul>
+
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<section class="section">
+  <div class="container">
+
+
+
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+
+        <h2 class="font-weight-bold mb-4">訂製故事圖書送獨立圖書網址 = <samp id="原價" style="color: violet; font-size: 60px;">$888</samp></h2>
+        <div class="row mb-40">
+          <h2>💰 = <a href="../PayAki/index.html">Payment</a> </h2>
+        </div>
+
+
+        <hr>
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-sm-6 mb-5">
+            <h2 class="font-weight-bold mb-4">訂製說明</h2>
+            <li style="font-size: 16px;">每本標準故事圖書為10頁一本，每頁包一圖、一段文字。</li>
+            <li style="font-size: 16px;">$80加一頁。</li>
+            <br>
+            <li style="font-size: 16px;">訂製故事圖書送獨立圖書網址。</li>
+            <li style="font-size: 16px;">製作成實體書，加$20每一頁。</li>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-5">
+            <P class="font-weight-bold mb-4">如需訂製個人故事圖書,請提供下述資料:</P>
+            <ul class="list-unstyled">
+              <li class="mb-2">🖼️ 角色照片(1至10張)</li>
+              
+              <li class="mb-2">📒 故事內容文字 1000字內</li>
+              
+              <li class="mb-2">🕺 圖片風格:真人/寫實/漫畫...</li>
+              
+              <li class="mb-2">🧾 付款收據</li>
+            </ul>
+          </div>
+        </div>
+
+        
+
+        <hr>
+        <table class="row">
+          <div class="col-lg-12 mb-3">
+            故事名稱
+            <input type="text" class="form-control mb-2" id="故事名稱" name="故事名稱" placeholder="請填寫故事名稱" required>
+          </div>
+          <div class="col-lg-12 mb-3">
+            角色照片網址
+            <input type="text" class="form-control mb-2" id="角色照片網址" name="角色照片網址" placeholder="角色照片網址 (最少1張) / 或直接whatsapp發送給客服" required>
+          </div>
+          <div class="col-lg-12 mb-3">
+            圖片風格
+            <select id="圖片風格" class="form-control mb-2" title="圖片風格" name="圖片風格">
+              <option value="真實照片">真實照片</option>
+              <option value="像素">像素</option>
+              <option value="插圖" selected>插圖</option>
+              <option value="塗鴉" disabled>塗鴉</option>
+              <option value="卡通">卡通</option>
+              <option value="可愛">可愛</option>
+            </select>
+          </div>
+          <div class="col-12 mb-3">
+            故事頁數
+            <input name="故事頁數" id="故事頁數" class="form-control mb-2" placeholder="每本標準故事圖書最多10頁一本，額外每$80加一頁。" title="每本標準故事圖書最多10頁一本，$80加一頁。" value="10" required>
+          </div>
+          <div class="col-12 mb-3">
+            故事內容
+            <textarea name="故事內容" id="故事內容" class="form-control mb-2" placeholder="故事內容 1000字內" maxlength="1000" required></textarea>
+          </div>
+          <div class="col-lg-12 mb-3">
+            是否要製作實體書
+            <select id="實體書"  class="form-control mb-2" title="是否要製作實體書" name="實體書">
+              <option value="y">要製作實體書</option>
+              <option value="n" selected>否</option>
+            </select>
+          </div>
+          <div class="col-12 text-right">
+            <h2 class="font-weight-bold mb-4">總金額:  <samp id="總金額">$00.00</samp></h2>
+            <button id="訂購" type="submit" class="btn btn-main btn-main-sm">發送訂單</button>
+          </div>
+        </table>
+
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+</section>
+
+<script src="plugins/jquery/jquery.js"></script>
+
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="plugins/slick/slick.min.js"></script>
+
+<script src="js/script.js"></script>
+</body>
+</html>
+<footer id="聯莫">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block">
+          <ul class="list-inline footer-menu">
+            
+            <li class="list-inline-item">
+              <a href="./#products">作品集</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.youtube.com/@mybookhk" target="_blank">youtube</a>
+            </li>
+
+          </ul>
+
+          <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
+          
+          <br>
+
+          <p>
+						&copy;2016 - <script>document.write(new Date().getFullYear());</script> 
+						All rights reserved by <script>document.write(location.hostname)</script>
+					</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" src="js/aki.js"></script>
+
+<script>
+          function Start() {
+            // 顯示聯莫
+            const 聯莫 = [
+                'moksurky@gmail.com',
+                'https://wa.me/85264071181/',
+                'https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/',
+                'https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/',
+                'http://t.me/mokaki/'
+            ];
+            _顯示聯莫(聯莫);
+          }
+
+          琪琪修改();
+</script>
