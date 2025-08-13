@@ -145,7 +145,7 @@ function _整故事box(數) {
 
     let boxGif = '\
     <div class="row mb-40">\
-            <img class="img-fluid" src="'+故事號+'/'+數+'.gif" alt="">\
+            <img class="img-fluid" src="https://i.meee.com.tw/7Ai7kVJ.gif" alt="">\
     </div>\
     '
     // 判定條件餘數爲0時爲偶數 https://www.twblogs.net/a/5d73a305bd9eee5327ff813f
