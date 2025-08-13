@@ -143,11 +143,20 @@ function _整故事box(數) {
     </div>\
     '
 
+    let boxGif = '\
+    <div class="row mb-40">\
+            <img class="img-fluid" src="'+故事號+'/'+數+'.gif" alt="">\
+    </div>\
+    '
     // 判定條件餘數爲0時爲偶數 https://www.twblogs.net/a/5d73a305bd9eee5327ff813f
-    if((數%2)===0){ 
-        trueBox = boxR
-    }else{ 
-        trueBox = boxL
+
+
+    if (數 === 7) {
+        trueBox = boxGif;
+    } else if (數 % 2 === 0) {
+        trueBox = boxR;
+    } else {
+        trueBox = boxL;
     }
 
     return trueBox
