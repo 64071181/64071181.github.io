@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倉庫管理系統</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --success: #0d904f;
+            --warning: #e6a817;
+            --danger: #d93025;
+            --bg: #f5f6f8;
+            --surface: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #5f6368;
+            --border: #e0e0e0;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 0.2s ease;
+            --font: 'Segoe UI', 'PingFang HK', 'Microsoft JhengHei', 'Noto Sans HK', sans-serif;
+            --header-h: 56px;
+            --nav-h: 60px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ============ LOGIN SCREEN ============ */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8eef5 0%, #dce3ed 50%, #eef1f5 100%);
+        }
+        .login-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 36px 28px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        .login-card .logo {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .login-card h1 {
+            font-size: 22px;
+            margin-bottom: 4px;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+        .login-card .subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+        .login-card label {
+            display: block;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+        .login-card input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            margin-bottom: 14px;
+            transition: var(--transition);
+            font-family: var(--font);
+            background: #fafbfc;
+        }
+        .login-card input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+            background: #fff;
+        }
+        .login-card .btn-login {
+            width: 100%;
+            padding: 13px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            margin-top: 6px;
+        }
+        .login-card .btn-login:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        .login-card .btn-login:active {
+            transform: scale(0.98);
+        }
+        .login-error {
+            color: var(--danger);
+            font-size: 13px;
+            min-height: 20px;
+            margin-top: 6px;
+        }
+        .login-hint {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            line-height: 1.5;
+        }
+        .login-hint strong {
+            color: var(--text);
+        }
+
+        /* ============ MAIN APP LAYOUT ============ */
+        .app-container {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            background: var(--bg);
+        }
+        .app-container.active {
+            display: flex;
+        }
+
+        /* Header */
+        .app-header {
+            background: var(--surface);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            min-height: var(--header-h);
+        }
+        .app-header .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .app-header .app-title {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .app-header .user-badge {
+            font-size: 12px;
+            background: #e8f0fe;
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #f1f3f4;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--text);
+        }
+        .btn-icon:hover {
+            background: #e4e6e8;
+        }
+        .btn-sm {
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .btn-sm.primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-sm.primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-sm.outline {
+            background: #fff;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+        .btn-sm.danger {
+            background: #fff;
+            color: var(--danger);
+            border: 1.5px solid var(--danger);
+        }
+        .btn-sm.success {
+            background: var(--success);
+            color: #fff;
+        }
+
+        /* Content */
+        .app-content {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 900px;
+            background: var(--surface);
+            display: flex;
+            border-top: 1px solid var(--border);
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            height: var(--nav-h);
+        }
+        .bottom-nav .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 500;
+            gap: 3px;
+            border: none;
+            background: none;
+            font-family: var(--font);
+            position: relative;
+        }
+        .bottom-nav .nav-item .nav-icon {
+            font-size: 22px;
+            transition: var(--transition);
+        }
+        .bottom-nav .nav-item.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .bottom-nav .nav-item.active .nav-icon {
+            transform: scale(1.1);
+        }
+        .bottom-nav .nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* ============ CARDS & LISTS ============ */
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 16px 0 8px 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title .count {
+            background: #e8e8e8;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            position: relative;
+        }
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        .card.has-items {
+            border-left-color: var(--success);
+        }
+        .card.empty-shelf {
+            border-left-color: #ccc;
+            opacity: 0.7;
+        }
+        .card .shelf-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .card .shelf-name {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .card .shelf-meta {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .card .shelf-meta span {
+            background: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .card .expand-icon {
+            font-size: 20px;
+            color: #aaa;
+            transition: var(--transition);
+        }
+        .card.expanded .expand-icon {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+        .card-details {
+            display: none;
+            margin-top: 12px;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card.expanded .card-details {
+            display: block;
+        }
+        .compartment-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin: 4px 0;
+            flex-wrap: wrap;
+            background: #fafbfc;
+            font-size: 13px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .compartment-row:hover {
+            background: #f0f4ff;
+            border-color: #d0daf0;
+        }
+        .compartment-row.filled {
+            background: #f0faf4;
+        }
+        .compartment-row .loc-tag {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 12px;
+            white-space: nowrap;
+            min-width: 50px;
+        }
+        .compartment-row .product-code {
+            font-weight: 600;
+            font-size: 13px;
+            color: #333;
+            flex: 1;
+            min-width: 80px;
+        }
+        .compartment-row .product-code.empty {
+            color: #bbb;
+            font-style: italic;
+            font-weight: 400;
+        }
+        .compartment-row .thumb-imgs {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .compartment-row .thumb-imgs img {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .compartment-row .thumb-imgs img:hover {
+            transform: scale(1.8);
+            z-index: 10;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            border-radius: 6px;
+        }
+        .compartment-row .no-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .compartment-row .action-mini {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: var(--font);
+            transition: var(--transition);
+        }
+        .compartment-row .action-mini:hover {
+            background: #f0f0f0;
+            border-color: #bbb;
+        }
+
+        /* ============ MODALS ============ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 200;
+            align-items: flex-end;
+            justify-content: center;
+            animation: fadeInOverlay 0.2s ease;
+        }
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-sheet {
+            background: var(--surface);
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            border-radius: 20px 20px 0 0;
+            padding: 8px 0 0 0;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        .modal-handle {
+            width: 36px;
+            height: 4px;
+            background: #d0d0d0;
+            border-radius: 2px;
+            margin: 0 auto 12px;
+        }
+        .modal-content {
+            padding: 0 20px 24px;
+        }
+        .modal-content h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+        .modal-content label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: var(--font);
+            margin-bottom: 12px;
+            transition: var(--transition);
+            background: #fafbfc;
+        }
+        .modal-content input:focus,
+        .modal-content select:focus,
+        .modal-content textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+        }
+        .modal-content .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .modal-content .btn-row button {
+            flex: 1;
+            min-width: 80px;
+            padding: 11px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            font-family: var(--font);
+            letter-spacing: 0.3px;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-cancel {
+            background: #f1f3f4;
+            color: var(--text);
+        }
+        .btn-cancel:hover {
+            background: #e4e6e8;
+        }
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
+        }
+        .btn-danger:hover {
+            background: #c5221f;
+        }
+        .img-preview-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 6px 0;
+        }
+        .img-preview-row .preview-item {
+            position: relative;
+            width: 70px;
+            height: 70px;
+        }
+        .img-preview-row .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        .img-preview-row .preview-item .remove-img {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--danger);
+            color: #fff;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .img-count-warn {
+            font-size: 11px;
+            color: var(--warning);
+            margin-top: -8px;
+            margin-bottom: 8px;
+        }
+
+        /* ============ SEARCH ============ */
+        .search-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .search-bar input {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px 14px;
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            font-size: 14px;
+            font-family: var(--font);
+            background: #fff;
+            transition: var(--transition);
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.08);
+        }
+        .search-bar select {
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            font-size: 13px;
+            font-family: var(--font);
+            background: #fff;
+            cursor: pointer;
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        .result-badge {
+            font-size: 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        .no-results .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ============ TOAST ============ */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 13px;
+            z-index: 300;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: transform 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success {
+            background: #0d904f;
+        }
+        .toast.error {
+            background: #d93025;
+        }
+
+        /* ============ HISTORY TABLE ============ */
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .history-table th,
+        .history-table td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .history-table th {
+            font-weight: 700;
+            color: var(--text-secondary);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #fafbfc;
+            position: sticky;
+            top: 0;
+        }
+        .history-table tr:hover td {
+            background: #f8fafd;
+        }
+        .table-wrap {
+            max-height: 350px;
+            overflow-y: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (min-width: 768px) {
+            .app-content {
+                padding: 20px;
+                padding-bottom: 90px;
+            }
+            .card {
+                padding: 16px 20px;
+            }
+            .compartment-row {
+                gap: 14px;
+                padding: 10px 14px;
+            }
+            .modal-sheet {
+                border-radius: 20px;
+                margin: auto;
+                max-height: 80vh;
+            }
+            .modal-overlay {
+                align-items: center;
+            }
+            .search-bar input {
+                font-size: 15px;
+                padding: 12px 16px;
+            }
+        }
+        @media (max-width: 380px) {
+            .card .shelf-name {
+                font-size: 15px;
+            }
+            .compartment-row {
+                font-size: 11px;
+                gap: 4px;
+                padding: 6px;
+            }
+            .compartment-row .thumb-imgs img {
+                width: 28px;
+                height: 28px;
+            }
+            .compartment-row .loc-tag {
+                font-size: 10px;
+                min-width: 38px;
+            }
+            .btn-sm {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-card">
+            <div class="logo">📦</div>
+            <h1>倉庫管理系統</h1>
+            <p class="subtitle">Warehouse Management System</p>
+            <label for="loginUser">👤 使用者名稱</label>
+            <input type="text" id="loginUser" placeholder="請輸入使用者名稱" autocomplete="username">
+            <label for="loginPass">🔒 密碼</label>
+            <input type="password" id="loginPass" placeholder="請輸入密碼" autocomplete="current-password">
+            <button class="btn-login" onclick="doLogin()">登入系統</button>
+            <div class="login-error" id="loginError"></div>
+            <div class="login-hint">
+                <strong>預設帳號：</strong><br>
+                管理員：<strong>admin</strong> / 密碼：<strong>admin123</strong><br>
+                員工A：<strong>staff_a</strong> / 密碼：<strong>staff123</strong><br>
+                員工B：<strong>staff_b</strong> / 密碼：<strong>staff123</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN APP ==================== -->
+    <div class="app-container" id="appContainer">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <span style="font-size:24px;">📦</span>
+                <span class="app-title">倉庫管理</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="user-badge" id="headerUser">👤 --</span>
+                <button class="btn-icon" onclick="doLogout()" title="登出">🚪</button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="app-content" id="appContent">
+            <!-- Dynamic content rendered here -->
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-tab="find" onclick="switchTab('find')">
+                <span class="nav-icon">🔍</span> 找貨
+            </button>
+            <button class="nav-item" data-tab="restock" onclick="switchTab('restock')">
+                <span class="nav-icon">📥</span> 補貨/更新
+            </button>
+            <button class="nav-item" data-tab="shelves" onclick="switchTab('shelves')">
+                <span class="nav-icon">🏗️</span> 貨架管理
+            </button>
+            <button class="nav-item" data-tab="search" onclick="switchTab('search')">
+                <span class="nav-icon">📋</span> 搜尋記錄
+            </button>
+        </nav>
+    </div>
+
+    <!-- ==================== MODAL OVERLAY ==================== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-sheet" id="modalSheet">
+            <div class="modal-handle"></div>
+            <div class="modal-content" id="modalContent">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        (function() {
+            // ============ STORAGE KEYS ============
+            const STORAGE_KEY = 'wms_data_v2';
+            const USERS_KEY = 'wms_users_v2';
+            const SESSION_KEY = 'wms_session';
+
+            // ============ DEFAULT USERS ============
+            const defaultUsers = {
+                'admin': { password: 'admin123', displayName: '管理員', role: 'admin' },
+                'staff_a': { password: 'staff123', displayName: '員工A', role: 'staff' },
+                'staff_b': { password: 'staff123', displayName: '員工B', role: 'staff' },
+            };
+
+            // ============ DEFAULT DATA ============
+            function getDefaultData() {
+                const now = new Date().toISOString();
+                return {
+                    shelves: [{
+                        id: 's1',
+                        name: 'A-01',
+                        createdAt: now,
+                        layers: [
+                            { layerNum: 1, compartments: [
+                                    { compNum: 1, productCode: 'SKU-8842',
+                                        images: [],
+                                        updatedBy: 'admin', updatedAt: now,
+                                        history: [{ user: 'admin', time: now,
+                                            action: '初始設置', productCode: 'SKU-8842' }]
+                                    },
+                                    { compNum: 2, productCode: '',
+                                        images: [],
+                                        updatedBy: '', updatedAt: '', history: [] },
+                                    { compNum: 3, productCode: 'SKU-9910',
+                                        images: [],
+                                        updatedBy: 'staff_a', updatedAt: now,
+                                        history: [{ user: 'staff_a', time: now,
+                                            action: '初始設置', productCode: 'SKU-9910' }]
+                                    },
+                                ] },
+                            { layerNum: 2, compartments: [
+                                    { compNum: 1, productCode: '',
+                                        images: [],
+                                        updatedBy: '', updatedAt: '', history: [] },
+                                    { compNum: 2, productCode: 'SKU-5501',
+                                        images: [],
+                                        updatedBy: 'staff_b', updatedAt: now,
+                                        history: [{ user: 'staff_b', time: now,
+                                            action: '初始設置', productCode: 'SKU-5501' }]
+                                    },
+                                    { compNum: 3, productCode: '',
+                                        images: [],
+                                        updatedBy: '', updatedAt: '', history: [] },
+                                ] },
+                        ]
+                    }, {
+                        id: 's2',
+                        name: 'B-03',
+                        createdAt: now,
+                        layers: [
+                            { layerNum: 1, compartments: [
+                                    { compNum: 1, productCode: 'SKU-3310',
+                                        images: [],
+                                        updatedBy: 'admin', updatedAt: now,
+                                        history: [{ user: 'admin', time: now,
+                                            action: '初始設置', productCode: 'SKU-3310' }]
+                                    },
+                                    { compNum: 2, productCode: 'SKU-3311',
+                                        images: [],
+                                        updatedBy: 'admin', updatedAt: now,
+                                        history: [{ user: 'admin', time: now,
+                                            action: '初始設置', productCode: 'SKU-3311' }]
+                                    },
+                                ] },
+                            { layerNum: 2, compartments: [
+                                    { compNum: 1, productCode: '',
+                                        images: [],
+                                        updatedBy: '', updatedAt: '', history: [] },
+                                    { compNum: 2, productCode: '',
+                                        images: [],
+                                        updatedBy: '', updatedAt: '', history: [] },
+                                ] },
+                        ]
+                    }],
+                    globalHistory: [
+                        { user: 'admin', time: now, action: '系統初始化', shelfName: 'A-01', details: '建立貨架 A-01' },
+                        { user: 'admin', time: now, action: '系統初始化', shelfName: 'B-03', details: '建立貨架 B-03' },
+                    ]
+                };
+            }
+
+            // ============ STATE ============
+            let appData = null;
+            let currentUser = null;
+            let currentTab = 'find';
+            let expandedShelves = new Set();
+
+            // ============ INIT ============
+            function initStorage() {
+                // Init users
+                if (!localStorage.getItem(USERS_KEY)) {
+                    localStorage.setItem(USERS_KEY, JSON.stringify(defaultUsers));
+                }
+                // Init app data
+                if (!localStorage.getItem(STORAGE_KEY)) {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(getDefaultData()));
+                }
+                loadData();
+            }
+
+            function loadData() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    appData = raw ? JSON.parse(raw) : getDefaultData();
+                } catch (e) {
+                    appData = getDefaultData();
+                    saveData();
+                }
+            }
+
+            function saveData() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+            }
+
+            function getUsers() {
+                try {
+                    return JSON.parse(localStorage.getItem(USERS_KEY)) || defaultUsers;
+                } catch (e) {
+                    return defaultUsers;
+                }
+            }
+
+            // ============ AUTH ============
+            function doLogin() {
+                const username = document.getElementById('loginUser').value.trim();
+                const password = document.getElementById('loginPass').value.trim();
+                const errorEl = document.getElementById('loginError');
+                errorEl.textContent = '';
+
+                if (!username || !password) {
+                    errorEl.textContent = '請輸入使用者名稱和密碼';
+                    return;
+                }
+                const users = getUsers();
+                if (users[username] && users[username].password === password) {
+                    currentUser = { username, displayName: users[username].displayName, role: users[username].role };
+                    sessionStorage.setItem(SESSION_KEY, JSON.stringify(currentUser));
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('appContainer').classList.add('active');
+                    document.getElementById('headerUser').textContent = '👤 ' + currentUser.displayName;
+                    switchTab('find');
+                    showToast('歡迎，' + currentUser.displayName + '！', 'success');
+                } else {
+                    errorEl.textContent = '使用者名稱或密碼錯誤';
+                }
+            }
+
+            function doLogout() {
+                if (confirm('確定要登出嗎？')) {
+                    currentUser = null;
+                    sessionStorage.removeItem(SESSION_KEY);
+                    document.getElementById('loginScreen').style.display = 'flex';
+                    document.getElementById('appContainer').classList.remove('active');
+                    document.getElementById('loginUser').value = '';
+                    document.getElementById('loginPass').value = '';
+                    document.getElementById('loginError').textContent = '';
+                    expandedShelves.clear();
+                }
+            }
+
+            function checkSession() {
+                const sess = sessionStorage.getItem(SESSION_KEY);
+                if (sess) {
+                    try {
+                        currentUser = JSON.parse(sess);
+                        document.getElementById('loginScreen').style.display = 'none';
+                        document.getElementById('appContainer').classList.add('active');
+                        document.getElementById('headerUser').textContent = '👤 ' + currentUser.displayName;
+                        switchTab('find');
+                        return true;
+                    } catch (e) {
+                        currentUser = null;
+                    }
+                }
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('appContainer').classList.remove('active');
+                return false;
+            }
+
+            // ============ TOAST ============
+            let toastTimer;
+
+            function showToast(msg, type = '') {
+                const toast = document.getElementById('toast');
+                toast.textContent = msg;
+                toast.className = 'toast ' + type + ' show';
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            // ============ MODAL ============
+            function openModal(htmlContent) {
+                document.getElementById('modalContent').innerHTML = htmlContent;
+                document.getElementById('modalOverlay').classList.add('active');
+            }
+
+            function closeModal() {
+                document.getElementById('modalOverlay').classList.remove('active');
+            }
+
+            // Close modal on overlay click
+            document.getElementById('modalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+
+            // ============ TAB SWITCHING ============
+            function switchTab(tab) {
+                currentTab = tab;
+                expandedShelves.clear();
+                // Update nav
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+                const navItem = document.querySelector(`.bottom-nav .nav-item[data-tab="${tab}"]`);
+                if (navItem) navItem.classList.add('active');
+                // Render
+                renderTab(tab);
+                document.getElementById('appContent').scrollTop = 0;
+            }
+
+            function renderTab(tab) {
+                const container = document.getElementById('appContent');
+                switch (tab) {
+                    case 'find':
+                        container.innerHTML = renderFindTab();
+                        break;
+                    case 'restock':
+                        container.innerHTML = renderRestockTab();
+                        break;
+                    case 'shelves':
+                        container.innerHTML = renderShelvesTab();
+                        break;
+                    case 'search':
+                        container.innerHTML = renderSearchTab();
+                        break;
+                    default:
+                        container.innerHTML = renderFindTab();
+                }
+                // Re-bind any event listeners after render
+                bindCardClicks();
+            }
+
+            function bindCardClicks() {
+                document.querySelectorAll('.card[data-shelf-id]').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        // Don't toggle if clicking on a button or image inside
+                        if (e.target.closest('button') || e.target.closest('img') || e.target.closest(
+                                '.action-mini') || e.target.closest('input') || e.target.closest(
+                                'select')) {
+                            return;
+                        }
+                        const shelfId = this.getAttribute('data-shelf-id');
+                        toggleShelfExpand(shelfId, this);
+                    });
+                });
+            }
+
+            function toggleShelfExpand(shelfId, cardEl) {
+                if (expandedShelves.has(shelfId)) {
+                    expandedShelves.delete(shelfId);
+                    if (cardEl) cardEl.classList.remove('expanded');
+                } else {
+                    expandedShelves.add(shelfId);
+                    if (cardEl) cardEl.classList.add('expanded');
+                }
+            }
+
+            // ============ RENDER: FIND TAB ============
+            function renderFindTab() {
+                const shelves = appData.shelves || [];
+                if (shelves.length === 0) {
+                    return `
+                    <div class="section-title">📋 所有貨架一覽</div>
+                    <div class="no-results"><span class="icon">📭</span>暫無貨架，請先到「貨架管理」新增貨架</div>`;
+                }
+                let html = `
+                <div class="section-title">📋 所有貨架一覽 <span class="count">${shelves.length} 個貨架</span></div>
+                <div class="search-bar">
+                    <input type="text" id="quickFindInput" placeholder="🔍 快速搜尋貨號 (如 SKU-8842)..." oninput="quickFindFilter()">
+                </div>
+                <div id="shelfListContainer">`;
+
+                shelves.forEach(shelf => {
+                    const isExpanded = expandedShelves.has(shelf.id);
+                    const totalComps = shelf.layers.reduce((sum, l) => sum + l.compartments.length, 0);
+                    const filledComps = shelf.layers.reduce((sum, l) => sum + l.compartments.filter(c => c
+                        .productCode).length, 0);
+                    const hasItems = filledComps > 0;
+                    html += `
+                    <div class="card ${hasItems ? 'has-items' : 'empty-shelf'} ${isExpanded ? 'expanded' : ''}" 
+                         data-shelf-id="${shelf.id}" data-shelf-name="${shelf.name.toLowerCase()}">
+                        <div class="shelf-header">
+                            <div>
+                                <span class="shelf-name">🏷️ ${escapeHtml(shelf.name)}</span>
+                                <div class="shelf-meta">
+                                    <span>📐 ${shelf.layers.length} 層</span>
+                                    <span>📦 ${totalComps} 格</span>
+                                    <span>✅ ${filledComps} 格有貨</span>
+                                </div>
+                            </div>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="card-details">
+                            ${shelf.layers.map(layer => 
+                                layer.compartments.map(comp => {
+                                    const filled = !!comp.productCode;
+                                    return `
+                                    <div class="compartment-row ${filled ? 'filled' : ''}" 
+                                         data-shelf="${shelf.id}" data-layer="${layer.layerNum}" data-comp="${comp.compNum}"
+                                         data-product="${(comp.productCode || '').toLowerCase()}">
+                                        <span class="loc-tag">📍 ${shelf.name}-L${layer.layerNum}C${comp.compNum}</span>
+                                        <span class="product-code ${filled ? '' : 'empty'}">${filled ? escapeHtml(comp.productCode) : '(空格)'}</span>
+                                        <span class="thumb-imgs">
+                                            ${comp.images && comp.images.length > 0 
+                                                ? comp.images.map((img,i) => `<img src="${img}" alt="圖片${i+1}" onclick="viewImage('${img}')" title="點擊放大">`).join('') 
+                                                : '<span class="no-img">📷</span>'}
+                                        </span>
+                                        ${filled ? `<span style="font-size:10px;color:#888;">👤 ${escapeHtml(comp.updatedBy || '')} | ${formatTime(comp.updatedAt)}</span>` : ''}
+                                        <button class="action-mini" onclick="event.stopPropagation();openUpdateModal('${shelf.id}',${layer.layerNum},${comp.compNum})">✏️ 更新</button>
+                                    </div>`;
+                                }).join('')
+                            ).join('<div style="border-top:1px dashed #eee;margin:4px 0;"></div>')}
+                        </div>
+                    </div>`;
+                });
+
+                html += `</div>`;
+                return html;
+            }
+
+            function quickFindFilter() {
+                const input = document.getElementById('quickFindInput');
+                if (!input) return;
+                const query = input.value.toLowerCase().trim();
+                const rows = document.querySelectorAll('.compartment-row');
+                const cards = document.querySelectorAll('.card[data-shelf-id]');
+                let anyVisible = false;
+
+                // First collapse all
+                cards.forEach(card => {
+                    const shelfId = card.getAttribute('data-shelf-id');
+                    if (query === '') {
+                        // Reset: collapse if not in expanded set
+                        if (!expandedShelves.has(shelfId)) {
+                            card.classList.remove('expanded');
+                        } else {
+                            card.classList.add('expanded');
+                        }
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                        rows.forEach(r => r.style.display = '');
+                        return;
+                    }
+                });
+
+                if (query === '') {
+                    // Re-bind
+                    bindCardClicks();
+                    return;
+                }
+
+                // With query: expand matching, hide non-matching cards
+                const matchingShelfIds = new Set();
+                rows.forEach(row => {
+                    const product = row.getAttribute('data-product') || '';
+                    const locTag = (row.querySelector('.loc-tag')?.textContent || '').toLowerCase();
+                    if (product.includes(query) || locTag.includes(query)) {
+                        row.style.display = '';
+                        row.style.background = '#fffde7';
+                        const shelfId = row.getAttribute('data-shelf');
+                        matchingShelfIds.add(shelfId);
+                        anyVisible = true;
+                    } else {
+                        row.style.display = 'none';
+                        row.style.background = '';
+                    }
+                });
+
+                cards.forEach(card => {
+                    const shelfId = card.getAttribute('data-shelf-id');
+                    const shelfName = card.getAttribute('data-shelf-name') || '';
+                    if (matchingShelfIds.has(shelfId) || shelfName.includes(query)) {
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                        card.classList.add('expanded');
+                        // Also expand detail rows within
+                        card.querySelectorAll('.compartment-row').forEach(r => {
+                            if (!matchingShelfIds.has(shelfId) && !shelfName.includes(query)) {
+                                // This shouldn't happen but just in case
+                            }
+                        });
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('expanded');
+                    }
+                });
+
+                if (!anyVisible && !document.querySelector('.card[data-shelf-id][style*="display:"]') &&
+                    ![...cards].some(c => c.getAttribute('data-shelf-name')?.includes(query))) {
+                    // Check if any card is visible
+                    const visibleCards = [...cards].filter(c => c.style.display !== 'none');
+                    if (visibleCards.length === 0) {
+                        // All hidden - show no results message? We'll handle by showing the container
+                    }
+                }
+
+                // Update no results visibility
+                const container = document.getElementById('shelfListContainer');
+                if (container && query !== '') {
+                    const visibleCards = container.querySelectorAll('.card[style*="display:"]');
+                    // Actually check properly
+                    const allCards = container.querySelectorAll('.card[data-shelf-id]');
+                    const hasVisible = [...allCards].some(c => c.style.display !== 'none');
+                    if (!hasVisible && allCards.length > 0) {
+                        // Show a message
+                        let noMsg = container.querySelector('.no-results-inline');
+                        if (!noMsg) {
+                            noMsg = document.createElement('div');
+                            noMsg.className = 'no-results no-results-inline';
+                            noMsg.innerHTML = '<span class="icon">🔍</span>沒有找到匹配的貨品或貨架';
+                            container.appendChild(noMsg);
+                        }
+                    } else {
+                        const noMsg = container.querySelector('.no-results-inline');
+                        if (noMsg) noMsg.remove();
+                    }
+                } else {
+                    const noMsg = document.querySelector('.no-results-inline');
+                    if (noMsg) noMsg.remove();
+                    // Reset row backgrounds
+                    document.querySelectorAll('.compartment-row').forEach(r => r.style.background = '');
+                }
+            }
+
+            function viewImage(src) {
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:400;
+                    display:flex;align-items:center;justify-content:center;cursor:pointer;
+                `;
+                modal.innerHTML = `<img src="${src}" style="max-width:95%;max-height:90vh;object-fit:contain;border-radius:8px;">`;
+                modal.addEventListener('click', () => modal.remove());
+                document.body.appendChild(modal);
+            }
+
+            // ============ RENDER: RESTOCK TAB ============
+            function renderRestockTab() {
+                const shelves = appData.shelves || [];
+                if (shelves.length === 0) {
+                    return `
+                    <div class="section-title">📥 補貨 / 更新貨架資料</div>
+                    <div class="no-results"><span class="icon">📭</span>暫無貨架，請先到「貨架管理」新增貨架</div>`;
+                }
+                let html = `
+                <div class="section-title">📥 選擇貨架進行補貨或更新</div>
+                <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">點擊下方貨架展開，再點擊格子的「✏️ 更新」按鈕</p>`;
+                // Reuse shelf cards but all expanded for easy access
+                shelves.forEach(shelf => {
+                    const totalComps = shelf.layers.reduce((sum, l) => sum + l.compartments.length, 0);
+                    const filledComps = shelf.layers.reduce((sum, l) => sum + l.compartments.filter(c => c
+                        .productCode).length, 0);
+                    const isExpanded = expandedShelves.has(shelf.id) || true; // default expanded in restock
+                    html += `
+                    <div class="card ${filledComps > 0 ? 'has-items' : 'empty-shelf'} ${isExpanded ? 'expanded' : ''}" 
+                         data-shelf-id="${shelf.id}">
+                        <div class="shelf-header">
+                            <div>
+                                <span class="shelf-name">🏷️ ${escapeHtml(shelf.name)}</span>
+                                <div class="shelf-meta">
+                                    <span>📐 ${shelf.layers.length} 層</span>
+                                    <span>📦 ${totalComps} 格</span>
+                                    <span>✅ ${filledComps} 格有貨</span>
+                                </div>
+                            </div>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="card-details">
+                            ${shelf.layers.map(layer =>
+                                layer.compartments.map(comp => {
+                                    const filled = !!comp.productCode;
+                                    return `
+                                    <div class="compartment-row ${filled ? 'filled' : ''}">
+                                        <span class="loc-tag">📍 ${escapeHtml(shelf.name)}-L${layer.layerNum}C${comp.compNum}</span>
+                                        <span class="product-code ${filled ? '' : 'empty'}">${filled ? escapeHtml(comp.productCode) : '(空格)'}</span>
+                                        <span class="thumb-imgs">
+                                            ${comp.images && comp.images.length > 0 
+                                                ? comp.images.map(img => `<img src="${img}" alt="圖片" onclick="viewImage('${img}')" title="點擊放大">`).join('') 
+                                                : '<span class="no-img">📷</span>'}
+                                        </span>
+                                        <button class="action-mini" onclick="event.stopPropagation();openUpdateModal('${shelf.id}',${layer.layerNum},${comp.compNum})" style="background:#e8f0fe;color:#1a73e8;border-color:#c5d9f7;font-weight:600;">✏️ 更新此格</button>
+                                    </div>`;
+                                }).join('')
+                            ).join('<div style="border-top:1px dashed #eee;margin:4px 0;"></div>')}
+                        </div>
+                    </div>`;
+                });
+                return html;
+            }
+
+            // ============ RENDER: SHELVES MANAGEMENT TAB ============
+            function renderShelvesTab() {
+                const shelves = appData.shelves || [];
+                let html = `
+                <div class="section-title">🏗️ 貨架管理</div>
+                <button class="btn-sm primary" onclick="openAddShelfModal()" style="margin-bottom:14px;font-size:14px;padding:10px 20px;">➕ 新增貨架</button>
+                <p style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;">共 ${shelves.length} 個貨架。點擊展開查看詳情。</p>`;
+
+                if (shelves.length === 0) {
+                    html +=
+                        `<div class="no-results"><span class="icon">🏗️</span>尚未建立任何貨架，點擊上方按鈕新增</div>`;
+                } else {
+                    shelves.forEach(shelf => {
+                        const totalComps = shelf.layers.reduce((sum, l) => sum + l.compartments.length, 0);
+                        const filledComps = shelf.layers.reduce((sum, l) => sum + l.compartments.filter(c => c
+                            .productCode).length, 0);
+                        const isExpanded = expandedShelves.has(shelf.id);
+                        html += `
+                        <div class="card ${isExpanded ? 'expanded' : ''}" data-shelf-id="${shelf.id}">
+                            <div class="shelf-header">
+                                <div>
+                                    <span class="shelf-name">🏷️ ${escapeHtml(shelf.name)}</span>
+                                    <div class="shelf-meta">
+                                        <span>📐 ${shelf.layers.length} 層</span>
+                                        <span>📦 ${totalComps} 格</span>
+                                        <span>✅ ${filledComps} 有貨</span>
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:6px;align-items:center;">
+                                    <button class="btn-sm danger" onclick="event.stopPropagation();deleteShelf('${shelf.id}')" style="font-size:10px;">🗑️ 刪除</button>
+                                    <span class="expand-icon">▼</span>
+                                </div>
+                            </div>
+                            <div class="card-details">
+                                <p style="font-size:11px;color:#888;margin:4px 0;">建立時間：${formatTime(shelf.createdAt)}</p>
+                                ${shelf.layers.map(layer => `
+                                    <div style="margin:6px 0;padding:8px;background:#fafbfc;border-radius:6px;">
+                                        <strong style="font-size:12px;">📐 第 ${layer.layerNum} 層 - ${layer.compartments.length} 格</strong>
+                                        <span style="font-size:10px;color:#888;"> (格號: ${layer.compartments.map(c=>c.compNum).join(', ')})</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>`;
+                    });
+                }
+                return html;
+            }
+
+            function openAddShelfModal() {
+                const html = `
+                <h2>➕ 新增貨架</h2>
+                <label>貨架編號 / 名稱</label>
+                <input type="text" id="newShelfName" placeholder="例如：C-05" maxlength="20">
+                <label>層數</label>
+                <input type="number" id="newShelfLayers" value="2" min="1" max="10" placeholder="層數">
+                <label>每層格數</label>
+                <input type="number" id="newShelfComps" value="3" min="1" max="20" placeholder="每層格數">
+                <div class="btn-row">
+                    <button class="btn-cancel" onclick="closeModal()">取消</button>
+                    <button class="btn-primary" onclick="addShelf()">✅ 建立貨架</button>
+                </div>`;
+                openModal(html);
+                setTimeout(() => {
+                    const input = document.getElementById('newShelfName');
+                    if (input) input.focus();
+                }, 300);
+            }
+
+            function addShelf() {
+                const name = document.getElementById('newShelfName').value.trim();
+                const layers = parseInt(document.getElementById('newShelfLayers').value) || 2;
+                const compsPerLayer = parseInt(document.getElementById('newShelfComps').value) || 3;
+                if (!name) { showToast('請輸入貨架名稱', 'error'); return; }
+                // Check duplicate
+                if (appData.shelves.some(s => s.name.toLowerCase() === name.toLowerCase())) {
+                    showToast('貨架名稱已存在', 'error');
+                    return;
+                }
+                const newShelf = {
+                    id: 's' + Date.now(),
+                    name: name,
+                    createdAt: new Date().toISOString(),
+                    layers: []
+                };
+                for (let l = 1; l <= layers; l++) {
+                    const comps = [];
+                    for (let c = 1; c <= compsPerLayer; c++) {
+                        comps.push({
+                            compNum: c,
+                            productCode: '',
+                            images: [],
+                            updatedBy: '',
+                            updatedAt: '',
+                            history: []
+                        });
+                    }
+                    newShelf.layers.push({ layerNum: l, compartments: comps });
+                }
+                appData.shelves.push(newShelf);
+                appData.globalHistory.push({
+                    user: currentUser.username,
+                    time: new Date().toISOString(),
+                    action: '新增貨架',
+                    shelfName: name,
+                    details: `建立貨架 ${name}，${layers}層，每層${compsPerLayer}格`
+                });
+                saveData();
+                closeModal();
+                switchTab('shelves');
+                showToast('貨架 ' + name + ' 已建立！', 'success');
+            }
+
+            function deleteShelf(shelfId) {
+                const shelf = appData.shelves.find(s => s.id === shelfId);
+                if (!shelf) return;
+                if (!confirm(`確定要刪除貨架「${shelf.name}」嗎？\n此操作無法復原，所有該貨架的資料將被刪除。`)) return;
+                appData.shelves = appData.shelves.filter(s => s.id !== shelfId);
+                appData.globalHistory.push({
+                    user: currentUser.username,
+                    time: new Date().toISOString(),
+                    action: '刪除貨架',
+                    shelfName: shelf.name,
+                    details: `刪除貨架 ${shelf.name}`
+                });
+                expandedShelves.delete(shelfId);
+                saveData();
+                switchTab('shelves');
+                showToast('貨架 ' + shelf.name + ' 已刪除', 'error');
+            }
+
+            // ============ UPDATE COMPARTMENT (RESTOCK) ============
+            function openUpdateModal(shelfId, layerNum, compNum) {
+                const shelf = appData.shelves.find(s => s.id === shelfId);
+                if (!shelf) return;
+                const layer = shelf.layers.find(l => l.layerNum === layerNum);
+                if (!layer) return;
+                const comp = layer.compartments.find(c => c.compNum === compNum);
+                if (!comp) return;
+                const locName = `${shelf.name}-L${layerNum}C${compNum}`;
+                const existingImages = comp.images || [];
+                const imgPreviews = existingImages.map((img, i) => `
+                    <div class="preview-item">
+                        <img src="${img}" alt="圖片${i+1}">
+                        <button class="remove-img" onclick="removeExistingImg('${shelfId}',${layerNum},${compNum},${i})">✕</button>
+                    </div>
+                `).join('');
+
+                const html = `
+                <h2>✏️ 更新貨架格子</h2>
+                <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">📍 位置：<strong>${escapeHtml(locName)}</strong></p>
+                <label>貨號 / 產品編號</label>
+                <input type="text" id="updateProductCode" value="${escapeHtml(comp.productCode || '')}" placeholder="輸入貨號，留空代表清空格子" maxlength="50">
+                <label>📷 上傳圖片 (最多3張，現有 ${existingImages.length} 張)</label>
+                <div class="img-preview-row" id="imgPreviewRow">${imgPreviews}</div>
+                <div class="file-input-wrapper" style="margin-bottom:8px;">
+                    <button class="btn-sm outline">📁 選擇圖片檔案</button>
+                    <input type="file" id="updateImages" accept="image/*" multiple onchange="previewNewImages()">
+                </div>
+                <span class="img-count-warn" id="imgCountWarn"></span>
+                <p style="font-size:10px;color:#999;">圖片會自動壓縮以節省儲存空間</p>
+                <div class="btn-row">
+                    <button class="btn-cancel" onclick="closeModal()">取消</button>
+                    <button class="btn-danger" onclick="clearCompartment('${shelfId}',${layerNum},${compNum})" style="flex:0.5;">🗑️ 清空</button>
+                    <button class="btn-primary" onclick="updateCompartment('${shelfId}',${layerNum},${compNum}')">💾 儲存更新</button>
+                </div>`;
+                openModal(html);
+                // Store new pending images in a temp variable
+                window._pendingNewImages = [];
+            }
+
+            function previewNewImages() {
+    const fileInput = document.getElementById('updateImages');
+    const previewRow = document.getElementById('imgPreviewRow');
+    const warnEl = document.getElementById('imgCountWarn');
+    if (!fileInput || !fileInput.files.length || !previewRow) return;
+
+    const files = Array.from(fileInput.files);
+    const existingCount = previewRow.querySelectorAll('.preview-item').length;
+    const allowed = Math.min(files.length, 3 - existingCount);
+    
+    if (existingCount + files.length > 3) {
+        warnEl.textContent = '⚠️ 最多只能有3張圖片！多餘的已自動忽略。';
+    } else {
+        warnEl.textContent = '';
+    }
+
+    // 處理每一張允許的圖片
+    for (let i = 0; i < allowed; i++) {
+        compressImage(files[i], 300, 0.6, (dataUrl) => {
+            // 壓縮完成後才加入預覽
+            const previewDiv = document.createElement('div');
+            previewDiv.className = 'preview-item';
+            previewDiv.innerHTML = `<img src="${dataUrl}" alt="新圖片">`;
+            // 可加入移除按鈕（保留原本的＋號標記或其他）
+            previewRow.appendChild(previewDiv);
+            
+            // 再次檢查數量
+            const total = previewRow.querySelectorAll('.preview-item').length;
+            if (total > 3) {
+                warnEl.textContent = '⚠️ 圖片過多，請手動刪除多餘圖片。';
+            }
+        });
+    }
+    fileInput.value = ''; // 清空 input 以便重複選取同一檔案
+}
+
+
+
+
+
+
+
+
+
+
+            function compressImage(file, maxWidth, quality, callback) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        callback(dataUrl);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function removeExistingImg(shelfId, layerNum, compNum, imgIndex) {
+                const shelf = appData.shelves.find(s => s.id === shelfId);
+                if (!shelf) return;
+                const layer = shelf.layers.find(l => l.layerNum === layerNum);
+                if (!layer) return;
+                const comp = layer.compartments.find(c => c.compNum === compNum);
+                if (!comp) return;
+                comp.images.splice(imgIndex, 1);
+                saveData();
+                // Refresh modal
+                openUpdateModal(shelfId, layerNum, compNum);
+                showToast('圖片已刪除', '');
+            }
+
+            function updateCompartment(shelfId, layerNum, compNum) {
+                const shelf = appData.shelves.find(s => s.id === shelfId);
+                if (!shelf) return;
+                const layer = shelf.layers.find(l => l.layerNum === layerNum);
+                if (!layer) return;
+                const comp = layer.compartments.find(c => c.compNum === compNum);
+                if (!comp) return;
+                const productCode = document.getElementById('updateProductCode').value.trim();
+                const oldProductCode = comp.productCode;
+                // Collect existing images (those not removed)
+                const previewRow = document.getElementById('imgPreviewRow');
+                const existingPreviews = previewRow ? previewRow.querySelectorAll('.preview-item img') : [];
+                const finalImages = [];
+                existingPreviews.forEach(img => {
+                    finalImages.push(img.src);
+                });
+                // Also add new pending images
+                if (window._pendingNewImages && window._pendingNewImages.length > 0) {
+                    finalImages.push(...window._pendingNewImages);
+                }
+                // Limit to 3
+                const limitedImages = finalImages.slice(0, 3);
+                comp.productCode = productCode;
+                comp.images = limitedImages;
+                comp.updatedBy = currentUser.displayName;
+                comp.updatedAt = new Date().toISOString();
+                const actionDesc = oldProductCode ?
+                    `更新：${oldProductCode} → ${productCode || '(清空)'}` :
+                    `補貨：${productCode || '(未變更)'}`;
+                comp.history.push({
+                    user: currentUser.username,
+                    time: comp.updatedAt,
+                    action: actionDesc,
+                    productCode: productCode
+                });
+                appData.globalHistory.push({
+                    user: currentUser.username,
+                    time: comp.updatedAt,
+                    action: productCode ? '補貨/更新' : '清空格子',
+                    shelfName: shelf.name,
+                    details: `${shelf.name}-L${layerNum}C${compNum} | 貨號: ${productCode || '(清空)'} | 圖片: ${limitedImages.length}張`
+                });
+                saveData();
+                window._pendingNewImages = [];
+                closeModal();
+                switchTab(currentTab);
+                showToast('✅ 格子已更新！', 'success');
+            }
+
+            function clearCompartment(shelfId, layerNum, compNum) {
+                if (!confirm('確定要清空此格子的所有資料嗎？（貨號和圖片將被清除）')) return;
+                const shelf = appData.shelves.find(s => s.id === shelfId);
+                if (!shelf) return;
+                const layer = shelf.layers.find(l => l.layerNum === layerNum);
+                if (!layer) return;
+                const comp = layer.compartments.find(c => c.compNum === compNum);
+                if (!comp) return;
+                comp.productCode = '';
+                comp.images = [];
+                comp.updatedBy = currentUser.displayName;
+                comp.updatedAt = new Date().toISOString();
+                comp.history.push({
+                    user: currentUser.username,
+                    time: comp.updatedAt,
+                    action: '清空格子',
+                    productCode: ''
+                });
+                appData.globalHistory.push({
+                    user: currentUser.username,
+                    time: comp.updatedAt,
+                    action: '清空格子',
+                    shelfName: shelf.name,
+                    details: `${shelf.name}-L${layerNum}C${compNum} 已清空`
+                });
+                saveData();
+                window._pendingNewImages = [];
+                closeModal();
+                switchTab(currentTab);
+                showToast('格子已清空', '');
+            }
+
+
+
+
+
+
+
+// ============ 完全替換原本的 updateCompartment 函式 ============
+function updateCompartment(shelfId, layerNum, compNum) {
+    try {
+        // 1. 檢查資料層
+        const shelf = appData.shelves.find(s => s.id === shelfId);
+        if (!shelf) throw new Error('找不到貨架');
+        const layer = shelf.layers.find(l => l.layerNum === layerNum);
+        if (!layer) throw new Error('找不到層數');
+        const comp = layer.compartments.find(c => c.compNum === compNum);
+        if (!comp) throw new Error('找不到格子');
+
+        // 2. 取得輸入框 (必須存在)
+        const productCodeInput = document.getElementById('updateProductCode');
+        if (!productCodeInput) throw new Error('找不到貨號輸入框');
+        const productCode = productCodeInput.value.trim();
+        const oldProductCode = comp.productCode;
+
+        // 3. 從預覽區塊直接收集所有圖片（已經壓縮完並顯示在畫面上的）
+        const finalImages = [];
+        const previewRow = document.getElementById('imgPreviewRow');
+        if (previewRow) {
+            const imgElements = previewRow.querySelectorAll('.preview-item img');
+            imgElements.forEach(img => {
+                if (img.src) finalImages.push(img.src);
+            });
+        }
+        // 限制最多 3 張
+        const limitedImages = finalImages.slice(0, 3);
+
+        // 4. 更新格子資料
+        comp.productCode = productCode;
+        comp.images = limitedImages;
+        comp.updatedBy = currentUser.displayName;
+        comp.updatedAt = new Date().toISOString();
+
+        // 5. 記錄操作歷史
+        const actionDesc = oldProductCode 
+            ? `更新：${oldProductCode} → ${productCode || '(清空)'}` 
+            : `補貨：${productCode || '(未變更)'}`;
+        comp.history.push({
+            user: currentUser.username,
+            time: comp.updatedAt,
+            action: actionDesc,
+            productCode: productCode
+        });
+
+        // 6. 全域歷史
+        appData.globalHistory.push({
+            user: currentUser.username,
+            time: comp.updatedAt,
+            action: productCode ? '補貨/更新' : '清空格子',
+            shelfName: shelf.name,
+            details: `${shelf.name}-L${layerNum}C${compNum} | 貨號: ${productCode || '(清空)'} | 圖片: ${limitedImages.length}張`
+        });
+
+        // 7. 儲存並重整畫面
+        saveData();
+        window._pendingNewImages = [];   // 清除暫存
+        closeModal();
+        switchTab(currentTab);
+        showToast('✅ 格子已更新！', 'success');
+
+    } catch (error) {
+        console.error('更新格子失敗:', error);
+        showToast('❌ 更新失敗：' + error.message, 'error');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+            // ============ RENDER: SEARCH TAB ============
+            function renderSearchTab() {
+                const globalHistory = appData.globalHistory || [];
+                const shelves = appData.shelves || [];
+                let html = `
+                <div class="section-title">📋 搜尋與記錄</div>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="搜尋架號、貨號、員工名..." oninput="performSearch()">
+                    <select id="searchType" onchange="performSearch()">
+                        <option value="all">全部</option>
+                        <option value="shelf">架號</option>
+                        <option value="product">貨號</option>
+                        <option value="user">員工名</option>
+                    </select>
+                </div>
+                <div id="searchResults">
+                    <div class="section-title">📊 當前貨架狀態總覽</div>`;
+                shelves.forEach(shelf => {
+                    const filled = shelf.layers.reduce((sum, l) => sum + l.compartments.filter(c => c.productCode)
+                        .length, 0);
+                    const total = shelf.layers.reduce((sum, l) => sum + l.compartments.length, 0);
+                    html += `
+                    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border-radius:8px;margin:4px 0;font-size:13px;flex-wrap:wrap;">
+                        <strong>🏷️ ${escapeHtml(shelf.name)}</strong>
+                        <span style="color:#888;">| 共${total}格</span>
+                        <span class="result-badge">✅ ${filled} 格有貨</span>
+                        <span style="font-size:10px;color:#aaa;">建立於 ${formatTime(shelf.createdAt)}</span>
+                    </div>`;
+                });
+
+                html += `
+                    <div class="section-title" style="margin-top:20px;">🕒 操作記錄 (最近50筆)</div>
+                    <div class="table-wrap">
+                        <table class="history-table">
+                            <thead><tr><th>時間</th><th>員工</th><th>動作</th><th>貨架</th><th>詳情</th></tr></thead>
+                            <tbody id="historyTableBody">`;
+                const recentHistory = [...globalHistory].reverse().slice(0, 50);
+                recentHistory.forEach(h => {
+                    html += `
+                            <tr data-search-row data-shelf="${(h.shelfName||'').toLowerCase()}" data-user="${(h.user||'').toLowerCase()}" data-details="${(h.details||'').toLowerCase()}">
+                                <td>${formatTime(h.time)}</td>
+                                <td>👤 ${escapeHtml(h.user)}</td>
+                                <td>${escapeHtml(h.action)}</td>
+                                <td>${escapeHtml(h.shelfName || '-')}</td>
+                                <td style="font-size:11px;">${escapeHtml(h.details || '')}</td>
+                            </tr>`;
+                });
+                html += `</tbody></table></div></div>`;
+                return html;
+            }
+
+            function performSearch() {
+                const query = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+                const type = document.getElementById('searchType')?.value || 'all';
+                const rows = document.querySelectorAll('#historyTableBody tr[data-search-row]');
+                if (!rows.length) return;
+                if (query === '') {
+                    rows.forEach(r => r.style.display = '');
+                    return;
+                }
+                rows.forEach(row => {
+                    const shelf = row.getAttribute('data-shelf') || '';
+                    const user = row.getAttribute('data-user') || '';
+                    const details = row.getAttribute('data-details') || '';
+                    let match = false;
+                    switch (type) {
+                        case 'shelf':
+                            match = shelf.includes(query);
+                            break;
+                        case 'product':
+                            match = details.includes(query);
+                            break;
+                        case 'user':
+                            match = user.includes(query);
+                            break;
+                        default:
+                            match = shelf.includes(query) || user.includes(query) || details.includes(
+                                query);
+                    }
+                    row.style.display = match ? '' : 'none';
+                });
+                // Highlight matching
+                if (query && type === 'all') {
+                    // Simple highlight on visible rows
+                }
+            }
+
+            // ============ UTILS ============
+            function escapeHtml(str) {
+                if (!str) return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function formatTime(isoStr) {
+                if (!isoStr) return '-';
+                try {
+                    const d = new Date(isoStr);
+                    const pad = n => String(n).padStart(2, '0');
+                    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+                } catch (e) {
+                    return isoStr;
+                }
+            }
+
+            // ============ GLOBAL EXPOSURES ============
+            window.doLogin = doLogin;
+            window.doLogout = doLogout;
+            window.switchTab = switchTab;
+            window.closeModal = closeModal;
+            window.openAddShelfModal = openAddShelfModal;
+            window.addShelf = addShelf;
+            window.deleteShelf = deleteShelf;
+            window.openUpdateModal = openUpdateModal;
+            window.updateCompartment = updateCompartment;
+            window.clearCompartment = clearCompartment;
+            window.removeExistingImg = removeExistingImg;
+            window.previewNewImages = previewNewImages;
+            window.viewImage = viewImage;
+            window.quickFindFilter = quickFindFilter;
+            window.performSearch = performSearch;
+
+            // ============ INIT ============
+            initStorage();
+            checkSession();
+
+            // Handle Enter key on login
+            document.getElementById('loginPass').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') doLogin();
+            });
+            document.getElementById('loginUser').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('loginPass').focus();
+                }
+            });
+
+            console.log('📦 倉庫管理系統已就緒');
+            console.log('  預設帳號: admin / admin123');
+            console.log('  員工帳號: staff_a / staff123, staff_b / staff123');
+            console.log('  資料儲存於瀏覽器 localStorage');
+            console.log('  如需多裝置共享，請部署後端服務器');
+        })();
+    </script>
+</body>
+</html>
