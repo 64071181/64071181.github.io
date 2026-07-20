@@ -1,34 +1,302 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-HK">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> 莫氏集團| 85264071181 </title>
   <meta name="description" content=" 莫氏集團 Founded 2006 in hong kong, our company was built on the idea of using innovative technology not only to solve problems but to help businesses achieve sustainable growth. We understand that every company has its unique needs and pain points.">
 <meta name="Keywords" content="數字化轉型,商業解決方案,工作流程自動化,創新解決方案,數據分析,數據採集,TVP,科技劵,自動客戶引流,自動回覆客戶,傳統行業轉型,行業科技轉型,創新解決方案,預約管理系統,人力資源管理系統,倉庫管理系統,商店管理系統,自媒體管理系統,科技轉型,數碼轉型,大數據,人工智能,Digital transformation, business solutions, workflow automation, innovative solutions, data analysis, data collection, automatic customer diversion, automatic customer response, traditional industry transformation, industry technology transformation, innovative solutions, appointment management system, Human resources management system, warehouse management system, store management system, self-media management system,科技转型,数码转型,大数据,人工智能,数字化转型,商业解决方案,工作流程自动化,创新解决方案,数据分析,数据采集,TVP,科技劵,自动客户引流,自动回覆客户,传统行业转型,行业科技转型,创新解决方案,预约管理系统,人力资源管理系统,仓库管理系统,商店管理系统,自媒体管理系统,科技转型,数码转型,大数据,人工智能">
 
-  <style>    
-    body {      margin: 0;      padding: 0;      font-family: Arial, sans-serif;      background-color: #f0f0f0;      display: flex;      flex-direction: column;      justify-content: center;      align-items: center;      min-height: 100vh;    }
-    #game-container {      width: 400px;      height: 500px;      background-color: #8FBC8F;      position: relative;      overflow: hidden;      cursor: pointer;      margin-bottom: 20px;    }
-    #player {      width: 50px;      height: 50px;      position: absolute;      bottom: 20px;      transition: left 0.1s;      font-size: 50px;      line-height: 50px;      text-align: center;    }
-    .portal, .obstacle {      width: 80px;      height: 80px;      position: absolute;      top: -80px;      border-radius: 50%;      display: flex;      justify-content: center;      align-items: center;      font-size: 40px;      color: #000;      text-shadow: 1px 1px 2px rgba(255,255,255,0.8);    }
-    .obstacle {      background-color: #FF4500;    }
-    #score {      position: absolute;      top: 10px;      left: 10px;      font-size: 24px;      color: white;      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);    }
-    #character-select {      position: absolute;      top: 18%;      left: 50%;      transform: translate(-50%, -50%);      background-color: white;      padding: 20px;      border-radius: 10px;      text-align: center;      box-shadow: 0 0 10px rgba(0,0,0,0.3);    }
-    .character {      width: 50px;      height: 50px;      margin: 10px;      cursor: pointer;      font-size: 40px;      line-height: 50px;      display: inline-block;      transition: transform 0.2s;    }
-    .character:hover {      transform: scale(1.2);    }
-    #share-button {      position: absolute;      bottom: 10px;      right: 10px;      padding: 5px 10px;      background-color: #4CAF50;      color: white;      border: none;      cursor: pointer;      border-radius: 5px;      font-size: 16px;    }
-    #share-button:hover {      background-color: #d16fb7a8;    }
-    #game-over {      position: absolute;      top: 50%;      left: 50%;      transform: translate(-50%, -50%);      background-color: rgba(255, 255, 255, 0.9);      padding: 20px;      border-radius: 10px;      text-align: center;      display: none;    }
-    #restart-button, #share-score-button {      margin-top: 10px;      padding: 5px 10px;      background-color: #4CAF50;      color: white;      border: none;      cursor: pointer;      border-radius: 5px;      font-size: 16px;    }
-    #restart-button:hover, #share-score-button:hover {      background-color: #45a049;    }
-    #info-box {      width: 400px;      height: 300px;      overflow-y: scroll;      background-color: #fff;      padding: 20px;      border-radius: 10px;      box-shadow: 0 0 10px rgba(0,0,0,0.1);    }
-    #translate {      margin-top: 20px;    }
-    .share-option {      display: block;      margin: 5px 0;      padding: 5px;      background-color: #4CAF50;      color: white;      border: none;      cursor: pointer;      border-radius: 5px;      font-size: 16px;      text-align: center;      text-decoration: none;    }
-    .share-option:hover {      background-color: #45a049;    }
-    .宣文 {      width: auto;      height: auto;      margin: 5%;      background-color: #fff;      padding: 20px;      border-radius: 10px;      box-shadow: 0 0 10px rgba(0,0,0,0.1);    }
-  
-  </style>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050510;
+    --card-bg: rgba(10, 15, 30, 0.85);
+    --gold: #d4a843;
+    --cyan: #00e5ff;
+    --pink: #ff2d78;
+    --purple: #b44dff;
+    --green: #00e676;
+    --blue: #448aff;
+    --orange: #ff9100;
+    --glow: 0 0 30px;
+  }
+
+  body {
+    background: var(--bg);
+    color: #e0e0e0;
+    font-family: 'Noto Sans TC', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  a {
+text-decoration: none;
+}
+
+  /* ===== 星空背景 ===== */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ===== 主容器 ===== */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+  .hero-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, var(--gold) 0%, #f0d78c 30%, var(--gold) 50%, #c9952e 70%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 25px rgba(212,168,67,0.5));
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { filter: drop-shadow(0 0 25px rgba(212,168,67,0.5)); }
+    50% { filter: drop-shadow(0 0 50px rgba(212,168,67,0.9)); }
+  }
+  .hero-sub {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    color: var(--cyan);
+    margin-top: 10px;
+    letter-spacing: 0.3em;
+    opacity: 0.8;
+  }
+  .hero-tagline {
+    font-size: 1.2rem;
+    color: #aab;
+    margin-top: 16px;
+    max-width: 700px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.8;
+  }
+  .hero-divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 30px auto;
+  }
+
+  /* ===== 統計條 ===== */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 20px 0 50px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: #889;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== 分類標題 ===== */
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin: 50px 0 30px;
+    color: #ccc;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--cyan);
+    margin: 12px auto 0;
+  }
+  .section-title.gold::after { background: var(--gold); }
+  .section-title.future::after { background: var(--pink); }
+
+  /* ===== 卡片網格 ===== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+
+  /* ===== 單張卡片 ===== */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(100,150,255,0.08);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .card.gold::before { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .card.cyan::before { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+  .card.purple::before { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+  .card.green::before { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+  .card.pink::before { background: linear-gradient(90deg, transparent, var(--pink), transparent); }
+  .card.blue::before { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+  .card.orange::before { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
+
+  /* 卡片 3D 畫布區 */
+  .card-3d {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, rgba(20,25,50,0.6) 0%, rgba(5,5,15,0.9) 100%);
+  }
+  .card-3d canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+    z-index: 2;
+  }
+  .badge-core { background: rgba(212,168,67,0.2); color: var(--gold); border: 1px solid rgba(212,168,67,0.3); }
+  .badge-future { background: rgba(255,45,120,0.2); color: var(--pink); border: 1px solid rgba(255,45,120,0.3); }
+  .badge-done { background: rgba(0,229,255,0.15); color: var(--cyan); border: 1px solid rgba(0,229,255,0.3); }
+
+  /* 卡片文字區 */
+  .card-body {
+    padding: 20px 24px 24px;
+  }
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .card-title.gold-text { color: var(--gold); }
+  .card-title.cyan-text { color: var(--cyan); }
+  .card-title.purple-text { color: var(--purple); }
+  .card-title.green-text { color: var(--green); }
+  .card-title.pink-text { color: var(--pink); }
+  .card-title.blue-text { color: var(--blue); }
+  .card-title.orange-text { color: var(--orange); }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: #99a;
+    line-height: 1.7;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #aab;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 40px;
+  }
+  .footer-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    color: #556;
+    letter-spacing: 0.15em;
+  }
+  .footer-glow {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--cyan);
+    margin: 0 8px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.8); }
+  }
+
+  /* ===== RWD ===== */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 12px 30px; }
+    .cards-grid { grid-template-columns: 1fr; gap: 20px; }
+    .stats-bar { gap: 20px; }
+    .stat-num { font-size: 1.8rem; }
+    .card-3d { height: 180px; }
+  }
+</style>
+
+
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -41,10 +309,9 @@
 
 
 
+
+
 </head>
-  <body>
-
-    <samp id="莫生查詢" style="display: none;">莫生我要查詢賺錢鍠</samp>
 
 
 
@@ -60,337 +327,668 @@
 
 
 
-    <div id="game-container">
-      <div id="player"></div>
-      <div id="score">⌛: 0</div>
-      <a id="share-button" href="./數碼轉型">🏡</a>
-      <div id="game-over">
-        <h2 style="color: #00e1ff;">🫣</h2>
-        <p>⌛ =  <span id="final-score"></span></p>
-        <a id="restart-button" href="./">🎮</a>
-        <button id="share-score-button">📶</button>
-        <div id="share-options" style="display:none;">
-          <a class="share-option" id="share-whatsapp">分享到 WhatsApp</a>
-          <!--
-          <a class="share-option" id="share-facebook">分享到 Facebook</a>
-          <a class="share-option" id="share-wechat">分享到 WeChat</a>
-          -->
-          <a class="share-option" id="copy-content">複製內容</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+<samp id="莫生查詢" style="display: none;">莫生我要查詢賺錢鍠</samp>
+
+
+
+<!-- 星空背景 -->
+<canvas id="bg-canvas"></canvas>
+
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <h1 class="hero-logo">莫氏集團</h1>
+    <p class="hero-sub">M O K &nbsp; G R O U P &nbsp; · &nbsp; est. 2 0 0 6</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">
+      專注企業流程自動化與數據驅動決策，整合 AI 模型、營銷、金流、客戶管理<br>
+      打造 <strong style="color:#d4a843;">「智能決策 → 自動執行 → 收益閉環」</strong> 的增長引擎
+    </p>
+  </header>
+
+  <!-- 統計 -->
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">2006</div><div class="stat-label">創立年份</div></div>
+    <div class="stat"><div class="stat-num">7+</div><div class="stat-label">事業體</div></div>
+    <div class="stat"><div class="stat-num">9</div><div class="stat-label">平台資源</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">未來潛力</div></div>
+  </div>
+
+  <!-- ===== 核心業務 ===== -->
+  <h2 class="section-title gold">◆ 核心業務 ◆</h2>
+  <div class="cards-grid">
+
+    <!-- 賺錢鍠 -->
+    <div class="card gold">
+      <div class="card-3d" id="canvas-money">
+        <span class="card-badge badge-core">CORE</span>
+      </div>
+      <div class="card-body">
+        <a href="./mk">
+        <div class="card-icon">🤑</div>
+        <div class="card-title gold-text">賺錢鍠</div>
+        <p class="card-desc">
+          自動賺錢完美閉環系統。一鍵自動化收集客戶資料、發送促銷 Email、24/7 WhatsApp 智能客服，讓企業在睡眠中也能持續獲利。
+        </p>
+        </a>
+        <div class="card-tags">
+          <span class="tag">AI客服</span><span class="tag">自動營銷</span><span class="tag">CRM</span><span class="tag">Email自動化</span>
         </div>
       </div>
     </div>
-  
-    <div id="character-select" style="display:none;">
-      <div id="character-options"></div>
-    </div>
-  
-    <div id="info-box">
-      <p>🤑 = <a href="./mk">賺錢鍠</a> </p>
-      <p>🤖 = <a href="./ws">ws鍠</a> </p>
-      <p>🚀 = <a href="./數碼轉型/">數碼轉型</a> </p>
-      <p>🔧 = <a href="./tool2024/">人工智慧工具</a> </p>
-      <p>💰 = <a href="./fb工/">facebook群組</a> </p>
-      <p>👷‍♂️ = <a href="./康力人力資源顧問公司">人力資源</a> </p>
-      <p>⛓️ = <a href="https://98672794.github.io/abta">區塊鏈解決方案</a> </p>
-      <p>📂 = <a href="./Demo">網站開發</a> </p>
-      <p>🪄 = <a href="./玄學">玄學</a> </p>
-      <p>💰 = <a href="./PayAki/index.html">付款方式</a> </p>
 
-      <p title="obstacle">🌵, 🗿, 🦂 = Game Over</p>
-      <p id="translate"></p>
-      
-      <p title="A new character can be unlocked every 500 points">⌛500 = ❓👤</p><!-- 每500分钟可以解锁一个角色 -->
-      
+    <!-- AI 決策平台 -->
+    <div class="card cyan">
+      <div class="card-3d" id="canvas-ai">
+        <span class="card-badge badge-core">CORE</span>
+      </div>
+      <div class="card-body">
+        <a href="https://mok2026.github.io/">
+        <div class="card-icon">🧠</div>
+        <div class="card-title cyan-text">AI 數據決策引擎</div>
+        <p class="card-desc">
+          整合營銷、金流、客戶管理三大核心的 AI 模型平台。即時數據分析 → 智能決策 → 自動執行，實現真正的數據驅動企業運營。
+        </p>
+        </a>
+        <div class="card-tags">
+          <span class="tag">機器學習</span><span class="tag">數據分析</span><span class="tag">金流整合</span><span class="tag">預測模型</span>
+        </div>
+      </div>
     </div>
 
+    <!-- 商業生態 -->
+    <div class="card purple">
+      <div class="card-3d" id="canvas-eco">
+        <span class="card-badge badge-core">CORE</span>
+      </div>
+      <div class="card-body">
+        <a href="./fb工/">
+        <div class="card-icon">🌐</div>
+        <div class="card-title purple-text">商業生態平台</div>
+        <p class="card-desc">
+          九大資源平台：商業教育、人力資源、技術轉型、天使投資、資源匹配、營銷推廣、特許經營、業務轉移、交流活動。一站式商業生態系統。
+        </p>
+        </a>
+        <div class="card-tags">
+          <span class="tag">天使投資</span><span class="tag">商業教育</span><span class="tag">HR服務</span><span class="tag">技術轉型</span>
+        </div>
+      </div>
+    </div>
 
-    <div class="宣文">
-      <p>
-        您好<br>
-        我們是 <b id="_我司名"></b><br><br>
-        成立於2006年<br>
-        專注於企業流程自動化與數據驅動決策，  <br>
-        透過AI模型整合營銷、金流、客戶管理三大核心，  <br>
-        協助企業打造「智能決策→自動執行→收益閉環」的增長引擎。  <br>
-        <br><br>
-        **平台資源**
-        <br><br>
-        - 商業教育<br>
-        - 人力資源服務<br>
-        - 技術轉型支援<br>
-        - 天使投資機會<br>
-        - 資源匹配平臺<br>
-        - 營銷和推廣管道<br>
-        - 特許經營和合作選項<br>
-        - 業務轉移平臺<br>
-        - 交流和互動活動<br>
-        <br><br>
-        最新產品 *賺錢鍠*
-        <br><br>
-        為您打造自動賺錢完美閉環
-        <br><br>
-        賺錢鍠 包含3大功能:<br>
-        &nbsp;&nbsp;&nbsp;自動化收集客戶資料<br>
-        &nbsp;&nbsp;&nbsp;自動化發送促銷Email<br>
-        &nbsp;&nbsp;&nbsp;自動化whatsapp客服<br>
-      </p>
+  </div>
+
+  <!-- ===== 新興項目 (DoneOnEarth) ===== -->
+  <h2 class="section-title future">◆ 前瞻項目 · DoneOnEarth ◆</h2>
+  <div class="cards-grid">
+
+    <!-- 頭髮鑽石散熱 -->
+    <div class="card green">
+      <div class="card-3d" id="canvas-diamond">
+        <span class="card-badge badge-done">R&D</span>
+      </div>
+      <div class="card-body">
+        <div class="card-icon">💎</div>
+        <div class="card-title green-text">生物鑽石散熱技術</div>
+        <p class="card-desc">
+          革命性材料科技：將人類頭髮回收，透過碳化與高壓製程轉化為鑽石粉末。鑽石擁有最高熱導率（2200 W/m·K），是 AI 晶片散熱的終極解決方案，廢物變黃金。
+        </p>
+        <div class="card-tags">
+          <span class="tag">鑽石粉末</span><span class="tag">AI晶片散熱</span><span class="tag">回收材料</span><span class="tag">熱導率2200</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 無人機 -->
+    <div class="card blue">
+      <div class="card-3d" id="canvas-drone">
+        <span class="card-badge badge-done">PHASE 1</span>
+      </div>
+      <div class="card-body">
+        <div class="card-icon">🛸</div>
+        <div class="card-title blue-text">智能無人機</div>
+        <p class="card-desc">
+          高效耐用無人機系統，應用於物流配送、智慧農業、環境監測。為前期研發提供收入支持，同時奠定宇宙探索的技術基礎。
+        </p>
+        <div class="card-tags">
+          <span class="tag">物流無人機</span><span class="tag">農業監測</span><span class="tag">自主飛行</span><span class="tag">環境感測</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 小行星採礦 -->
+    <div class="card orange">
+      <div class="card-3d" id="canvas-asteroid">
+        <span class="card-badge badge-done">PHASE 2</span>
+      </div>
+      <div class="card-body">
+        <div class="card-icon">☄️</div>
+        <div class="card-title orange-text">小行星採礦</div>
+        <p class="card-desc">
+          鎖定萬億美元太空資源市場！專注稀土資源開採與提煉，實現自主供應鏈。研發著陸、通訊及回收技術，打造星際資源網絡。
+        </p>
+        <div class="card-tags">
+          <span class="tag">稀土開採</span><span class="tag">太空資源</span><span class="tag">自主著陸</span><span class="tag">軌道回收</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 戴森泡 -->
+    <div class="card pink">
+      <div class="card-3d" id="canvas-dyson">
+        <span class="card-badge badge-done">PHASE 3</span>
+      </div>
+      <div class="card-body">
+        <div class="card-icon">🌐</div>
+        <div class="card-title pink-text">戴森泡計劃</div>
+        <p class="card-desc">
+          終極能源革命！使用無人機將能量回收設備送往小行星，收集太陽能與稀土資源傳回地球。逐步構建戴森泡系統，實現太陽系能源 100% 回收利用，開啟人類能源新紀元。
+        </p>
+        <div class="card-tags">
+          <span class="tag">太陽能收集</span><span class="tag">星際傳輸</span><span class="tag">能源革命</span><span class="tag">戴森泡</span>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p class="footer-text">
+      莫氏集團 <span class="footer-glow"></span> MOK GROUP
+      <br>智能決策 → 自動執行 → 收益閉環
+      <br><br>
       
       <div id="ContactAKI" class="ContactAKI"><!-- JS _顯示聯莫 --></div>
 
       <p class="mokJsApi_copyright">版權</p>
 
       <button id="scrollTopButton">Top</button>
-    </div>
+    </p>
+  </div>
 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Three.js -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+// ============ 星空背景 ============
+const bgCanvas = document.getElementById('bg-canvas');
+const bgRenderer = new THREE.WebGLRenderer({ canvas: bgCanvas, antialias: true, alpha: true });
+bgRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+bgRenderer.setSize(window.innerWidth, window.innerHeight);
+const bgScene = new THREE.Scene();
+const bgCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+bgCamera.position.z = 30;
+
+// 星星
+const starsGeo = new THREE.BufferGeometry();
+const starCount = 800;
+const starPos = new Float32Array(starCount * 3);
+for (let i = 0; i < starCount; i++) {
+  starPos[i*3] = (Math.random() - 0.5) * 80;
+  starPos[i*3+1] = (Math.random() - 0.5) * 50;
+  starPos[i*3+2] = (Math.random() - 0.5) * 40;
+}
+starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+const starsMat = new THREE.PointsMaterial({ color: 0x8899cc, size: 0.06, transparent: true, blending: THREE.AdditiveBlending });
+const stars = new THREE.Points(starsGeo, starsMat);
+bgScene.add(stars);
+
+// 星雲粒子環
+const ringGeo = new THREE.TorusGeometry(18, 0.3, 16, 100);
+const ringMat = new THREE.MeshBasicMaterial({ color: 0x334466, transparent: true, opacity: 0.15, wireframe: true });
+const ring = new THREE.Mesh(ringGeo, ringMat);
+ring.rotation.x = Math.PI / 3;
+bgScene.add(ring);
+
+const ring2 = new THREE.Mesh(
+  new THREE.TorusGeometry(22, 0.2, 16, 80),
+  new THREE.MeshBasicMaterial({ color: 0x553366, transparent: true, opacity: 0.12, wireframe: true })
+);
+ring2.rotation.x = -Math.PI / 4;
+bgScene.add(ring2);
+
+// ============ 卡片 3D 場景工廠 ============
+function createCardScene(containerId, createMesh, colorHex, options = {}) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(w, h);
+  container.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 50);
+  camera.position.z = options.camZ || 6;
+
+  // 光照
+  const ambient = new THREE.AmbientLight(0x333355, 1.5);
+  scene.add(ambient);
+  const light1 = new THREE.DirectionalLight(colorHex, 2);
+  light1.position.set(3, 2, 4);
+  scene.add(light1);
+  const light2 = new THREE.DirectionalLight(0x8888ff, 1);
+  light2.position.set(-3, -1, -2);
+  scene.add(light2);
+  const pointLight = new THREE.PointLight(colorHex, 3, 10);
+  pointLight.position.set(0, 0, 3);
+  scene.add(pointLight);
+
+  const mesh = createMesh();
+  scene.add(mesh);
+
+  // 粒子環
+  if (options.particles) {
+    const pGeo = new THREE.BufferGeometry();
+    const pCount = options.particles;
+    const pPos = new Float32Array(pCount * 3);
+    const radius = options.pRadius || 2;
+    for (let i = 0; i < pCount; i++) {
+      const angle = (i / pCount) * Math.PI * 2;
+      pPos[i*3] = Math.cos(angle) * radius;
+      pPos[i*3+1] = (Math.random() - 0.5) * 0.6;
+      pPos[i*3+2] = Math.sin(angle) * radius;
+    }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    const pMat = new THREE.PointsMaterial({ color: colorHex, size: 0.04, transparent: true, blending: THREE.AdditiveBlending });
+    const particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
+
+    return { renderer, scene, camera, mesh, particles, container };
+  }
+
+  return { renderer, scene, camera, mesh, container };
+}
+
+// 各卡片 3D 物件建立函數
+const cardScenes = [];
+
+// 1. 賺錢鍠 - 金色∞環
+cardScenes.push(createCardScene('canvas-money', () => {
+  const group = new THREE.Group();
+  const torusKnot = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(0.8, 0.22, 100, 16),
+    new THREE.MeshStandardMaterial({ color: 0xd4a843, metalness: 0.9, roughness: 0.2, emissive: 0x332200, emissiveIntensity: 0.4 })
+  );
+  group.add(torusKnot);
+
+  // 外環
+  const outerRing = new THREE.Mesh(
+    new THREE.TorusGeometry(1.3, 0.05, 16, 80),
+    new THREE.MeshStandardMaterial({ color: 0xf0d78c, metalness: 0.8, roughness: 0.15, emissive: 0x221100, emissiveIntensity: 0.6 })
+  );
+  group.add(outerRing);
+
+  return group;
+}, 0xd4a843, { camZ: 5.5, particles: 60, pRadius: 1.8 }));
+
+// 2. AI 引擎 - 旋轉二十面體
+cardScenes.push(createCardScene('canvas-ai', () => {
+  const group = new THREE.Group();
+  const ico = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.9, 0),
+    new THREE.MeshStandardMaterial({ color: 0x00e5ff, metalness: 0.3, roughness: 0.3, emissive: 0x003344, emissiveIntensity: 0.5, wireframe: false })
+  );
+  group.add(ico);
+
+  const wire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.05, 0),
+    new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.4 })
+  );
+  group.add(wire);
+
+  return group;
+}, 0x00e5ff, { camZ: 5, particles: 50, pRadius: 1.6 }));
+
+// 3. 商業生態 - 軌道球體
+cardScenes.push(createCardScene('canvas-eco', () => {
+  const group = new THREE.Group();
+  const centerSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.55, 32, 32),
+    new THREE.MeshStandardMaterial({ color: 0xb44dff, metalness: 0.2, roughness: 0.25, emissive: 0x220044, emissiveIntensity: 0.5 })
+  );
+  group.add(centerSphere);
+
+  // 軌道小球
+  for (let i = 0; i < 3; i++) {
+    const orbitGroup = new THREE.Group();
+    orbitGroup.rotation.x = i * Math.PI / 3;
+    orbitGroup.rotation.y = i * Math.PI / 4;
+    const smallSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.15, 16, 16),
+      new THREE.MeshStandardMaterial({ color: 0xcc88ff, metalness: 0.5, roughness: 0.2, emissive: 0x220033, emissiveIntensity: 0.6 })
+    );
+    smallSphere.position.x = 1.2;
+    orbitGroup.add(smallSphere);
+    group.add(orbitGroup);
+    group.userData = group.userData || {};
+    group.userData[`orbit${i}`] = orbitGroup;
+  }
+
+  return group;
+}, 0xb44dff, { camZ: 5.5, particles: 40, pRadius: 1.8 }));
+
+// 4. 無人機 - 飛行器造型
+cardScenes.push(createCardScene('canvas-drone', () => {
+  const group = new THREE.Group();
+  // 主體
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.4, 0.5, 0.5, 8),
+    new THREE.MeshStandardMaterial({ color: 0x448aff, metalness: 0.7, roughness: 0.25, emissive: 0x001122, emissiveIntensity: 0.3 })
+  );
+  group.add(body);
+
+  // 機臂
+  for (let i = 0; i < 4; i++) {
+    const angle = (i / 4) * Math.PI * 2;
+    const arm = new THREE.Mesh(
+      new THREE.BoxGeometry(0.08, 0.08, 1.2),
+      new THREE.MeshStandardMaterial({ color: 0x6699cc, metalness: 0.8, roughness: 0.2 })
+    );
+    arm.position.set(Math.cos(angle) * 0.55, 0, Math.sin(angle) * 0.55);
+    arm.rotation.y = -angle;
+    group.add(arm);
+
+    // 旋翼
+    const rotor = new THREE.Mesh(
+      new THREE.TorusGeometry(0.25, 0.04, 8, 16),
+      new THREE.MeshStandardMaterial({ color: 0xaaccff, metalness: 0.5, roughness: 0.3, emissive: 0x112244, emissiveIntensity: 0.3 })
+    );
+    rotor.position.set(Math.cos(angle) * 1.15, 0.1, Math.sin(angle) * 1.15);
+    rotor.rotation.x = Math.PI / 2;
+    group.add(rotor);
+    group.userData = group.userData || {};
+    group.userData[`rotor${i}`] = rotor;
+  }
+
+  // 底部相機
+  const camera = new THREE.Mesh(
+    new THREE.SphereGeometry(0.15, 16, 16),
+    new THREE.MeshStandardMaterial({ color: 0x111133, metalness: 0.9, roughness: 0.1, emissive: 0x000022, emissiveIntensity: 0.5 })
+  );
+  camera.position.y = -0.35;
+  group.add(camera);
+
+  return group;
+}, 0x448aff, { camZ: 5.5 }));
+
+// 5. 小行星 - 粗糙岩石
+cardScenes.push(createCardScene('canvas-asteroid', () => {
+  const group = new THREE.Group();
+  const astGeo = new THREE.IcosahedronGeometry(0.9, 2);
+  // 隨機變形頂點
+  const pos = astGeo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const len = Math.sqrt(x*x + y*y + z*z);
+    const scale = 0.7 + Math.random() * 0.6;
+    pos.setXYZ(i, x / len * scale, y / len * scale, z / len * scale);
+  }
+  astGeo.computeVertexNormals();
+  const astMesh = new THREE.Mesh(
+    astGeo,
+    new THREE.MeshStandardMaterial({ color: 0x887766, metalness: 0.4, roughness: 0.8, flatShading: true })
+  );
+  group.add(astMesh);
+
+  // 表面亮點 (礦物)
+  const dotsGeo = new THREE.BufferGeometry();
+  const dotCount = 80;
+  const dotPositions = new Float32Array(dotCount * 3);
+  for (let i = 0; i < dotCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = 0.85 + Math.random() * 0.25;
+    dotPositions[i*3] = Math.sin(phi) * Math.cos(theta) * r;
+    dotPositions[i*3+1] = Math.sin(phi) * Math.sin(theta) * r;
+    dotPositions[i*3+2] = Math.cos(phi) * r;
+  }
+  dotsGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
+  const dotsMat = new THREE.PointsMaterial({ color: 0xffaa44, size: 0.04, transparent: true, blending: THREE.AdditiveBlending });
+  const dots = new THREE.Points(dotsGeo, dotsMat);
+  group.add(dots);
+
+  return group;
+}, 0xff9100, { camZ: 5, particles: 30, pRadius: 1.5 }));
+
+// 6. 戴森泡 - 能量球 + 環
+cardScenes.push(createCardScene('canvas-dyson', () => {
+  const group = new THREE.Group();
+  // 中心太陽
+  const sun = new THREE.Mesh(
+    new THREE.SphereGeometry(0.55, 32, 32),
+    new THREE.MeshStandardMaterial({ color: 0xff4422, metalness: 0, roughness: 0.1, emissive: 0xff2200, emissiveIntensity: 1.2 })
+  );
+  group.add(sun);
+
+  // 戴森環
+  for (let i = 0; i < 3; i++) {
+    const dysonRing = new THREE.Mesh(
+      new THREE.TorusGeometry(1.0 + i * 0.45, 0.03, 16, 80),
+      new THREE.MeshStandardMaterial({ color: 0xff6688, metalness: 0.9, roughness: 0.2, emissive: 0x330011, emissiveIntensity: 0.5 })
+    );
+    dysonRing.rotation.x = Math.PI / 2 + i * 0.3;
+    dysonRing.rotation.y = i * 0.5;
+    group.add(dysonRing);
+  }
+
+  // 能量粒子
+  const eGeo = new THREE.BufferGeometry();
+  const eCount = 150;
+  const ePositions = new Float32Array(eCount * 3);
+  for (let i = 0; i < eCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = 1.0 + Math.random() * 2.0;
+    ePositions[i*3] = Math.sin(phi) * Math.cos(theta) * r;
+    ePositions[i*3+1] = Math.sin(phi) * Math.sin(theta) * r;
+    ePositions[i*3+2] = Math.cos(phi) * r;
+  }
+  eGeo.setAttribute('position', new THREE.BufferAttribute(ePositions, 3));
+  const eMat = new THREE.PointsMaterial({ color: 0xff6644, size: 0.04, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.8 });
+  const eParticles = new THREE.Points(eGeo, eMat);
+  group.add(eParticles);
+
+  return group;
+}, 0xff2d78, { camZ: 6.5 }));
+
+// 7. 鑽石散熱 - 八面體鑽石
+cardScenes.push(createCardScene('canvas-diamond', () => {
+  const group = new THREE.Group();
+  const diamondGeo = new THREE.OctahedronGeometry(0.8, 0);
+  const diamondMat = new THREE.MeshPhysicalMaterial({
+    color: 0x88ffcc,
+    metalness: 0.05,
+    roughness: 0.05,
+    clearcoat: 0.3,
+    clearcoatRoughness: 0.1,
+    emissive: 0x003322,
+    emissiveIntensity: 0.3,
+    specularIntensity: 1,
+    specularColor: 0xffffff
+  });
+  const diamond = new THREE.Mesh(diamondGeo, diamondMat);
+  group.add(diamond);
+
+  // 熱力波紋環
+  const heatRing = new THREE.Mesh(
+    new THREE.TorusGeometry(1.1, 0.03, 16, 60),
+    new THREE.MeshBasicMaterial({ color: 0xff6644, transparent: true, opacity: 0.5 })
+  );
+  group.add(heatRing);
+
+  const heatRing2 = new THREE.Mesh(
+    new THREE.TorusGeometry(1.4, 0.02, 16, 60),
+    new THREE.MeshBasicMaterial({ color: 0xff9944, transparent: true, opacity: 0.3 })
+  );
+  group.add(heatRing2);
+
+  return group;
+}, 0x00e676, { camZ: 5, particles: 50, pRadius: 1.7 }));
+
+// ============ 動畫循環 ============
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // 背景動畫
+  stars.rotation.y += 0.0002;
+  stars.rotation.x += 0.0001;
+  ring.rotation.z += 0.0003;
+  ring.rotation.y += 0.0002;
+  ring2.rotation.z -= 0.0002;
+  ring2.rotation.x += 0.0003;
+  bgRenderer.render(bgScene, bgCamera);
+
+  // 卡片場景動畫
+  for (const cs of cardScenes) {
+    if (!cs || !cs.mesh) continue;
+    const mesh = cs.mesh;
+    const s = cs.scene;
+    const c = cs.camera;
+    const r = cs.renderer;
+
+    // 主物件旋轉
+    mesh.rotation.y += 0.008;
+    mesh.rotation.x += 0.003;
+
+    // 特殊動畫
+    if (cs.particles) {
+      cs.particles.rotation.y += 0.01;
+    }
+
+    // 生態球軌道
+    if (mesh.userData) {
+      for (let i = 0; i < 3; i++) {
+        const orbit = mesh.userData[`orbit${i}`];
+        if (orbit) orbit.rotation.z += 0.015 + i * 0.005;
+      }
+      // 無人機旋翼
+      for (let i = 0; i < 4; i++) {
+        const rotor = mesh.userData[`rotor${i}`];
+        if (rotor) rotor.rotation.z += 0.15;
+      }
+    }
+
+    r.render(s, c);
+
+    // 更新容器大小
+    const w = cs.container.clientWidth;
+    const h = cs.container.clientHeight;
+    if (r.domElement.width !== w * Math.min(window.devicePixelRatio, 2) ||
+        r.domElement.height !== h * Math.min(window.devicePixelRatio, 2)) {
+      r.setSize(w, h);
+      c.aspect = w / h;
+      c.updateProjectionMatrix();
+    }
+  }
+}
+
+// 視窗大小調整
+window.addEventListener('resize', () => {
+  bgRenderer.setSize(window.innerWidth, window.innerHeight);
+  bgCamera.aspect = window.innerWidth / window.innerHeight;
+  bgCamera.updateProjectionMatrix();
+});
+
+animate();
+
+console.log('🚀 莫氏集團事業版圖已就緒 | MOK GROUP Business Map Ready');
+</script>
+
+
+
+    <!-- 引入 MOKAGI 聊天 Widget -->
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
-      
-      const gameContainer = document.getElementById('game-container');
-      const player = document.getElementById('player');
-      const scoreElement = document.getElementById('score');
-      const characterSelect = document.getElementById('character-select');
-      const characterOptions = document.getElementById('character-options');
-      const shareButton = document.getElementById('share-button');
-      const gameOverScreen = document.getElementById('game-over');
-      const finalScoreElement = document.getElementById('final-score');
-      const restartButton = document.getElementById('restart-button');
-      const shareScoreButton = document.getElementById('share-score-button');
-      const shareOptions = document.getElementById('share-options');
-      const shareWhatsapp = document.getElementById('share-whatsapp');
-      const shareFacebook = document.getElementById('share-facebook');
-      const shareWechat = document.getElementById('share-wechat');
-      const copyContent = document.getElementById('copy-content');
+        window.MOKAGI_SERVER = 'https://64071881.xyz';
 
-      let score = 0;
-      let gameInterval;
-      let objectInterval;
-      let playerX = 200;
-      let gameRunning = false;
-      let isPressed = false;
-  
-
-
-
-
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      const characters = [
-        '🐹', '🐰', '🐻', '🐼', '🦊',
-        '🐸', '🐥', '🐘', '🦖', '🫨'
-      ];
-  
-      const portals = [
-        { color: '#00e1ff', url: './數碼轉型/', symbol: '🚀' },
-        { color: '#7986cb', url: './tool2024/', symbol: '🔧' },
-        { color: '#33691e', url: 'https://98672794.github.io/abta', symbol: '⛓️' },
-        { color: '#9575cd', url: './fb工/', symbol: 'F' },
-        { color: '#00bcd4', url: './康力人力資源顧問公司', symbol: '👷‍♂️' },
-        { color: '#e1bee7', url: './玄學/', symbol: '🪄' },
-        { color: '#37474f', url: './mk/', symbol: '🤑' }
-      ];
-  
-      const obstacles = [
-        '🌵', '🗿', '🦂'
-      ];
-
-      function updateScore(value) {
-          score += value;
-          scoreElement.textContent = `⌛: ${score}`;
-
-          // 取得當前儲存在 localStorage 的最高分數
-          let highestScore = parseInt(localStorage.getItem('cuteAnimalPortalDashScore')) || 0;
-
-          // 只有當前分數大於儲存的最高分數時才更新 localStorage
-          if (score > highestScore) {
-              localStorage.setItem('cuteAnimalPortalDashScore', score);
-          }
-
-          if (score % 10000 === 0 && score / 10000 < characters.length) {
-              updateCharacterSelect();
-          }
-      }
-  
-      function updateCharacterSelect() {
-        // 每500分可以解锁一个角色
-        const unlockedCharacters = Math.min(3 + Math.floor(score / 500), characters.length);
-        characterOptions.innerHTML = '';
-        for (let i = 0; i < unlockedCharacters; i++) {
-          const charElement = document.createElement('span');
-          charElement.textContent = characters[i];
-          charElement.className = 'character';
-          charElement.onclick = () => selectCharacter(i);
-          characterOptions.appendChild(charElement);
-        }
-      }
-  
-
-
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-
-
-      
-
-
-
-
-
-      function selectCharacter(index) {
-        player.textContent = characters[index];
-        characterSelect.style.display = 'none';
-        startGame();
-      }
-  
-      function createPortal() {
-        const portal = document.createElement('div');
-        portal.className = 'portal';
-        const randomPortal = portals[Math.floor(Math.random() * portals.length)];
-        portal.style.backgroundColor = randomPortal.color;
-        portal.style.left = `${Math.random() * (gameContainer.clientWidth - 80)}px`;
-        portal.textContent = randomPortal.symbol;
-        gameContainer.appendChild(portal);
-  
-        const portalAnimation = portal.animate([
-          { top: '-80px' },
-          { top: '580px' }
-        ], {
-          duration: 4000,
-          easing: 'linear'
-        });
-  
-        portalAnimation.onfinish = () => {
-          portal.remove();
-        };
-  
-        return { element: portal, url: randomPortal.url };
-      }
-  
-      function createObstacle() {
-        const obstacle = document.createElement('div');
-        obstacle.className = 'obstacle';
-        obstacle.style.left = `${Math.random() * (gameContainer.clientWidth - 80)}px`;
-        obstacle.textContent = obstacles[Math.floor(Math.random() * obstacles.length)];
-        gameContainer.appendChild(obstacle);
-  
-        const obstacleAnimation = obstacle.animate([
-          { top: '-80px' },
-          { top: '580px' }
-        ], {
-          duration: 3500,
-          easing: 'linear'
-        });
-  
-        obstacleAnimation.onfinish = () => {
-          obstacle.remove();
-        };
-  
-        return obstacle;
-      }
-  
-      function checkCollision() {
-        const playerRect = player.getBoundingClientRect();
-        const objects = document.querySelectorAll('.portal, .obstacle');
-  
-        for (let object of objects) {
-          const objectRect = object.getBoundingClientRect();
-          if (
-            playerRect.left < objectRect.right &&
-            playerRect.right > objectRect.left &&
-            playerRect.top < objectRect.bottom &&
-            playerRect.bottom > objectRect.top
-          ) {
-            if (object.classList.contains('portal')) {
-              const url = object.dataset.url;
-              window.location.href = url;
-            } else {
-              gameOver();
-            }
-            return true;
-          }
-        }
-        return false;
-      }
-  
-      function updateGame() {
-        if (isPressed) {
-          playerX -= 5;
-        } else {
-          playerX += 5;
-        }
-  
-        playerX = Math.max(0, Math.min(playerX, gameContainer.clientWidth - 50));
-  
-        player.style.left = `${playerX}px`;
-  
-        if (!checkCollision()) {
-          updateScore(1);
-        }
-      }
-  
-      function startGame() {
-        gameRunning = true;
-        score = 0;
-        updateScore(0);
-        playerX = 200;
-        player.style.left = `${playerX}px`;
-        gameOverScreen.style.display = 'none';
-        gameInterval = setInterval(updateGame, 20);
-        objectInterval = setInterval(() => {
-          if (Math.random() < 0.7) {
-            const portal = createPortal();
-            portal.element.dataset.url = portal.url;
-          } else {
-            createObstacle();
-          }
-        }, 1000);
-      }
-  
-      function gameOver() {
-        gameRunning = false;
-        clearInterval(gameInterval);
-        clearInterval(objectInterval);
-        finalScoreElement.textContent = score;
-        gameOverScreen.style.display = 'block';
-      }
-  
       // 顯示聯莫
       const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
       ];
       function Start() {
 
         網頁分流();
-
-
-        score = parseInt(localStorage.getItem('cuteAnimalPortalDashScore')) || 0;
-        updateScore(0);
-        updateCharacterSelect();
-        characterSelect.style.display = 'block';
-
-        
 
         // 翻譯 
         //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
@@ -402,110 +1000,14 @@
         _顯示聯莫(聯莫);
 
             
-        
+        琪琪修改('../')
 
       }
-  
 
-
-
-
-
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      function shareScore() {
-        const unlockedCharacters = [];
-        const unlockedCharacterElements = document.querySelectorAll('.character');
-
-        unlockedCharacterElements.forEach(element => {
-            const characterText = element.textContent.trim();
-            if (characterText) {
-                unlockedCharacters.push(characterText);
-            }
-        });
-
-        const currentUrl = window.location.href;
-        const shareText = `我在可愛動物傳送門達陣遊戲中獲得了 ${score} 分！你能打破我的紀錄嗎？已解鎖的角色: ${unlockedCharacters.join(', ')}`;
-
-        shareOptions.style.display = 'block';
-
-        shareWhatsapp.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + '\n' + currentUrl)}`;
-        shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`;
-        shareWechat.href = `https://web.wechat.com/`;
-        copyContent.onclick = () => {
-          navigator.clipboard.writeText(`${shareText}\n${currentUrl}`);
-            alert('內容已複製到剪貼簿');
-        };
-      }
-
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-      
-      gameContainer.addEventListener('mousedown', () => {
-        if (gameRunning) {
-          isPressed = true;
-        }
-      });
-  
-      gameContainer.addEventListener('mouseup', () => {
-        if (gameRunning) {
-          isPressed = false;
-        }
-      });
-  
-      gameContainer.addEventListener('touchstart', (e) => {
-        if (gameRunning) {
-          isPressed = true;
-          e.preventDefault();
-        }
-      });
-  
-      gameContainer.addEventListener('touchend', () => {
-        if (gameRunning) {
-          isPressed = false;
-        }
-      });
-  
-
-      shareScoreButton.addEventListener('click', shareScore);
-  
-  
-
-      琪琪修改('../')
-
-// 選取目標 div
-var targetDiv = document.querySelector('.bubble-element.CustomElement.baTraHaL.bubble-r-container');
-
-// 刪除所有內聯樣式
-targetDiv.removeAttribute('style');
-
-// 設置 display 為 none
-targetDiv.style.display = 'none';
-
-
-
-    </script>
-
-    <!-- 引入 MOKAGI 聊天 Widget -->
-    
-    <script>
-        window.MOKAGI_SERVER = 'https://64071881.xyz';
     </script>
     <script src="https://64071881.xyz/static/api.js"></script>
-  </body>
-  </html>
+
+
+
+</body>
+</html>
