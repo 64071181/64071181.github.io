@@ -15,7 +15,7 @@
   :root {
     --bg: #050510;
     --card-bg: rgba(10, 15, 30, 0.85);
-    --gold: #d4a843;
+    --gold: #cccaca;
     --cyan: #00e5ff;
     --pink: #ff2d78;
     --purple: #b44dff;
@@ -23,6 +23,7 @@
     --blue: #448aff;
     --orange: #ff9100;
     --glow: 0 0 30px;
+    --主題色: #cccaca;
   }
 
   body {
@@ -301,8 +302,9 @@ text-decoration: none;
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
+  <link rel="stylesheet" href="../mokJsapi/aki.css">
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="../mokJsapi/a.js"></script>
+  <script src="../mokJsapi/mokJsApi.js"></script>
   
   <meta name="google-site-verification" content="zKKu5phgon5Fp0BeiCOzKKveF1F_iRW9W9cbctL3Hl4" />
   <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
@@ -362,7 +364,7 @@ text-decoration: none;
   <!-- ===== HERO ===== -->
   <header class="hero">
     <h1 class="hero-logo">莫氏集團</h1>
-    <p class="hero-sub">M O K &nbsp; G R O U P &nbsp; · &nbsp; est. 2 0 0 6</p>
+    <p class="hero-sub">M O K's &nbsp; G R O U P &nbsp; · &nbsp; est. 2 0 0 6</p>
     <div class="hero-divider"></div>
     <p class="hero-tagline">
       專注企業流程自動化與數據驅動決策，整合 AI 模型、營銷、金流、客戶管理<br>
@@ -529,7 +531,7 @@ text-decoration: none;
 
       <p class="mokJsApi_copyright">版權</p>
 
-      <button id="scrollTopButton">Top</button>
+      <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
     </p>
   </div>
 
@@ -984,7 +986,7 @@ console.log('🚀 莫氏集團事業版圖已就緒 | MOK GROUP Business Map Rea
         window.MOKAGI_SERVER = 'https://64071881.xyz';
 
       // 顯示聯莫
-      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky2025/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
+      const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
       ];
       function Start() {
 
@@ -999,10 +1001,8 @@ console.log('🚀 莫氏集團事業版圖已就緒 | MOK GROUP Business Map Rea
 
         _顯示聯莫(聯莫);
 
-            
-        琪琪修改('../')
-
       }
+      Start()
 
     </script>
     <script src="https://64071881.xyz/static/api.js"></script>
