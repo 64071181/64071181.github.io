@@ -786,6 +786,128 @@ cardScenes.push(createCardScene('canvas-eco', () => {
   return group;
 }, 0xb44dff, { camZ: 5.5, particles: 40, pRadius: 1.8 }));
 
+
+
+
+
+
+
+
+
+
+
+
+// 8. MOKAGI 虛擬靈魂 - DNA 雙螺旋 + 粒子光暈
+cardScenes.push(createCardScene('canvas-mokagi', () => {
+  const group = new THREE.Group();
+
+  // ----- 雙螺旋結構 -----
+  const helixGroup = new THREE.Group();
+  const color1 = 0xaa66ff;
+  const color2 = 0xcc88ff;
+  const segments = 20;
+  const radius = 0.8;
+  const height = 1.8;
+
+  // 主鏈條（兩條螺旋線）
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const angle = t * Math.PI * 4;
+    const y = -height/2 + t * height;
+
+    // 左鏈
+    const leftSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08, 8, 8),
+      new THREE.MeshStandardMaterial({ color: color1, emissive: 0x442266, emissiveIntensity: 0.4 })
+    );
+    leftSphere.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
+    helixGroup.add(leftSphere);
+
+    // 右鏈
+    const rightSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08, 8, 8),
+      new THREE.MeshStandardMaterial({ color: color2, emissive: 0x663388, emissiveIntensity: 0.4 })
+    );
+    rightSphere.position.set(Math.cos(angle + Math.PI) * radius, y, Math.sin(angle + Math.PI) * radius);
+    helixGroup.add(rightSphere);
+
+    // 橫向連接（每隔一節）
+    if (i % 2 === 0) {
+      const bar = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.02, 0.02, radius * 2, 4),
+        new THREE.MeshStandardMaterial({ color: 0x8844cc, emissive: 0x331155, emissiveIntensity: 0.3 })
+      );
+      bar.position.set(0, y, 0);
+      bar.rotation.z = Math.PI / 2;
+      bar.rotation.y = angle;
+      helixGroup.add(bar);
+    }
+  }
+
+  // 中心光柱（半透明）
+  const coreCylinder = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.06, 0.06, height, 8),
+    new THREE.MeshBasicMaterial({ color: 0xbb88ff, transparent: true, opacity: 0.2 })
+  );
+  helixGroup.add(coreCylinder);
+
+  group.add(helixGroup);
+
+  // ----- 外圍粒子環（靈魂光暈） -----
+  const glowGeo = new THREE.BufferGeometry();
+  const glowCount = 120;
+  const glowPos = new Float32Array(glowCount * 3);
+  for (let i = 0; i < glowCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = 1.2 + Math.random() * 0.8;
+    glowPos[i*3] = Math.sin(phi) * Math.cos(theta) * r;
+    glowPos[i*3+1] = (Math.random() - 0.5) * 2.2;
+    glowPos[i*3+2] = Math.sin(phi) * Math.sin(theta) * r;
+  }
+  glowGeo.setAttribute('position', new THREE.BufferAttribute(glowPos, 3));
+  const glowMat = new THREE.PointsMaterial({
+    color: 0x9966ff,
+    size: 0.04,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    opacity: 0.7
+  });
+  const glowPoints = new THREE.Points(glowGeo, glowMat);
+  group.add(glowPoints);
+
+  // 第二層小粒子（更遠）
+  const glowGeo2 = new THREE.BufferGeometry();
+  const glowPos2 = new Float32Array(60 * 3);
+  for (let i = 0; i < 60; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = 1.8 + Math.random() * 1.0;
+    glowPos2[i*3] = Math.sin(phi) * Math.cos(theta) * r;
+    glowPos2[i*3+1] = (Math.random() - 0.5) * 2.6;
+    glowPos2[i*3+2] = Math.sin(phi) * Math.sin(theta) * r;
+  }
+  glowGeo2.setAttribute('position', new THREE.BufferAttribute(glowPos2, 3));
+  const glowMat2 = new THREE.PointsMaterial({
+    color: 0x8844dd,
+    size: 0.025,
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    opacity: 0.4
+  });
+  const glowPoints2 = new THREE.Points(glowGeo2, glowMat2);
+  group.add(glowPoints2);
+
+  return group;
+}, 0xaa66ff, { camZ: 6, particles: 40, pRadius: 2.0 }));
+
+
+
+
+
+
+
+
 // 4. 無人機 - 飛行器造型
 cardScenes.push(createCardScene('canvas-drone', () => {
   const group = new THREE.Group();
