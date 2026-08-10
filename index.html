@@ -294,21 +294,7 @@ text-decoration: none;
     .stat-num { font-size: 1.8rem; }
     .card-3d { height: 180px; }
   }
-</style>
 
-
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-  <link rel="stylesheet" href="https://64071181.github.io/mokJsapi/aki.css">
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-  <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
-  
-  <meta name="google-site-verification" content="zKKu5phgon5Fp0BeiCOzKKveF1F_iRW9W9cbctL3Hl4" />
-  <!-- 方案三：自建語言切換器（取代 translate.js CDN） -->
-  <style>
     /* ===== 語言切換器 ===== */
     .lang-switcher {
       position: fixed;
@@ -391,6 +377,19 @@ text-decoration: none;
       .lang-btn { padding: 8px 13px; font-size: 13px; }
     }
   </style>
+
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+  <link rel="stylesheet" href="../mokJsapi/aki.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="../mokJsapi/mokJsApi.js"></script>
+  
+  <meta name="google-site-verification" content="zKKu5phgon5Fp0BeiCOzKKveF1F_iRW9W9cbctL3Hl4" />
+
 
 
 
@@ -1260,10 +1259,6 @@ console.log('🚀 莫氏集團事業版圖已就緒 | MOK GROUP Business Map Rea
       ];
       function Start() {
         網頁分流();
-        // 翻譯 
-        //translate.language.setLocal('chinese_traditional'); //設置本地語種（當前網頁的語種）。如果不設置，默認自動識別當前網頁顯示文字的語種。 可填寫如 'english'、'chinese_simplified' 等，具體參見文檔下方關於此的說明。
-        translate.service.use('client.edge'); //設置機器翻譯服務通道，直接客戶端本身，不依賴服務端 。相關說明參考 http://translate.zvo.cn/43086.html
-        translate.execute();//進行翻譯 
         _顯示聯莫(聯莫);
       }
       Start()
