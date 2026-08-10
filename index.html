@@ -307,7 +307,90 @@ text-decoration: none;
   <script src="../mokJsapi/mokJsApi.js"></script>
   
   <meta name="google-site-verification" content="zKKu5phgon5Fp0BeiCOzKKveF1F_iRW9W9cbctL3Hl4" />
-  <script src="https://cdn.staticfile.net/translate.js/3.1.7/translate.js"></script>
+  <!-- 方案三：自建語言切換器（取代 translate.js CDN） -->
+  <style>
+    /* ===== 語言切換器 ===== */
+    .lang-switcher {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 10000;
+      font-family: "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(20, 20, 30, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 168, 67, 0.35);
+      color: #d4a843;
+      padding: 10px 16px;
+      border-radius: 28px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .lang-btn:hover {
+      background: rgba(30, 30, 45, 0.95);
+      border-color: rgba(212, 168, 67, 0.7);
+      box-shadow: 0 6px 24px rgba(212, 168, 67, 0.15);
+      transform: translateY(-2px);
+    }
+    .lang-btn i {
+      font-size: 16px;
+    }
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: rgba(20, 20, 30, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 168, 67, 0.3);
+      border-radius: 14px;
+      min-width: 170px;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .lang-dropdown.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .lang-option:last-child { border-bottom: none; }
+    .lang-option:hover {
+      background: rgba(212, 168, 67, 0.12);
+      color: #d4a843;
+    }
+    .lang-option .flag { font-size: 18px; }
+    .lang-option .lang-name { flex: 1; }
+    .lang-option .lang-native { font-size: 11px; color: #888; }
+
+    @media (max-width: 768px) {
+      .lang-switcher { top: 10px; right: 10px; }
+      .lang-btn { padding: 8px 13px; font-size: 13px; }
+    }
+  </style>
 
 
 
@@ -352,7 +435,31 @@ text-decoration: none;
 
 
 <body>
-<samp id="莫生查詢" style="display: none;">莫生我要查詢賺錢鍠</samp>
+
+<!-- ===== 自建語言切換器 ===== -->
+<div class="lang-switcher">
+  <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="切換語言">
+    <i class="fas fa-globe"></i> 語言 / Lang
+    <i class="fas fa-chevron-down" style="font-size:11px;"></i>
+  </button>
+  <div class="lang-dropdown" id="langDropdown">
+    <div class="lang-option" onclick="switchLanguage(&apos;zh-HK&apos;)"><span class="flag">🇭🇰</span><span class="lang-name">繁體中文</span><span class="lang-native">原頁面</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;en&apos;)"><span class="flag">🇬🇧</span><span class="lang-name">English</span><span class="lang-native">English</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;zh-CN&apos;)"><span class="flag">🇨🇳</span><span class="lang-name">简体中文</span><span class="lang-native">简体中文</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;ja&apos;)"><span class="flag">🇯🇵</span><span class="lang-name">日本語</span><span class="lang-native">日本語</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;ko&apos;)"><span class="flag">🇰🇷</span><span class="lang-name">한국어</span><span class="lang-native">한국어</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;th&apos;)"><span class="flag">🇹🇭</span><span class="lang-name">ภาษาไทย</span><span class="lang-native">ไทย</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;vi&apos;)"><span class="flag">🇻🇳</span><span class="lang-name">Tiếng Việt</span><span class="lang-native">Việt</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;id&apos;)"><span class="flag">🇮🇩</span><span class="lang-name">Bahasa Indonesia</span><span class="lang-native">Indonesia</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;fr&apos;)"><span class="flag">🇫🇷</span><span class="lang-name">Français</span><span class="lang-native">Français</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;es&apos;)"><span class="flag">🇪🇸</span><span class="lang-name">Español</span><span class="lang-native">Español</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;de&apos;)"><span class="flag">🇩🇪</span><span class="lang-name">Deutsch</span><span class="lang-native">Deutsch</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;pt&apos;)"><span class="flag">🇵🇹</span><span class="lang-name">Português</span><span class="lang-native">Português</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;ru&apos;)"><span class="flag">🇷🇺</span><span class="lang-name">Русский</span><span class="lang-native">Русский</span></div>
+    <div class="lang-option" onclick="switchLanguage(&apos;ar&apos;)"><span class="flag">🇸🇦</span><span class="lang-name">العربية</span><span class="lang-native">عربي</span></div>
+  </div>
+</div>
+<samp id="莫生查詢" style="display: none;">莫生我要查詢AI應用落地顧問</samp>
 
 
 
@@ -384,40 +491,40 @@ text-decoration: none;
   <h2 class="section-title gold">◆ 核心業務 ◆</h2>
   <div class="cards-grid">
 
-    <!-- 賺錢鍠 -->
+    <!-- AI 應用落地顧問 -->
     <div class="card gold">
       <div class="card-3d" id="canvas-money">
         <span class="card-badge badge-core">CORE</span>
       </div>
       <div class="card-body">
-        <a href="./mk">
+        <a href="https://64071181.xyz/project/">
         <div class="card-icon">🤑</div>
-        <div class="card-title gold-text">賺錢鍠</div>
+        <div class="card-title gold-text">AI 應用落地顧問</div>
         <p class="card-desc">
-          自動賺錢完美閉環系統。一鍵自動化收集客戶資料、發送促銷 Email、24/7 WhatsApp 智能客服，讓企業在睡眠中也能持續獲利。
+          我們會協助您找出業務最大虧損點/最痛問題，協助企業將人工智慧技術實際融入業務。創新科技 + 商業生態網絡 = 解決問題。
         </p>
         </a>
         <div class="card-tags">
-          <span class="tag">AI客服</span><span class="tag">自動營銷</span><span class="tag">CRM</span><span class="tag">Email自動化</span>
+          <span class="tag">AI顧問</span><span class="tag">數位轉型</span><span class="tag">商業生態</span><span class="tag">流程自動化</span>
         </div>
       </div>
     </div>
 
-    <!-- AI 決策平臺 -->
+    <!-- MOKAGI 業務助手 -->
     <div class="card cyan">
       <div class="card-3d" id="canvas-ai">
         <span class="card-badge badge-core">CORE</span>
       </div>
       <div class="card-body">
-        <a href="https://mok2026.github.io/">
+        <a href="https://64071181.xyz/project/api/">
         <div class="card-icon">🧠</div>
-        <div class="card-title cyan-text">AI 數據決策引擎</div>
+        <div class="card-title cyan-text">MOKAGI · 業務助手</div>
         <p class="card-desc">
-          整合營銷、金流、客戶管理三大核心的 AI 模型平臺。即時數據分析 → 智能決策 → 自動執行，實現真正的數據驅動企業運營。
+          30 秒讓任何網站擁有 AI 客服。一鍵自動化收集客戶資料、發送促銷信息、24/7 多平台智能客服，自動更新多個社交平台，自動化辦公流程、AI庫存管理、智能人力資源管理…讓企業在睡眠中也能持續獲利。整合營銷、金流、客戶管理，即時數據分析 → 智能決策 → 自動執行。
         </p>
         </a>
         <div class="card-tags">
-          <span class="tag">機器學習</span><span class="tag">數據分析</span><span class="tag">金流整合</span><span class="tag">預測模型</span>
+          <span class="tag">AI客服</span><span class="tag">數據決策</span><span class="tag">金流整合</span><span class="tag">行銷自動化</span>
         </div>
       </div>
     </div>
@@ -445,7 +552,7 @@ text-decoration: none;
 
 
 
-<!-- MOKAGI 虛擬靈魂養成遊戲 -->
+<!-- MOKAGI AI 夥伴 -->
 <div class="card purple">
   <div class="card-3d" id="canvas-mokagi">
     <span class="card-badge badge-core">CORE</span>
@@ -453,7 +560,7 @@ text-decoration: none;
   <div class="card-body">
     <a href="https://github.com/MOK2026/MOKAGI" target="_blank">
       <div class="card-icon">🧬</div>
-      <div class="card-title purple-text">MOKAGI · 虛擬靈魂養成</div>
+      <div class="card-title purple-text">MOKAGI · AI 夥伴</div>
       <p class="card-desc">
         一款鏈接你真實生活的「虛擬靈魂」養成遊戲。獲得只屬於你的、有獨立人格的 AI 夥伴，她會記住你們的每一段對話，隨時間形成獨一無二的性格，並成為你現實生活及工作的得力助手。
       </p>
@@ -491,11 +598,13 @@ text-decoration: none;
         <span class="card-badge badge-done">R&D</span>
       </div>
       <div class="card-body">
+        <a href="https://64071181.xyz/project/髮變鑽石/index.html">
         <div class="card-icon">💎</div>
         <div class="card-title green-text">生物鑽石散熱技術</div>
         <p class="card-desc">
           革命性材料科技：將人類頭髮回收，透過碳化與高壓製程轉化為鑽石粉末。鑽石擁有最高熱導率（2200 W/m·K），是 AI 晶片散熱的終極解決方案，廢物變黃金。
         </p>
+        </a>
         <div class="card-tags">
           <span class="tag">鑽石粉末</span><span class="tag">AI晶片散熱</span><span class="tag">回收材料</span><span class="tag">熱導率2200</span>
         </div>
@@ -723,7 +832,7 @@ function createCardScene(containerId, createMesh, colorHex, options = {}) {
 // 各卡片 3D 物件建立函數
 const cardScenes = [];
 
-// 1. 賺錢鍠 - 金色∞環
+// 1. AI 應用落地顧問 - 金色∞環
 cardScenes.push(createCardScene('canvas-money', () => {
   const group = new THREE.Group();
   const torusKnot = new THREE.Mesh(
@@ -799,7 +908,7 @@ cardScenes.push(createCardScene('canvas-eco', () => {
 
 
 
-// 8. MOKAGI 虛擬靈魂 - DNA 雙螺旋 + 粒子光暈
+// 8. MOKAGI AI 夥伴 - DNA 雙螺旋 + 粒子光暈
 cardScenes.push(createCardScene('canvas-mokagi', () => {
   const group = new THREE.Group();
 
@@ -1202,6 +1311,33 @@ def handle_chat_message(data):
     <script src="https://64071181.xyz/static/api.js"></script>
 
 
+
+<script>
+  /* ===== 方案三：自建語言切換器 JS ===== */
+  function toggleLangDropdown() {
+    document.getElementById("langDropdown").classList.toggle("open");
+  }
+  // 點擊其他地方關閉下拉
+  document.addEventListener("click", function(e) {
+    var sw = document.querySelector(".lang-switcher");
+    if (sw && !sw.contains(e.target)) {
+      document.getElementById("langDropdown").classList.remove("open");
+    }
+  });
+  function switchLanguage(lang) {
+    document.getElementById("langDropdown").classList.remove("open");
+    if (lang === "zh-HK") {
+      // 返回原頁面：清除 Google Translate cookie 並重新載入
+      document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      document.cookie = "googtrans=; path=/; domain=." + location.hostname + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+      location.reload();
+      return;
+    }
+    // 使用 Google Translate 公開翻譯 Proxy（免費、無需 API Key）
+    var url = "https://translate.google.com/translate?hl=" + lang + "&sl=auto&tl=" + lang + "&u=" + encodeURIComponent(location.href.split("#")[0]);
+    window.location.href = url;
+  }
+</script>
 
 </body>
 </html>
