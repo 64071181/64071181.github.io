@@ -1250,22 +1250,26 @@ console.log('🚀 莫氏集團事業版圖已就緒 | MOK GROUP Business Map Rea
 
 
     
+    <!-- 治本修正 2026-10-08：mokJsApi.js 用真正的 script 標籤預先載入，提供 網頁分流() / _顯示聯莫()，不再靠 mok6407nav.js 遲來注入 -->
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
     <script>
       // 85264071181 // qqq 冇 a.js 錯誤版
       // 顯示聯莫
       const 聯莫 = ['moksurky@gmail.com','https://wa.me/85264071181/','https://i.meee.com.tw/atcX6QM.png','https://www.instagram.com/moksurky/','https://line.me/ti/p/UlSPd7p9zh/','https://www.facebook.com/aki.mok.10/','http://t.me/mokaki/'
       ];
-      function Start() {
-        網頁分流();
-        _顯示聯莫(聯莫);
-      }
-      Start()
-
+      // 修正 2026-10-08：設定值一律先寫入，避免前面任何錯誤令 MOKAGI_SERVER 未設到
       window.MOKAGI_AGENT = '客服';
       window.contact = 'https://wa.me/85264071181/?text=莫生我要查詢AI應用落地顧問/' // ai無法回答的緊急聯絡
       window.MOKAGI_USER_ID = localStorage.getItem('mokagi_user_id') || undefined;
       window.MOKAGI_SERVER = 'https://64071181.xyz';
       window.position = 'bottom-right';
+
+      function Start() {
+        網頁分流();
+        _顯示聯莫(聯莫);
+      }
+      // 防禦：單一小錯不應拖垮整段 script
+      try { Start(); } catch (e) { console.warn('[MOK] Start() failed:', e); }
 
 
       // 其他配置可選
